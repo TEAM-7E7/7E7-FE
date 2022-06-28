@@ -1,0 +1,37 @@
+@media all and (min-width: 1024px){
+  .Nav {
+    padding: 10px;
+  }
+}
+
+.Nav {
+  width: 100%;
+  position: relative;
+  button {
+    border: 0;
+    cursor: pointer;
+    .Talk {
+      position: absolute;
+      right: 228px;
+      top: 54px;
+      width: 30px;
+      height: 30px;
+    }
+
+    .like {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      top: 51px;
+      right: 151px;
+    }
+
+    .User {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 49px;
+      right: 67px;
+    }
+  }
+}
