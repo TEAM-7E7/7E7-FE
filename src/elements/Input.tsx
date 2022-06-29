@@ -11,7 +11,7 @@ interface InputOptions {
   type?: string;
 }
 
-export const Input = ({
+export function Input({
   size = "small",
   fullWidth = false,
   value,
@@ -20,7 +20,7 @@ export const Input = ({
   onChange,
   name,
   type,
-}: InputOptions) => {
+}: InputOptions) {
   return (
     <input
       className={`input-${size} input-${fullWidth ? "fullWidth" : ""}`}
@@ -32,4 +32,4 @@ export const Input = ({
       type={type}
     />
   );
-};
+}

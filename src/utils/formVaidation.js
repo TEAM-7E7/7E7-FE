@@ -22,3 +22,8 @@ export const signUpValidationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "비밀번호가 일치하지 않습니다!")
     .required("필수 입력 값입니다!"),
 });
+
+export const signInValidationSchema = Yup.object().shape({
+  email: Yup.string().email("올바른 이메일 형식이 아닙니다!").required("이메일을 입력하세요!"),
+  password: Yup.string().required("패스워드를 입력하세요!"),
+});

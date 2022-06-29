@@ -3,20 +3,20 @@ import { Input } from "../../elements/Input";
 import "../../styles/pages/sign-up/signUp.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { signUpValidationSchema } from "../../utils/formVaidation";
+import { signInValidationSchema, signUpValidationSchema } from "../../utils/formVaidation";
 import { Formik, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-interface SubmitValues {
+interface SignUpDto {
   email: string;
-  username: string;
-  password: string;
+  username?: string;
+  password?: string;
 }
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const submit = async (values: SubmitValues) => {
+  const submit = async ({ ...values }: SignUpDto) => {
     console.log(values);
     /*const { email, username, password } = values;
     try {
@@ -47,7 +47,7 @@ const SignUp = () => {
         password: "",
         password2: "",
       }}
-      validationSchema={signUpValidationSchema}
+      validationSchema={signInValidationSchema}
       onSubmit={submit}
     >
       {({ values, handleSubmit, handleChange }) => (
@@ -58,7 +58,7 @@ const SignUp = () => {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="signup-body">
-              <div className="signup-body-items">
+              <div className="signup-body-item">
                 <div className="signup-body-item-label">이메일</div>
                 <div className="signup-body-item-input">
                   <Input size="medium" name="email" onChange={handleChange} value={values.email} />
@@ -76,7 +76,7 @@ const SignUp = () => {
               </div>
               <div className="signup-body-item-error"></div>
             </div>*/}
-              <div className="signup-body-items">
+              <div className="signup-body-item">
                 <div className="signup-body-item-label">닉네임</div>
                 <div className="signup-body-item-input">
                   <Input size="medium" name="username" onChange={handleChange} value={values.username} />
@@ -86,7 +86,7 @@ const SignUp = () => {
                   <ErrorMessage name="username" />
                 </div>
               </div>
-              <div className="signup-body-items">
+              <div className="signup-body-item">
                 <div className="signup-body-item-label">비밀번호</div>
                 <div className="signup-body-item-input">
                   <Input
@@ -102,7 +102,7 @@ const SignUp = () => {
                   <ErrorMessage name="password" />
                 </div>
               </div>
-              <div className="signup-body-items">
+              <div className="signup-body-item">
                 <div className="signup-body-item-label">비밀번호 확인</div>
                 <div className="signup-body-item-input">
                   <Input
