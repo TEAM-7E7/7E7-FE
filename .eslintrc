@@ -9,7 +9,7 @@
     },
     "rules": { 
         "@typescript-eslint/explicit-module-boundary-types": "off" ,
-        "no-console": "error",
+        "no-console": "warn",
         "no-var": "error"
     }
 }
