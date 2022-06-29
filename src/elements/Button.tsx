@@ -11,7 +11,7 @@ interface ButtonOptions {
   children: ReactNode;
 }
 
-export const Button = ({
+export function Button({
   size = "small",
   color = "default",
   variant = "filled",
@@ -19,7 +19,7 @@ export const Button = ({
   onClick,
   type,
   children,
-}: ButtonOptions) => {
+}: ButtonOptions) {
   return (
     <button
       className={`button-${size} button-${color} button-${variant} button-${fullWidth ? "fullWidth" : ""}`}
@@ -29,4 +29,4 @@ export const Button = ({
       {children}
     </button>
   );
-};
+}
