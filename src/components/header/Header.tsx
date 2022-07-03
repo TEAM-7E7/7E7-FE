@@ -1,4 +1,4 @@
-import "../styles/components/header/header.scss";
+import "../../styles/components/header/header.scss";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -12,6 +12,7 @@ const Header = () => {
       <div className="header-menu">
         <Link to="/sign-in">로그인</Link>
         <Link to="/sign-up">회원가입</Link>
+        <Link to="/add-board">업로드</Link>
       </div>
     </div>
   );
