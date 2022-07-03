@@ -1,0 +1,67 @@
+.addboard-wrapper{
+  font-family: 'Noto Sans KR', sans-serif;
+  .addboard-header{
+    font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+    margin: 2rem 0;
+  }
+  .addboard-body{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .preview-main-image{
+      background: #D1D1D1;
+      border-radius: 51px;
+      width: 250px;
+      height: 450px;
+      margin-right: 1rem;
+    }
+    .addboard-form{
+      margin-left: 1rem;
+      .drag-explain{
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        color: #797979;
+      }
+      .upload-item{
+        display: flex;
+        align-items: baseline;
+        .uploaded-items{
+          border: 1px #D1D1D1 solid;
+          min-width: 400px;
+          min-height: 150px;
+          margin-right: 0.5rem;
+          border-radius: 15px;
+          flex-grow: 1;
+          padding: 1rem;
+          display: flex;
+        }
+        .upload-button{
+          margin-left: 0.5rem;
+        }
+      }
+      .input-title{
+        margin: 0.5rem 0;
+      }
+      .category-and-price{
+        margin: 0.5rem 0;
+        display: flex;
+        .dropdown-category{
+          flex-grow: 1;
+          margin-right: 0.5rem;
+        }
+        .input-price{
+          margin-left: 0.5rem;
+        }
+      }
+      .textfield-explain{
+        display: flex;
+        margin: 0.5rem 0;
+      }
+    }
+
+  }
+
+}

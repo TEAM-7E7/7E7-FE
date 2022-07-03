@@ -5,12 +5,13 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Input } from "../../elements/Input";
 import { Button } from "../../elements/Button";
+import { SignInDto, SingInFormDto } from "../../dto/AuthDto";
+import { signUpValidationSchema } from "../../utils/authValidation";
 
-interface SignInDto {
-  email: string;
-  password: string;
-}
-
+const initialValues: SingInFormDto = {
+  email: "",
+  password: "",
+};
 const SignIn = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -43,13 +44,7 @@ const SignIn = () => {
     }*/
   };
   return (
-    <Formik
-      initialValues={{
-        email: "",
-        password: "",
-      }}
-      onSubmit={submit}
-    >
+    <Formik initialValues={initialValues} onSubmit={submit} validationSchema={signUpValidationSchema}>
       {({ values, handleSubmit, handleChange }) => (
         <div className="signin-wrapper">
           <div className="signin-header"></div>

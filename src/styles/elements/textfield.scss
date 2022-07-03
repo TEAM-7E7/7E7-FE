@@ -1,9 +1,10 @@
-input {
+textarea {
   outline: 0;
   border-radius: 20px;
   cursor: pointer;
   border: 1px solid #989898;
   box-sizing: border-box;
+  resize: none;
   font-family: 'Noto Sans KR', sans-serif;
   flex-grow: 1;
   &:focus {
@@ -13,22 +14,22 @@ input {
 }
 
 // size
-.input-small {
+.textfield-small {
   font-size: 1rem;
   padding: 0.5rem 1rem;
 }
 
-.input-medium {
+.textfield-medium {
   font-size: 1.25rem;
   padding: 0.625rem 1.25rem;
 }
 
-.input-large {
+.textfield-large {
   font-size: 1.5rem;
   padding: 0.75rem 1.5rem;
 }
 
-.input-fullWidth{
+.textfield-fullWidth{
   width: 100%;
 }
 

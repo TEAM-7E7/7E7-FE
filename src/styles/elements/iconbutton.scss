@@ -1,0 +1,117 @@
+button {
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.left-right{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-bottom{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  svg{
+    margin-bottom: 0.5rem;
+  }
+}
+
+// size
+.iconbutton-small {
+  font-size: 1rem;
+  padding: 1rem;
+  svg{
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.iconbutton-medium {
+  font-size: 1.25rem;
+  padding: 1.25rem;
+  svg{
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.iconbutton-large {
+  font-size: 1.5rem;
+  padding: 1.5rem;
+  svg{
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+// type
+.iconbutton-default {
+  background: #d9d9d9;
+  color: #282c34;
+  border: 1px solid #d9d9d9;
+  svg{
+    fill: #282c34;
+  }
+}
+
+.iconbutton-submit {
+  background: #5c5c5c;
+  color: #ffffff;
+  border: 1px solid #5c5c5c;
+  svg{
+    fill: #fff;
+  }
+}
+
+.iconbutton-primary {
+  background: blue;
+  color: blue;
+  border: 1px solid blue;
+  svg{
+    fill: blue;
+  }
+}
+
+// variant
+.iconbutton-filled {
+  border: 0;
+  color: #fff;
+  svg{
+    fill:#fff;
+  }
+}
+
+.iconbutton-outlined {
+  background: #fff;
+}
+
+// fullWidth
+.iconbutton-fullWidth {
+  width: 100%;
+}
+
+// icon size
+.iconbutton-icon-small{
+  svg{
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.iconbutton-icon-medium{
+  svg{
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.iconbutton-icon-large{
+  svg{
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+

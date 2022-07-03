@@ -3,16 +3,18 @@ import { Input } from "../../elements/Input";
 import "../../styles/pages/sign-up/signUp.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { signInValidationSchema, signUpValidationSchema } from "../../utils/formVaidation";
+import { signInValidationSchema } from "../../utils/authValidation";
 import { Formik, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { SignUpDto, SignUpFormDto } from "../../dto/AuthDto";
 
-interface SignUpDto {
-  email: string;
-  username?: string;
-  password?: string;
-}
+const initialValues: SignUpFormDto = {
+  email: "",
+  username: "",
+  password: "",
+  password2: "",
+};
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -40,16 +42,7 @@ const SignUp = () => {
   };
 
   return (
-    <Formik
-      initialValues={{
-        email: "",
-        username: "",
-        password: "",
-        password2: "",
-      }}
-      validationSchema={signInValidationSchema}
-      onSubmit={submit}
-    >
+    <Formik initialValues={initialValues} validationSchema={signInValidationSchema} onSubmit={submit}>
       {({ values, handleSubmit, handleChange }) => (
         <div className="signup-wrapper">
           <ToastContainer />
