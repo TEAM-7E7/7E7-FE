@@ -140,10 +140,12 @@ const WebCam: FC = () => {
           <h1>Video</h1>
           {!!videoBlob && <Player src={URL.createObjectURL(videoBlob)} />}
         </div>
-        <div className={"result " + (hasPhoto ? "hasphoto" : "")}>
-          <h1>Photo</h1>
-          <canvas ref={photoRef}></canvas>
-          {/*<Button onClick={closePhoto}>close</Button>*/}
+        <div className="webcam-picture">
+          <div className={"result " + (hasPhoto ? "hasphoto" : "")}>
+            <h1>Photo</h1>
+            <canvas ref={photoRef}></canvas>
+            {/*<Button onClick={closePhoto}>close</Button>*/}
+          </div>
         </div>
       </div>
     </div>
