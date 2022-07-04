@@ -34,6 +34,7 @@ const WebCam: FC = () => {
   const getVideo = () => {
     navigator.mediaDevices
       .getUserMedia({
+        //webcam 화면 사이즈 설정
         video: { width: 600, height: 600 },
       })
       .then((stream) => {
@@ -47,6 +48,7 @@ const WebCam: FC = () => {
   };
   //사진 촬영
   const takePhoto = () => {
+    //사진 촬영후 사이즈 설정
     const width = 600;
     const height = width / (16 / 9);
 
@@ -94,10 +96,11 @@ const WebCam: FC = () => {
       clearInterval(intervalRef.current);
       setTimeLeft(30);
     }
+    //video 사이즈 설정은 scss에서 video-react-video
   };
   //녹화 시작 후 30초뒤에 자동 종료
   useEffect(() => {
-    const timeOut = setTimeout(stopRecording, 2000);
+    const timeOut = setTimeout(stopRecording, 1000);
     return () => {
       clearTimeout(timeOut);
     };
