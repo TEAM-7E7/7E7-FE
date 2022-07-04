@@ -15,12 +15,15 @@ function padTime(time: number) {
 const WebCam: FC = () => {
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
+  //take picture
   const photoRef = useRef<any>(null);
   const [hasPhoto, setHasPhoto] = useState(false);
+  //recordrtc
   const [stream, setStream] = useState<MediaStream | null>();
   const [recorder, setRecorder] = useState<RecordRTC.RecordRTCPromisesHandler | null>();
   const [videoBlob, setVideoUrlBlob] = useState<Blob | null>();
-  const [timeLeft, setTimeLeft] = React.useState<any>(30);
+  //30초 타이머
+  const [timeLeft, setTimeLeft] = React.useState<number>(30);
   const minutes: any = padTime(Math.floor(timeLeft / 60));
   const seconds = padTime(timeLeft - minutes * 60);
   const intervalRef: any = React.useRef(null);
@@ -69,7 +72,7 @@ const WebCam: FC = () => {
     setVideoUrlBlob(null);
     // 시작버튼 누르면 30초 타이머
     intervalRef.current = setInterval(() => {
-      setTimeLeft((timeLeft: any) => {
+      setTimeLeft((timeLeft: number) => {
         if (timeLeft >= 1) {
           return timeLeft - 1;
         } else {
@@ -94,13 +97,13 @@ const WebCam: FC = () => {
   };
   //녹화 시작 후 30초뒤에 자동 종료
   useEffect(() => {
-    const timeOut = setTimeout(stopRecording, 1000);
+    const timeOut = setTimeout(stopRecording, 2000);
     return () => {
       clearTimeout(timeOut);
     };
   });
   //clearTimeout(timeOut);
-  const downloadVideo = () => {
+  const UpLoadVideo = () => {
     if (videoBlob) {
       const mp4File = new File([videoBlob], "demo.mp4", { type: "video/mp4" });
     }
@@ -116,8 +119,8 @@ const WebCam: FC = () => {
           <Button size="medium" onClick={stopRecording}>
             stop
           </Button>
-          <Button size="medium" onClick={downloadVideo}>
-            download
+          <Button size="medium" onClick={UpLoadVideo}>
+            upload
           </Button>
           <Button size="medium" onClick={takePhoto}>
             촬영
