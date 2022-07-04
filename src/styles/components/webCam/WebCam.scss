@@ -1,0 +1,32 @@
+.webcam {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .webcam-record {
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+    canvas {
+      width: 600px;
+    }
+    .webcam-video{
+      .video-react-video{
+        width: 600px;
+      }
+      .video-react {
+        padding-top: 0px !important;
+      }
+      .video-react-control {
+        display: none;
+      }
+      .video-react-time-control{
+        display: none;
+      }
+      .video-react-button{
+        display: none;
+      }
+    }
+  }
+}
+
