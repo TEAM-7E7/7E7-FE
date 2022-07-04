@@ -85,7 +85,7 @@ const WebCam: FC = () => {
   };
   //녹화 시작 후 30초뒤에 자동 종료
   useEffect(() => {
-    const timeOut = setTimeout(stopRecording, 2000);
+    const timeOut = setTimeout(stopRecording, 1100);
     return () => {
       clearTimeout(timeOut);
     };
