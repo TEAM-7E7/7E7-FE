@@ -83,6 +83,15 @@ const WebCam: FC = () => {
       });
     }, 1000);
   };
+  //녹화 시작 후 30초뒤에 자동 종료
+  useEffect(() => {
+    const timeOut = setTimeout(stopRecording, 1000);
+    const interval = setInterval(intervalRef.current);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeOut);
+    };
+  });
   //비디오 녹화 종료
   const stopRecording: any = async () => {
     if (recorder) {
@@ -98,13 +107,6 @@ const WebCam: FC = () => {
     }
     //video 사이즈 설정은 scss에서 video-react-video
   };
-  //녹화 시작 후 30초뒤에 자동 종료
-  useEffect(() => {
-    const timeOut = setTimeout(stopRecording, 1000);
-    return () => {
-      clearTimeout(timeOut);
-    };
-  });
   //clearTimeout(timeOut);
   const UpLoadVideo = () => {
     if (videoBlob) {
