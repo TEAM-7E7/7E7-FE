@@ -3,11 +3,12 @@ import { Input } from "../../elements/Input";
 import "../../styles/pages/sign-up/signUp.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { signInValidationSchema } from "../../utils/authValidation";
+import { signInValidationSchema, signUpValidationSchema } from "../../utils/authValidation";
 import { Formik, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SignUpDto, SignUpFormDto } from "../../dto/AuthDto";
+import React, { useState } from "react";
 
 const initialValues: SignUpFormDto = {
   email: "",
@@ -18,6 +19,8 @@ const initialValues: SignUpFormDto = {
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [emailIsSent, setEmailIsSent] = useState<boolean>(false);
+  const [emailToken, setEmailToken] = useState<string>("");
   const submit = async ({ ...values }: SignUpDto) => {
     console.log(values);
     /*const { email, username, password } = values;
@@ -41,8 +44,36 @@ const SignUp = () => {
     }*/
   };
 
+  const sendEmail = async (email: any) => {
+    console.log(email);
+    const emailDto = {
+      email: email,
+      emailToken: "",
+    };
+    try {
+      const res = await axios.post("http://15.164.218.81:8080/api/email-validation", emailDto);
+      alert("이메일을 확인해주세요");
+      setEmailIsSent(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const verifyEmail = async (email: any) => {
+    console.log(email);
+    const emailDto = {
+      email: email,
+      emailToken: emailToken,
+    };
+    try {
+      const res = await axios.post("http://15.164.218.81:8080/api/email-validation", emailDto);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
-    <Formik initialValues={initialValues} validationSchema={signInValidationSchema} onSubmit={submit}>
+    <Formik initialValues={initialValues} validationSchema={signUpValidationSchema} onSubmit={submit}>
       {({ values, handleSubmit, handleChange }) => (
         <div className="signup-wrapper">
           <ToastContainer />
@@ -55,20 +86,39 @@ const SignUp = () => {
                 <div className="signup-body-item-label">이메일</div>
                 <div className="signup-body-item-input">
                   <Input size="medium" name="email" onChange={handleChange} value={values.email} />
-                  <Button size="medium">인증 요청</Button>
+                  <Button
+                    onClick={() => {
+                      sendEmail(values.email);
+                    }}
+                    size="medium"
+                  >
+                    인증 요청
+                  </Button>
                 </div>
                 <div className="signup-body-item-error">
                   <ErrorMessage name="email" />
                 </div>
+                {emailIsSent && (
+                  <div className="signup-body-item-input">
+                    <Input
+                      size="medium"
+                      name="emailToken"
+                      onChange={(e: any) => {
+                        setEmailToken(e.target.value);
+                      }}
+                      value={emailToken}
+                    />
+                    <Button
+                      size="medium"
+                      onClick={() => {
+                        verifyEmail(values.email);
+                      }}
+                    >
+                      인증 확인
+                    </Button>
+                  </div>
+                )}
               </div>
-              {/*<div className="signup-body-items">
-              <div className="signup-body-item-label">인증번호</div>
-              <div className="signup-body-item-input">
-                <Input size="medium" />
-                <Button size="medium">인증번호 확인</Button>
-              </div>
-              <div className="signup-body-item-error"></div>
-            </div>*/}
               <div className="signup-body-item">
                 <div className="signup-body-item-label">닉네임</div>
                 <div className="signup-body-item-input">

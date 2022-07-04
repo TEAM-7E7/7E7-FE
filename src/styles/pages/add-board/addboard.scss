@@ -1,67 +1,76 @@
-.addboard-wrapper{
+.addboard-wrapper {
   font-family: 'Noto Sans KR', sans-serif;
-  .addboard-header{
+
+  .addboard-header {
     font-weight: bold;
     text-align: center;
     font-size: 2rem;
     margin: 2rem 0;
   }
-  .addboard-body{
+
+  .addboard-body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    .preview-main-image{
+
+    .preview-main-image {
       background: #D1D1D1;
       border-radius: 51px;
       width: 250px;
       height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-right: 1rem;
+      img, video {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
     }
-    .addboard-form{
+
+    .addboard-form {
       margin-left: 1rem;
-      .drag-explain{
+
+      .drag-explain {
         font-size: 0.8rem;
         margin-bottom: 0.5rem;
         color: #797979;
       }
-      .upload-item{
+
+      .upload-item {
         display: flex;
-        align-items: baseline;
-        .uploaded-items{
-          border: 1px #D1D1D1 solid;
-          min-width: 400px;
-          min-height: 150px;
-          margin-right: 0.5rem;
-          border-radius: 15px;
-          flex-grow: 1;
-          padding: 1rem;
-          display: flex;
-        }
-        .upload-button{
+        align-items: flex-end;
+
+        .upload-button {
           margin-left: 0.5rem;
         }
       }
-      .input-title{
+
+      .input-title {
         margin: 0.5rem 0;
       }
-      .category-and-price{
+
+      .category-and-price {
         margin: 0.5rem 0;
         display: flex;
-        .dropdown-category{
+        align-items: flex-end;
+        .dropdown-category {
           flex-grow: 1;
           margin-right: 0.5rem;
         }
-        .input-price{
+
+        .input-price {
           margin-left: 0.5rem;
         }
       }
-      .textfield-explain{
+
+      .textfield-explain {
         display: flex;
         margin: 0.5rem 0;
       }
     }
 
   }
-
 }

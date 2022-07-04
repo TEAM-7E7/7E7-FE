@@ -1,6 +1,6 @@
 export interface FileDto {
   fileObject: File | null;
-  preview_URL: string | ArrayBuffer | null;
+  preview_URL: string;
   type: string;
 }
 

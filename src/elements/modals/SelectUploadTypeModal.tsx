@@ -2,53 +2,27 @@ import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import "../../styles/elements/modals/selectuploadtypemodal.scss";
 import { IconButton } from "../IconButton";
 import { CameraIcon, ImageIcon } from "../../assets/icons/FigmaIcons";
-import { useState } from "react";
-import { Button } from "../Button";
+import { memo, useState } from "react";
 import FileUploader from "../../components/fileUploader/FileUploader";
-interface ModalProps {
+import { BoardDto } from "../../dto/AddBoardDto";
+
+interface SelectUploadTypeModalProps {
   modalIsOpen: boolean;
   setModalIsOpen: any;
   setValues: any;
+  values: BoardDto;
 }
 
-const SelectUploadTypeModal = ({ modalIsOpen, setModalIsOpen, setValues }: ModalProps) => {
+const SelectUploadTypeModal = memo(function SelectUploadTypeModal({
+  modalIsOpen,
+  setModalIsOpen,
+  setValues,
+  values,
+}: SelectUploadTypeModalProps) {
   const [uploadModalIsOpen, setUploadModalIsOpen] = useState<boolean>(false);
   const [cameraModalIsOpen, setCameraModalIsOpen] = useState<boolean>(false);
   return (
     <>
-      <FileUploader />
-      <Dialog
-        open={uploadModalIsOpen}
-        onClose={() => {
-          setUploadModalIsOpen(false);
-        }}
-      >
-        <div className="modal-select-type">
-          <DialogTitle>사진과 동영상중 선택하세요</DialogTitle>
-          <DialogContent>
-            <div className="modal-body">
-              <div className="select-button">
-                <Button
-                  onClick={() => {
-                    setUploadModalIsOpen(false);
-                  }}
-                >
-                  사진
-                </Button>
-              </div>
-              <div className="select-button">
-                <Button
-                  onClick={() => {
-                    setUploadModalIsOpen(false);
-                  }}
-                >
-                  동영상
-                </Button>
-              </div>
-            </div>
-          </DialogContent>
-        </div>
-      </Dialog>
       <Dialog
         open={modalIsOpen}
         onClose={() => {
@@ -67,7 +41,8 @@ const SelectUploadTypeModal = ({ modalIsOpen, setModalIsOpen, setValues }: Modal
                 </IconButton>
               </div>
               <div className="select-button">
-                <FileUploader />
+                {/* 유저가 직접 업로드하는 파일 업로더 */}
+                <FileUploader values={values} setValues={setValues} />
               </div>
             </div>
           </DialogContent>
@@ -75,5 +50,6 @@ const SelectUploadTypeModal = ({ modalIsOpen, setModalIsOpen, setValues }: Modal
       </Dialog>
     </>
   );
-};
+});
+
 export default SelectUploadTypeModal;
