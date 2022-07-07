@@ -16,15 +16,15 @@
 
     .preview-main-image {
       background: #D1D1D1;
-      border-radius: 51px;
+      border-radius: 25px;
       width: 250px;
       height: 450px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: 1rem;
+      overflow: hidden;
       img, video {
-        height: 100%;
         width: 100%;
         object-fit: contain;
       }

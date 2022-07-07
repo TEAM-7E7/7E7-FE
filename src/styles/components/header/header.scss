@@ -11,19 +11,20 @@ a {
 .header-wrapper {
   z-index: 10;
   position: fixed;
+  padding: 0 2rem;
   top: 0;
   left: 0;
   right: 0;
-  padding: 1.2rem 4rem;
+  height: var(--header--height);
   color: #282c34;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background-color: snow;
+  background-color: #D1D1D1;
   .header-title{
     a {
-      font-size: 3rem;
+      font-size: 2.5rem;
       display: flex;
       align-items: center;
     }
@@ -34,7 +35,7 @@ a {
     a {
       font-size: 1.5rem;
       flex-shrink: 0;
-      margin: 0 1rem;
+      margin: 0 0.8rem;
     }
   }
 }

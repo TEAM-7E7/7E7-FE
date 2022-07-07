@@ -11,7 +11,7 @@ interface FileUploaderDto {
 
 const FileUploader = memo(({ values, setValues }: FileUploaderDto) => {
   let inputRef: HTMLInputElement;
-  console.log(values.files);
+
   const saveImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const fileList = [];

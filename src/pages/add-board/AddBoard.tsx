@@ -41,7 +41,7 @@ const AddBoard = () => {
                 (values.files[0].type === "image" ? (
                   <img src={values.files[0].preview_URL} />
                 ) : (
-                  <video src={values.files[0].preview_URL} autoPlay={true} />
+                  <video src={values.files[0].preview_URL} controls={true} autoPlay={true} />
                 ))}
             </div>
             <div className="addboard-form">
