@@ -6,7 +6,7 @@ const Header = () => {
     <div className="header-wrapper">
       <div className="header-title">
         <Link to="/">
-          <span>ClipMarket</span>
+          <span>MarketClip</span>
         </Link>
       </div>
       <div className="header-menu">
