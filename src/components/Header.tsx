@@ -1,4 +1,4 @@
-import "../../styles/components/header/header.scss";
+import "../styles/components/header.scss";
 import { Link } from "react-router-dom";
 
 const Header = () => {

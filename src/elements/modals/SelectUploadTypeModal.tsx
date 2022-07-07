@@ -3,7 +3,7 @@ import "../../styles/elements/modals/selectuploadtypemodal.scss";
 import { IconButton } from "../IconButton";
 import { CameraIcon, ImageIcon } from "../../assets/icons/FigmaIcons";
 import { memo, useState } from "react";
-import FileUploader from "../../components/fileUploader/FileUploader";
+import FileUploader from "../../components/FileUploader";
 import { BoardDto } from "../../dto/AddBoardDto";
 
 interface SelectUploadTypeModalProps {

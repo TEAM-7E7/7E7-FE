@@ -16,9 +16,22 @@ body {
   padding: 0;
 }
 
-// header 높이 계산
-:root {
-  --header--height: 120px
+@media all and (min-width: 360px) {
+  :root {
+    --header--height: 120px;
+  }
+  html {
+    font-size: 100%;
+  }
+}
+
+@media all and (max-width: 360px) {
+  :root {
+    --header--height: 100px;
+  }
+  html {
+    font-size: 70%;
+  }
 }
 
 
@@ -27,6 +40,7 @@ body {
   height: calc(100% - var(--header--height));
   // header가 fixed이므로 relative 속성을 주고 header 높이만큼 top 값을 부여
   top: var(--header--height);
+
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }

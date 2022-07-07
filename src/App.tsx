@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Header from "./components/header/Header";
-import SignUp from "./pages/sign-up/SignUp";
-import SignIn from "./pages/sign-in/SignIn";
-import AddBoard from "./pages/add-board/AddBoard";
+import Home from "./pages/Home";
+import Header from "./components/Header";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import AddBoard from "./pages/AddBoard";
 import "./App.scss";
 const App = () => {
   return (

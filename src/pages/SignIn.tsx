@@ -1,12 +1,12 @@
-import "../../styles/pages/sign-in/signIn.scss";
+import "../styles/pages/signIn.scss";
 import { ErrorMessage, Formik } from "formik";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Input } from "../../elements/Input";
-import { Button } from "../../elements/Button";
-import { SignInDto, SingInFormDto } from "../../dto/AuthDto";
-import { signUpValidationSchema } from "../../utils/authValidation";
+import { Input } from "../elements/Input";
+import { Button } from "../elements/Button";
+import { SignInDto, SingInFormDto } from "../dto/AuthDto";
+import { signUpValidationSchema } from "../utils/authValidation";
 
 const initialValues: SingInFormDto = {
   email: "",

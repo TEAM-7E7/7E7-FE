@@ -41,7 +41,7 @@ const DndContainer = memo(({ values, setValues }: DndContainerDto) => {
 
   return (
     <div className="dndcontainer-wrapper">
-      {values.files?.map((item) => (
+      {values.files?.map((item: FileDto) => (
         <DndItem
           key={item.preview_URL}
           type={item.type}

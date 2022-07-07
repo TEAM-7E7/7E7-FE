@@ -1,16 +1,16 @@
-import "../../styles/pages/add-board/addboard.scss";
-import { Button } from "../../elements/Button";
-import { IconButton } from "../../elements/IconButton";
+import "../styles/pages/addboard.scss";
+import { Button } from "../elements/Button";
+import { IconButton } from "../elements/IconButton";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
-import { BoardDto, FileDto } from "../../dto/AddBoardDto";
-import { addBoardValidationSchema } from "../../utils/boardValidation";
-import { Input } from "../../elements/Input";
-import { TextField } from "../../elements/TextField";
-import SelectUploadTypeModal from "../../elements/modals/SelectUploadTypeModal";
-import { UploadIcon } from "../../assets/icons/FigmaIcons";
-import DndContainer from "../../components/addBoardDnd/DndContainer";
+import { BoardDto, FileDto } from "../dto/AddBoardDto";
+import { addBoardValidationSchema } from "../utils/boardValidation";
+import { Input } from "../elements/Input";
+import { TextField } from "../elements/TextField";
+import SelectUploadTypeModal from "../elements/modals/SelectUploadTypeModal";
+import { UploadIcon } from "../assets/icons/FigmaIcons";
+import DndContainer from "../components/addBoardDnd/DndContainer";
 import { DndProvider } from "react-dnd-multi-backend";
 // for mobile
 import HTML5toTouch from "react-dnd-multi-backend/dist/esm/HTML5toTouch";

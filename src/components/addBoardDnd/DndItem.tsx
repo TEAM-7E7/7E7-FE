@@ -1,6 +1,8 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import "../../styles/components/addBoardDnd/dnditem.scss";
+import { Button } from "../../elements/Button";
+import PreviewModal from "../../elements/modals/PreviewModal";
 
 interface DndItemDto {
   type: string;
@@ -11,6 +13,7 @@ interface DndItemDto {
 
 const DndItem = memo(({ type, id, moveItem, findItem }: DndItemDto) => {
   // Card의 id로 원래 인덱스를 찾기
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const originalIndex = findItem(id).index;
   // drag 여부를 판별하는 isDragging과 drag할 요소에 부착할 ref를 받음
   const [{ isDragging }, dragRef] = useDrag(
@@ -63,6 +66,14 @@ const DndItem = memo(({ type, id, moveItem, findItem }: DndItemDto) => {
           {type === "video" ? <video src={id} /> : <img src={id} />}
         </div>
       )}
+      <Button
+        onClick={() => {
+          setModalIsOpen(true);
+        }}
+      >
+        123
+      </Button>
+      <PreviewModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} previewURL={id} type={type} />
     </>
   );
 });

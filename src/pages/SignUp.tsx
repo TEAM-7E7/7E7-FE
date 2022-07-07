@@ -1,13 +1,13 @@
-import { Button } from "../../elements/Button";
-import { Input } from "../../elements/Input";
-import "../../styles/pages/sign-up/signUp.scss";
+import { Button } from "../elements/Button";
+import { Input } from "../elements/Input";
+import "../styles/pages/signUp.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { signInValidationSchema, signUpValidationSchema } from "../../utils/authValidation";
+import { signInValidationSchema, signUpValidationSchema } from "../utils/authValidation";
 import { Formik, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { SignUpDto, SignUpFormDto } from "../../dto/AuthDto";
+import { SignUpDto, SignUpFormDto } from "../dto/AuthDto";
 import React, { useState } from "react";
 
 const initialValues: SignUpFormDto = {
@@ -55,7 +55,7 @@ const SignUp = () => {
       alert("이메일을 확인해주세요");
       setEmailIsSent(true);
     } catch (e) {
-      console.log(e);
+      alert(`이메일이 이미 발송되었습니다.\n잠시후 다시 시도해주세요.`);
     }
   };
 
@@ -98,7 +98,10 @@ const SignUp = () => {
                 <div className="signup-body-item-error">
                   <ErrorMessage name="email" />
                 </div>
-                {emailIsSent && (
+              </div>
+              {emailIsSent && (
+                <div className="signup-body-item">
+                  <div className="signup-body-item-label">인증번호</div>
                   <div className="signup-body-item-input">
                     <Input
                       size="medium"
@@ -117,8 +120,8 @@ const SignUp = () => {
                       인증 확인
                     </Button>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
               <div className="signup-body-item">
                 <div className="signup-body-item-label">닉네임</div>
                 <div className="signup-body-item-input">

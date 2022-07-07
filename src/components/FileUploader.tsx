@@ -1,8 +1,8 @@
 import React, { memo, useState } from "react";
-import "../../styles/components/fileUploader/fileuploader.scss";
-import { ImageIcon } from "../../assets/icons/FigmaIcons";
-import { IconButton } from "../../elements/IconButton";
-import { BoardDto } from "../../dto/AddBoardDto";
+import "../styles/components/fileuploader.scss";
+import { ImageIcon } from "../assets/icons/FigmaIcons";
+import { IconButton } from "../elements/IconButton";
+import { BoardDto } from "../dto/AddBoardDto";
 
 interface FileUploaderDto {
   values: BoardDto;
@@ -38,7 +38,6 @@ const FileUploader = memo(({ values, setValues }: FileUploaderDto) => {
                   });
                 }
                 clearInterval(timer);
-                // 비동기 맞추기 ㅈㄴ어렵네 ㅅㅂ
                 resolve("good");
               }
             }, 500);

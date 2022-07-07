@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import "../../styles/pages/home/home.scss";
+import "../styles/pages/home.scss";
 
 const Home = () => {
   const snapScrollWrapperRef = useRef<HTMLDivElement>(null);
-  const [images, setImages] = useState([
+  const [images] = useState([
     { previewURL: "img/image1.jpg", type: "image" },
     { previewURL: "video/video1.mp4", type: "video" },
     { previewURL: "img/image2.jpg", type: "image" },
@@ -12,11 +12,11 @@ const Home = () => {
   ]);
   const playVideo = (e: React.UIEvent<HTMLDivElement>) => {
     // snap-scroll-wrapper의 뷰포트에서 맨 위 Y좌표와 맨 아래 Y좌표를 구함
-    const snapScrollWrapperRect = (e.target as HTMLInputElement).getBoundingClientRect();
+    const snapScrollWrapperRect = (e.target as HTMLDivElement).getBoundingClientRect();
     const snapScrollWrapperTopY = snapScrollWrapperRect.top;
     const snapScrollWrapperBottomY = snapScrollWrapperRect.bottom;
     // 스크롤되는 아이템들은 snap-scoll-wrapper의 자식들(snap-scroll-item)이다.
-    const snapScrollItems = (e.target as HTMLInputElement).childNodes;
+    const snapScrollItems = (e.target as HTMLDivElement).childNodes;
     snapScrollItems.forEach((item: any) => {
       // 이미지나 비디오는 snap-scroll-item의 0번째 자식
       const snapScrollItem = item.childNodes[0];
