@@ -7,8 +7,10 @@ interface InputOptions {
   value?: any;
   ref?: any;
   onChange?: any;
+  onClick?: any;
   name?: string;
   type?: string;
+  disabled?: boolean;
 }
 
 export function Input({
@@ -18,18 +20,22 @@ export function Input({
   ref,
   placeholder,
   onChange,
+  onClick,
   name,
   type,
+  disabled = false,
 }: InputOptions) {
   return (
     <input
-      className={`input-${size} input-${fullWidth ? "fullWidth" : ""}`}
+      className={`input-${size} ${fullWidth ? "input-fullWidth" : ""} ${disabled ? "input-disabled" : ""}`}
       value={value}
       ref={ref}
       placeholder={placeholder}
       onChange={onChange}
+      onClick={onClick}
       name={name}
       type={type}
+      disabled={!!disabled}
     />
   );
 }

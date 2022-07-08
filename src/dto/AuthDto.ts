@@ -10,13 +10,14 @@ export interface SingInFormDto {
 
 export interface SignUpDto {
   email: string;
-  username?: string;
-  password?: string;
+  nickname: string;
+  password: string;
 }
 
 export interface SignUpFormDto {
   email: string;
-  username: string;
+  emailToken: string;
+  nickname: string;
   password: string;
   password2: string;
 }

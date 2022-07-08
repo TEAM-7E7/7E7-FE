@@ -1,8 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/pages/home.scss";
+import axios from "axios";
 
 const Home = () => {
   const snapScrollWrapperRef = useRef<HTMLDivElement>(null);
+  const [goods, setGoodsList] = useState<any>();
+  useEffect(() => {
+    const getGoodsList = async () => {
+      const res = await axios.get("http://15.164.218.81:8080/api/goods?pageNumber=0&pageSize=4");
+      console.log(res.data);
+    };
+    getGoodsList();
+  }, []);
   const [images] = useState([
     { previewURL: "img/image1.jpg", type: "image" },
     { previewURL: "video/video1.mp4", type: "video" },

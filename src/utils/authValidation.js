@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 export const signUpValidationSchema = Yup.object().shape({
   email: Yup.string().email("올바른 이메일 형식이 아닙니다!").required("이메일을 입력하세요!"),
-  username: Yup.string()
+  nickname: Yup.string()
     .min(2, "닉네임은 최소 2글자 이상입니다!")
     .max(10, "닉네임은 최대 10글자입니다!")
     .matches(

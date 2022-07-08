@@ -9,6 +9,7 @@ interface ButtonOptions {
   onClick?: () => void;
   type?: string;
   children: ReactNode;
+  disabled?: boolean;
 }
 
 export function Button({
@@ -19,11 +20,15 @@ export function Button({
   onClick,
   type,
   children,
+  disabled = false,
 }: ButtonOptions) {
   return (
     <button
-      className={`button-${size} button-${color} button-${variant} button-${fullWidth ? "fullWidth" : ""}`}
+      className={`button-${size} button-${color} button-${variant} ${fullWidth ? "button-fullWidth" : ""} ${
+        disabled ? "button-disabled" : ""
+      }`}
       type={type === "submit" ? "submit" : "button"}
+      disabled={!!disabled}
       onClick={onClick}
     >
       {children}

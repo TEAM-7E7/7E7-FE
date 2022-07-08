@@ -1,12 +1,12 @@
 import "../styles/pages/signIn.scss";
-import { ErrorMessage, Formik } from "formik";
+import { Formik } from "formik";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Input } from "../elements/Input";
 import { Button } from "../elements/Button";
 import { SignInDto, SingInFormDto } from "../dto/AuthDto";
-import { signUpValidationSchema } from "../utils/authValidation";
+import { signInValidationSchema } from "../utils/authValidation";
 
 const initialValues: SingInFormDto = {
   email: "",
@@ -14,14 +14,16 @@ const initialValues: SingInFormDto = {
 };
 const SignIn = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const submit = async (values: SignInDto) => {
-    console.log(values);
-    /*try {
-      const { data } = await axios.post("/api/auth/signin", {
-        email,
-        password,
-      });
+    const { email, password } = values;
+    const signInRequestBody = {
+      email: email,
+      password: password,
+    };
+    try {
+      const res = await axios.post("http://15.164.218.81:8080/api/login", signInRequestBody);
+      console.log(res);
       const redirectUrl = searchParams.get("redirectUrl");
       toast.success(<h3>로그인 성공</h3>, {
         position: "top-center",
@@ -37,17 +39,20 @@ const SignIn = () => {
         }
       }, 2000);
     } catch (e) {
+      console.log(e);
       // 서버에서 받은 에러 메시지 출력
-      toast.error(e.response.data.message + "😭", {
-        position: "top-center",
-      });
-    }*/
+    }
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={submit} validationSchema={signUpValidationSchema}>
-      {({ values, handleSubmit, handleChange }) => (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={submit}
+      validationSchema={signInValidationSchema}
+      validateOnMount={true}
+    >
+      {({ values, handleSubmit, handleChange, errors }) => (
         <div className="signin-wrapper">
-          <div className="signin-header"></div>
+          <div className="signin-header">로그인</div>
           <form onSubmit={handleSubmit}>
             <div className="signin-body">
               <div className="signin-body-item">
@@ -55,21 +60,24 @@ const SignIn = () => {
                 <div className="signin-body-item-input">
                   <Input size="medium" name="email" onChange={handleChange} value={values.email} />
                 </div>
-                <div className="signup-body-item-error">
-                  <ErrorMessage name="email" />
-                </div>
+                <div className="signin-body-item-error">{errors.email}</div>
               </div>
               <div className="signin-body-item">
                 <div className="signin-body-item-label">password</div>
                 <div className="signin-body-item-input">
-                  <Input size="medium" name="password" onChange={handleChange} value={values.email} />
+                  <Input
+                    size="medium"
+                    name="password"
+                    onChange={handleChange}
+                    value={values.password}
+                    type="password"
+                  />
                 </div>
-                <div className="signup-body-item-error">
-                  <ErrorMessage name="password" />
-                </div>
+                <div className="signin-body-item-error">{errors.password}</div>
               </div>
               <div className="signin-button">
-                <Button color="submit" fullWidth>
+                {/*플랫폼 자체 로그인*/}
+                <Button color="submit" type="submit" fullWidth>
                   Login
                 </Button>
               </div>
