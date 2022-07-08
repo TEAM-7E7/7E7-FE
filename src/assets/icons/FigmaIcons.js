@@ -21,3 +21,16 @@ export function ImageIcon() {
     </svg>
   );
 }
+
+export function SalelistIcon() {
+  return (
+    <svg width="77" height="97" viewBox="0 0 77 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3.91602" width="71" height="90" rx="8" stroke="#5A5A5A" stroke-width="6" />
+      <path d="M2 72.416H75" stroke="black" stroke-linecap="round" stroke-dasharray="2 2" />
+      <path d="M16 20.916H61" stroke="black" stroke-linecap="round" />
+      <path d="M16 28.916H61" stroke="black" stroke-linecap="round" />
+      <path d="M16 36.916H61" stroke="black" stroke-linecap="round" />
+      <path d="M16 52.916H61" stroke="black" stroke-linecap="round" />
+    </svg>
+  );
+}

@@ -1,0 +1,139 @@
+.myProfile{
+  .myProfile-swapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 50px;
+    .myProfile-head{
+      width: 90%;
+      max-width: 1380px;
+      flex-wrap: wrap;
+      height: 288px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #d1d1d1;
+      border-radius: 40px;
+      margin-bottom: 43px;
+      background-color: #D1D1D1;
+      .myProfile-head-user{
+        display: flex;
+        align-items: center;
+        .user-img{
+
+        }
+        .user-info {
+          .user-nick {
+            font-size: 26px;
+          }
+          .user-email {
+            font-size: 30px;
+            color: #545454;
+          }
+        }
+      }
+      .myProfile-head-button{
+        button {
+          margin-left: 30px;
+        }
+      }
+      .myProfile-head-user{
+        margin-left: 5%;
+        .user-info{
+          display: flex;
+          flex-direction: column;
+          margin-left: 20px;
+        }
+      }
+      .myProfile-head-button{
+        display: flex;
+        margin-right: 10%;
+        margin-left: 13%;
+      }
+    }
+    hr{
+      width: 65%;
+      display: flex;
+      border: 1px solid black;
+    }
+    .myProfile-body{
+      width: 90%;
+      max-width: 1380px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      margin-top: 32px;
+      justify-content: center;
+      align-items: center;
+      .category-status{
+        width: 100%;
+        max-width: 1380px;
+        height: 50px;
+        margin-bottom: 20px;
+        .button-text{
+          color: #000000;
+          margin-right: 20px;
+        }
+      }
+      .myProfile-category{
+        width: 100%;
+        max-width: 1380px;
+        height: 220px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        border: 1px solid #D1D1D1;
+        border-radius: 40px;
+        background-color: #D1D1D1;
+        justify-content: space-around;
+        margin-bottom: 30px;
+        .category-list{
+          width: 100%;
+          max-width: 1380px;
+          display: flex;
+          justify-content: space-evenly;
+          flex-wrap: wrap;
+          .list-content{
+            display: flex;
+            flex-direction: column;
+            padding: 0 5px;
+            font-size: 16px;
+          }
+          .iconbutton-text{
+            color: #000000;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+      .myProfile-content{
+        width: 100%;
+        max-width: 370px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        border: 1px solid #D1D1D1;
+        border-radius: 40px;
+
+        .preview-main-image{
+          height: 600px;
+        }
+        .myProfile-product{
+          display: flex;
+          justify-content: space-around;
+        }
+        .product-price{
+          display: flex;
+          justify-content: space-around;
+        }
+        .product-detail{
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
