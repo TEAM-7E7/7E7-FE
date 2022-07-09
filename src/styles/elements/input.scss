@@ -10,6 +10,9 @@ input {
     outline: solid skyblue;
     border: 1px #ffffff;
   }
+  &::placeholder{
+    font-size: 0.7em;
+  }
 }
 
 // size

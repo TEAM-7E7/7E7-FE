@@ -20,9 +20,12 @@ const initialValues: SignUpFormDto = {
 
 const SignUp = () => {
   const navigate = useNavigate();
+  // email 인증, nickname 중복확인
   const [emailIsSent, setEmailIsSent] = useState<boolean>(false);
   const [emailIsVerified, setEmailIsVerified] = useState<boolean>(false);
-  const [nicknameIsExist, setNicknameIsExist] = useState<boolean>(false);
+  const [nicknameIsNotDuplicate, setNicknameIsNotDuplicate] = useState<boolean>(false);
+  // nickname 중복확인을 하고 nickname을 바꿀 때 사용
+  const [currentNickname, setCurrentNickname] = useState<string>("");
   const submit = async (values: SignUpDto) => {
     console.log(values);
     const { email, nickname, password } = values;
@@ -78,9 +81,11 @@ const SignUp = () => {
     try {
       await axios.post("http://15.164.218.81:8080/api/nickname-check", checkDuplicateNicknameRequestBody);
       alert("닉네임을 사용하실 수 있습니다.");
-      setNicknameIsExist(true);
+      setNicknameIsNotDuplicate(true);
+      setCurrentNickname("nickName");
     } catch (e) {
       alert("이미 존재하는 닉네임입니다.");
+      setNicknameIsNotDuplicate(false);
     }
   };
 
@@ -107,21 +112,28 @@ const SignUp = () => {
                     name="email"
                     onChange={handleChange}
                     value={values.email}
-                    disabled={emailIsSent}
+                    disabled={emailIsVerified}
+                    placeholder="아이디@email.com"
                   />
                   <Button
                     size="medium"
                     onClick={() => {
                       sendEmail(values.email);
                     }}
-                    disabled={!!(emailIsSent || errors.email)}
-                    variant={emailIsSent ? "outlined" : "filled"}
-                    color={emailIsSent ? "primary" : "default"}
+                    disabled={errors.email ? !emailIsVerified : false}
+                    variant={emailIsVerified ? "outlined" : "filled"}
+                    color={emailIsVerified ? "primary" : "default"}
                   >
-                    {emailIsSent ? "발송 완료" : "인증 요청"}
+                    인증요청
                   </Button>
                 </div>
-                <div className="signup-body-item-error">{errors.email}</div>
+                <div className="signup-body-item-error">
+                  {emailIsVerified
+                    ? "✔ 이메일 인증이 완료되었습니다."
+                    : errors.email
+                    ? errors.email
+                    : "🗙 이메일 인증을 해주세요."}
+                </div>
               </div>
               {emailIsSent && (
                 <div className="signup-body-item">
@@ -157,21 +169,32 @@ const SignUp = () => {
                     name="nickname"
                     onChange={handleChange}
                     value={values.nickname}
-                    disabled={nicknameIsExist}
+                    placeholder="한글 포함 최대 16글자"
                   />
                   <Button
                     onClick={() => {
                       checkDuplicateNickname(values.nickname);
                     }}
                     size="medium"
-                    variant={nicknameIsExist ? "outlined" : "filled"}
-                    color={nicknameIsExist ? "primary" : "default"}
-                    disabled={nicknameIsExist}
+                    /*variant={nicknameIsNotDuplicate ? "outlined" : "filled"}*/
+                    /*color={nicknameIsNotDuplicate ? "primary" : "default"}*/
+                    disabled={!!errors.nickname}
                   >
-                    {nicknameIsExist ? "확인 완료" : "중복 확인"}
+                    중복 확인
                   </Button>
                 </div>
-                <div className="signup-body-item-error">{errors.nickname}</div>
+                <div className="signup-body-item-error">
+                  {/* {nicknameIsNotDuplicate
+                    ? "✔ 사용할 수 있는 닉네임입니다."
+                    : errors.nickname
+                    ? errors.nickname
+                    : "🗙 닉네임 중복확인을 해주세요"}*/}
+                  {currentNickname !== "" && currentNickname === values.nickname
+                    ? "✔ 사용할 수 있는 닉네임입니다."
+                    : errors.nickname
+                    ? errors.nickname
+                    : "🗙 닉네임 중복확인을 해주세요"}
+                </div>
               </div>
               <div className="signup-body-item">
                 <div className="signup-body-item-label">비밀번호</div>
@@ -183,9 +206,12 @@ const SignUp = () => {
                     value={values.password}
                     fullWidth
                     type="password"
+                    placeholder="공백을 제외한 특수문자, 알파벳, 숫자를 모두 포함한 8~16자리"
                   />
                 </div>
-                <div className="signup-body-item-error">{errors.password}</div>
+                <div className="signup-body-item-error">
+                  {errors.password ? errors.password : "✔ 사용할 수 있는 비밀번호입니다."}
+                </div>
               </div>
               <div className="signup-body-item">
                 <div className="signup-body-item-label">비밀번호 확인</div>
@@ -197,9 +223,12 @@ const SignUp = () => {
                     value={values.password2}
                     fullWidth
                     type="password"
+                    placeholder="한번 더 입력하세요!"
                   />
                 </div>
-                <div className="signup-body-item-error">{errors.password2}</div>
+                <div className="signup-body-item-error">
+                  {errors.password2 ? errors.password2 : "✔ 비밀번호가 일치합니다."}
+                </div>
               </div>
               <Button size="medium" color="submit" type="submit" fullWidth>
                 등록하기

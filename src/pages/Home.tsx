@@ -7,7 +7,7 @@ const Home = () => {
   const [goods, setGoodsList] = useState<any>();
   useEffect(() => {
     const getGoodsList = async () => {
-      const res = await axios.get("http://15.164.218.81:8080/api/goods?pageNumber=0&pageSize=4");
+      const res = await axios.get("https://tryaz.shop/api/goods?pageNumber=0&pageSize=4/");
       console.log(res.data);
     };
     getGoodsList();
