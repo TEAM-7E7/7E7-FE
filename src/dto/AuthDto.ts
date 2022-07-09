@@ -16,7 +16,6 @@ export interface SignUpDto {
 
 export interface SignUpFormDto {
   email: string;
-  emailToken: string;
   nickname: string;
   password: string;
   password2: string;

@@ -13,7 +13,7 @@ interface SelectUploadTypeModalProps {
   values: BoardDto;
 }
 
-const SelectUploadTypeModal = memo(function SelectUploadTypeModal({
+const SelectUploadTypeModal = function SelectUploadTypeModal({
   modalIsOpen,
   setModalIsOpen,
   setValues,
@@ -50,6 +50,6 @@ const SelectUploadTypeModal = memo(function SelectUploadTypeModal({
       </Dialog>
     </>
   );
-});
+};
 
 export default SelectUploadTypeModal;

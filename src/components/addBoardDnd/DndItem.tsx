@@ -66,13 +66,13 @@ const DndItem = memo(({ type, id, moveItem, findItem }: DndItemDto) => {
           {type === "video" ? <video src={id} /> : <img src={id} />}
         </div>
       )}
-      <Button
+      {/*<Button
         onClick={() => {
           setModalIsOpen(true);
         }}
       >
         123
-      </Button>
+      </Button>*/}
       <PreviewModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} previewURL={id} type={type} />
     </>
   );

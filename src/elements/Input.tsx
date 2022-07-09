@@ -1,30 +1,32 @@
 import "../styles/elements/input.scss";
+import { ForwardedRef, forwardRef } from "react";
 
 interface InputOptions {
   size?: string; // small, medium, large
   placeholder?: string;
   fullWidth?: boolean;
   value?: any;
-  ref?: any;
   onChange?: any;
   onClick?: any;
   name?: string;
   type?: string;
   disabled?: boolean;
 }
-
-export function Input({
-  size = "small",
-  fullWidth = false,
-  value,
-  ref,
-  placeholder,
-  onChange,
-  onClick,
-  name,
-  type,
-  disabled = false,
-}: InputOptions) {
+// ref를 prop으로 받으려면 forwardRef를 이용해야함 ;
+export const Input = forwardRef(function (
+  {
+    size = "small",
+    fullWidth = false,
+    value,
+    placeholder,
+    onChange,
+    onClick,
+    name,
+    type,
+    disabled = false,
+  }: InputOptions,
+  ref: ForwardedRef<any>,
+) {
   return (
     <input
       className={`input-${size} ${fullWidth ? "input-fullWidth" : ""} ${disabled ? "input-disabled" : ""}`}
@@ -38,4 +40,32 @@ export function Input({
       disabled={!!disabled}
     />
   );
-}
+});
+
+/*export function Input({
+  size = "small",
+  fullWidth = false,
+  value,
+  ref,
+  placeholder,
+  onChange,
+  onClick,
+  name,
+  type,
+  disabled = false,
+}: InputOptions) {
+
+  return (
+    <input
+      className={`input-${size} ${fullWidth ? "input-fullWidth" : ""} ${disabled ? "input-disabled" : ""}`}
+      value={value}
+      ref={ref}
+      placeholder={placeholder}
+      onChange={onChange}
+      onClick={onClick}
+      name={name}
+      type={type}
+      disabled={!!disabled}
+    />
+  );
+}*/

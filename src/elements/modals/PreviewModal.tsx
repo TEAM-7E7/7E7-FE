@@ -9,12 +9,7 @@ interface PreviewModalProps {
   type: string;
 }
 
-const PreviewModal = memo(function PreviewTypeModal({
-  modalIsOpen,
-  setModalIsOpen,
-  previewURL,
-  type,
-}: PreviewModalProps) {
+const PreviewModal = function PreviewTypeModal({ modalIsOpen, setModalIsOpen, previewURL, type }: PreviewModalProps) {
   return (
     <>
       <Dialog
@@ -34,6 +29,6 @@ const PreviewModal = memo(function PreviewTypeModal({
       </Dialog>
     </>
   );
-});
+};
 
 export default PreviewModal;
