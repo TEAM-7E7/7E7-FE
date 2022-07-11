@@ -63,12 +63,11 @@
       max-width: 1380px;
       display: flex;
       flex-direction: column;
-      flex-wrap: wrap;
       margin-top: 32px;
       justify-content: center;
       align-items: center;
       .category-status{
-        width: 100%;
+        width: 90%;
         max-width: 1380px;
         height: 50px;
         margin-bottom: 20px;
@@ -80,7 +79,7 @@
       .myProfile-category{
         width: 100%;
         max-width: 1380px;
-        height: 220px;
+        height: 270px;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -89,11 +88,14 @@
         background-color: #D1D1D1;
         justify-content: space-around;
         margin-bottom: 30px;
+        align-items: center;
         .category-list{
-          width: 100%;
+          width: 90%;
           max-width: 1380px;
+          min-height: 120px;
           display: flex;
           justify-content: space-evenly;
+          align-items: center;
           flex-wrap: wrap;
           .list-content{
             display: flex;
@@ -103,8 +105,6 @@
           }
           .iconbutton-text{
             color: #000000;
-            display: flex;
-            align-items: center;
           }
         }
       }
@@ -113,15 +113,14 @@
         max-width: 370px;
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
         justify-content: center;
         border: 1px solid #D1D1D1;
         border-radius: 40px;
-
         .preview-main-image{
           height: 600px;
         }
         .myProfile-product{
+          position: relative;
           display: flex;
           justify-content: space-around;
         }

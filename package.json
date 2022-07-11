@@ -26,6 +26,7 @@
     "react-dnd-multi-backend": "^6.0.2",
     "react-dnd-touch-backend": "^16.0.1",
     "react-dom": "^18.2.0",
+    "react-js-pagination": "^3.0.3",
     "react-query": "^3.39.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -61,6 +62,7 @@
   },
   "devDependencies": {
     "@types/react-dnd-multi-backend": "^6.0.2",
+    "@types/react-js-pagination": "^3.0.4",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
     "eslint": "^8.18.0",

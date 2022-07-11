@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
+import { IconButton } from "../../../../elements/IconButton";
+import { MoreOtionIcon } from "../../../../assets/icons/FigmaIcons";
+import Modal from "../../../../elements/modals/MenuModal";
 
 const BuyList = () => {
-  // const saleList_query: any = useQuery(["post_list"], () => axios.get("http://localhost:3000/post_list"), {
-  //   onSuccess: (data: any) => {
-  //     console.log("success", data);
-  //   },
-  // });
-  // console.log(saleList_query);
+  const [show, setShow] = useState(false);
+  const popRef = useRef<HTMLDivElement>(null);
+  //modal 바깥을 클릭하면 modal이 없어진다
+  const onClickOutside = useCallback(
+    ({ target }: any) => {
+      if (popRef.current && !popRef.current.contains(target)) {
+        setShow(false);
+      }
+    },
+    [setShow],
+  );
+  useEffect(() => {
+    document.addEventListener("click", onClickOutside);
+    return () => {
+      document.removeEventListener("click", onClickOutside);
+    };
+  }, []);
+  //*** 더보기 버튼을 클릭했을때 modal창이 나타남
+  const onModal = useCallback(() => {
+    setShow((prev) => !prev);
+  }, [setShow]);
   return (
     <div className="myProfile-content">
       <div className="preview-main-image">
@@ -17,6 +35,10 @@ const BuyList = () => {
       <div className="myProfile-product">
         <span>물건이름</span>
         <span>time</span>
+        <div className="modal" ref={popRef}>
+          <IconButton icon={<MoreOtionIcon />} iconSize="small" size="small" onClick={onModal}></IconButton>
+          <Modal show={show} />
+        </div>
       </div>
       <div className="product-price">
         <span>price</span>
