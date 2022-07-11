@@ -4,6 +4,7 @@ import axios from "axios";
 import { IconButton } from "../../../../../elements/IconButton";
 import { MoreOtionIcon } from "../../../../../assets/icons/FigmaIcons";
 import Modal from "../../../../../elements/modals/MenuModal";
+import Pagination from "../../../../Pagination";
 
 const Complete = () => {
   const [show, setShow] = useState(false);
@@ -28,26 +29,29 @@ const Complete = () => {
     setShow((prev) => !prev);
   }, [setShow]);
   return (
-    <div className="myProfile-content-body">
-      <div className="preview-main-image">
-        {/*{values.files[0] && (values.files[0].type === "image" ? <img /> : <video />)}*/}
-      </div>
-      <div className="myProfile-product">
-        <span>물건 이름</span>
-        <span>time</span>
-        <div className="modal" ref={popRef}>
-          <IconButton icon={<MoreOtionIcon />} iconSize="small" size="small" onClick={onModal}></IconButton>
-          <Modal show={show} />
+    <>
+      <div className="sale-body">
+        <div className="preview-main-image">
+          {/*{values.files[0] && (values.files[0].type === "image" ? <img /> : <video />)}*/}
+        </div>
+        <div className="myProfile-product">
+          <span>물건 이름</span>
+          <span>time</span>
+          <div className="modal" ref={popRef}>
+            <IconButton icon={<MoreOtionIcon />} iconSize="small" size="small" onClick={onModal}></IconButton>
+            <Modal show={show} />
+          </div>
+        </div>
+        <div className="product-price">
+          <span>price</span>
+          <span>판매완료</span>
+        </div>
+        <div className="product-detail">
+          <button className="button-fullWidth button-medium button-default">자세히보러가기</button>
         </div>
       </div>
-      <div className="product-price">
-        <span>price</span>
-        <span>판매완료</span>
-      </div>
-      <div className="product-detail">
-        <button className="button-fullWidth button-medium button-default">자세히보러가기</button>
-      </div>
-    </div>
+      <Pagination />
+    </>
   );
 };
 export default Complete;

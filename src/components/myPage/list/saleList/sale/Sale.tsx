@@ -37,27 +37,27 @@ const Sale = () => {
   // }, []);
   return (
     <>
-      <div className="preview-main-image">
-        {/*{values.files[0] && (values.files[0].type === "image" ? <img /> : <video />)}*/}
-      </div>
-      <div className="myProfile-product">
-        <span>물건 이름</span>
-        <span>time</span>
-        <div className="modal" ref={popRef}>
-          <IconButton icon={<MoreOtionIcon />} iconSize="small" size="small" onClick={onModal}></IconButton>
-          <Modal show={show} />
+      <div className="sale-body">
+        <div className="preview-main-image">
+          {/*{values.files[0] && (values.files[0].type === "image" ? <img /> : <video />)}*/}
+        </div>
+        <div className="myProfile-product">
+          <span>물건 이름</span>
+          <span>time</span>
+          <div className="modal" ref={popRef}>
+            <IconButton icon={<MoreOtionIcon />} iconSize="small" size="small" onClick={onModal}></IconButton>
+            <Modal show={show} />
+          </div>
+        </div>
+        <div className="product-price">
+          <span>price</span>
+          <span>판매중</span>
+        </div>
+        <div className="product-detail">
+          <button className="button-fullWidth button-medium button-default">자세히보러가기</button>
         </div>
       </div>
-      <div className="product-price">
-        <span>price</span>
-        <span>판매중</span>
-      </div>
-      <div className="product-detail">
-        <button className="button-fullWidth button-medium button-default">자세히보러가기</button>
-      </div>
-      <div>
-        <Pagination />
-      </div>
+      <Pagination />
     </>
   );
 };
