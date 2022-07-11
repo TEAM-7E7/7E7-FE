@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { IconButton } from "../../../../elements/IconButton";
 import { MoreOtionIcon } from "../../../../assets/icons/FigmaIcons";
-import Modal from "../../../../elements/modals/MenuModal";
+import MenuModal from "../../../../elements/modals/MenuModal";
 import Pagination from "../../../Pagination";
 
 const LikeList = () => {
@@ -37,9 +37,9 @@ const LikeList = () => {
         <div className="myProfile-product">
           <span>물건이름</span>
           <span>time</span>
-          <div className="modal" ref={popRef}>
+          <div className="menumodal" ref={popRef}>
             <IconButton icon={<MoreOtionIcon />} iconSize="small" size="small" onClick={onModal}></IconButton>
-            <Modal show={show} />
+            <MenuModal show={show} />
           </div>
         </div>
         <div className="product-price">

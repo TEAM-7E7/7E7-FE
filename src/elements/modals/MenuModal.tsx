@@ -5,7 +5,7 @@ interface Props {
   show: boolean;
 }
 
-const Modal: FC<Props> = ({ show }) => {
+const MenuModal: FC<Props> = ({ show }) => {
   // show가 false면 화면에 메뉴를 나타내지 않는다.
   if (!show) {
     return null;
@@ -23,4 +23,4 @@ const Modal: FC<Props> = ({ show }) => {
   );
 };
 
-export default Modal;
+export default MenuModal;
