@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 interface ButtonOptions {
   variant?: "outlined" | "filled";
   size?: "small" | "medium" | "large";
-  color?: "default" | "primary" | "submit";
+  color?: "primary" | "submit" | "skyblue";
   fullWidth?: boolean;
   onClick?: () => void;
   type?: string;
@@ -13,8 +13,8 @@ interface ButtonOptions {
 }
 
 export function Button({
-  size = "small",
-  color = "default",
+  size = "medium",
+  color = "primary",
   variant = "filled",
   fullWidth = false,
   onClick,

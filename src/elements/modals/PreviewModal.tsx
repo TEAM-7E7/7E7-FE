@@ -1,7 +1,5 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-import "../../styles/elements/modals/selectuploadtypemodal.scss";
-import { memo } from "react";
-
+import "../../styles/elements/modals/previewmodal.scss";
 interface PreviewModalProps {
   modalIsOpen: boolean;
   setModalIsOpen: any;
@@ -18,8 +16,7 @@ const PreviewModal = function PreviewTypeModal({ modalIsOpen, setModalIsOpen, pr
           setModalIsOpen(false);
         }}
       >
-        <div className="modal-select-type">
-          <DialogTitle>미리보기</DialogTitle>
+        <div className="modal-preview">
           <DialogContent>
             <div className="modal-body">
               {type === "video" ? <video autoPlay={true} controls={true} src={previewURL} /> : <img src={previewURL} />}
