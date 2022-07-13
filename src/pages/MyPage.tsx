@@ -40,7 +40,6 @@ const MyProfilePage = () => {
             <IconButton icon={<AlarmIcon />} iconSize="large" onClick={onAlram}></IconButton>
           </div>
         </div>
-        <hr />
         <div className="myProfile-body">
           <div className="myProfile-category">
             <div className="category-list">

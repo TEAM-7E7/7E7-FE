@@ -7,6 +7,7 @@ import AddBoard from "./pages/AddBoard";
 import "./App.scss";
 import MyPage from "./pages/MyPage";
 import MyPageAlarm from "./pages/MyPageAlarm";
+import GoodsDetail from "./components/GoodsDetail";
 const App = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/add-board" element={<AddBoard />} />
           <Route path="/MyPage" element={<MyPage />} />
           <Route path="/MyPageAlarm" element={<MyPageAlarm />} />
+          <Route path="/GoodsDetail" element={<GoodsDetail />} />
         </Routes>
       </div>
     </>
