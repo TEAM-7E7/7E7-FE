@@ -114,16 +114,7 @@ const SignIn = () => {
                 <Button fullWidth>SignIn with Google</Button>
               </div>
               <div className="social-login-button">
-                <Button
-                  onClick={() => {
-                    window.location.replace(
-                      "https://todowith.shop/oauth2/authorization/kakao?redirect_uri=http://localhost:3000",
-                    );
-                  }}
-                  fullWidth
-                >
-                  SignIn with Kakao
-                </Button>
+                <Button fullWidth>SignIn with Kakao</Button>
               </div>
               <div className="social-login-button">
                 <Button fullWidth>SignIn with Naver</Button>
