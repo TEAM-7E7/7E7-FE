@@ -4,7 +4,7 @@ import "../styles/pages/signUp.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signUpValidationSchema } from "../utils/authValidation";
-import { Formik, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SignUpDto, SignUpFormDto } from "../dto/AuthDto";
@@ -51,8 +51,9 @@ const SignUp = () => {
     };
     try {
       await axios.post("https://tryaz.shop/api/email-validation", sendEmailRequestBody);
-    } catch (e) {
-      alert(`이메일이 이미 발송되었습니다.\n잠시후 다시 시도해주세요.`);
+      setModalIsOpen(true);
+    } catch (e: any) {
+      alert(e.response.data.message);
     }
   };
 
@@ -65,6 +66,7 @@ const SignUp = () => {
       alert("닉네임을 사용하실 수 있습니다.");
       setCurrentNickname(nickname);
     } catch (e) {
+      console.log(e);
       alert("이미 존재하는 닉네임입니다.");
       setCurrentNickname(nickname);
     }
@@ -98,13 +100,11 @@ const SignUp = () => {
                   />
                   <Button
                     size="medium"
+                    color={emailIsVerified ? "primary" : "skyblue"}
                     onClick={() => {
                       sendEmail(values.email);
-                      setModalIsOpen(true);
                     }}
                     disabled={errors.email ? true : emailIsVerified}
-                    variant={emailIsVerified ? "outlined" : "filled"}
-                    color={emailIsVerified ? "primary" : "default"}
                   >
                     인증 요청
                   </Button>
@@ -131,13 +131,14 @@ const SignUp = () => {
                     name="nickname"
                     onChange={handleChange}
                     value={values.nickname}
-                    placeholder="한글 포함 최대 16글자"
+                    placeholder="한글과 공백 포함 2~16자리"
                   />
                   <Button
                     onClick={() => {
                       checkDuplicateNickname(values.nickname);
                     }}
                     size="medium"
+                    color={errors.nickname ? "skyblue" : "primary"}
                     disabled={!!errors.nickname}
                   >
                     중복 확인
@@ -187,7 +188,11 @@ const SignUp = () => {
               </div>
               <Button
                 size="medium"
-                color="submit"
+                color={
+                  !emailIsVerified || currentNickname === "" || currentNickname !== values.nickname
+                    ? "skyblue"
+                    : "primary"
+                }
                 type="submit"
                 disabled={!emailIsVerified || currentNickname === "" || currentNickname !== values.nickname}
                 fullWidth

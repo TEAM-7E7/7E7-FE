@@ -1,19 +1,28 @@
 import "../styles/pages/signIn.scss";
 import { Formik } from "formik";
-import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Input } from "../elements/Input";
 import { Button } from "../elements/Button";
 import { SignInDto, SingInFormDto } from "../dto/AuthDto";
 import { signInValidationSchema } from "../utils/authValidation";
+import { useRecoilState } from "recoil";
+import { refresh_token } from "../recoil/store";
+import { Cookies } from "react-cookie";
+import axios from "axios";
+import React from "react";
 
 const initialValues: SingInFormDto = {
   email: "",
   password: "",
 };
+
+const cookies = new Cookies();
+
 const SignIn = () => {
   const navigate = useNavigate();
+  const [refreshToken, setRefreshToken] = useRecoilState(refresh_token);
   const [searchParams] = useSearchParams();
   const submit = async (values: SignInDto) => {
     const { email, password } = values;
@@ -22,8 +31,11 @@ const SignIn = () => {
       password: password,
     };
     try {
-      const res = await axios.post("http://15.164.218.81:8080/api/login", signInRequestBody);
-      console.log(res);
+      await axios.post("https://tryaz.shop/api/login", signInRequestBody).then((result) => {
+        setRefreshToken(result.headers["x-refresh-token"].split(" ")[1]);
+        cookies.set("X-ACCESS-TOKEN", result.headers["x-access-token"].split(" ")[1]);
+      });
+
       const redirectUrl = searchParams.get("redirectUrl");
       toast.success(<h3>로그인 성공</h3>, {
         position: "top-center",
@@ -32,15 +44,13 @@ const SignIn = () => {
       // redirectUrl이 쿼리스트링으로 존재하면
       // 원래가고자 했던 페이지로 돌아가기
       setTimeout(() => {
-        if (redirectUrl) {
-          navigate(redirectUrl);
-        } else {
-          navigate("/");
-        }
+        navigate("/");
       }, 2000);
     } catch (e) {
-      console.log(e);
-      // 서버에서 받은 에러 메시지 출력
+      toast.error(<h3>아이디와 비밀번호를 확인해주세요.</h3>, {
+        position: "top-center",
+        autoClose: 2000,
+      });
     }
   };
   return (
@@ -52,6 +62,7 @@ const SignIn = () => {
     >
       {({ values, handleSubmit, handleChange, errors }) => (
         <div className="signin-wrapper">
+          <ToastContainer />
           <div className="signin-header">로그인</div>
           <form onSubmit={handleSubmit}>
             <div className="signin-body">
@@ -103,7 +114,16 @@ const SignIn = () => {
                 <Button fullWidth>SignIn with Google</Button>
               </div>
               <div className="social-login-button">
-                <Button fullWidth>SignIn with Kakao</Button>
+                <Button
+                  onClick={() => {
+                    window.location.replace(
+                      "https://todowith.shop/oauth2/authorization/kakao?redirect_uri=http://localhost:3000",
+                    );
+                  }}
+                  fullWidth
+                >
+                  SignIn with Kakao
+                </Button>
               </div>
               <div className="social-login-button">
                 <Button fullWidth>SignIn with Naver</Button>

@@ -1,6 +1,6 @@
 .addboard-wrapper {
   font-family: 'Noto Sans KR', sans-serif;
-
+  padding: 5rem 0;
   .addboard-header {
     font-weight: bold;
     text-align: center;
@@ -12,13 +12,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+
 
     .preview-main-image {
-      background: #D1D1D1;
+      margin-top: 1.3rem;
+      background: #E0DFEC;
       border-radius: 25px;
-      width: 250px;
-      height: 450px;
+      width: 360px;
+      height: 620px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -29,7 +30,11 @@
         object-fit: contain;
       }
     }
-
+    .addboard-form-error{
+      color: blue;
+      display: flex;
+      justify-content: space-between;
+    }
     .addboard-form {
       margin-left: 1rem;
 
@@ -42,7 +47,6 @@
       .upload-item {
         display: flex;
         align-items: flex-end;
-
         .upload-button {
           margin-left: 0.5rem;
         }
@@ -58,18 +62,22 @@
         align-items: flex-end;
         .dropdown-category {
           flex-grow: 1;
-          margin-right: 0.5rem;
+          select{
+            width: 100%;
+          }
         }
 
         .input-price {
           margin-left: 0.5rem;
         }
       }
-
       .textfield-explain {
-        display: flex;
         margin: 0.5rem 0;
       }
+    }
+    .submit-button{
+      display: flex;
+      flex-direction: row-reverse;
     }
 
   }

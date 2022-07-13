@@ -1,7 +1,8 @@
 button {
-  border-radius: 20px;
+  border-radius: 14px;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;
+  box-sizing: border-box;
 }
 
 // size
@@ -12,7 +13,7 @@ button {
 
 .button-medium {
   font-size: 1.25rem;
-  padding: 0.625rem 1.25rem;
+  padding: 1rem 1.75rem;
 }
 
 .button-large {
@@ -21,12 +22,6 @@ button {
 }
 
 // color
-.button-default {
-  background: #d9d9d9;
-  color: #d9d9d9;
-  border: 2px solid #d9d9d9;
-}
-
 .button-submit {
   background: #5c5c5c;
   color: #ffffff;
@@ -34,9 +29,14 @@ button {
 }
 
 .button-primary {
-  background: blue;
-  color: blue;
-  border: 2px solid blue;
+  background: #6760EF;
+  color: #6760EF;
+}
+
+.button-skyblue{
+  background: #C1BEFF;
+  color: #C1BEFF;
+  border: 2px solid #C1BEFF;
 }
 
 // variant

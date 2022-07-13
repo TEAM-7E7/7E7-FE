@@ -5,13 +5,7 @@ import axios from "axios";
 const Home = () => {
   const snapScrollWrapperRef = useRef<HTMLDivElement>(null);
   const [goods, setGoodsList] = useState<any>();
-  useEffect(() => {
-    const getGoodsList = async () => {
-      const res = await axios.get("https://tryaz.shop/api/goods?pageNumber=0&pageSize=4/");
-      console.log(res.data);
-    };
-    getGoodsList();
-  }, []);
+
   const [images] = useState([
     { previewURL: "img/image1.jpg", type: "image" },
     { previewURL: "video/video1.mp4", type: "video" },

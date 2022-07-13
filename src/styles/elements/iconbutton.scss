@@ -48,33 +48,23 @@ button {
 }
 
 // type
-.iconbutton-default {
-  background: #d9d9d9;
-  color: #282c34;
-  border: 1px solid #d9d9d9;
-  svg{
-    fill: #282c34;
-  }
-}
-
-.iconbutton-submit {
-  background: #5c5c5c;
-  color: #ffffff;
-  border: 1px solid #5c5c5c;
-  svg{
-    fill: #fff;
-  }
-}
-
 .iconbutton-primary {
-  background: blue;
-  color: blue;
-  border: 1px solid blue;
+  background: #6760EF;
+  color: #6760EF;
+  border: 1px solid #6760EF;
   svg{
-    fill: blue;
+    fill: #6760EF;
   }
 }
 
+.iconbutton-skyblue{
+  background: #C1BEFF;
+  color: #C1BEFF;
+  border: 1px solid #C1BEFF;
+  svg{
+    fill: #C1BEFF;
+  }
+}
 // variant
 .iconbutton-filled {
   border: 0;

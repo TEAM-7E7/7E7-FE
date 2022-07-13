@@ -1,5 +1,4 @@
 export interface FileDto {
-  fileObject: File | null;
   preview_URL: string;
   type: string;
 }
