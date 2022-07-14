@@ -10,7 +10,6 @@ import { useEffect } from "react";
 import PrivateRoute from "./utils/PrivateRoute";
 
 const App = () => {
-  useEffect(() => {}, []);
   return (
     <>
       <Header />
