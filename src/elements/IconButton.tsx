@@ -2,7 +2,7 @@ import "../styles/elements/iconbutton.scss";
 import React, { ReactNode } from "react";
 
 interface IconButtonOptions {
-  variant?: "outlined" | "filled" | "circle";
+  variant?: "outlined" | "filled" | "circle" | "none";
   size?: "small" | "medium" | "large";
   color?: "default" | "primary" | "submit" | "blue";
   direction?: "left-right" | "top-bottom";

@@ -2,7 +2,7 @@ import "../styles/elements/button.scss";
 import { ReactNode } from "react";
 
 interface ButtonOptions {
-  variant?: "outlined" | "filled";
+  variant?: "outlined" | "filled" | "none";
   size?: "small" | "medium" | "large";
   color?: "default" | "primary" | "submit" | "primaryblue" | "lightblue";
   fullWidth?: boolean;

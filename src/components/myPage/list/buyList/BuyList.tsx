@@ -60,17 +60,23 @@ const BuyList = () => {
                 <span>{item.status}</span>
               </div>
               <div className="menumodal" ref={popRef} key={idx}>
-                <IconButton icon={<MoreOtionIcon />} iconSize="small" size="small" onClick={onModal}></IconButton>
+                <IconButton
+                  icon={<MoreOtionIcon />}
+                  iconSize="small"
+                  size="small"
+                  onClick={onModal}
+                  variant="none"
+                ></IconButton>
                 <MenuModal show={show} />
               </div>
             </div>
             <div className="product-price">
               <Moment fromNow>{item.createdAt}</Moment>
-              <h1>{item.sellPrice}</h1>
+              <h1>{item.sellPrice}원</h1>
             </div>
             <div className="product-detail">
               <button
-                className="button-fullWidth button-medium button-default"
+                className="button-fullWidth button-lightblue button-medium button-none"
                 onClick={() => navigate("/GoodsDetail")}
               >
                 자세히보러가기

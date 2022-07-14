@@ -61,25 +61,26 @@ const Sale = () => {
                 <h2>{item.title}</h2>
                 <span>{item.status}</span>
               </div>
-              <div className="menumodal" key={item.id}>
+              <div className="menumodal">
                 <IconButton
                   icon={<MoreOtionIcon />}
                   iconSize="small"
                   size="small"
-                  variant="filled"
-                  onClick={onModal}
+                  onClick={() => onModal()}
+                  variant="none"
                 ></IconButton>
-                <MenuModal show={show} />
+                <MenuModal show={show} key={item.id} />
               </div>
             </div>
             <div className="product-price">
               <Moment fromNow>{item.createdAt}</Moment>
-              <h1>{item.sellPrice}</h1>
+              <h1>{item.sellPrice}원</h1>
             </div>
             <div className="product-detail">
               <button
-                className="button-fullWidth button-medium button-filled button-lightblue"
+                className="button-fullWidth button-lightblue button-medium button-none"
                 onClick={() => navigate("/GoodsDetail")}
+                id={item.id}
               >
                 <span>자세히보러가기</span>
               </button>
