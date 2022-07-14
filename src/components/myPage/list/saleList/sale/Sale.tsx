@@ -6,12 +6,17 @@ import { IconButton } from "../../../../../elements/IconButton";
 import { MoreOtionIcon } from "../../../../../assets/icons/FigmaIcons";
 import MenuModal from "../../../../../elements/modals/MenuModal";
 import Pagination from "../../../../Pagination";
+import Moment from "react-moment";
+import "moment/locale/ko";
+import { useInView } from "react-intersection-observer";
+import { useBoardInfiniteQuery } from "../../../../../react-query/query/useBoardInfinteQuery";
 
 const Sale = () => {
   const [show, setShow] = useState(false);
   const [goods, setGoodsList] = useState<any>([]);
   const popRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const nowTime = Date.now();
   //modal 바깥을 클릭하면 modal이 없어진다
   const onClickOutside = useCallback(
     ({ target }: any) => {
@@ -44,32 +49,39 @@ const Sale = () => {
       <div className="content">
         {goods.map((item: any) => (
           <div className="content-body" key={item.id}>
-            <div className="preview-main-item">
-              <img src={item.fileUrl} alt={item.title} />
-              {/*{item.type === "image" ? (*/}
-              {/*  <img src={item.fileUrl} />*/}
-              {/*) : (*/}
-              {/*  <video src={item.fileUrl} controls={true} muted={true} />*/}
-              {/*)}*/}
+            <div className="preview-main-item" key={item.id}>
+              {item.type === "mp4" ? (
+                <video src={item.fileUrl} controls={true} muted={true} />
+              ) : (
+                <img src={item.fileUrl} />
+              )}
             </div>
             <div className="myProfile-product">
-              <span>{item.title}</span>
-              <span>{item.createdAt}</span>
-              <div className="menumodal" ref={popRef}>
-                <IconButton icon={<MoreOtionIcon />} iconSize="small" size="small" onClick={onModal}></IconButton>
+              <div className="myProfile-product-body">
+                <h2>{item.title}</h2>
+                <span>{item.status}</span>
+              </div>
+              <div className="menumodal" key={item.id}>
+                <IconButton
+                  icon={<MoreOtionIcon />}
+                  iconSize="small"
+                  size="small"
+                  variant="filled"
+                  onClick={onModal}
+                ></IconButton>
                 <MenuModal show={show} />
               </div>
             </div>
             <div className="product-price">
-              <span>{item.sellPrice}</span>
-              <span>{item.status}</span>
+              <Moment fromNow>{item.createdAt}</Moment>
+              <h1>{item.sellPrice}</h1>
             </div>
             <div className="product-detail">
               <button
-                className="button-fullWidth button-medium button-default"
+                className="button-fullWidth button-medium button-filled button-lightblue"
                 onClick={() => navigate("/GoodsDetail")}
               >
-                자세히보러가기
+                <span>자세히보러가기</span>
               </button>
             </div>
           </div>

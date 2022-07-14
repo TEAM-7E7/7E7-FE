@@ -13,14 +13,18 @@ import {
   SalelistIcon,
   UserIcon,
 } from "../../src/assets/icons/FigmaIcons";
-import Pagination from "../components/Pagination";
+// import SaleListButton from "../elements/SaleListButton";
+// import BuyListButton from "../elements/BuyListButton";
+// import LikstListButton from "../elements/LikstListButton";
 
 const MyProfilePage = () => {
   const [category, setCategory] = useState("saleList");
+  // const data = [<SaleListButton />, <BuyListButton />, <LikstListButton />];
   const navigate = useNavigate();
   const onAlram = () => {
     navigate("/MyPageAlarm");
   };
+
   return (
     <div className="myProfile">
       <div className="myProfile-swapper">
@@ -36,14 +40,26 @@ const MyProfilePage = () => {
             </div>
           </div>
           <div className="myProfile-head-button">
-            <IconButton icon={<ChatIcon />} iconSize="large"></IconButton>
-            <IconButton icon={<AlarmIcon />} iconSize="large" onClick={onAlram}></IconButton>
+            <IconButton color="blue" variant="circle" icon={<ChatIcon />} iconSize="large"></IconButton>
+            <IconButton
+              color="blue"
+              variant="circle"
+              icon={<AlarmIcon />}
+              iconSize="large"
+              onClick={onAlram}
+            ></IconButton>
           </div>
         </div>
         <div className="myProfile-body">
           <div className="myProfile-category">
             <div className="category-list">
-              <IconButton size="large" onClick={() => setCategory("saleList")} icon={<SalelistIcon />} iconSize="large">
+              <IconButton
+                size="large"
+                color="blue"
+                onClick={() => setCategory("SaleList")}
+                icon={<SalelistIcon />}
+                iconSize="large"
+              >
                 <div className="list-content">
                   <span>판매내역</span>
                   <p>건</p>
@@ -51,34 +67,33 @@ const MyProfilePage = () => {
               </IconButton>
               <IconButton
                 size="large"
-                onClick={() => {
-                  setCategory("buyList");
-                }}
+                color="blue"
+                onClick={() => setCategory("BuyList")}
                 icon={<BuylistIcon />}
                 iconSize="large"
               >
                 <div className="list-content">
-                  <span>구매목록</span>
+                  <span>구매내역</span>
                   <p>건</p>
                 </div>
               </IconButton>
               <IconButton
                 size="large"
-                onClick={() => setCategory("likeList")}
+                color="blue"
+                onClick={() => setCategory("LikeList")}
                 icon={<LikelistIcon />}
                 iconSize="large"
-                direction="left-right"
               >
                 <div className="list-content">
-                  <span>저장목록</span>
+                  <span>저장내역</span>
                   <p>건</p>
                 </div>
               </IconButton>
             </div>
           </div>
-          {category === "saleList" && <SaleList />}
-          {category === "buyList" && <BuyList />}
-          {category === "likeList" && <LikeList />}
+          {category === "SaleList" && <SaleList />}
+          {category === "BuyList" && <BuyList />}
+          {category === "LikeList" && <LikeList />}
         </div>
       </div>
     </div>

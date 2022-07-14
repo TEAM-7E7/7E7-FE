@@ -5,14 +5,16 @@ import { IconButton } from "../../../../elements/IconButton";
 import { MoreOtionIcon } from "../../../../assets/icons/FigmaIcons";
 import MenuModal from "../../../../elements/modals/MenuModal";
 import Pagination from "../../../Pagination";
+import Moment from "react-moment";
+import "moment/locale/ko";
 import Modal from "../../../../elements/modals/MenuModal";
 import { useNavigate } from "react-router-dom";
 
 const LikeList = () => {
   const [show, setShow] = useState(false);
   const [goods, setGoodsList] = useState<any>([]);
-  const navigate = useNavigate();
   const popRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   //modal 바깥을 클릭하면 modal이 없어진다
   const onClickOutside = useCallback(
     ({ target }: any) => {
@@ -43,28 +45,31 @@ const LikeList = () => {
   return (
     <>
       <div className="content">
-        {goods.map((item: any) => (
+        {goods.map((item: any, idx: any) => (
           <div className="content-body" key={item.id}>
             <div className="preview-main-item">
-              <img src={item.fileUrl} alt={item.title} />
+              {item.type === "mp4" ? (
+                <video src={item.fileUrl} controls={true} muted={true} />
+              ) : (
+                <img src={item.fileUrl} />
+              )}
             </div>
             <div className="myProfile-product">
-              <span>{item.title}</span>
-              <span>{item.createdAt}</span>
-              <div className="menumodal" ref={popRef}>
+              <div className="myProfile-product-body">
+                <h2>{item.title}</h2>
+                <span>{item.status}</span>
+              </div>
+              <div className="menumodal" ref={popRef} key={idx}>
                 <IconButton icon={<MoreOtionIcon />} iconSize="small" size="small" onClick={onModal}></IconButton>
-                <Modal show={show} />
+                <MenuModal show={show} />
               </div>
             </div>
             <div className="product-price">
-              <span>{item.sellPrice}</span>
-              <span>{item.status}</span>
+              <Moment fromNow>{item.createdAt}</Moment>
+              <h1>{item.sellPrice}</h1>
             </div>
             <div className="product-detail">
-              <button
-                className="button-fullWidth button-medium button-default"
-                onClick={() => navigate("/GoodsDetail")}
-              >
+              <button className="button-fullWidth" onClick={() => navigate("/GoodsDetail")}>
                 자세히보러가기
               </button>
             </div>

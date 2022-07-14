@@ -11,7 +11,9 @@ const SaleList = () => {
       <div className="category-status">
         <button
           className={
-            color ? "button-medium button-filled button-text" : "button-medium button-filled button-text button-default"
+            color
+              ? "button-medium button-filled button-halfWidth button-text1"
+              : "button-medium button-filled button-halfWidth button-text button-primaryblue"
           }
           onClick={() => {
             setContent(true), color ? setColor(false) : setColor(true);
@@ -21,7 +23,9 @@ const SaleList = () => {
         </button>
         <button
           className={
-            color ? "button-medium button-filled button-text button-default" : "button-medium button-filled button-text"
+            color
+              ? "button-medium button-filled button-halfWidth button-text button-primaryblue"
+              : "button-medium button-filled button-halfWidth button-text1"
           }
           onClick={() => {
             setContent(false), color ? setColor(false) : setColor(true);
