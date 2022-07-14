@@ -69,7 +69,7 @@ const Sale = () => {
                   onClick={() => onModal()}
                   variant="none"
                 ></IconButton>
-                <MenuModal show={show} key={item.id} />
+                <MenuModal show={show} />
               </div>
             </div>
             <div className="product-price">
