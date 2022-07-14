@@ -41,13 +41,15 @@ const DndContainer = memo(({ values, setValues }: DndContainerDto) => {
 
   return (
     <div className="dndcontainer-wrapper">
-      {values.files?.map((item: FileDto) => (
+      {values.files?.map((item: FileDto, index: number) => (
         <DndItem
-          key={item.preview_URL}
+          key={index}
           type={item.type}
           id={`${item.preview_URL}`}
           moveItem={moveItem}
           findItem={findItem}
+          values={values}
+          setValues={setValues}
         />
       ))}
     </div>

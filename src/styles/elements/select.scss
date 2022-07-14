@@ -1,37 +1,41 @@
-textarea {
-  outline: 0;
+select {
   border: 0;
-  border-radius: 20px;
+  border-radius: 14px;
   cursor: pointer;
   background: #E0DFEC;
   box-sizing: border-box;
-  resize: none;
   font-family: 'Noto Sans KR', sans-serif;
   flex-grow: 1;
   &:focus {
     outline: solid skyblue;
-    border: 1px #ffffff;
+  }
+  &::placeholder{
+    color: #ADADAD;
+    font-size: 0.8em;
   }
 }
 
 // size
-.textfield-small {
+.select-small {
   font-size: 1rem;
   padding: 0.5rem 1rem;
 }
 
-.textfield-medium {
-  font-size: 1.25rem;
-  padding: 0.625rem 1.25rem;
+.select-medium {
+  font-size: 1rem;
+  padding: 1rem 1.25rem;
 }
 
-.textfield-large {
+.select-large {
   font-size: 1.5rem;
   padding: 0.75rem 1.5rem;
 }
 
-.textfield-fullWidth{
+.select-fullWidth{
   width: 100%;
 }
 
+.select-disabled{
+  cursor: not-allowed;
+}
 

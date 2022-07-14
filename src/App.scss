@@ -16,24 +16,34 @@ body {
   padding: 0;
 }
 
-@media all and (min-width: 360px) {
-  :root {
-    --header--height: 120px;
-  }
+@media all and (min-width: 1024px) {
   html {
     font-size: 100%;
   }
 }
 
-@media all and (max-width: 360px) {
-  :root {
-    --header--height: 100px;
+@media all and (max-width: 1024px) {
+  html {
+    font-size: 90%;
   }
+}
+
+@media all and (max-width: 768px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media all and (max-width: 360px) {
   html {
     font-size: 70%;
   }
 }
 
+
+:root {
+  --header--height: 7rem;
+}
 
 .contents {
   position: relative;

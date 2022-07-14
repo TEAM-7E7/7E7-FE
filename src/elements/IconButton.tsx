@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 interface IconButtonOptions {
   variant?: "outlined" | "filled" | "circle" | "none";
   size?: "small" | "medium" | "large";
-  color?: "default" | "primary" | "submit" | "blue";
+  color?: "default" | "primary" | "submit" | "blue" | "skyblue";
   direction?: "left-right" | "top-bottom";
   icon: any;
   fullWidth?: boolean;
@@ -16,8 +16,8 @@ interface IconButtonOptions {
 
 export function IconButton({
   variant = "filled",
-  size = "small",
-  color = "default",
+  size = "medium",
+  color = "primary",
   direction = "left-right",
   icon,
   fullWidth = false,

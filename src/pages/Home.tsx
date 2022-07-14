@@ -1,8 +1,20 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/pages/home.scss";
+import axios from "axios";
+import { useBoardInfiniteQuery } from "../react-query/query/useBoardInfinteQuery";
+import { useInView } from "react-intersection-observer";
 
 const Home = () => {
   const snapScrollWrapperRef = useRef<HTMLDivElement>(null);
+  const [goods, setGoodsList] = useState<any>();
+  const { getBoard, getNextPage, getBoardIsSuccess, getNextPageIsPossible } = useBoardInfiniteQuery();
+  const [ref, isView] = useInView();
+  useEffect(() => {
+    // 맨 마지막 요소를 보고있고 맨 마지막 페이지에서 리턴한 isLast가 false가 아니면
+    if (isView && getNextPageIsPossible) {
+      getNextPage();
+    }
+  }, [isView, getBoard]);
   const [images] = useState([
     { previewURL: "img/image1.jpg", type: "image" },
     { previewURL: "video/video1.mp4", type: "video" },
@@ -35,15 +47,50 @@ const Home = () => {
   };
   return (
     <div className="snap-scroll-wrapper" ref={snapScrollWrapperRef} onScroll={playVideo}>
-      {images.map((item, index) => (
+      {getBoardIsSuccess && getBoard?.pages
+        ? getBoard.pages.map((page_data, page_num) => {
+            const board_page = page_data.board_page;
+            return board_page.map((item: any, idx: number) => {
+              console.log(item.fileUrl);
+              const fileType = item.fileUrl.split(".").at(-1);
+              console.log(fileType);
+              if (
+                // 마지막 요소에 ref 달아주기
+                page_num === getBoard.pages.length - 1 &&
+                idx === board_page.length - 1
+              ) {
+                return (
+                  <div className="snap-scroll-item" key={item.id} ref={ref}>
+                    {fileType === "mp4" ? (
+                      <video src={item.fileUrl} controls={true} muted={true} />
+                    ) : (
+                      <img src={item.fileUrl} />
+                    )}
+                  </div>
+                );
+              } else {
+                return (
+                  <div className="snap-scroll-item" key={item.id}>
+                    {fileType === "mp4" ? (
+                      <video src={item.fileUrl} controls={true} muted={true} />
+                    ) : (
+                      <img src={item.fileUrl} />
+                    )}
+                  </div>
+                );
+              }
+            });
+          })
+        : null}
+      {/*{images.map((item, index) => (
         <div className="snap-scroll-item" key={index}>
           {item.type === "image" ? (
-            <img src={item.previewURL} />
+            <img src={item.previewURL}/>
           ) : (
-            <video src={item.previewURL} controls={true} muted={true} />
+            <video src={item.previewURL} controls={true} muted={true}/>
           )}
         </div>
-      ))}
+      ))}*/}
     </div>
   );
 };

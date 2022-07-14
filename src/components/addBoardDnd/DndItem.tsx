@@ -3,15 +3,18 @@ import { useDrag, useDrop } from "react-dnd";
 import "../../styles/components/addBoardDnd/dnditem.scss";
 import { Button } from "../../elements/Button";
 import PreviewModal from "../../elements/modals/PreviewModal";
+import { BoardDto } from "../../dto/AddBoardDto";
 
 interface DndItemDto {
   type: string;
   id: string;
   moveItem: any;
   findItem: any;
+  values: BoardDto;
+  setValues: any;
 }
 
-const DndItem = memo(({ type, id, moveItem, findItem }: DndItemDto) => {
+const DndItem = memo(({ type, id, moveItem, findItem, values, setValues }: DndItemDto) => {
   // Card의 id로 원래 인덱스를 찾기
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const originalIndex = findItem(id).index;
@@ -48,33 +51,34 @@ const DndItem = memo(({ type, id, moveItem, findItem }: DndItemDto) => {
   );
   return (
     // dragRef와 dropRef 장착
-    <>
-      {originalIndex === 0 ? (
-        <div
-          ref={(node) => dragRef(dropRef(node))}
-          className="dnditem-wrapper"
-          style={{ width: "80px", height: "80px", opacity: isDragging ? 0.4 : 1 }}
+    <div className="dnditem-wrapper" ref={(node) => dragRef(dropRef(node))} style={{ opacity: isDragging ? 0.4 : 1 }}>
+      <div className="dnditem-body">
+        <span
+          className="dnditem-remove-icon"
+          onClick={() => {
+            const removed_files = [...values.files];
+            removed_files.splice(originalIndex, 1);
+            setValues({
+              ...values,
+              files: removed_files,
+            });
+          }}
         >
-          {type === "video" ? <video src={id} /> : <img src={id} />}
-        </div>
-      ) : (
-        <div
-          ref={(node) => dragRef(dropRef(node))}
-          className="dnditem-wrapper"
-          style={{ opacity: isDragging ? 0.4 : 1 }}
-        >
-          {type === "video" ? <video src={id} /> : <img src={id} />}
-        </div>
-      )}
-      <Button
+          🗙
+        </span>
+        {type === "video" ? <video src={id} /> : <img src={id} />}
+        {originalIndex === 0 && <div className="dnditem-is-main">대표영상/사진</div>}
+      </div>
+      <div
+        className="dnditem-preview"
         onClick={() => {
           setModalIsOpen(true);
         }}
       >
-        123
-      </Button>
+        미리보기
+      </div>
       <PreviewModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} previewURL={id} type={type} />
-    </>
+    </div>
   );
 });
 

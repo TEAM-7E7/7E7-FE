@@ -1,53 +1,71 @@
 import "../styles/pages/signIn.scss";
-import { ErrorMessage, Formik } from "formik";
-import axios from "axios";
+import { Formik } from "formik";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Input } from "../elements/Input";
 import { Button } from "../elements/Button";
 import { SignInDto, SingInFormDto } from "../dto/AuthDto";
-import { signUpValidationSchema } from "../utils/authValidation";
+import { signInValidationSchema } from "../utils/authValidation";
+import { useRecoilState } from "recoil";
+import { refresh_token } from "../recoil/store";
+import { Cookies } from "react-cookie";
+import axios from "axios";
+import React from "react";
 
 const initialValues: SingInFormDto = {
   email: "",
   password: "",
 };
+
+const cookies = new Cookies();
+
 const SignIn = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [refreshToken, setRefreshToken] = useRecoilState(refresh_token);
+  const [searchParams] = useSearchParams();
   const submit = async (values: SignInDto) => {
-    console.log(values);
-    /*try {
-      const { data } = await axios.post("/api/auth/signin", {
-        email,
-        password,
+    const { email, password } = values;
+    const signInRequestBody = {
+      email: email,
+      password: password,
+    };
+    try {
+      await axios.post("https://tryaz.shop/api/login", signInRequestBody).then((result) => {
+        setRefreshToken(result.headers["x-refresh-token"].split(" ")[1]);
+        cookies.set("X-ACCESS-TOKEN", result.headers["x-access-token"].split(" ")[1]);
       });
+
       const redirectUrl = searchParams.get("redirectUrl");
       toast.success(<h3>로그인 성공</h3>, {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 1000,
       });
-      // redirectUrl이 쿼리스트링으로 존재하면
-      // 원래가고자 했던 페이지로 돌아가기
       setTimeout(() => {
         if (redirectUrl) {
           navigate(redirectUrl);
         } else {
           navigate("/");
         }
-      }, 2000);
+      }, 1000);
     } catch (e) {
-      // 서버에서 받은 에러 메시지 출력
-      toast.error(e.response.data.message + "😭", {
+      toast.error(<h3>아이디와 비밀번호를 확인해주세요.</h3>, {
         position: "top-center",
+        autoClose: 2000,
       });
-    }*/
+    }
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={submit} validationSchema={signUpValidationSchema}>
-      {({ values, handleSubmit, handleChange }) => (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={submit}
+      validationSchema={signInValidationSchema}
+      validateOnMount={true}
+    >
+      {({ values, handleSubmit, handleChange, errors }) => (
         <div className="signin-wrapper">
-          <div className="signin-header"></div>
+          <ToastContainer />
+          <div className="signin-header">로그인</div>
           <form onSubmit={handleSubmit}>
             <div className="signin-body">
               <div className="signin-body-item">
@@ -55,21 +73,24 @@ const SignIn = () => {
                 <div className="signin-body-item-input">
                   <Input size="medium" name="email" onChange={handleChange} value={values.email} />
                 </div>
-                <div className="signup-body-item-error">
-                  <ErrorMessage name="email" />
-                </div>
+                <div className="signin-body-item-error">{errors.email}</div>
               </div>
               <div className="signin-body-item">
                 <div className="signin-body-item-label">password</div>
                 <div className="signin-body-item-input">
-                  <Input size="medium" name="password" onChange={handleChange} value={values.email} />
+                  <Input
+                    size="medium"
+                    name="password"
+                    onChange={handleChange}
+                    value={values.password}
+                    type="password"
+                  />
                 </div>
-                <div className="signup-body-item-error">
-                  <ErrorMessage name="password" />
-                </div>
+                <div className="signin-body-item-error">{errors.password}</div>
               </div>
               <div className="signin-button">
-                <Button color="submit" fullWidth>
+                {/*플랫폼 자체 로그인*/}
+                <Button color="submit" type="submit" fullWidth>
                   Login
                 </Button>
               </div>
@@ -95,7 +116,16 @@ const SignIn = () => {
                 <Button fullWidth>SignIn with Google</Button>
               </div>
               <div className="social-login-button">
-                <Button fullWidth>SignIn with Kakao</Button>
+                <Button
+                  fullWidth
+                  onClick={() => {
+                    const kakao = async () => {
+                      await axios.get("https://tryaz.shop/oauth2/authorization/kakao");
+                    };
+                  }}
+                >
+                  SignIn with Kakao
+                </Button>
               </div>
               <div className="social-login-button">
                 <Button fullWidth>SignIn with Naver</Button>
