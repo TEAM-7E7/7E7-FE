@@ -39,13 +39,15 @@ const SignIn = () => {
       const redirectUrl = searchParams.get("redirectUrl");
       toast.success(<h3>로그인 성공</h3>, {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 1000,
       });
-      // redirectUrl이 쿼리스트링으로 존재하면
-      // 원래가고자 했던 페이지로 돌아가기
       setTimeout(() => {
-        navigate("/");
-      }, 2000);
+        if (redirectUrl) {
+          navigate(redirectUrl);
+        } else {
+          navigate("/");
+        }
+      }, 1000);
     } catch (e) {
       toast.error(<h3>아이디와 비밀번호를 확인해주세요.</h3>, {
         position: "top-center",
@@ -114,7 +116,16 @@ const SignIn = () => {
                 <Button fullWidth>SignIn with Google</Button>
               </div>
               <div className="social-login-button">
-                <Button fullWidth>SignIn with Kakao</Button>
+                <Button
+                  fullWidth
+                  onClick={() => {
+                    const kakao = async () => {
+                      await axios.get("https://tryaz.shop/oauth2/authorization/kakao");
+                    };
+                  }}
+                >
+                  SignIn with Kakao
+                </Button>
               </div>
               <div className="social-login-button">
                 <Button fullWidth>SignIn with Naver</Button>

@@ -15,6 +15,7 @@ import { DndProvider } from "react-dnd-multi-backend";
 import HTML5toTouch from "react-dnd-multi-backend/dist/esm/HTML5toTouch";
 import { Select } from "../elements/Select";
 import { instanceWithToken } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 const initialValues: BoardDto = {
   title: "",
@@ -26,7 +27,7 @@ const initialValues: BoardDto = {
 
 const AddBoard = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   const submit = async (values: BoardDto) => {
     console.log(values);
     const { title, category, price, explain, files } = values;
@@ -37,10 +38,13 @@ const AddBoard = () => {
       category: category,
       sellPrice: Number(price),
     };
-    console.log(addBoardRequestBody);
-    await instanceWithToken.post("/api/goods", addBoardRequestBody).then();
+    await instanceWithToken.post("/api/goods", addBoardRequestBody).then(() => {
+      alert("게시물 등록이 완료되었습니다.");
+      navigate("/");
+    });
   };
 
+  // [{fileUrl: "!@#213, type: "img"or "video"}]
   return (
     <Formik
       initialValues={initialValues}
@@ -120,14 +124,7 @@ const AddBoard = () => {
                   <div className="addboard-form-error">{errors.explain}</div>
                 </div>
                 <div className="submit-button">
-                  <Button
-                    type="submit"
-                    onClick={() => {
-                      console.log(values);
-                    }}
-                  >
-                    Upload
-                  </Button>
+                  <Button type="submit">Upload</Button>
                 </div>
               </div>
             </div>
