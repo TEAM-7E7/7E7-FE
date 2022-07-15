@@ -1,4 +1,17 @@
+@keyframes topDownAppear {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
 .dnditem-wrapper {
+  opacity: 0;
+  animation: topDownAppear 1s;
   display: flex;
   flex-direction: column;
   align-items: center;

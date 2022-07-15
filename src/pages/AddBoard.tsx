@@ -84,7 +84,7 @@ const AddBoard = () => {
                 </div>
                 <div className="input-title">
                   <Input name="title" onChange={handleChange} fullWidth placeholder="제목을 입력하세요" />
-                  <div className="addboard-form-error">{errors.title}</div>
+                  <div className="addboard-form-error">{errors.title ? errors.title : "✔ 제목이 입력되었습니다"}</div>
                 </div>
                 <div className="category-and-price">
                   <div className="dropdown-category">
@@ -102,13 +102,13 @@ const AddBoard = () => {
                       <option value="MAN_FASHION_GOODS">남성패션/잡화</option>
                     </Select>
                     <div className="addboard-form-error">
-                      <div>{errors.category}</div>
+                      <div>{errors.category ? errors.category : "✔ 카테고리가 선택되었습니다."}</div>
                     </div>
                   </div>
                   <div className="input-price">
                     <Input name="price" onChange={handleChange} placeholder="가격을 입력하세요" />
                     <div className="addboard-form-error">
-                      <div>{errors.price}</div>
+                      <div>{errors.price ? errors.price : "✔ 가격이 적당한가요?"}</div>
                     </div>
                   </div>
                 </div>
@@ -121,7 +121,7 @@ const AddBoard = () => {
                     placeholder="설명을 써주세요!"
                     rows={10}
                   />
-                  <div className="addboard-form-error">{errors.explain}</div>
+                  <div className="addboard-form-error">{errors.explain ? errors.explain : "✔ 좋은 설명이네요"}</div>
                 </div>
                 <div className="submit-button">
                   <Button type="submit">Upload</Button>

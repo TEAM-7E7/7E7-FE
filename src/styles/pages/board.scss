@@ -1,6 +1,86 @@
 .board-wrapper{
+  font-family: 'Noto Sans KR', sans-serif;
+  box-sizing: border-box;
+  padding: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .board-body{
-
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    .preview-images{
+      background: black;
+      border-radius: 25px;
+      flex-shrink: 0;
+      width: 360px;
+      height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      overflow: hidden;
+      img, video {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .board-contents{
+      height: 620px;
+      padding: 2rem;
+      background: #F9F9FA;
+      border-radius: 18px;
+      box-sizing: border-box;
+      .user-profile{
+        margin-bottom: 2rem;
+        display: flex;
+        .user-img{
+          width: 48px;
+          height: 48px;
+          border: 1px solid #007aff;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: 8px;
+          img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+        .user-nickname-created{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-left: 8px;
+          .user-nickname{
+            font-size: 14px;
+          }
+          .user-created{
+            font-size: 8px;
+            color: #606060;
+          }
+        }
+      }
+      .board-contents-text{
+        width: 30rem;
+        .board-title{
+          font-size: 30px;
+          font-weight: bold;
+        }
+        .board-price{
+          font-size: 24px;
+          font-weight: bold;
+        }
+        .board-explain{
+          margin: 1.5rem 0 ;
+          height: 16rem;
+        }
+      }
+    }
+    .board-button{
+      display: flex;
+      flex-direction: row-reverse;
+    }
   }
 
 }
