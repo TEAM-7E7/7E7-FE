@@ -11,8 +11,6 @@ import { useRefreshToken } from "./recoil/store";
 import { Cookies } from "react-cookie";
 import Board from "./pages/Board";
 import MyPage from "./pages/MyPage";
-
-import MyPage from "./pages/MyPage";
 import MyPageAlarm from "./pages/MyPageAlarm";
 import GoodsDetail from "./components/GoodsDetail";
 import Sale from "./components/myPage/list/saleList/sale/Sale";
