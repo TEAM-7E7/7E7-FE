@@ -6,7 +6,7 @@ import { instanceWithToken } from "../api/api";
 
 const Header = () => {
   const onMypage = async () => {
-    await instanceWithToken.post("https://tryaz.shop/api/user/goods/my-page?page=1&size=5");
+    await instanceWithToken.post("https://tryaz.shop/api/goods/my-page?page=1&size=5");
   };
   return (
     <div className="header-wrapper">

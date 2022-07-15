@@ -15,24 +15,26 @@ import {
 } from "../../src/assets/icons/FigmaIcons";
 import axios from "axios";
 import { instanceWithToken } from "../api/api";
+import { BoardDto } from "../dto/BoardDto";
 
 const MyProfilePage = () => {
   const [category, setCategory] = useState("saleList");
-  const [goods, setGoodsList] = useState<any>([]);
+  const [board, setBoard] = useState<BoardDto>();
+  const { board_id } = useParams();
   // const data = [<SaleListButton />, <BuyListButton />, <LikstListButton />];
   const navigate = useNavigate();
   const onAlram = () => {
     navigate("/MyPageAlarm");
   };
   useEffect(() => {
-    const getGoodsList = async () => {
-      const res = await instanceWithToken.get("https://tryaz.shop/api/goods/my-page?page=1&size=5");
-      console.log(res.data);
-      setGoodsList(res.data.data.goodsList);
+    const getBoard = async () => {
+      const result = await instanceWithToken.get(`https://tryaz.shop/api/goods/my-page?page=1&size=5/${board_id}`);
+      console.log(result);
+      return result;
     };
-    getGoodsList();
+    getBoard().then((result) => setBoard(result.data.data));
   }, []);
-  console.log(setGoodsList);
+  console.log(board);
   return (
     <div className="myProfile">
       <div className="myProfile-swapper">
@@ -42,12 +44,10 @@ const MyProfilePage = () => {
             <div className="user-img">
               <IconButton icon={<UserIcon />} iconSize="large"></IconButton>
             </div>
-            {goods.map((item: any) => (
-              <div className="user-info">
-                <span className="user-nick">방배동 후라이팬</span>
-                <span className="user-email">{item.account}</span>
-              </div>
-            ))}
+            <div className="user-info">
+              <span className="user-nick">방배동 후라이팬</span>
+              <span className="user-email">asfd@adsf</span>
+            </div>
           </div>
           <div className="myProfile-head-button">
             <IconButton color="blue" variant="circle" icon={<ChatIcon />} iconSize="large"></IconButton>
@@ -72,7 +72,7 @@ const MyProfilePage = () => {
               >
                 <div className="list-content">
                   <span>판매내역</span>
-                  <p>{goods.length}건</p>
+                  <p>건</p>
                 </div>
               </IconButton>
               <IconButton
@@ -84,7 +84,7 @@ const MyProfilePage = () => {
               >
                 <div className="list-content">
                   <span>구매내역</span>
-                  <p>{goods.length}건</p>
+                  <p>건</p>
                 </div>
               </IconButton>
               <IconButton
@@ -96,7 +96,7 @@ const MyProfilePage = () => {
               >
                 <div className="list-content">
                   <span>저장내역</span>
-                  <p>{goods.length}건</p>
+                  <p>건</p>
                 </div>
               </IconButton>
             </div>
