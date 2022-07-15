@@ -38,6 +38,12 @@ button {
   color: #C1BEFF;
   border: 2px solid #C1BEFF;
 }
+.button-primaryblue{
+  background: #674EF2;
+}
+.button-lightblue{
+  background: #E0DFEC;
+}
 
 // variant
 .button-filled {
@@ -49,14 +55,20 @@ button {
   background: #fff;
 }
 
+.button-none {
+  border: 0px;
+}
+
 // fullWidth
 .button-fullWidth {
   width: 100%;
+}
+.button-halfWidth {
+  width: 50%;
 }
 
 .button-disabled {
   cursor: not-allowed;
 }
-
 
 

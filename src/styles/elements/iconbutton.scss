@@ -79,6 +79,15 @@ button {
   color: #6D4C41;
 }
 
+
+.iconbutton-blue{
+  background: #6F4EF2;
+  color: #6F4EF2;
+  border: 1px solid #6F4EF2;
+  svg{
+    fill: #6F4EF2;
+  }
+}
 // variant
 .iconbutton-filled {
   border: 0;
@@ -88,15 +97,29 @@ button {
   }
 }
 
-
 .iconbutton-outlined {
   background: #fff;
+}
+
+.iconbutton-circle {
+  border-radius: 80px;
+  svg{
+    fill:#fff;
+  }
+}
+
+.iconbutton-none {
+  border: 0;
+  background: white;
 }
 
 // fullWidth
 .iconbutton-fullWidth {
   width: 100%;
   justify-content: space-between;
+}
+.iconbutton-halfWidth{
+  width: 50%;
 }
 
 // icon size

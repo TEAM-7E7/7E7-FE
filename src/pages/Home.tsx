@@ -3,8 +3,10 @@ import "../styles/pages/home.scss";
 import { useBoardInfiniteQuery } from "../react-query/query/useBoardInfinteQuery";
 import { useInView } from "react-intersection-observer";
 import ScollSnapItem from "../components/ScollSnapItem";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const snapScrollWrapperRef = useRef<HTMLDivElement>(null);
   const { getBoard, getNextPage, getBoardIsSuccess, getNextPageIsPossible } = useBoardInfiniteQuery();
   const [scrollRef, isView] = useInView();
@@ -38,7 +40,6 @@ const Home = () => {
       }
     });
   };
-
   return (
     <div className="scroll-snap-wrapper" ref={snapScrollWrapperRef} onScroll={playVideo}>
       {getBoardIsSuccess && getBoard?.pages

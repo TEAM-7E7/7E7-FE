@@ -52,13 +52,9 @@ const Header = () => {
           </div>
           <div className="icons-wrapper">
             <AlarmIcon color="#FFE247" />
-            <div
-              onClick={() => {
-                navigate("/my-page");
-              }}
-            >
+            <Link to="/MyPage">
               <PersonIcon color="#22FF6D" />
-            </div>
+            </Link>
             <ChatIcon color="#FF965A" />
             <ConfigIcon color="#80C9FF" />
           </div>
