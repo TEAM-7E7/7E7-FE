@@ -1,12 +1,16 @@
 import "../styles/components/header.scss";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useBoardInfiniteQuery } from "../react-query/query/useBoardInfinteQuery";
 
 const Header = () => {
+  const { getBoard, getNextPage, getBoardIsSuccess, getNextPageIsPossible } = useBoardInfiniteQuery();
   const navigate = useNavigate();
-  const onMypage = async (e: any) => {
-    navigate("/Mypage", { state: { getBoard: e } });
+
+  const onMypage = async (item: any) => {
+    navigate("/Sale", { state: { getboard: item } });
   };
+
   return (
     <div className="header-wrapper">
       <div className="header-title">

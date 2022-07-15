@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { IconButton } from "../../../../../elements/IconButton";
@@ -17,6 +17,8 @@ const Sale = () => {
   const popRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const nowTime = Date.now();
+  const locate = useLocation();
+  console.log(locate.state);
   //modal 바깥을 클릭하면 modal이 없어진다
   const onClickOutside = useCallback(
     ({ target }: any) => {
@@ -36,14 +38,14 @@ const Sale = () => {
   const onModal = useCallback(() => {
     setShow((prev) => !prev);
   }, [setShow]);
-  useEffect(() => {
-    const getGoodsList = async () => {
-      const res = await axios.get("https://tryaz.shop/api/goods?pageNumber=0&pageSize=4/");
-      console.log(res.data);
-      setGoodsList(res.data.data.goodsList);
-    };
-    getGoodsList();
-  }, []);
+  // useEffect(() => {
+  //   const getGoodsList = async () => {
+  //     const res = await axios.get("https://tryaz.shop/api/goods?pageNumber=0&pageSize=4/");
+  //     console.log(res.data);
+  //     setGoodsList(res.data.data.goodsList);
+  //   };
+  //   getGoodsList();
+  // }, []);
   return (
     <>
       <div className="content">

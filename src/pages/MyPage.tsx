@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import "../../src/styles/pages/mypage.scss";
 import SaleList from "../../src/components/myPage/list/saleList/SaleList";
 import BuyList from "../../src/components/myPage/list/buyList/BuyList";
@@ -20,20 +20,18 @@ const MyProfilePage = () => {
   const [goods, setGoodsList] = useState<any>([]);
   // const data = [<SaleListButton />, <BuyListButton />, <LikstListButton />];
   const navigate = useNavigate();
-  const locate = useLocation();
-  console.log(locate.state);
-
+  const { board_id } = useParams();
   const onAlram = () => {
     navigate("/MyPageAlarm");
   };
-  useEffect(() => {
-    const getGoodsList = async () => {
-      const res = await axios.get("https://tryaz.shop/api/goods?pageNumber=0&pageSize=4/");
-      console.log(res.data);
-      setGoodsList(res.data.data.goodsList);
-    };
-    getGoodsList();
-  }, []);
+  // useEffect(() => {
+  //   const getGoodsList = async () => {
+  //     const res = await axios.get("https://tryaz.shop/api/goods/${board_id}");
+  //     console.log(res.data);
+  //     setGoodsList(res.data.data.goodsList);
+  //   };
+  //   getGoodsList();
+  // }, []);
   return (
     <div className="myProfile">
       <div className="myProfile-swapper">

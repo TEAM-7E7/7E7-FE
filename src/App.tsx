@@ -10,6 +10,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import MyPage from "./pages/MyPage";
 import MyPageAlarm from "./pages/MyPageAlarm";
 import GoodsDetail from "./components/GoodsDetail";
+import Sale from "./components/myPage/list/saleList/sale/Sale";
 const App = () => {
   return (
     <>
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/add-board" element={<PrivateRoute path="/add-board" component={AddBoard} />} />
           <Route path="/add-board" element={<AddBoard />} />
           <Route path="/MyPage" element={<MyPage />} />
+          <Route path="/Sale" element={<Sale />} />
           <Route path="/MyPageAlarm" element={<MyPageAlarm />} />
           <Route path="/GoodsDetail" element={<GoodsDetail />} />
         </Routes>

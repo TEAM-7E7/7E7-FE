@@ -8,14 +8,14 @@ const SaleList = () => {
   const [content, setContent] = useState(true);
   const [color, setColor] = useState(false);
   const [goods, setGoodsList] = useState<any>([]);
-  useEffect(() => {
-    const getGoodsList = async () => {
-      const res = await axios.get("https://tryaz.shop/api/goods?pageNumber=0&pageSize=4/");
-      console.log(res.data);
-      setGoodsList(res.data.data.goodsList);
-    };
-    getGoodsList();
-  }, []);
+  // useEffect(() => {
+  //   const getGoodsList = async () => {
+  //     const res = await axios.get("https://tryaz.shop/api/goods?pageNumber=0&pageSize=4/");
+  //     console.log(res.data);
+  //     setGoodsList(res.data.data.goodsList);
+  //   };
+  //   getGoodsList();
+  // }, []);
   return (
     <div className="myProfile-body">
       <div className="category-status">
