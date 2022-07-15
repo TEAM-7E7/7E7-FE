@@ -1,9 +1,9 @@
 import "../styles/pages/addboard.scss";
 import { Button } from "../elements/Button";
 import { IconButton } from "../elements/IconButton";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Formik } from "formik";
-import { BoardDto, FileDto } from "../dto/AddBoardDto";
+import { BoardDto } from "../dto/AddBoardDto";
 import { addBoardValidationSchema } from "../utils/boardValidation";
 import { Input } from "../elements/Input";
 import { TextField } from "../elements/TextField";
@@ -16,6 +16,7 @@ import HTML5toTouch from "react-dnd-multi-backend/dist/esm/HTML5toTouch";
 import { Select } from "../elements/Select";
 import { instanceWithToken } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { Video } from "../elements/Video";
 
 const initialValues: BoardDto = {
   title: "",
@@ -44,7 +45,6 @@ const AddBoard = () => {
     });
   };
 
-  // [{fileUrl: "!@#213, type: "img"or "video"}]
   return (
     <Formik
       initialValues={initialValues}
@@ -61,7 +61,7 @@ const AddBoard = () => {
                   (values.files[0].type === "image" ? (
                     <img src={values.files[0].preview_URL} />
                   ) : (
-                    <video src={values.files[0].preview_URL} controls={true} autoPlay={true} />
+                    <Video src={values.files[0].preview_URL} autoPlay={true} />
                   ))}
               </div>
               <div className="addboard-form">

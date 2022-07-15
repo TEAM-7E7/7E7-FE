@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import "../styles/components/fileuploader.scss";
 import { ImageIcon } from "../assets/icons/FigmaIcons";
 import { IconButton } from "../elements/IconButton";
