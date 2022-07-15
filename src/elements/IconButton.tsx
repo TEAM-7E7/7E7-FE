@@ -2,13 +2,12 @@ import "../styles/elements/iconbutton.scss";
 import React, { ReactNode } from "react";
 
 interface IconButtonOptions {
-  variant?: "outlined" | "filled" | "circle" | "none" | "";
+  variant?: "outlined" | "filled" | "";
   size?: "small" | "medium" | "large";
-  color?: "primary" | "skyblue" | "kakao" | "blue";
+  color?: "primary" | "skyblue" | "kakao";
   direction?: "left-right" | "top-bottom" | "right-left";
   icon: any;
   fullWidth?: boolean;
-  halfWidth?: boolean;
   iconSize?: "small" | "medium" | "large";
   onClick?: () => void;
   children?: ReactNode;
@@ -21,7 +20,6 @@ export function IconButton({
   direction = "left-right",
   icon,
   fullWidth = false,
-  halfWidth = false,
   iconSize = "small",
   onClick,
   children,
@@ -30,7 +28,7 @@ export function IconButton({
     <button
       className={`iconbutton-${size} iconbutton-${color} ${direction} iconbutton-${variant} iconbutton-${
         fullWidth ? "fullWidth" : ""
-      } iconbutton-${halfWidth ? "halfWidth" : ""} iconbutton-icon-${iconSize}`}
+      } iconbutton-icon-${iconSize}`}
       onClick={onClick}
     >
       <div className="iconbutton-text">{children}</div>
