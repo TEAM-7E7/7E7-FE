@@ -2,11 +2,10 @@ import "../styles/elements/button.scss";
 import { ReactNode } from "react";
 
 interface ButtonOptions {
-  variant?: "outlined" | "filled" | "none";
+  variant?: "outlined" | "filled";
   size?: "small" | "medium" | "large";
-  color?: "default" | "primary" | "submit" | "primaryblue" | "lightblue" | "skyblue";
+  color?: "primary" | "submit" | "skyblue";
   fullWidth?: boolean;
-  halfWidth?: boolean;
   onClick?: () => void;
   type?: string;
   children: ReactNode;
@@ -18,7 +17,6 @@ export function Button({
   color = "primary",
   variant = "filled",
   fullWidth = false,
-  halfWidth = false,
   onClick,
   type,
   children,
@@ -26,9 +24,9 @@ export function Button({
 }: ButtonOptions) {
   return (
     <button
-      className={`button-${size} button-${color} button-${variant} button-${fullWidth ? "fullWidth" : ""} button-${
-        halfWidth ? "halfWidth" : ""
-      } ${disabled ? "button-disabled" : ""}`}
+      className={`button-${size} button-${color} button-${variant} ${fullWidth ? "button-fullWidth" : ""} ${
+        disabled ? "button-disabled" : ""
+      }`}
       type={type === "submit" ? "submit" : "button"}
       disabled={!!disabled}
       onClick={onClick}
