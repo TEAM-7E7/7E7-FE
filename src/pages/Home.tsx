@@ -55,6 +55,8 @@ const Home = () => {
                 return (
                   <React.Fragment key={item.id}>
                     <ScollSnapItem
+                      userNickname={item.nickname}
+                      userImageUrl={item.accountImageUrl}
                       fileType={fileType}
                       fileUrl={item.goodsImageUrl}
                       id={item.id}
@@ -70,6 +72,8 @@ const Home = () => {
                 return (
                   <React.Fragment key={item.id}>
                     <ScollSnapItem
+                      userNickname={item.nickname}
+                      userImageUrl={item.accountImageUrl}
                       fileType={fileType}
                       fileUrl={item.goodsImageUrl}
                       id={item.id}
@@ -84,6 +88,8 @@ const Home = () => {
                 return (
                   <React.Fragment key={item.id}>
                     <ScollSnapItem
+                      userNickname={item.nickname}
+                      userImageUrl={item.accountImageUrl}
                       fileType={fileType}
                       fileUrl={item.goodsImageUrl}
                       id={item.id}

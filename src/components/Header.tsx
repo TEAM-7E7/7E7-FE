@@ -26,7 +26,7 @@ const Header = () => {
         </div>
 
         <div className="header-menu">
-          {jwtUtils.isValid(refreshToken) && (
+          {!jwtUtils.isValid(refreshToken) && (
             <>
               <Link to="/sign-in">로그인</Link>
               <Link to="/sign-up">회원가입</Link>
