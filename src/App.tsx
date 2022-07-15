@@ -10,6 +10,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import { useRefreshToken } from "./recoil/store";
 import { Cookies } from "react-cookie";
 import Board from "./pages/Board";
+import MyPage from "./pages/MyPage";
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/add-board" element={<PrivateRoute path="/add-board" component={AddBoard} />} />
           <Route path="/board/:board_id" element={<Board />} />
+          <Route path="/my-page" element={<PrivateRoute path="/my-page" component={MyPage} />} />
         </Routes>
       </div>
     </>

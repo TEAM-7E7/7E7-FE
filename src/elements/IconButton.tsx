@@ -2,10 +2,10 @@ import "../styles/elements/iconbutton.scss";
 import React, { ReactNode } from "react";
 
 interface IconButtonOptions {
-  variant?: "outlined" | "filled";
+  variant?: "outlined" | "filled" | "";
   size?: "small" | "medium" | "large";
-  color?: "primary" | "skyblue";
-  direction?: "left-right" | "top-bottom";
+  color?: "primary" | "skyblue" | "kakao";
+  direction?: "left-right" | "top-bottom" | "right-left";
   icon: any;
   fullWidth?: boolean;
   iconSize?: "small" | "medium" | "large";

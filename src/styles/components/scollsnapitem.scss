@@ -40,10 +40,28 @@
     .user-profile {
       position: absolute;
       display: flex;
+      align-items: center;
+      justify-content: center;
       bottom: 16px;
       left: 16px;
       color: white;
-
+      .user-img{
+        width: 48px;
+        height: 48px;
+        border: 1px solid slategrey;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 8px;
+        img{
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+      .user-nickname{
+        color: #ffffff;
+        font-size: 16px;
+      }
     }
   }
 

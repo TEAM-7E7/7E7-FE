@@ -12,6 +12,8 @@ import { refresh_token, useRefreshToken } from "../recoil/store";
 import { Cookies } from "react-cookie";
 import axios from "axios";
 import React from "react";
+import { KakaoIcon } from "../assets/icons/FigmaIcons";
+import { IconButton } from "../elements/IconButton";
 
 const initialValues: SingInFormDto = {
   email: "",
@@ -124,21 +126,23 @@ const SignIn = () => {
                 </Button>
               </div>
               <div className="social-login-button">
-                <Button
+                <IconButton
+                  icon={<KakaoIcon />}
+                  direction="right-left"
+                  variant=""
+                  color="kakao"
+                  iconSize="medium"
                   fullWidth
                   onClick={() => {
-                    const kakao = async () => {
-                      await axios.get("https://tryaz.shop/oauth2/authorization/kakao");
-                    };
                     window.location.replace("https://tryaz.shop/oauth2/authorization/kakao");
                   }}
                 >
                   SignIn with Kakao
-                </Button>
+                </IconButton>
               </div>
-              <div className="social-login-button">
+              {/*<div className="social-login-button">
                 <Button fullWidth>SignIn with Naver</Button>
-              </div>
+              </div>*/}
             </div>
           </form>
         </div>

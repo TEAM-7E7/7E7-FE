@@ -34,7 +34,7 @@ const FileUploader = memo(({ values, setValues, setModalIsOpen }: FileUploaderDt
                   // src에 넣지 않을 것이므로 미리보기 URL 제거
                 } else {
                   fileList.push({ type: fileType });
-                  formData.append("file", files[i]);
+                  formData.append("goodsImage", files[i]);
                 }
                 URL.revokeObjectURL(preview_URL);
                 clearInterval(timer);
@@ -44,12 +44,12 @@ const FileUploader = memo(({ values, setValues, setModalIsOpen }: FileUploaderDt
           });
         } else {
           fileList.push({ type: fileType });
-          formData.append("file", files[i]);
+          formData.append("goodsImage", files[i]);
         }
       }
     }
     if (fileList) {
-      const res = await instanceWithToken.post("/api/goods/image", formData);
+      const res = await instanceWithToken.post("/api/goods/image-upload", formData);
       for (let i = 0; i < res.data.data.length; i++) {
         fileList[i]["preview_URL"] = res.data.data[i];
       }

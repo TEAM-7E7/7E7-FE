@@ -12,12 +12,11 @@ const Board = () => {
   useEffect(() => {
     const getBoard = async () => {
       const result = await axios.get(`https://tryaz.shop/api/goods/${board_id}`);
-      console.log(result);
       return result;
     };
     getBoard().then((result) => setBoard(result.data.data));
   }, []);
-  console.log(board);
+  console.log(board?.accountImageUrl);
   return (
     <div className="board-wrapper">
       <div className="board-body">
@@ -26,7 +25,7 @@ const Board = () => {
           <div className="board-contents">
             <div className="user-profile">
               <div className="user-img">
-                <img src={board?.accountImageUrl === "default" ? board?.accountImageUrl : "img/default_profile.png"} />
+                <img src={board?.accountImageUrl === "default" ? "/img/default_img.png" : board?.accountImageUrl} />
               </div>
               <div className="user-nickname-created">
                 <div className="user-nickname">{board?.nickname}</div>
