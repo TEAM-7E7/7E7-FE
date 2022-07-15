@@ -10,6 +10,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import { useRefreshToken } from "./recoil/store";
 import { Cookies } from "react-cookie";
 import Board from "./pages/Board";
+import MyPage from "./pages/MyPage";
 
 import MyPage from "./pages/MyPage";
 import MyPageAlarm from "./pages/MyPageAlarm";
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/GoodsDetail" element={<GoodsDetail />} />
           <Route path="/board/:id" element={<Board />} />
           <Route path="/board/:board_id" element={<Board />} />
+          <Route path="/my-page" element={<PrivateRoute path="/my-page" component={MyPage} />} />
         </Routes>
       </div>
     </>

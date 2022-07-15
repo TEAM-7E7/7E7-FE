@@ -50,10 +50,12 @@ const SignUp = () => {
       emailToken: "",
     };
     try {
-      await axios.post("https://tryaz.shop/api/email-validation", sendEmailRequestBody);
+      alert("이메일을 확인해주세요");
       setModalIsOpen(true);
+      await axios.post("https://tryaz.shop/api/email-validation", sendEmailRequestBody);
     } catch (e: any) {
       alert(e.response.data.message);
+      setModalIsOpen(false);
     }
   };
 
@@ -106,7 +108,7 @@ const SignUp = () => {
                     }}
                     disabled={errors.email ? true : emailIsVerified}
                   >
-                    인증 요청
+                    {emailIsVerified ? "인증 완료" : "인증 요청"}
                   </Button>
                 </div>
                 <div className="signup-body-item-error">
@@ -189,7 +191,11 @@ const SignUp = () => {
               <Button
                 size="medium"
                 color={
-                  !emailIsVerified || currentNickname === "" || currentNickname !== values.nickname
+                  !emailIsVerified ||
+                  currentNickname === "" ||
+                  currentNickname !== values.nickname ||
+                  errors.password ||
+                  errors.password2
                     ? "skyblue"
                     : "primary"
                 }

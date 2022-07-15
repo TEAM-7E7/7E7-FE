@@ -1,14 +1,17 @@
 import "../styles/components/header.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UploadIcon, HamburgerIcon, AlarmIcon, PersonIcon, ChatIcon, ConfigIcon } from "../assets/icons/FigmaIcons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CategoryItem from "./CategoryItem";
+import { useRefreshToken } from "../recoil/store";
+import { jwtUtils } from "../utils/jwtUtils";
 
 const Header = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
-
+  const { refreshToken } = useRefreshToken();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -23,8 +26,13 @@ const Header = () => {
         </div>
 
         <div className="header-menu">
-          <Link to="/sign-in">로그인</Link>
-          <Link to="/sign-up">회원가입</Link>
+          {!jwtUtils.isValid(refreshToken) && (
+            <>
+              <Link to="/sign-in">로그인</Link>
+              <Link to="/sign-up">회원가입</Link>
+            </>
+          )}
+
           <Link to="/add-board">
             <div className="header-icon">
               <UploadIcon />

@@ -35,12 +35,7 @@ const VerifyEmailModal = function SelectUploadTypeModal({
   };
   return (
     <>
-      <Dialog
-        open={modalIsOpen}
-        onClose={() => {
-          setModalIsOpen(false);
-        }}
-      >
+      <Dialog open={modalIsOpen}>
         <div className="modal-verify-email">
           <DialogContent>
             <div className="modal-body">
@@ -57,7 +52,7 @@ const VerifyEmailModal = function SelectUploadTypeModal({
                 </div>
                 <div className="modal-body-button">
                   <Button
-                    color="submit"
+                    color="primary"
                     onClick={() => {
                       verifyEmail();
                     }}

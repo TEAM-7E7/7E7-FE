@@ -7,6 +7,8 @@ import "../styles/components/scollsnapitem.scss";
 import { useNavigate } from "react-router-dom";
 
 interface ScrollSnapItemInterface {
+  userNickname: string;
+  userImageUrl: string;
   fileType: string;
   fileUrl: string;
   scrollRef?: any;
@@ -18,6 +20,8 @@ interface ScrollSnapItemInterface {
 }
 
 const ScrollSnapItem = ({
+  userNickname,
+  userImageUrl,
   fileType,
   fileUrl,
   scrollRef,
@@ -31,10 +35,13 @@ const ScrollSnapItem = ({
   return (
     <div className="scroll-snap-item" key={id} ref={scrollRef}>
       <div className="scroll-snap-item-img">
+        <div className="scroll-snap-item-img-gradient" />
         {fileType === "mp4" ? <Video src={fileUrl} autoPlay={autoPlay} /> : <img src={fileUrl} />}
         <div className="user-profile">
-          <div className="user-img"></div>
-          <div className="user-nickname"></div>
+          <div className="user-img">
+            <img src={userImageUrl === "default" ? "/img/default_img.png" : userImageUrl} />
+          </div>
+          <div className="user-nickname">{userNickname}</div>
         </div>
       </div>
       <div className="scroll-snap-item-explain">
