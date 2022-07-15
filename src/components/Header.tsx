@@ -1,16 +1,13 @@
 import "../styles/components/header.scss";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useBoardInfiniteQuery } from "../react-query/query/useBoardInfinteQuery";
+import { Link, useNavigate } from "react-router-dom";
+import { useRefreshToken } from "../recoil/store";
+import axios from "axios";
+import { instanceWithToken } from "../api/api";
 
 const Header = () => {
-  const { getBoard, getNextPage, getBoardIsSuccess, getNextPageIsPossible } = useBoardInfiniteQuery();
-  const navigate = useNavigate();
-
-  const onMypage = async (item: any) => {
-    navigate("/Sale", { state: { getboard: item } });
+  const onMypage = async () => {
+    await instanceWithToken.post("https://tryaz.shop/api/user/goods/my-page?page=1&size=5");
   };
-
   return (
     <div className="header-wrapper">
       <div className="header-title">

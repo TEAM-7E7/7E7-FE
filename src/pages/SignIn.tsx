@@ -30,7 +30,7 @@ const SignIn = () => {
       password: password,
     };
     try {
-      await axios.post("https://tryaz.shop/api/login", signInRequestBody).then((result) => {
+      await axios.post("https://tryaz.shop/api/user/login", signInRequestBody).then((result) => {
         const refreshToken = result.headers["x-refresh-token"].split(" ")[1];
         const accessToken = result.headers["x-access-token"].split(" ")[1];
         setRefreshToken(refreshToken);
