@@ -34,10 +34,7 @@ export function ImageIcon({ color = "" }) {
 export function MessageIcon({ color = "" }) {
   return (
     <svg viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M24.3 0.5H2.7C1.215 0.5 0 1.715 0 3.2V27.5L5.4 22.1H24.3C25.785 22.1 27 20.885 27 19.4V3.2C27 1.715 25.785 0.5 24.3 0.5Z"
-        fill="#A9B5BC"
-      />
+      <path d="M24.3 0.5H2.7C1.215 0.5 0 1.715 0 3.2V27.5L5.4 22.1H24.3C25.785 22.1 27 20.885 27 19.4V3.2C27 1.715 25.785 0.5 24.3 0.5Z" />
     </svg>
   );
 }

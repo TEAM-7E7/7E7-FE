@@ -26,7 +26,7 @@ const Board = () => {
           <div className="board-contents">
             <div className="user-profile">
               <div className="user-img">
-                <img src={board?.accountImageUrl} />
+                <img src={board?.accountImageUrl === "default" ? board?.accountImageUrl : "img/default_profile.png"} />
               </div>
               <div className="user-nickname-created">
                 <div className="user-nickname">{board?.nickname}</div>
