@@ -44,7 +44,7 @@ const FileUploader = memo(({ values, setValues, setModalIsOpen }: FileUploaderDt
           });
         } else {
           fileList.push({ type: fileType });
-          formData.append("file", files[i]);
+          formData.append("goodsImageUrl", files[i]);
         }
       }
     }

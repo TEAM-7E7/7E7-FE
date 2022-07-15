@@ -5,14 +5,7 @@ import SaleList from "../../src/components/myPage/list/saleList/SaleList";
 import BuyList from "../../src/components/myPage/list/buyList/BuyList";
 import LikeList from "../../src/components/myPage/list/likeList/LikeList";
 import { IconButton } from "../../src/elements/IconButton";
-import {
-  AlarmIcon,
-  BuylistIcon,
-  ChatIcon,
-  LikelistIcon,
-  SalelistIcon,
-  UserIcon,
-} from "../../src/assets/icons/FigmaIcons";
+import { AlarmIcon, BuylistIcon, ChatIcon, LikelistIcon, SalelistIcon, UserIcon } from "../assets/icons/FigmaIcons";
 import axios from "axios";
 import { instanceWithToken } from "../api/api";
 import { BoardDto } from "../dto/BoardDto";
@@ -28,7 +21,7 @@ const MyProfilePage = () => {
   };
   useEffect(() => {
     const getBoard = async () => {
-      const result = await instanceWithToken.get(`https://tryaz.shop/api/goods/my-page?page=1&size=5/${board_id}`);
+      const result = await axios.get(`https://tryaz.shop/api/goods/my-page?page=1&size=5/${board_id}`, {});
       console.log(result);
       return result;
     };

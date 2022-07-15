@@ -41,7 +41,9 @@ const App = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/add-board" element={<PrivateRoute path="/add-board" component={AddBoard} />} />
           <Route path="/add-board" element={<AddBoard />} />
+          <Route path="/MyPage" element={<PrivateRoute path="/MyPage" component={MyPage} />} />
           <Route path="/MyPage" element={<MyPage />} />
+          <Route path="/MyPage/:id" element={<MyPage />} />
           <Route path="/MyPage/:board_id" element={<MyPage />} />
           <Route path="/Sale" element={<Sale />} />
           <Route path="/MyPageAlarm" element={<MyPageAlarm />} />
