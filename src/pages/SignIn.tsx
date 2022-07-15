@@ -8,7 +8,7 @@ import { Button } from "../elements/Button";
 import { SignInDto, SingInFormDto } from "../dto/AuthDto";
 import { signInValidationSchema } from "../utils/authValidation";
 import { useRecoilState } from "recoil";
-import { refresh_token } from "../recoil/store";
+import { refresh_token, useRefreshToken } from "../recoil/store";
 import { Cookies } from "react-cookie";
 import axios from "axios";
 import React from "react";
@@ -18,11 +18,10 @@ const initialValues: SingInFormDto = {
   password: "",
 };
 
-const cookies = new Cookies();
-
 const SignIn = () => {
+  const cookies = new Cookies();
   const navigate = useNavigate();
-  const [refreshToken, setRefreshToken] = useRecoilState(refresh_token);
+  const { setRefreshToken } = useRefreshToken();
   const [searchParams] = useSearchParams();
   const submit = async (values: SignInDto) => {
     const { email, password } = values;
@@ -32,8 +31,10 @@ const SignIn = () => {
     };
     try {
       await axios.post("https://tryaz.shop/api/login", signInRequestBody).then((result) => {
-        setRefreshToken(result.headers["x-refresh-token"].split(" ")[1]);
-        cookies.set("X-ACCESS-TOKEN", result.headers["x-access-token"].split(" ")[1]);
+        const refreshToken = result.headers["x-refresh-token"].split(" ")[1];
+        const accessToken = result.headers["x-access-token"].split(" ")[1];
+        setRefreshToken(refreshToken);
+        cookies.set("X-ACCESS-TOKEN", accessToken);
       });
 
       const redirectUrl = searchParams.get("redirectUrl");
@@ -113,7 +114,14 @@ const SignIn = () => {
               </div>
               <hr className="separator" />
               <div className="social-login-button">
-                <Button fullWidth>SignIn with Google</Button>
+                <Button
+                  fullWidth
+                  onClick={() => {
+                    window.location.replace("https://tryaz.shop/oauth2/authorization/google");
+                  }}
+                >
+                  SignIn with Google
+                </Button>
               </div>
               <div className="social-login-button">
                 <Button
@@ -122,6 +130,7 @@ const SignIn = () => {
                     const kakao = async () => {
                       await axios.get("https://tryaz.shop/oauth2/authorization/kakao");
                     };
+                    window.location.replace("https://tryaz.shop/oauth2/authorization/kakao");
                   }}
                 >
                   SignIn with Kakao

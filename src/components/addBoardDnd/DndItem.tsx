@@ -1,7 +1,6 @@
 import { memo, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import "../../styles/components/addBoardDnd/dnditem.scss";
-import { Button } from "../../elements/Button";
 import PreviewModal from "../../elements/modals/PreviewModal";
 import { BoardDto } from "../../dto/AddBoardDto";
 

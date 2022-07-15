@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import "../styles/components/fileuploader.scss";
 import { ImageIcon } from "../assets/icons/FigmaIcons";
 import { IconButton } from "../elements/IconButton";
@@ -8,9 +8,10 @@ import { instanceWithToken } from "../api/api";
 interface FileUploaderDto {
   values: BoardDto;
   setValues: any;
+  setModalIsOpen: any;
 }
 
-const FileUploader = memo(({ values, setValues }: FileUploaderDto) => {
+const FileUploader = memo(({ values, setValues, setModalIsOpen }: FileUploaderDto) => {
   let inputRef: HTMLInputElement;
 
   const saveImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +54,7 @@ const FileUploader = memo(({ values, setValues }: FileUploaderDto) => {
         fileList[i]["preview_URL"] = res.data.data[i];
       }
       setValues({ ...values, files: [...values.files, ...fileList] });
+      setModalIsOpen(false);
     }
   };
   return (

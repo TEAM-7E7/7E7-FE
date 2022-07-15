@@ -42,7 +42,7 @@ const SelectUploadTypeModal = function SelectUploadTypeModal({
               </div>
               <div className="select-button">
                 {/* 유저가 직접 업로드하는 파일 업로더 */}
-                <FileUploader values={values} setValues={setValues} />
+                <FileUploader values={values} setValues={setValues} setModalIsOpen={setModalIsOpen} />
               </div>
             </div>
           </DialogContent>

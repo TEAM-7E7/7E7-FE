@@ -1,0 +1,73 @@
+@keyframes smoothAppear {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+.scroll-snap-item {
+  opacity: 0;
+  animation: smoothAppear 1.5s forwards;
+  animation-delay: 0.5s;
+
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 90%;
+  border-radius: 20px;
+  scroll-snap-align: center;
+  margin: 2rem auto;
+
+  .scroll-snap-item-img {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    background: black;
+    overflow: hidden;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+
+    img, video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .user-profile {
+      position: absolute;
+      display: flex;
+      bottom: 16px;
+      left: 16px;
+      color: white;
+
+    }
+  }
+
+  .scroll-snap-item-explain {
+    width: 100%;
+
+    .item-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .item-created {
+      color: #9F9F9F;
+    }
+
+    .item-price {
+      margin: 1rem 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .item-view-button {
+
+    }
+  }
+
+}
