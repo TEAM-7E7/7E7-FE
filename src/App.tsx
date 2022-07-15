@@ -6,7 +6,6 @@ import SignIn from "./pages/SignIn";
 import AddBoard from "./pages/AddBoard";
 import "./App.scss";
 import { useEffect } from "react";
-
 import PrivateRoute from "./utils/PrivateRoute";
 import { useRefreshToken } from "./recoil/store";
 import { Cookies } from "react-cookie";
@@ -47,6 +46,7 @@ const App = () => {
           <Route path="/MyPageAlarm" element={<MyPageAlarm />} />
           <Route path="/GoodsDetail" element={<GoodsDetail />} />
           <Route path="/board/:id" element={<Board />} />
+          <Route path="/board/:board_id" element={<Board />} />
         </Routes>
       </div>
     </>
