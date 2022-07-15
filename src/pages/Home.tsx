@@ -52,40 +52,46 @@ const Home = () => {
                 idx === board_page.length - 1
               ) {
                 return (
-                  <ScollSnapItem
-                    fileType={fileType}
-                    fileUrl={item.fileUrl}
-                    id={item.id}
-                    title={item.title}
-                    createdAt={item.createdAt}
-                    sellPrice={item.sellPrice}
-                    autoPlay={false}
-                    scrollRef={scrollRef}
-                  />
+                  <React.Fragment key={item.id}>
+                    <ScollSnapItem
+                      fileType={fileType}
+                      fileUrl={item.fileUrl}
+                      id={item.id}
+                      title={item.title}
+                      createdAt={item.createdAt}
+                      sellPrice={item.sellPrice}
+                      autoPlay={false}
+                      scrollRef={scrollRef}
+                    />
+                  </React.Fragment>
                 );
               } else if (page_num === 0 && idx === 0) {
                 return (
-                  <ScollSnapItem
-                    fileType={fileType}
-                    fileUrl={item.fileUrl}
-                    id={item.id}
-                    title={item.title}
-                    createdAt={item.createdAt}
-                    sellPrice={item.sellPrice}
-                    autoPlay={true}
-                  />
+                  <React.Fragment key={item.id}>
+                    <ScollSnapItem
+                      fileType={fileType}
+                      fileUrl={item.fileUrl}
+                      id={item.id}
+                      title={item.title}
+                      createdAt={item.createdAt}
+                      sellPrice={item.sellPrice}
+                      autoPlay={true}
+                    />
+                  </React.Fragment>
                 );
               } else {
                 return (
-                  <ScollSnapItem
-                    fileType={fileType}
-                    fileUrl={item.fileUrl}
-                    id={item.id}
-                    title={item.title}
-                    createdAt={item.createdAt}
-                    sellPrice={item.sellPrice}
-                    autoPlay={false}
-                  />
+                  <React.Fragment key={item.id}>
+                    <ScollSnapItem
+                      fileType={fileType}
+                      fileUrl={item.fileUrl}
+                      id={item.id}
+                      title={item.title}
+                      createdAt={item.createdAt}
+                      sellPrice={item.sellPrice}
+                      autoPlay={false}
+                    />
+                  </React.Fragment>
                 );
               }
             });

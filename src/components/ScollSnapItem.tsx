@@ -4,6 +4,7 @@ import { IconButton } from "../elements/IconButton";
 import { ArrowIcon } from "../assets/icons/FigmaIcons";
 import React from "react";
 import "../styles/components/scollsnapitem.scss";
+import { useNavigate } from "react-router-dom";
 
 interface ScrollSnapItemInterface {
   fileType: string;
@@ -26,6 +27,7 @@ const ScrollSnapItem = ({
   sellPrice,
   autoPlay,
 }: ScrollSnapItemInterface) => {
+  const navigate = useNavigate();
   return (
     <div className="scroll-snap-item" key={id} ref={scrollRef}>
       <div className="scroll-snap-item-img">
@@ -39,7 +41,12 @@ const ScrollSnapItem = ({
         <div className="item-title">{title}</div>
         <div className="item-created">{timeUtils.timePass(createdAt)}</div>
         <div className="item-price">{sellPrice}원</div>
-        <div className="item-view-button">
+        <div
+          className="item-view-button"
+          onClick={() => {
+            navigate(`/board/${id}`);
+          }}
+        >
           <IconButton icon={<ArrowIcon />} fullWidth>
             자세히 보러가기
           </IconButton>
