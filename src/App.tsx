@@ -6,9 +6,7 @@ import SignIn from "./pages/SignIn";
 import AddBoard from "./pages/AddBoard";
 import "./App.scss";
 import { useEffect } from "react";
-
 import PrivateRoute from "./utils/PrivateRoute";
-
 import MyPage from "./pages/MyPage";
 import MyPageAlarm from "./pages/MyPageAlarm";
 import GoodsDetail from "./components/GoodsDetail";

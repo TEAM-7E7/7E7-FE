@@ -28,10 +28,7 @@ export function Button({
     <button
       className={`button-${size} button-${color} button-${variant} button-${fullWidth ? "fullWidth" : ""} button-${
         halfWidth ? "halfWidth" : ""
-      }`}
-      className={`button-${size} button-${color} button-${variant} ${fullWidth ? "button-fullWidth" : ""} ${
-        disabled ? "button-disabled" : ""
-      }`}
+      } ${disabled ? "button-disabled" : ""}`}
       type={type === "submit" ? "submit" : "button"}
       disabled={!!disabled}
       onClick={onClick}

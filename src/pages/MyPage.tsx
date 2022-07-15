@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../src/styles/pages/mypage.scss";
 import SaleList from "../../src/components/myPage/list/saleList/SaleList";
 import BuyList from "../../src/components/myPage/list/buyList/BuyList";
@@ -20,6 +20,9 @@ const MyProfilePage = () => {
   const [goods, setGoodsList] = useState<any>([]);
   // const data = [<SaleListButton />, <BuyListButton />, <LikstListButton />];
   const navigate = useNavigate();
+  const locate = useLocation();
+  console.log(locate.state);
+
   const onAlram = () => {
     navigate("/MyPageAlarm");
   };
