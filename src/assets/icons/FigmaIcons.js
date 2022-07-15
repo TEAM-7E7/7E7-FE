@@ -44,7 +44,7 @@ export function SalelistIcon() {
   );
 }
 
-export function ChatIcon() {
+export function ChatIcon({ color = "" }) {
   return (
     <svg width="50" height="48" viewBox="0 0 50 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -59,7 +59,7 @@ export function ChatIcon() {
   );
 }
 
-export function AlarmIcon() {
+export function AlarmIcon({ color = "" }) {
   return (
     <svg width="36" height="46" viewBox="0 0 36 46" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -142,7 +142,7 @@ export function MoreOtionIcon() {
   );
 }
 
-export function StarIcon() {
+export function StarIcon({ color = "" }) {
   return (
     <svg width="39" height="37" viewBox="0 0 39 37" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -173,22 +173,10 @@ export function GoBackIcon() {
   );
 }
 
-export function MessageIcon() {
 export function MessageIcon({ color = "" }) {
   return (
     <svg viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M24.3 0.5H2.7C1.215 0.5 0 1.715 0 3.2V27.5L5.4 22.1H24.3C25.785 22.1 27 20.885 27 19.4V3.2C27 1.715 25.785 0.5 24.3 0.5Z" />
-    </svg>
-  );
-}
-
-export function AlarmIcon({ color = "" }) {
-  return (
-    <svg viewBox="0 0 24 30" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M11.6715 30C13.3638 30 14.7484 28.6154 14.7484 26.9231H8.59458C8.59458 28.6154 9.96381 30 11.6715 30ZM20.9023 20.7692V13.0769C20.9023 8.35385 18.3792 4.4 13.9792 3.35385V2.30769C13.9792 1.03077 12.9484 0 11.6715 0C10.3946 0 9.36381 1.03077 9.36381 2.30769V3.35385C4.94843 4.4 2.44073 8.33846 2.44073 13.0769V20.7692L0.456119 22.7538C-0.513112 23.7231 0.163811 25.3846 1.53304 25.3846H21.7946C23.1638 25.3846 23.8561 23.7231 22.8869 22.7538L20.9023 20.7692Z"
-        fill={color}
-      />
     </svg>
   );
 }
@@ -263,28 +251,6 @@ export function HamburgerIcon({ color = "" }) {
   return (
     <svg viewBox="0 0 28 18" xmlns="http://www.w3.org/2000/svg">
       <path d="M0.5 0H27.5V3H0.5V0ZM0.5 7.5H27.5V10.5H0.5V7.5ZM0.5 15H27.5V18H0.5V15Z" fill={color} />
-    </svg>
-  );
-}
-
-export function StarIcon({ color = "" }) {
-  return (
-    <svg viewBox="0 0 24 22" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M10.5377 1.37408C11.1496 0.208641 12.8506 0.208639 13.4625 1.37408L15.747 5.72525C15.9878 6.18401 16.4385 6.50201 16.959 6.58055L21.912 7.3279C23.25 7.52979 23.7797 9.14031 22.8136 10.0693L19.291 13.4564C18.9098 13.823 18.7341 14.3482 18.82 14.8647L19.6116 19.6271C19.8276 20.9265 18.4473 21.9171 17.2475 21.3238L12.7411 19.0956C12.2751 18.8652 11.725 18.8652 11.259 19.0956L6.75269 21.3238C5.55286 21.9171 4.17257 20.9265 4.38856 19.6271L5.18018 14.8647C5.26604 14.3482 5.09037 13.823 4.70912 13.4564L1.18655 10.0693C0.22047 9.14031 0.750172 7.52979 2.08818 7.3279L7.04117 6.58055C7.56169 6.50201 8.01232 6.18401 8.25318 5.72525L10.5377 1.37408Z"
-        fill={color}
-      />
-    </svg>
-  );
-}
-
-export function ChatIcon({ color = "" }) {
-  return (
-    <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M19.0111 0.277832H2.21108C1.05608 0.277832 0.111084 1.22283 0.111084 2.37783V21.2778L4.31108 17.0778H19.0111C20.1661 17.0778 21.1111 16.1328 21.1111 14.9778V2.37783C21.1111 1.22283 20.1661 0.277832 19.0111 0.277832Z"
-        fill={color}
-      />
     </svg>
   );
 }
