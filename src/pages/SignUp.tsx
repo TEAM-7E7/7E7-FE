@@ -29,7 +29,7 @@ const SignUp = () => {
     const { email, nickname, password } = values;
     const signUpRequestBody = { email: email, nickname: nickname, password: password };
     try {
-      await axios.post("https://tryaz.shop/api/sign-up", signUpRequestBody);
+      await axios.post("https://tryaz.shop/api/user/sign-up", signUpRequestBody);
       toast.success(<h3>회원가입이 완료되었습니다.</h3>, {
         position: "top-center",
         autoClose: 2000,
@@ -62,13 +62,13 @@ const SignUp = () => {
       nickname: nickname,
     };
     try {
-      await axios.post("https://tryaz.shop/api/nickname-check", checkDuplicateNicknameRequestBody);
-      alert("닉네임을 사용하실 수 있습니다.");
-      setCurrentNickname(nickname);
+      await axios.post("https://tryaz.shop/api/user/nickname-check", checkDuplicateNicknameRequestBody).then(() => {
+        alert("닉네임을 사용하실 수 있습니다.");
+        setCurrentNickname(nickname);
+      });
     } catch (e) {
       console.log(e);
       alert("이미 존재하는 닉네임입니다.");
-      setCurrentNickname(nickname);
     }
   };
 

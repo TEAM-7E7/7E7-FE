@@ -36,7 +36,7 @@ const App = () => {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/add-board" element={<PrivateRoute path="/add-board" component={AddBoard} />} />
-          <Route path="/board/:id" element={<Board />} />
+          <Route path="/board/:board_id" element={<Board />} />
         </Routes>
       </div>
     </>
