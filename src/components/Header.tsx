@@ -44,7 +44,9 @@ const Header = () => {
           </div>
           <div className="icons-wrapper">
             <AlarmIcon color="#FFE247" />
-            <PersonIcon color="#22FF6D" />
+            <Link to="/MyPage">
+              <PersonIcon color="#22FF6D" />
+            </Link>
             <ChatIcon color="#FF965A" />
             <ConfigIcon color="#80C9FF" />
           </div>

@@ -9,8 +9,12 @@ import { AlarmIcon, BuylistIcon, ChatIcon, LikelistIcon, SalelistIcon, UserIcon 
 import axios from "axios";
 import { instanceWithToken } from "../api/api";
 import { BoardDto } from "../dto/BoardDto";
+import { refresh_token, useRefreshToken } from "../recoil/store";
+import { useRecoilState } from "recoil";
 
 const MyProfilePage = () => {
+  const [refreshToken] = useRecoilState(refresh_token);
+  //const [refreshToken]: any = useRefreshToken();
   const [category, setCategory] = useState("saleList");
   const [board, setBoard] = useState<BoardDto>();
   const { board_id } = useParams();
@@ -21,7 +25,9 @@ const MyProfilePage = () => {
   };
   useEffect(() => {
     const getBoard = async () => {
-      const result = await axios.get(`https://tryaz.shop/api/goods/my-page?page=1&size=5/${board_id}`, {});
+      const result = await axios.get(`https://tryaz.shop/api/goods/my-page?page=1&size=5`, {
+        headers: { "X-REFRESH-TOKEN": "BEARER " + refreshToken },
+      });
       console.log(result);
       return result;
     };
