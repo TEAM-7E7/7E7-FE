@@ -1,10 +1,11 @@
 import "../styles/pages/board.scss";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { BoardDto } from "../dto/BoardDto";
 import { Button } from "../elements/Button";
 import { timeUtils } from "../utils/timeUtils";
+import { Video } from "../elements/Video";
 
 const Board = () => {
   const { board_id } = useParams();
@@ -16,11 +17,17 @@ const Board = () => {
     };
     getBoard().then((result) => setBoard(result.data.data));
   }, []);
-  console.log(board?.accountImageUrl);
+  console.log(board);
   return (
     <div className="board-wrapper">
       <div className="board-body">
-        <div className="preview-images"></div>
+        <div className="preview-images">
+          {board?.fileUrlList[0].split(".").at(-1) === "mp4" ? (
+            <Video src={board?.fileUrlList[0]} autoPlay={true} />
+          ) : (
+            <img src={board?.fileUrlList[0]} />
+          )}
+        </div>
         <div>
           <div className="board-contents">
             <div className="user-profile">
