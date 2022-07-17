@@ -21,6 +21,22 @@ export class jwtUtils {
   // 토큰에서 유저 id 가져오기
   static getId(token) {
     const decoded = jwtDecode(token);
-    return decoded.jti;
+    console.log(decoded);
+    return decoded.USER_ID;
+  }
+
+  static getNickname(token) {
+    const decoded = jwtDecode(token);
+    return decoded.USER_NAME;
+  }
+
+  static getEmail(token) {
+    const decoded = jwtDecode(token);
+    return decoded.USER_EAMIL;
+  }
+
+  static getProfileImg(token) {
+    const decoded = jwtDecode(token);
+    return decoded.USER_PROFILEIMG;
   }
 }

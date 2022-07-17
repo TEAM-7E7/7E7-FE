@@ -1,40 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
 import "../../src/styles/pages/mypage.scss";
 import SaleList from "../../src/components/myPage/list/saleList/SaleList";
 import BuyList from "../../src/components/myPage/list/buyList/BuyList";
 import LikeList from "../../src/components/myPage/list/likeList/LikeList";
 import { IconButton } from "../../src/elements/IconButton";
 import { AlarmIcon, BuylistIcon, ChatIcon, LikelistIcon, SalelistIcon, UserIcon } from "../assets/icons/FigmaIcons";
-import axios from "axios";
-import { instanceWithToken } from "../api/api";
-import { BoardDto } from "../dto/BoardDto";
-import { refresh_token, useRefreshToken } from "../recoil/store";
-import { useRecoilState } from "recoil";
 import { Cookies } from "react-cookie";
+import { jwtUtils } from "../utils/jwtUtils";
+import { instanceWithToken } from "../api/api";
 
 const MyProfilePage = () => {
   const cookies = new Cookies();
   const accessToken = cookies.get("X-ACCESS-TOKEN");
-  const [refreshToken] = useRecoilState(refresh_token);
-  //const [refreshToken]: any = useRefreshToken();
   const [category, setCategory] = useState("saleList");
-  const [board, setBoard] = useState<BoardDto>();
-  const { board_id } = useParams();
-  // const data = [<SaleListButton />, <BuyListButton />, <LikstListButton />];
-  const navigate = useNavigate();
-  const onAlram = () => {
-    navigate("/MyPageAlarm");
-  };
+  const [goods, setGoodsList] = useState<any>([]);
   useEffect(() => {
-    const getBoard = async () => {
-      const result = await instanceWithToken.get(`https://tryaz.shop/api/goods/my-page?page=1&size=5`);
-      console.log(result);
-      return result;
+    console.log(
+      jwtUtils.getNickname(accessToken),
+      jwtUtils.getId(accessToken),
+      jwtUtils.getEmail(accessToken),
+      jwtUtils.getProfileImg(accessToken),
+    );
+  });
+  useEffect(() => {
+    const getGoodsList = async () => {
+      const res = await instanceWithToken.post("https://tryaz.shop/api/goods/my-page?page=1&size=5");
+      console.log(res.data);
+      setGoodsList(res.data.data.goodsList);
     };
-    getBoard().then((result) => setBoard(result.data.data));
+    getGoodsList();
   }, []);
-  console.log(board);
   return (
     <div className="myProfile">
       <div className="myProfile-swapper">
@@ -42,22 +37,22 @@ const MyProfilePage = () => {
         <div className="myProfile-head">
           <div className="myProfile-head-user">
             <div className="user-img">
-              <IconButton icon={<UserIcon />} iconSize="large"></IconButton>
+              <img
+                src={
+                  jwtUtils.getProfileImg(accessToken) === "default"
+                    ? "/img/default_img.png"
+                    : jwtUtils.getProfileImg(accessToken)
+                }
+              />
             </div>
             <div className="user-info">
-              <span className="user-nick">방배동 후라이팬</span>
-              <span className="user-email">asfd@adsf</span>
+              <span className="user-nick">{jwtUtils.getNickname(accessToken)}</span>
+              <span className="user-email">{jwtUtils.getEmail(accessToken)}</span>
             </div>
           </div>
           <div className="myProfile-head-button">
             <IconButton color="blue" variant="circle" icon={<ChatIcon />} iconSize="large"></IconButton>
-            <IconButton
-              color="blue"
-              variant="circle"
-              icon={<AlarmIcon />}
-              iconSize="large"
-              onClick={onAlram}
-            ></IconButton>
+            <IconButton color="blue" variant="circle" icon={<AlarmIcon />} iconSize="large"></IconButton>
           </div>
         </div>
         <div className="myProfile-body">
@@ -72,7 +67,7 @@ const MyProfilePage = () => {
               >
                 <div className="list-content">
                   <span>판매내역</span>
-                  <p>건</p>
+                  <p>{goods.length}건</p>
                 </div>
               </IconButton>
               <IconButton

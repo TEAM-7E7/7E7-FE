@@ -22,7 +22,10 @@
         display: flex;
         align-items: center;
         .user-img{
-
+          img{
+            width:50px;
+            border-radius: 80px;
+          }
         }
         .user-info {
           .user-nick {

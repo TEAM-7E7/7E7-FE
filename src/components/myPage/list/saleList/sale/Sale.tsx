@@ -1,22 +1,17 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { IconButton } from "../../../../../elements/IconButton";
 import { MoreOtionIcon } from "../../../../../assets/icons/FigmaIcons";
 import MenuModal from "../../../../../elements/modals/MenuModal";
 import Pagination from "../../../../Pagination";
-import Moment from "react-moment";
-import "moment/locale/ko";
-import { useInView } from "react-intersection-observer";
-import { useBoardInfiniteQuery } from "../../../../../react-query/query/useBoardInfinteQuery";
+import { instanceWithToken } from "../../../../../api/api";
+import { timeUtils } from "../../../../../utils/timeUtils";
 
 const Sale = () => {
   const [show, setShow] = useState(false);
   const [goods, setGoodsList] = useState<any>([]);
   const popRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const nowTime = Date.now();
   //modal 바깥을 클릭하면 modal이 없어진다
   const onClickOutside = useCallback(
     ({ target }: any) => {
@@ -38,7 +33,7 @@ const Sale = () => {
   }, [setShow]);
   useEffect(() => {
     const getGoodsList = async () => {
-      const res = await axios.get("https://tryaz.shop/api/goods/my-page?page=1&size=5");
+      const res = await instanceWithToken.post("https://tryaz.shop/api/goods/my-page?page=1&size=5");
       console.log(res.data);
       setGoodsList(res.data.data.goodsList);
     };
@@ -73,7 +68,7 @@ const Sale = () => {
               </div>
             </div>
             <div className="product-price">
-              <Moment fromNow>{item.createdAt}</Moment>
+              <span>{timeUtils.timePass(item.createdAt)}</span>
               <h1>{item.sellPrice}원</h1>
             </div>
             <div className="product-detail">
