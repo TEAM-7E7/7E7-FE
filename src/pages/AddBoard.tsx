@@ -3,7 +3,7 @@ import { Button } from "../elements/Button";
 import { IconButton } from "../elements/IconButton";
 import { useState } from "react";
 import { Formik } from "formik";
-import { BoardDto } from "../dto/AddBoardDto";
+import { AddBoardDto } from "../dto/AddBoardDto";
 import { addBoardValidationSchema } from "../utils/boardValidation";
 import { Input } from "../elements/Input";
 import { TextField } from "../elements/TextField";
@@ -18,7 +18,7 @@ import { instanceWithToken } from "../api/api";
 import { useNavigate } from "react-router-dom";
 import { Video } from "../elements/Video";
 
-const initialValues: BoardDto = {
+const initialValues: AddBoardDto = {
   title: "",
   category: "",
   price: "",
@@ -29,13 +29,12 @@ const initialValues: BoardDto = {
 const AddBoard = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
-  const submit = async (values: BoardDto) => {
-    console.log(values);
+  const submit = async (values: AddBoardDto) => {
     const { title, category, price, explain, files } = values;
     const addBoardRequestBody = {
       title: title,
       description: explain,
-      fileUrls: files.map((item) => item.preview_URL),
+      fileIdList: files.map((item) => item.file_id),
       category: category,
       sellPrice: Number(price),
     };

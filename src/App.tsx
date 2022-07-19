@@ -11,7 +11,6 @@ import { useRefreshToken } from "./recoil/store";
 import { Cookies } from "react-cookie";
 import Board from "./pages/Board";
 import MyPage from "./pages/MyPage";
-import Sale from "./components/myPage/list/saleList/sale/Sale";
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -39,7 +38,9 @@ const App = () => {
           <Route path="/add-board" element={<PrivateRoute path="/add-board" component={AddBoard} />} />
           <Route path="/add-board" element={<AddBoard />} />
           <Route path="/MyPage" element={<PrivateRoute path="/MyPage" component={MyPage} />} />
-          <Route path="/Sale" element={<Sale />} />
+          <Route path="/MyPage" element={<MyPage />} />
+          <Route path="/MyPage/:id" element={<MyPage />} />
+          <Route path="/MyPage/:board_id" element={<MyPage />} />
           <Route path="/board/:id" element={<Board />} />
           <Route path="/board/:board_id" element={<Board />} />
           <Route path="/my-page" element={<PrivateRoute path="/my-page" component={MyPage} />} />

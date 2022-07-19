@@ -1,10 +1,10 @@
 import { memo, useCallback } from "react";
 import DndItem from "./DndItem";
-import { BoardDto, FileDto } from "../../dto/AddBoardDto";
+import { AddBoardDto, FileDto } from "../../dto/AddBoardDto";
 import "../../styles/components/addBoardDnd/dndcontainer.scss";
 
 interface DndContainerDto {
-  values: BoardDto;
+  values: AddBoardDto;
   setValues: any;
 }
 // DND를 담는 컨테이너
@@ -41,9 +41,9 @@ const DndContainer = memo(({ values, setValues }: DndContainerDto) => {
 
   return (
     <div className="dndcontainer-wrapper">
-      {values.files?.map((item: FileDto, index: number) => (
+      {values.files?.map((item: FileDto) => (
         <DndItem
-          key={index}
+          key={item.preview_URL}
           type={item.type}
           id={`${item.preview_URL}`}
           moveItem={moveItem}

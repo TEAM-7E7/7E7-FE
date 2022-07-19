@@ -2,11 +2,11 @@ import React, { memo } from "react";
 import "../styles/components/fileuploader.scss";
 import { ImageIcon } from "../assets/icons/FigmaIcons";
 import { IconButton } from "../elements/IconButton";
-import { BoardDto } from "../dto/AddBoardDto";
+import { AddBoardDto } from "../dto/AddBoardDto";
 import { instanceWithToken } from "../api/api";
 
 interface FileUploaderDto {
-  values: BoardDto;
+  values: AddBoardDto;
   setValues: any;
   setModalIsOpen: any;
 }
@@ -51,7 +51,8 @@ const FileUploader = memo(({ values, setValues, setModalIsOpen }: FileUploaderDt
     if (fileList) {
       const res = await instanceWithToken.post("/api/goods/image-upload", formData);
       for (let i = 0; i < res.data.data.length; i++) {
-        fileList[i]["preview_URL"] = res.data.data[i];
+        fileList[i]["preview_URL"] = res.data.data[i].url;
+        fileList[i]["file_id"] = res.data.data[i].id;
       }
       setValues({ ...values, files: [...values.files, ...fileList] });
       setModalIsOpen(false);

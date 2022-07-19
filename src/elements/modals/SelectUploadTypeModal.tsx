@@ -4,13 +4,13 @@ import { IconButton } from "../IconButton";
 import { CameraIcon, ImageIcon } from "../../assets/icons/FigmaIcons";
 import { memo, useState } from "react";
 import FileUploader from "../../components/FileUploader";
-import { BoardDto } from "../../dto/AddBoardDto";
+import { AddBoardDto } from "../../dto/AddBoardDto";
 
 interface SelectUploadTypeModalProps {
   modalIsOpen: boolean;
   setModalIsOpen: any;
   setValues: any;
-  values: BoardDto;
+  values: AddBoardDto;
 }
 
 const SelectUploadTypeModal = function SelectUploadTypeModal({

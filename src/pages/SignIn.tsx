@@ -93,7 +93,12 @@ const SignIn = () => {
               </div>
               <div className="signin-button">
                 {/*플랫폼 자체 로그인*/}
-                <Button color="submit" type="submit" fullWidth>
+                <Button
+                  color={errors.email && errors.password ? "skyblue" : "primary"}
+                  disabled={errors.email && errors.password ? true : false}
+                  type="submit"
+                  fullWidth
+                >
                   Login
                 </Button>
               </div>

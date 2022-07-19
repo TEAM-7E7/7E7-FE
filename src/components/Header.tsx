@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import CategoryItem from "./CategoryItem";
 import { useRefreshToken } from "../recoil/store";
 import { jwtUtils } from "../utils/jwtUtils";
+import { Cookies } from "react-cookie";
 
 const Header = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -12,6 +13,13 @@ const Header = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+  const cookies = new Cookies();
+  const logout = () => {
+    localStorage.removeItem("X-REFRESH-TOKEN");
+    cookies.remove("X-ACCESS-TOKEN");
+    alert("로그아웃 되었습니다.");
+    window.location.href = "/";
+  };
 
   return (
     <>
@@ -26,10 +34,16 @@ const Header = () => {
         </div>
 
         <div className="header-menu">
-          {!jwtUtils.isValid(refreshToken) && (
+          {!jwtUtils.isValid(refreshToken) ? (
             <>
               <Link to="/sign-in">로그인</Link>
               <Link to="/sign-up">회원가입</Link>
+            </>
+          ) : (
+            <>
+              <Link to="#" onClick={logout}>
+                로그아웃
+              </Link>
             </>
           )}
 
@@ -52,9 +66,13 @@ const Header = () => {
           </div>
           <div className="icons-wrapper">
             <AlarmIcon color="#FFE247" />
-            <Link to="/MyPage">
+            <div
+              onClick={() => {
+                navigate("/my-page");
+              }}
+            >
               <PersonIcon color="#22FF6D" />
-            </Link>
+            </div>
             <ChatIcon color="#FF965A" />
             <ConfigIcon color="#80C9FF" />
           </div>

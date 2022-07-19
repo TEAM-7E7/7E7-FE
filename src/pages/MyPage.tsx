@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import "../../src/styles/pages/mypage.scss";
-import SaleList from "../../src/components/myPage/list/saleList/SaleList";
-import BuyList from "../../src/components/myPage/list/buyList/BuyList";
-import LikeList from "../../src/components/myPage/list/likeList/LikeList";
+import SaleList from "../components/myPage/list/SaleList";
 import { IconButton } from "../../src/elements/IconButton";
 import { AlarmIcon, BuylistIcon, LikelistIcon, MessageIcon, SalelistIcon } from "../assets/icons/FigmaIcons";
+import { instanceWithToken } from "../api/api";
 import { Cookies } from "react-cookie";
 import { jwtUtils } from "../utils/jwtUtils";
-import { instanceWithToken } from "../api/api";
+import BoardList from "../components/myPage/list/BoardList";
 
 const MyProfilePage = () => {
   const cookies = new Cookies();
@@ -15,17 +15,14 @@ const MyProfilePage = () => {
   const [category, setCategory] = useState("saleList");
   const [goods, setGoodsList] = useState<any>([]);
   useEffect(() => {
-    console.log(
-      jwtUtils.getNickname(accessToken),
-      jwtUtils.getId(accessToken),
-      jwtUtils.getEmail(accessToken),
-      jwtUtils.getProfileImg(accessToken),
-    );
+    jwtUtils.getNickname(accessToken);
+    jwtUtils.getId(accessToken);
+    jwtUtils.getEmail(accessToken);
+    jwtUtils.getProfileImg(accessToken);
   });
   useEffect(() => {
     const getGoodsList = async () => {
       const res = await instanceWithToken.post("https://tryaz.shop/api/goods/my-page?page=1&size=5");
-      console.log(res.data);
       setGoodsList(res.data.data.goodsList);
     };
     getGoodsList();
@@ -52,10 +49,10 @@ const MyProfilePage = () => {
           </div>
           <div className="message-alarm-icon">
             <div className="message-icon">
-              <IconButton color="blue" variant="circle" icon={<MessageIcon />} iconSize="large"></IconButton>
+              <IconButton color="skyblue" variant="circle" icon={<MessageIcon />} iconSize="large"></IconButton>
             </div>
             <div className="alarm-icon">
-              <IconButton color="blue" variant="circle" icon={<AlarmIcon />} iconSize="large"></IconButton>
+              <IconButton color="skyblue" variant="circle" icon={<AlarmIcon />} iconSize="large"></IconButton>
             </div>
           </div>
         </div>
@@ -64,7 +61,7 @@ const MyProfilePage = () => {
             <div className="category-list">
               <IconButton
                 size="large"
-                color="blue"
+                color="skyblue"
                 onClick={() => setCategory("SaleList")}
                 icon={<SalelistIcon />}
                 iconSize="large"
@@ -76,7 +73,7 @@ const MyProfilePage = () => {
               </IconButton>
               <IconButton
                 size="large"
-                color="blue"
+                color="skyblue"
                 onClick={() => setCategory("BuyList")}
                 icon={<BuylistIcon />}
                 iconSize="large"
@@ -88,7 +85,7 @@ const MyProfilePage = () => {
               </IconButton>
               <IconButton
                 size="large"
-                color="blue"
+                color="skyblue"
                 onClick={() => setCategory("LikeList")}
                 icon={<LikelistIcon />}
                 iconSize="large"
@@ -100,9 +97,42 @@ const MyProfilePage = () => {
               </IconButton>
             </div>
           </div>
-          {category === "SaleList" && <SaleList />}
-          {category === "BuyList" && <BuyList />}
-          {category === "LikeList" && <LikeList />}
+          {goods.map((item: any) => {
+            const fileType = item.goodsImageUrl;
+            if (category === "SaleList") {
+              return <SaleList />;
+            } else if (category === "BuyList") {
+              return (
+                <React.Fragment key={item.id}>
+                  <BoardList
+                    id={item.id}
+                    fileType={fileType}
+                    fileUrl={item.goodsImageUrl}
+                    title={item.title}
+                    status={item.status}
+                    createdAt={item.createdAt}
+                    sellPrice={item.sellPrice}
+                    autoPlay={false}
+                  />
+                </React.Fragment>
+              );
+            } else {
+              return (
+                <React.Fragment key={item.id}>
+                  <BoardList
+                    id={item.id}
+                    fileType={fileType}
+                    fileUrl={item.goodsImageUrl}
+                    title={item.title}
+                    status={item.status}
+                    createdAt={item.createdAt}
+                    sellPrice={item.sellPrice}
+                    autoPlay={false}
+                  />
+                </React.Fragment>
+              );
+            }
+          })}
         </div>
       </div>
     </div>

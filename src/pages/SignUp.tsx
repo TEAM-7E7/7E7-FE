@@ -54,8 +54,8 @@ const SignUp = () => {
       setModalIsOpen(true);
       await axios.post("https://tryaz.shop/api/email-validation", sendEmailRequestBody);
     } catch (e: any) {
-      alert(e.response.data.message);
       setModalIsOpen(false);
+      alert(e.response.data.message);
     }
   };
 
