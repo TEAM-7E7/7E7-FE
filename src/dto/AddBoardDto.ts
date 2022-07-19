@@ -1,9 +1,10 @@
 export interface FileDto {
   preview_URL: string;
+  file_id: number;
   type: string;
 }
 
-export interface BoardDto {
+export interface AddBoardDto {
   title: string;
   category: string;
   price: string;

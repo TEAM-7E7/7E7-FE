@@ -2,14 +2,14 @@ import { memo, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import "../../styles/components/addBoardDnd/dnditem.scss";
 import PreviewModal from "../../elements/modals/PreviewModal";
-import { BoardDto } from "../../dto/AddBoardDto";
+import { AddBoardDto } from "../../dto/AddBoardDto";
 
 interface DndItemDto {
   type: string;
   id: string;
   moveItem: any;
   findItem: any;
-  values: BoardDto;
+  values: AddBoardDto;
   setValues: any;
 }
 

@@ -22,10 +22,10 @@ const Board = () => {
     <div className="board-wrapper">
       <div className="board-body">
         <div className="preview-images">
-          {board?.fileUrlList[0].split(".").at(-1) === "mp4" ? (
-            <Video src={board?.fileUrlList[0]} autoPlay={true} />
+          {board?.imageMapList[0].url.split(".").at(-1) === "mp4" ? (
+            <Video src={board?.imageMapList[0].url} autoPlay={true} />
           ) : (
-            <img src={board?.fileUrlList[0]} />
+            <img src={board?.imageMapList[0].url} />
           )}
         </div>
         <div>
