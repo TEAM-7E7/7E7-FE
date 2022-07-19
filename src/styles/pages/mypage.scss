@@ -1,11 +1,14 @@
-.myProfile{
-  .myProfile-swapper{
+.myprofile{
+  font-family: 'Noto Sans KR';
+  .myprofile-swapper{
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     margin-bottom: 50px;
-    .myProfile-head{
+    .myprofile-head{
+      font-size: 2rem;
+      font-weight: bold;
       width: 95%;
       max-width: 1222px;
       flex-wrap: wrap;
@@ -16,47 +19,56 @@
       align-items: center;
       border: 1px solid #E3E1FB;
       border-radius: 20px;
-      margin-bottom: 24px;
+      margin-bottom: 3rem;
       background-color: #E3E1FB;
-      .myProfile-head-user{
+      .mypage-body-user-profile{
+        margin-left: 4rem;
         display: flex;
         align-items: center;
-        .user-img{
+        .user-profile-img{
+          width: 3.75rem;
+          height: 3.75rem;
+          overflow: hidden;
+          border-radius: 50%;
+          margin-right: 2rem;
           img{
-            width:50px;
-            border-radius: 80px;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
           }
         }
-        .user-info {
-          .user-nick {
-            font-size: 26px;
-          }
-          .user-email {
-            font-size: 30px;
-            color: #545454;
-          }
-        }
-      }
-      .myProfile-head-button{
-        button {
-          margin-left: 30px;
-        }
-      }
-      .myProfile-head-user{
-        margin-left: 5%;
-        .user-info{
+        .user-profile-nickname-email {
           display: flex;
           flex-direction: column;
-          margin-left: 20px;
+          justify-content: space-between;
+          .user-profile-nickname {
+            font-weight: bold;
+            font-size: 1.5rem;
+          }
+          .user-profile-email {
+            font-size: 1.25rem;
+            color: #606060;
+          }
         }
       }
-      .myProfile-head-button{
+      .message-alarm-icon{
         display: flex;
-        margin-right: 10%;
-        margin-left: 13%;
+        margin-right: 2rem;
+        margin-left: 8rem;
+        .message-icon{
+          margin-left: 1rem;
+          margin-right: 1rem;
+        }
+        .alarm-icon{
+          margin-right: 1rem;
+        }
+        svg{
+          width: 20px;
+          height: 20px;
+        }
       }
     }
-    .myProfile-body{
+    .myprofile-body{
       width: 100%;
       max-width: 1222px;
       display: flex;
@@ -74,7 +86,7 @@
           color: black;
         }
       }
-      .myProfile-category{
+      .myprofile-category{
         width: 100%;
         height: 172px;
         display: flex;
@@ -84,7 +96,7 @@
         border-radius: 20px;
         background-color: #E3E1FB;
         justify-content: space-around;
-        margin-bottom: 30px;
+        margin-bottom: 2rem;
         align-items: center;
         .category-list{
           width: 90%;
@@ -93,15 +105,15 @@
           display: flex;
           justify-content: space-evenly;
           align-items: center;
-
           .left-right{
             flex-direction: row-reverse;
           }
           .list-content{
             display: flex;
             flex-direction: column;
-            padding: 0 3px;
-            font-size: 16px;
+            padding: 0.2rem 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
           }
           .iconbutton-text{
             color: white;
@@ -137,11 +149,11 @@
               object-fit: contain;
             }
           }
-          .myProfile-product {
+          .myprofile-product {
             display: flex;
             justify-content: space-between;
             position: relative;
-            .myProfile-product-body {
+            .myprofile-product-body {
               display: flex;
               justify-content: flex-start;
               align-items: center;
@@ -181,7 +193,7 @@
           }
         }
       }
-      .myProfile-content{
+      .myprofile-content{
         width: 100%;
         max-width: 1222px;
         display: flex;
@@ -204,14 +216,14 @@
                 img,video {
                   width: 100%;
                   height: 100%;
-                  object-fit: scale-down;
+                  object-fit: contain;
                 }
               }
-              .myProfile-product {
+              .myprofile-product {
                 display: flex;
                 justify-content: space-between;
                 position: relative;
-                .myProfile-product-body {
+                .myprofile-product-body {
                   display: flex;
                   justify-content: flex-start;
                   align-items: center;

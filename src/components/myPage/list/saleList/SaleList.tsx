@@ -16,7 +16,7 @@ const SaleList = () => {
     getGoodsList();
   }, []);
   return (
-    <div className="myProfile-body">
+    <div className="myprofile-body">
       <div className="category-status">
         <button
           className={
@@ -43,7 +43,7 @@ const SaleList = () => {
           거래완료()
         </button>
       </div>
-      <div className="myProfile-content">{content ? <Sale /> : <Complete />}</div>
+      <div className="myprofile-content">{content ? <Sale /> : <Complete />}</div>
     </div>
   );
 };

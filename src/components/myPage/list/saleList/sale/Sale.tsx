@@ -1,9 +1,9 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Video } from "../../../../../elements/Video";
 import { IconButton } from "../../../../../elements/IconButton";
 import { MoreOtionIcon } from "../../../../../assets/icons/FigmaIcons";
 import MenuModal from "../../../../../elements/modals/MenuModal";
-import Pagination from "../../../../Pagination";
 import { instanceWithToken } from "../../../../../api/api";
 import { timeUtils } from "../../../../../utils/timeUtils";
 
@@ -45,14 +45,10 @@ const Sale = () => {
         {goods.map((item: any) => (
           <div className="content-body" key={item.id}>
             <div className="preview-main-item" key={item.id}>
-              {item.type === "mp4" ? (
-                <video src={item.fileUrl} controls={true} muted={true} />
-              ) : (
-                <img src={item.fileUrl} />
-              )}
+              {item.fileType === "mp4" ? <Video src={item?.goodsImageUrl} /> : <img src={item?.goodsImageUrl} />}
             </div>
-            <div className="myProfile-product">
-              <div className="myProfile-product-body">
+            <div className="myprofile-product">
+              <div className="myprofile-product-body">
                 <h2>{item.title}</h2>
                 <span>{item.status}</span>
               </div>
@@ -73,8 +69,8 @@ const Sale = () => {
             </div>
             <div className="product-detail">
               <button
-                className="button-fullWidth button-lightblue button-medium button-none"
-                onClick={() => navigate("/GoodsDetail")}
+                className="button-fullWidth button-primaryblue button-medium button-none"
+                onClick={() => navigate(`/board/${item.id}`)}
                 id={item.id}
               >
                 <span>자세히보러가기</span>
@@ -83,7 +79,6 @@ const Sale = () => {
           </div>
         ))}
       </div>
-      <Pagination />
     </>
   );
 };

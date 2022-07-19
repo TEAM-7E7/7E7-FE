@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 interface ButtonOptions {
   variant?: "outlined" | "filled" | "none";
   size?: "small" | "medium" | "large";
-  color?: "default" | "primary" | "submit" | "primaryblue" | "lightblue" | "skyblue";
+  color?: "default" | "primary" | "submit" | "primaryblue" | "skyblue";
   fullWidth?: boolean;
   halfWidth?: boolean;
   onClick?: () => void;

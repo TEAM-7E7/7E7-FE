@@ -1,14 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import axios from "axios";
 import { IconButton } from "../../../../../elements/IconButton";
 import { MoreOtionIcon } from "../../../../../assets/icons/FigmaIcons";
 import MenuModal from "../../../../../elements/modals/MenuModal";
-import Pagination from "../../../../Pagination";
 import { useNavigate } from "react-router-dom";
-import Moment from "react-moment";
-import "moment/locale/ko";
 import Modal from "../../../../../elements/modals/MenuModal";
+import { timeUtils } from "../../../../../utils/timeUtils";
 
 const Complete = () => {
   const [show, setShow] = useState(false);
@@ -54,8 +50,8 @@ const Complete = () => {
                 <img src={item.fileUrl} />
               )}
             </div>
-            <div className="myProfile-product">
-              <div className="myProfile-product-body">
+            <div className="myprofile-product">
+              <div className="myprofile-product-body">
                 <h2>{item.title}</h2>
                 <span>{item.status}</span>
               </div>
@@ -71,7 +67,7 @@ const Complete = () => {
               </div>
             </div>
             <div className="product-price">
-              <Moment fromNow>{item.createdAt}</Moment>
+              <span>{timeUtils.timePass(item.createdAt)}</span>
               <h1>{item.sellPrice}원</h1>
             </div>
             <div className="product-detail">
@@ -85,7 +81,6 @@ const Complete = () => {
           </div>
         ))}
       </div>
-      <Pagination />
     </>
   );
 };

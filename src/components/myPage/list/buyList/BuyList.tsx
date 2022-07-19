@@ -1,14 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import axios from "axios";
 import { IconButton } from "../../../../elements/IconButton";
 import { MoreOtionIcon } from "../../../../assets/icons/FigmaIcons";
 import MenuModal from "../../../../elements/modals/MenuModal";
-import Pagination from "../../../Pagination";
-import Moment from "react-moment";
-import "moment/locale/ko";
 import Modal from "../../../../elements/modals/MenuModal";
 import { useNavigate } from "react-router-dom";
+import { timeUtils } from "../../../../utils/timeUtils";
 
 const BuyList = () => {
   const [show, setShow] = useState(false);
@@ -34,14 +30,14 @@ const BuyList = () => {
   const onModal = useCallback(() => {
     setShow((prev) => !prev);
   }, [setShow]);
-  useEffect(() => {
-    const getGoodsList = async () => {
-      const res = await axios.get("https://tryaz.shop/api/goods?pageNumber=0&pageSize=4/");
-      console.log(res.data);
-      setGoodsList(res.data.data.goodsList);
-    };
-    getGoodsList();
-  }, []);
+  // useEffect(() => {
+  //   const getGoodsList = async () => {
+  //     const res = await axios.get("https://tryaz.shop/api/goods?pageNumber=0&pageSize=4/");
+  //     console.log(res.data);
+  //     setGoodsList(res.data.data.goodsList);
+  //   };
+  //   getGoodsList();
+  // }, []);
   return (
     <>
       <div className="content">
@@ -54,8 +50,8 @@ const BuyList = () => {
                 <img src={item.fileUrl} />
               )}
             </div>
-            <div className="myProfile-product">
-              <div className="myProfile-product-body">
+            <div className="myprofile-product">
+              <div className="myprofile-product-body">
                 <h2>{item.title}</h2>
                 <span>{item.status}</span>
               </div>
@@ -71,7 +67,7 @@ const BuyList = () => {
               </div>
             </div>
             <div className="product-price">
-              <Moment fromNow>{item.createdAt}</Moment>
+              <span>{timeUtils.timePass(item.createdAt)}</span>
               <h1>{item.sellPrice}원</h1>
             </div>
             <div className="product-detail">
@@ -85,7 +81,6 @@ const BuyList = () => {
           </div>
         ))}
       </div>
-      <Pagination />
     </>
   );
 };

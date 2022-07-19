@@ -4,7 +4,7 @@ import SaleList from "../../src/components/myPage/list/saleList/SaleList";
 import BuyList from "../../src/components/myPage/list/buyList/BuyList";
 import LikeList from "../../src/components/myPage/list/likeList/LikeList";
 import { IconButton } from "../../src/elements/IconButton";
-import { AlarmIcon, BuylistIcon, ChatIcon, LikelistIcon, SalelistIcon, UserIcon } from "../assets/icons/FigmaIcons";
+import { AlarmIcon, BuylistIcon, LikelistIcon, MessageIcon, SalelistIcon } from "../assets/icons/FigmaIcons";
 import { Cookies } from "react-cookie";
 import { jwtUtils } from "../utils/jwtUtils";
 import { instanceWithToken } from "../api/api";
@@ -31,12 +31,12 @@ const MyProfilePage = () => {
     getGoodsList();
   }, []);
   return (
-    <div className="myProfile">
-      <div className="myProfile-swapper">
+    <div className="myprofile">
+      <div className="myprofile-swapper">
         <h1>마이페이지</h1>
-        <div className="myProfile-head">
-          <div className="myProfile-head-user">
-            <div className="user-img">
+        <div className="myprofile-head">
+          <div className="mypage-body-user-profile">
+            <div className="user-profile-img">
               <img
                 src={
                   jwtUtils.getProfileImg(accessToken) === "default"
@@ -45,18 +45,22 @@ const MyProfilePage = () => {
                 }
               />
             </div>
-            <div className="user-info">
-              <span className="user-nick">{jwtUtils.getNickname(accessToken)}</span>
-              <span className="user-email">{jwtUtils.getEmail(accessToken)}</span>
+            <div className="user-profile-nickname-email">
+              <div className="user-profile-nickname">{jwtUtils.getNickname(accessToken)}</div>
+              <div className="user-profile-email">{jwtUtils.getEmail(accessToken)}</div>
             </div>
           </div>
-          <div className="myProfile-head-button">
-            <IconButton color="blue" variant="circle" icon={<ChatIcon />} iconSize="large"></IconButton>
-            <IconButton color="blue" variant="circle" icon={<AlarmIcon />} iconSize="large"></IconButton>
+          <div className="message-alarm-icon">
+            <div className="message-icon">
+              <IconButton color="blue" variant="circle" icon={<MessageIcon />} iconSize="large"></IconButton>
+            </div>
+            <div className="alarm-icon">
+              <IconButton color="blue" variant="circle" icon={<AlarmIcon />} iconSize="large"></IconButton>
+            </div>
           </div>
         </div>
-        <div className="myProfile-body">
-          <div className="myProfile-category">
+        <div className="myprofile-body">
+          <div className="myprofile-category">
             <div className="category-list">
               <IconButton
                 size="large"
