@@ -1,5 +1,15 @@
 import axios from "axios";
-import { Cookies } from "react-cookie/cjs";
+import { Cookies } from "react-cookie";
+
+export const api = axios.create({ baseURL: "https://tryaz.shop" });
+api.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
 
 export const instanceWithToken = axios.create({ baseURL: "https://tryaz.shop" });
 instanceWithToken.interceptors.request.use(

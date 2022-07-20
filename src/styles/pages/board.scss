@@ -10,20 +10,8 @@
     justify-content: center;
     flex-wrap: wrap;
     .preview-images{
-      background: black;
-      border-radius: 25px;
       flex-shrink: 0;
-      width: 360px;
-      height: 620px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin-right: 1rem;
-      overflow: hidden;
-      img, video {
-        width: 100%;
-        object-fit: contain;
-      }
     }
     .board-contents{
       height: 620px;

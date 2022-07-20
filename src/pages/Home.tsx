@@ -45,7 +45,6 @@ const Home = () => {
         ? getBoard.pages.map((page_data, page_num) => {
             const board_page = page_data.board_page;
             return board_page.map((item: any, idx: number) => {
-              console.log(item);
               const fileType = item.goodsImageUrl.split(".").at(-1);
               if (
                 // 마지막 요소에 ref 달아주기
