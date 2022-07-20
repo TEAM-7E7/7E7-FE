@@ -37,7 +37,7 @@ const BoardList = ({ id, fileType, fileUrl, title, status, createdAt, sellPrice,
           <IconButton
             icon={<ArrowIcon />}
             onClick={() => {
-              navigate(`/board/${id}`);
+              navigate(`/MyPage/${id}`);
             }}
             fullWidth
           >

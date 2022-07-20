@@ -1,6 +1,6 @@
 import "../styles/pages/board.scss";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { BoardDto } from "../dto/BoardDto";
 import { Button } from "../elements/Button";
@@ -8,6 +8,7 @@ import { timeUtils } from "../utils/timeUtils";
 import { Video } from "../elements/Video";
 
 const Board = () => {
+  const navigate = useNavigate();
   const { board_id } = useParams();
   const [board, setBoard] = useState<BoardDto>();
   useEffect(() => {
@@ -17,6 +18,11 @@ const Board = () => {
     };
     getBoard().then((result) => setBoard(result.data.data));
   }, []);
+  const onDelete = async () => {
+    await axios.delete(`https://tryaz.shop/api/goods/${board_id}`);
+    alert("게시물이 삭제되었습니다");
+    navigate("/MyPage");
+  };
   return (
     <div className="board-wrapper">
       <div className="board-body">
@@ -47,7 +53,9 @@ const Board = () => {
           </div>
           <div className="board-button">
             <Button color="primary">수정</Button>
-            <Button color="primary">삭제</Button>
+            <Button color="primary" onClick={onDelete}>
+              삭제
+            </Button>
           </div>
         </div>
       </div>

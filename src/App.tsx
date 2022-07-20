@@ -39,8 +39,7 @@ const App = () => {
           <Route path="/add-board" element={<PrivateRoute path="/add-board" component={AddBoard} />} />
           <Route path="/add-board" element={<AddBoard />} />
           <Route path="/MyPage" element={<PrivateRoute path="/MyPage" component={MyPage} />} />
-          <Route path="/board/:board_id" element={<MyPageBoard />} />
-          <Route path="/board/:id" element={<MyPageBoard />} />
+          <Route path="/MyPage/:board_id" element={<MyPageBoard />} />
           <Route path="/board/:id" element={<Board />} />
           <Route path="/board/:board_id" element={<Board />} />
           <Route path="/my-page" element={<PrivateRoute path="/my-page" component={MyPage} />} />
