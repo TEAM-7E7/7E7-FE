@@ -121,75 +121,90 @@
           }
         }
       }
-      .content{
-        width: 100%;
-        max-width: 1222px;
+      .content-swapper{
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        .content-body {
-          width: 360px;
-          height: 832px;
-          border-radius: 40px;
-          margin-bottom: 51px;
-          margin-right: 21px;
-          .content-body:nth-child(3){
-            margin-right: 0;
-          }
-          .preview-main-item {
-            overflow: hidden;
+        .content{
+          width: 100%;
+          max-width: 1222px;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          .content-body {
             width: 360px;
-            height: 620px;
-            background: black;
-            border-radius: 20px;
-            img {
+            height: 832px;
+            border-radius: 40px;
+            margin-bottom: 51px;
+            margin-right: 21px;
+
+            .content-body:nth-child(3) {
+              margin-right: 0;
+            }
+
+            .preview-main-item {
+              overflow: hidden;
               width: 360px;
               height: 620px;
-              object-fit: contain;
+              background: black;
+              border-radius: 20px;
+
+              img {
+                width: 360px;
+                height: 620px;
+                object-fit: contain;
+              }
             }
-          }
-          .myprofile-product {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            .myprofile-product-body {
+
+            .myprofile-product {
               display: flex;
-              justify-content: flex-start;
-              align-items: center;
-              h2{
-                font-size: 20px;
-                margin-right: 8px;
-              }
-              span{
-                border: 1px solid #E0DFEC;
-                border-radius: 26px;
-                width: 71px;
-                height: 40px;
+              justify-content: space-between;
+              position: relative;
+
+              .myprofile-product-body {
                 display: flex;
+                justify-content: flex-start;
                 align-items: center;
-                justify-content: center;
-                background: #E0DFEC;
-                color: #6F4EF2;
+
+                h2 {
+                  font-size: 20px;
+                  margin-right: 8px;
+                }
+
+                span {
+                  border: 1px solid #E0DFEC;
+                  border-radius: 26px;
+                  width: 71px;
+                  height: 40px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background: #E0DFEC;
+                  color: #6F4EF2;
+                }
               }
             }
-          }
-          .product-price {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            h1{
-              font-size: 24px;
+
+            .product-price {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+
+              h1 {
+                font-size: 24px;
+              }
+
+              time {
+                margin-top: 7px;
+                font-size: 16px;
+                color: #ADADAD;
+              }
             }
-            time{
-              margin-top: 7px;
-              font-size: 16px;
-              color: #ADADAD;
+
+            .product-detail {
+              display: flex;
+              justify-content: center;
             }
-          }
-          .product-detail {
-            display: flex;
-            justify-content: center;
           }
         }
       }
@@ -197,7 +212,7 @@
         width: 100%;
         max-width: 1222px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         .content{
           width: 100%;
           max-width: 1222px;

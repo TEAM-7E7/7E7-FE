@@ -3,6 +3,7 @@ import { Video } from "../../../elements/Video";
 import { timeUtils } from "../../../utils/timeUtils";
 import { ArrowIcon } from "../../../assets/icons/FigmaIcons";
 import { IconButton } from "../../../elements/IconButton";
+import { useNavigate } from "react-router-dom";
 interface CategoryListInterface {
   id: string;
   fileType: any;
@@ -15,6 +16,7 @@ interface CategoryListInterface {
 }
 
 const BoardList = ({ id, fileType, fileUrl, title, status, createdAt, sellPrice, autoPlay }: CategoryListInterface) => {
+  const navigate = useNavigate();
   return (
     <div className="content">
       <div className="content-body" key={id}>
@@ -32,7 +34,13 @@ const BoardList = ({ id, fileType, fileUrl, title, status, createdAt, sellPrice,
           <h1>{sellPrice}원</h1>
         </div>
         <div className="product-detail">
-          <IconButton icon={<ArrowIcon />} fullWidth>
+          <IconButton
+            icon={<ArrowIcon />}
+            onClick={() => {
+              navigate(`/board/${id}`);
+            }}
+            fullWidth
+          >
             자세히 보러가기
           </IconButton>
         </div>

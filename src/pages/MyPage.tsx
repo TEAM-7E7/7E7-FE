@@ -97,42 +97,43 @@ const MyProfilePage = () => {
               </IconButton>
             </div>
           </div>
-          {goods.map((item: any) => {
-            const fileType = item.goodsImageUrl;
-            if (category === "SaleList") {
-              return <SaleList />;
-            } else if (category === "BuyList") {
-              return (
-                <React.Fragment key={item.id}>
-                  <BoardList
-                    id={item.id}
-                    fileType={fileType}
-                    fileUrl={item.goodsImageUrl}
-                    title={item.title}
-                    status={item.status}
-                    createdAt={item.createdAt}
-                    sellPrice={item.sellPrice}
-                    autoPlay={false}
-                  />
-                </React.Fragment>
-              );
-            } else {
-              return (
-                <React.Fragment key={item.id}>
-                  <BoardList
-                    id={item.id}
-                    fileType={fileType}
-                    fileUrl={item.goodsImageUrl}
-                    title={item.title}
-                    status={item.status}
-                    createdAt={item.createdAt}
-                    sellPrice={item.sellPrice}
-                    autoPlay={false}
-                  />
-                </React.Fragment>
-              );
-            }
-          })}
+          {category === "SaleList" && <SaleList />}
+          <div className="content-swapper">
+            {goods.map((item: any) => {
+              const fileType = item.goodsImageUrl;
+              if (category === "BuyList") {
+                return (
+                  <React.Fragment key={item.id}>
+                    <BoardList
+                      id={item.id}
+                      fileType={fileType}
+                      fileUrl={item.goodsImageUrl}
+                      title={item.title}
+                      status={item.status}
+                      createdAt={item.createdAt}
+                      sellPrice={item.sellPrice}
+                      autoPlay={false}
+                    />
+                  </React.Fragment>
+                );
+              } else if (category === "LikeList") {
+                return (
+                  <React.Fragment key={item.id}>
+                    <BoardList
+                      id={item.id}
+                      fileType={fileType}
+                      fileUrl={item.goodsImageUrl}
+                      title={item.title}
+                      status={item.status}
+                      createdAt={item.createdAt}
+                      sellPrice={item.sellPrice}
+                      autoPlay={false}
+                    />
+                  </React.Fragment>
+                );
+              }
+            })}
+          </div>
         </div>
       </div>
     </div>

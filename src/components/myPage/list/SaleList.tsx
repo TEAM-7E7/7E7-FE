@@ -42,42 +42,40 @@ const SaleList = () => {
         </button>
       </div>
       <div className="myprofile-content">
-        <div className="content">
-          {goods.map((item: any) => {
-            const fileType = item.goodsImageUrl;
-            if (content === "Sale") {
-              return (
-                <React.Fragment key={item.id}>
-                  <BoardList
-                    id={item.id}
-                    fileType={fileType}
-                    fileUrl={item.goodsImageUrl}
-                    title={item.title}
-                    status={item.status}
-                    createdAt={item.createdAt}
-                    sellPrice={item.sellPrice}
-                    autoPlay={false}
-                  />
-                </React.Fragment>
-              );
-            } else {
-              return (
-                <React.Fragment key={item.id}>
-                  <BoardList
-                    id={item.id}
-                    fileType={fileType}
-                    fileUrl={item.goodsImageUrl}
-                    title={item.title}
-                    status={item.status}
-                    createdAt={item.createdAt}
-                    sellPrice={item.sellPrice}
-                    autoPlay={false}
-                  />
-                </React.Fragment>
-              );
-            }
-          })}
-        </div>
+        {goods.map((item: any) => {
+          const fileType = item.goodsImageUrl;
+          if (content === "Sale") {
+            return (
+              <React.Fragment key={item.id}>
+                <BoardList
+                  id={item.id}
+                  fileType={fileType}
+                  fileUrl={item.goodsImageUrl}
+                  title={item.title}
+                  status={item.status}
+                  createdAt={item.createdAt}
+                  sellPrice={item.sellPrice}
+                  autoPlay={false}
+                />
+              </React.Fragment>
+            );
+          } else if (content === "Complete") {
+            return (
+              <React.Fragment key={item.id}>
+                <BoardList
+                  id={item.id}
+                  fileType={fileType}
+                  fileUrl={item.goodsImageUrl}
+                  title={item.title}
+                  status={item.status}
+                  createdAt={item.createdAt}
+                  sellPrice={item.sellPrice}
+                  autoPlay={false}
+                />
+              </React.Fragment>
+            );
+          }
+        })}
       </div>
     </div>
   );
