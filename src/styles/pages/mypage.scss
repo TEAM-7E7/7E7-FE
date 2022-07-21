@@ -4,19 +4,20 @@
 
 .mypage-wrapper{
   font-family: 'Noto Sans KR';
-  padding: 3rem 4rem;
-  box-sizing: border-box;
+  width: 80%;
+  margin: 0 auto;
   .mypage-header{
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 3rem;
+    padding: 1.5rem;
   }
   .mypage-body{
     .mypage-body-user-profile{
+      padding: 1.5rem 0;
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-around;
       .user-profile{
         display: flex;
         .user-profile-img{
@@ -55,6 +56,30 @@
         svg{
           width: 20px;
           height: 20px;
+        }
+      }
+    }
+    .mypage-body-board-state-menu{
+      padding: 1.5rem 0;
+      display: flex;
+      max-width: 75%;
+      justify-content: space-evenly;
+      margin: 0 auto;
+      .board-state{
+        cursor: pointer;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        .state-icon{
+          svg{
+            width: 2rem;
+            height: 2rem;
+          }
+          margin-right: 0.5rem;
+        }
+        .state-text{
+          font-size: 1rem;
+          text-align: center;
         }
       }
     }

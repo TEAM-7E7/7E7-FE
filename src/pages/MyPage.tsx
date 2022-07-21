@@ -1,22 +1,16 @@
-import { useRefreshToken } from "../recoil/store";
-import { useEffect } from "react";
+import { useState } from "react";
 import { jwtUtils } from "../utils/jwtUtils";
 import { Cookies } from "react-cookie";
 import "../styles/pages/mypage.scss";
-import { AlarmIcon, ChatIcon, SellIcon } from "../assets/icons/FigmaIcons";
+import { AlarmIcon, BookMarkIcon, BuyIcon, ChatIcon, SellIcon } from "../assets/icons/FigmaIcons";
+import MyPageBoardList from "../components/myPage/MyPageBoardList";
 
 const MyPage = () => {
-  const { refreshToken } = useRefreshToken();
   const cookies = new Cookies();
   const accessToken = cookies.get("X-ACCESS-TOKEN");
-  useEffect(() => {
-    console.log(
-      jwtUtils.getNickname(accessToken),
-      jwtUtils.getId(accessToken),
-      jwtUtils.getEmail(accessToken),
-      jwtUtils.getProfileImg(accessToken),
-    );
-  });
+  // sell, buy, bookmark
+  const [boardState, setBoardState] = useState<string>("sell");
+
   return (
     <div className="mypage-wrapper">
       <div className="mypage-header">마이페이지</div>
@@ -47,11 +41,55 @@ const MyPage = () => {
           </div>
         </div>
         <div className="mypage-body-board-state-menu">
-          <div className="board-state-sell"></div>
-          <div className="board-state-buy"></div>
-          <div className="board-state-bookmark"></div>
+          <div className="board-state">
+            <div className="state-icon">
+              <SellIcon />
+            </div>
+            <div className="state-text">
+              판매목록
+              <br />
+              33건
+            </div>
+          </div>
+          <div
+            className="board-state"
+            onClick={() => {
+              setBoardState("sell");
+            }}
+          >
+            <div className="state-icon">
+              <BuyIcon />
+            </div>
+            <div
+              className="state-text"
+              onClick={() => {
+                setBoardState("buy");
+              }}
+            >
+              구매목록
+              <br />
+              33건
+            </div>
+          </div>
+          <div
+            className="board-state"
+            onClick={() => {
+              setBoardState("bookmark");
+            }}
+          >
+            <div className="state-icon">
+              <BookMarkIcon />
+            </div>
+            <div className="state-text">
+              저장목록
+              <br />
+              33건
+            </div>
+          </div>
         </div>
-        <div className="mypage-body-board-items"></div>
+        <div className="mypage-body-board-list">
+          <MyPageBoardList boardState={boardState} />
+        </div>
       </div>
     </div>
   );
