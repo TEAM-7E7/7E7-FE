@@ -15,38 +15,38 @@ interface CategoryListInterface {
   autoPlay: boolean;
 }
 
-const BoardList = ({ id, fileType, fileUrl, title, status, createdAt, sellPrice, autoPlay }: CategoryListInterface) => {
+const BoardItem = ({ id, fileType, fileUrl, title, status, createdAt, sellPrice, autoPlay }: CategoryListInterface) => {
   const navigate = useNavigate();
   return (
-    <div className="content">
-      <div className="content-body" key={id}>
-        <div className="preview-main-item">
-          {fileType === "mp4" ? <Video src={fileUrl} autoPlay={autoPlay} /> : <img src={fileUrl} />}
+    <div className="board-list-body">
+      <div key={id} className="board-list-item-wrapper">
+        <div className="board-list-item-img">
+          {fileType === "mp4" ? <Video src={fileUrl} /> : <img src={fileUrl} />}
         </div>
-        <div className="myprofile-product">
-          <div className="myprofile-product-body">
+        <div className="board-list-item-body">
+          <div className="board-list-item-body-status">
             <h2>{title}</h2>
             <span>{status}</span>
           </div>
-        </div>
-        <div className="product-price">
-          <span>{timeUtils.timePass(createdAt)}</span>
-          <h1>{sellPrice}원</h1>
-        </div>
-        <div className="product-detail">
-          <IconButton
-            icon={<ArrowIcon />}
-            onClick={() => {
-              navigate(`/MyPage/${id}`);
-            }}
-            fullWidth
-          >
-            자세히 보러가기
-          </IconButton>
+          <div className="board-list-item-body-price">
+            <span>{timeUtils.timePass(createdAt)}</span>
+            <h1>{sellPrice}원</h1>
+          </div>
+          <div className="board-list-item-body-detail">
+            <IconButton
+              icon={<ArrowIcon />}
+              onClick={() => {
+                navigate(`/MyPage/${id}`);
+              }}
+              fullWidth
+            >
+              자세히 보러가기
+            </IconButton>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default BoardList;
+export default BoardItem;

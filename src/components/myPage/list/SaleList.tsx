@@ -20,7 +20,7 @@ const SaleList = () => {
           className={
             color
               ? "button-medium button-filled button-halfWidth button-text1"
-              : "button-medium button-filled button-halfWidth button-text button-primaryblue"
+              : "button-medium button-filled button-halfWidth button-text button-primary"
           }
           onClick={() => {
             setContent("Sale"), color ? setColor(false) : setColor(true);
@@ -31,7 +31,7 @@ const SaleList = () => {
         <button
           className={
             color
-              ? "button-medium button-filled button-halfWidth button-text button-primaryblue"
+              ? "button-medium button-filled button-halfWidth button-text button-primary"
               : "button-medium button-filled button-halfWidth button-text1"
           }
           onClick={() => {
@@ -41,25 +41,10 @@ const SaleList = () => {
           거래완료()
         </button>
       </div>
-      <div className="myprofile-content">
+      <div className="board-list-body">
         {goods.map((item: any) => {
           const fileType = item.goodsImageUrl;
           if (content === "Sale") {
-            return (
-              <React.Fragment key={item.id}>
-                <BoardList
-                  id={item.id}
-                  fileType={fileType}
-                  fileUrl={item.goodsImageUrl}
-                  title={item.title}
-                  status={item.status}
-                  createdAt={item.createdAt}
-                  sellPrice={item.sellPrice}
-                  autoPlay={false}
-                />
-              </React.Fragment>
-            );
-          } else if (content === "Complete") {
             return (
               <React.Fragment key={item.id}>
                 <BoardList
