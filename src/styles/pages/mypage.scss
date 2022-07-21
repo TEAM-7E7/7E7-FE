@@ -1,51 +1,45 @@
-.myprofile{
+@media all and (max-width: 1024px){
+
+}
+
+.mypage-wrapper{
   font-family: 'Noto Sans KR';
-  .myprofile-swapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  .mypage-header{
     text-align: center;
-    margin-bottom: 50px;
-    .myprofile-head{
-      font-size: 2rem;
-      font-weight: bold;
-      width: 95%;
-      max-width: 1222px;
-      flex-wrap: wrap;
-      height: 148px;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1.5rem;
+  }
+  .mypage-body{
+    .mypage-body-user-profile{
+      padding: 1.5rem 0;
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       align-items: center;
-      border: 1px solid #E3E1FB;
-      border-radius: 20px;
-      margin-bottom: 3rem;
-      background-color: #E3E1FB;
-      .mypage-body-user-profile{
-        margin-left: 4rem;
+      justify-content: space-around;
+      .user-profile{
         display: flex;
-        align-items: center;
         .user-profile-img{
           width: 3.75rem;
           height: 3.75rem;
           overflow: hidden;
           border-radius: 50%;
-          margin-right: 2rem;
           img{
             width: 100%;
             height: 100%;
             object-fit: contain;
           }
         }
-        .user-profile-nickname-email {
+        .user-profile-nickname-email{
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          .user-profile-nickname {
+          .user-profile-nickname{
             font-weight: bold;
             font-size: 1.5rem;
           }
-          .user-profile-email {
+          .user-profile-email{
             font-size: 1.25rem;
             color: #606060;
           }
@@ -53,14 +47,12 @@
       }
       .message-alarm-icon{
         display: flex;
-        margin-right: 2rem;
-        margin-left: 8rem;
         .message-icon{
           margin-left: 1rem;
           margin-right: 1rem;
         }
         .alarm-icon{
-          margin-right: 1rem;
+          margin-left: 1rem;
         }
         svg{
           width: 20px;
@@ -68,207 +60,29 @@
         }
       }
     }
-    .myprofile-body{
-      width: 100%;
-      max-width: 1222px;
+    .mypage-body-board-state-menu{
+      padding: 1.5rem 0;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .category-status{
-        width: 99%;
-        height: 50px;
-        margin-bottom: 20px;
-        .button-text{
-          color: white;
-        }
-        .button-text1{
-          color: black;
-        }
-      }
-      .myprofile-category{
-        width: 100%;
-        height: 172px;
+      max-width: 75%;
+      justify-content: space-evenly;
+      margin: 0 auto;
+      .board-state{
+        cursor: pointer;
         display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        border: 1px solid #E3E1FB;
-        border-radius: 20px;
-        background-color: #E3E1FB;
-        justify-content: space-around;
-        margin-bottom: 2rem;
+        justify-items: center;
         align-items: center;
-        .category-list{
-          width: 90%;
-          max-width: 1222px;
-          min-height: 120px;
-          display: flex;
-          justify-content: space-evenly;
-          align-items: center;
-          .left-right{
-            flex-direction: row-reverse;
+        .state-icon{
+          svg{
+            width: 2rem;
+            height: 2rem;
           }
-          .list-content{
-            display: flex;
-            flex-direction: column;
-            padding: 0.2rem 3px;
-            font-size: 0.8rem;
-            font-weight: bold;
-          }
-          .iconbutton-text{
-            color: white;
-            font-weight: 500;
-          }
+          margin-right: 0.5rem;
+        }
+        .state-text{
+          font-size: 1rem;
+          text-align: center;
         }
       }
-      .content-swapper{
-        display: flex;
-        flex-direction: row;
-        .content{
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          justify-content: center;
-          margin-right: 21px;
-          .content-body {
-            width: 360px;
-            height: 832px;
-            border-radius: 40px;
-            margin-bottom: 51px;
-            .content-body:nth-child(3) {
-              margin-right: 0;
-            }
-
-            .preview-main-item {
-              overflow: hidden;
-              width: 360px;
-              height: 620px;
-              background: black;
-              border-radius: 20px;
-
-              img {
-                width: 360px;
-                height: 620px;
-                object-fit: contain;
-              }
-            }
-
-            .myprofile-product {
-              display: flex;
-              justify-content: space-between;
-              position: relative;
-
-              .myprofile-product-body {
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-
-                h2 {
-                  font-size: 20px;
-                  margin-right: 8px;
-                }
-
-                span {
-                  border: 1px solid #E0DFEC;
-                  border-radius: 26px;
-                  width: 71px;
-                  height: 40px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  background: #E0DFEC;
-                  color: #6F4EF2;
-                }
-              }
-            }
-
-            .product-price {
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-
-              h1 {
-                font-size: 24px;
-              }
-
-              time {
-                margin-top: 7px;
-                font-size: 16px;
-                color: #ADADAD;
-              }
-            }
-
-
-          }
-        }
-      }
-      .myprofile-content{
-        width: 100%;
-        max-width: 1222px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        .content{
-          display: flex;
-          margin-right: 15px;
-            .content-body {
-              height: 832px;
-              border-radius: 40px;
-              margin-bottom: 51px;
-              .preview-main-item {
-                background: black;
-                width: 360px;
-                height: 620px;
-                border-radius: 20px;
-                img,video {
-                  width: 100%;
-                  height: 100%;
-                  object-fit: contain;
-                }
-              }
-              .myprofile-product {
-                display: flex;
-                justify-content: space-between;
-                position: relative;
-                .myprofile-product-body {
-                  display: flex;
-                  justify-content: flex-start;
-                  align-items: center;
-                  h2{
-                    font-size: 20px;
-                    margin-right: 8px;
-                  }
-                  span{
-                    border: 1px solid #E0DFEC;
-                    border-radius: 26px;
-                    width: 71px;
-                    height: 40px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: #E0DFEC;
-                    color: #6F4EF2;
-                  }
-                }
-              }
-              .product-price {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                margin-bottom: 16px;
-                h1{
-                  font-size: 24px;
-                }
-                time{
-                  margin-top: 7px;
-                  font-size: 16px;
-                  color: #ADADAD;
-                }
-              }
-            }
-          }
-        }
-      }
+    }
   }
 }

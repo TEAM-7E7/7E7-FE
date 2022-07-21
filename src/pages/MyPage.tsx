@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
-import "../../src/styles/pages/mypage.scss";
-import SaleList from "../components/myPage/list/SaleList";
-import { IconButton } from "../../src/elements/IconButton";
-import { AlarmIcon, BuylistIcon, LikelistIcon, MessageIcon, SalelistIcon } from "../assets/icons/FigmaIcons";
-import { instanceWithToken } from "../api/api";
-import { Cookies } from "react-cookie";
+import { useState } from "react";
 import { jwtUtils } from "../utils/jwtUtils";
-import BoardList from "../components/myPage/list/BoardList";
+import { Cookies } from "react-cookie";
+import "../styles/pages/mypage.scss";
+import { AlarmIcon, BookMarkIcon, BuyIcon, ChatIcon, SellIcon } from "../assets/icons/FigmaIcons";
+import MyPageBoardList from "../components/myPage/MyPageBoardList";
 
-const MyProfilePage = () => {
+const MyPage = () => {
   const cookies = new Cookies();
   const accessToken = cookies.get("X-ACCESS-TOKEN");
-  const [category, setCategory] = useState("SaleList");
-  const [goods, setGoodsList] = useState<any>([]);
-  useEffect(() => {
-    jwtUtils.getNickname(accessToken);
-    jwtUtils.getId(accessToken);
-    jwtUtils.getEmail(accessToken);
-    jwtUtils.getProfileImg(accessToken);
-  });
+  // sell, buy, bookmark
+  const [boardState, setBoardState] = useState<string>("sell");
+
   return (
-    <div className="myprofile">
-      <div className="myprofile-swapper">
-        <h1>마이페이지</h1>
-        <div className="myprofile-head">
-          <div className="mypage-body-user-profile">
+    <div className="mypage-wrapper">
+      <div className="mypage-header">마이페이지</div>
+      <div className="mypage-body">
+        <div className="mypage-body-user-profile">
+          <div className="user-profile">
             <div className="user-profile-img">
               <img
                 src={
@@ -42,92 +33,65 @@ const MyProfilePage = () => {
           </div>
           <div className="message-alarm-icon">
             <div className="message-icon">
-              <IconButton color="skyblue" variant="circle" icon={<MessageIcon />} iconSize="large"></IconButton>
+              <ChatIcon color="#FF965A" />
             </div>
             <div className="alarm-icon">
-              <IconButton color="skyblue" variant="circle" icon={<AlarmIcon />} iconSize="large"></IconButton>
+              <AlarmIcon color="#FFE247" />
             </div>
           </div>
         </div>
-        <div className="myprofile-body">
-          <div className="myprofile-category">
-            <div className="category-list">
-              <IconButton
-                size="large"
-                color="skyblue"
-                onClick={() => setCategory("SaleList")}
-                icon={<SalelistIcon />}
-                iconSize="large"
-              >
-                <div className="list-content">
-                  <span>판매내역</span>
-                </div>
-              </IconButton>
-              <IconButton
-                size="large"
-                color="skyblue"
-                onClick={() => setCategory("BuyList")}
-                icon={<BuylistIcon />}
-                iconSize="large"
-              >
-                <div className="list-content">
-                  <span>구매내역</span>
-                </div>
-              </IconButton>
-              <IconButton
-                size="large"
-                color="skyblue"
-                onClick={() => setCategory("LikeList")}
-                icon={<LikelistIcon />}
-                iconSize="large"
-              >
-                <div className="list-content">
-                  <span>저장내역</span>
-                </div>
-              </IconButton>
+        <div className="mypage-body-board-state-menu">
+          <div className="board-state">
+            <div className="state-icon">
+              <SellIcon />
+            </div>
+            <div className="state-text">
+              판매목록
+              <br />
+              33건
             </div>
           </div>
-          {category === "SaleList" && <SaleList />}
-          <div className="content-swapper">
-            {goods.map((item: any) => {
-              const fileType = item.goodsImageUrl;
-              if (category === "BuyList") {
-                return (
-                  <React.Fragment key={item.id}>
-                    <BoardList
-                      id={item.id}
-                      fileType={fileType}
-                      fileUrl={item.goodsImageUrl}
-                      title={item.title}
-                      status={item.status}
-                      createdAt={item.createdAt}
-                      sellPrice={item.sellPrice}
-                      autoPlay={false}
-                    />
-                  </React.Fragment>
-                );
-              } else if (category === "LikeList") {
-                return (
-                  <React.Fragment key={item.id}>
-                    <BoardList
-                      id={item.id}
-                      fileType={fileType}
-                      fileUrl={item.goodsImageUrl}
-                      title={item.title}
-                      status={item.status}
-                      createdAt={item.createdAt}
-                      sellPrice={item.sellPrice}
-                      autoPlay={false}
-                    />
-                  </React.Fragment>
-                );
-              }
-            })}
+          <div
+            className="board-state"
+            onClick={() => {
+              setBoardState("sell");
+            }}
+          >
+            <div className="state-icon">
+              <BuyIcon />
+            </div>
+            <div
+              className="state-text"
+              onClick={() => {
+                setBoardState("buy");
+              }}
+            >
+              구매목록
+              <br />
+              33건
+            </div>
           </div>
+          <div
+            className="board-state"
+            onClick={() => {
+              setBoardState("bookmark");
+            }}
+          >
+            <div className="state-icon">
+              <BookMarkIcon />
+            </div>
+            <div className="state-text">
+              저장목록
+              <br />
+              33건
+            </div>
+          </div>
+        </div>
+        <div className="mypage-body-board-list">
+          <MyPageBoardList boardState={boardState} />
         </div>
       </div>
     </div>
   );
 };
-
-export default MyProfilePage;
+export default MyPage;
