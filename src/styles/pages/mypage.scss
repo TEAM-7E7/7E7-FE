@@ -125,8 +125,6 @@
         display: flex;
         flex-direction: row;
         .content{
-          width: 100%;
-          max-width: 1222px;
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
@@ -209,11 +207,10 @@
         max-width: 1222px;
         display: flex;
         flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
         .content{
-          width: 100%;
-          max-width: 1222px;
           display: flex;
-          justify-content: center;
           margin-right: 15px;
             .content-body {
               height: 832px;

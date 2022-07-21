@@ -12,7 +12,7 @@ import BoardList from "../components/myPage/list/BoardList";
 const MyProfilePage = () => {
   const cookies = new Cookies();
   const accessToken = cookies.get("X-ACCESS-TOKEN");
-  const [category, setCategory] = useState("saleList");
+  const [category, setCategory] = useState("SaleList");
   const [goods, setGoodsList] = useState<any>([]);
   useEffect(() => {
     jwtUtils.getNickname(accessToken);
@@ -20,13 +20,6 @@ const MyProfilePage = () => {
     jwtUtils.getEmail(accessToken);
     jwtUtils.getProfileImg(accessToken);
   });
-  useEffect(() => {
-    const getGoodsList = async () => {
-      const res = await instanceWithToken.post("https://tryaz.shop/api/goods/my-page?page=1&size=5");
-      setGoodsList(res.data.data.goodsList);
-    };
-    getGoodsList();
-  }, []);
   return (
     <div className="myprofile">
       <div className="myprofile-swapper">
@@ -68,7 +61,6 @@ const MyProfilePage = () => {
               >
                 <div className="list-content">
                   <span>판매내역</span>
-                  <p>{goods.length}건</p>
                 </div>
               </IconButton>
               <IconButton
@@ -80,7 +72,6 @@ const MyProfilePage = () => {
               >
                 <div className="list-content">
                   <span>구매내역</span>
-                  <p>건</p>
                 </div>
               </IconButton>
               <IconButton
@@ -92,7 +83,6 @@ const MyProfilePage = () => {
               >
                 <div className="list-content">
                   <span>저장내역</span>
-                  <p>건</p>
                 </div>
               </IconButton>
             </div>
