@@ -2,7 +2,7 @@
   width: 80%;
   margin: 0 auto;
   .board-list-header{
-    text-align: center;
+
   }
   .board-list-body{
     display: flex;
@@ -11,47 +11,8 @@
     .board-list-item-wrapper{
       width: 15rem;
       height: 24rem;
-
+      border: 3px solid black;
       margin-bottom: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      .board-list-item-img{
-        img,video {
-          width: 15rem;
-          height: 8rem;
-          object-fit: contain;
-        }
-      }
-      .board-list-item-body{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        .board-list-item-body-status{
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          span{
-            border: 1px solid #E0DFEC;
-            border-radius: 26px;
-            width: 3rem;
-            height: 2rem;
-            margin-left: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #E0DFEC;
-            color: #6F4EF2;
-          }
-        }
-        .board-list-item-body-price{
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .board-list-item-body-detail{
-          width: 100%;
-        }
-      }
     }
   }
   .board-list-footer{
