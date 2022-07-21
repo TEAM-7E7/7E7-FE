@@ -1,0 +1,21 @@
+.board-list-wrapper{
+  width: 80%;
+  margin: 0 auto;
+  .board-list-header{
+
+  }
+  .board-list-body{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    .board-list-item-wrapper{
+      width: 15rem;
+      height: 24rem;
+      border: 3px solid black;
+      margin-bottom: 1.5rem;
+    }
+  }
+  .board-list-footer{
+
+  }
+}
