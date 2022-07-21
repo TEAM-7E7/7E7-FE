@@ -13,14 +13,14 @@ const MyPageBoardList = ({ boardState }: MyPageBoardStateDto) => {
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   useEffect(() => {
-    if (boardState === "sell") {
-      const getSellBoard = async () => {
-        const { data } = await instanceWithToken.post(`/api/goods/my-page?page=${page}&size=9`);
-        setTotalCount(data.data.totalElements);
-        setBoardList(data.data.goodsList);
-      };
-      getSellBoard();
-    }
+    // if (boardState === "buy") {
+    //   const getSellBoard = async () => {
+    //     const { data } = await instanceWithToken.post(`/api/goods/my-page?page=${page}&size=9`);
+    //     setTotalCount(data.data.totalElements);
+    //     setBoardList(data.data.goodsList);
+    //   };
+    //   getSellBoard();
+    // }
   }, []);
   return (
     <div className="board-list-wrapper">

@@ -1,13 +1,18 @@
+import { Pagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import BoardList from "./BoardList";
 import { instanceWithToken } from "../../../api/api";
+import { useSearchParams } from "react-router-dom";
 
 const SaleList = () => {
+  const [pageCount, setPageCount] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [content, setContent] = useState("Sale");
   const [color, setColor] = useState(false);
   const [goods, setGoodsList] = useState<any>([[{}]]);
   useEffect(() => {
     const getGoodsList = async () => {
+      const page_number = searchParams.get("page");
       const res = await instanceWithToken.post("https://tryaz.shop/api/goods/my-page?page=1&size=5");
       setGoodsList(res.data.data.goodsList);
     };
