@@ -24,13 +24,14 @@ const Home = () => {
     const scrollSnapItems = (e.target as HTMLDivElement).childNodes;
     scrollSnapItems.forEach((item: any) => {
       // 이미지나 비디오는 snap-scroll-item의 0번째 자식
-      const scrollSnapItem = item.childNodes[0].childNodes[0].childNodes;
+      const scrollSnapItem = item.childNodes[0].childNodes[1].childNodes;
       // 비디오일 때만 부모의 뷰포트 맨위와 맨 아래에 중심이 들어왔을 때 실행
       if (scrollSnapItem[0] && scrollSnapItem[0].tagName === "VIDEO") {
         const snapScrollItemRect = item.childNodes[0].getBoundingClientRect();
         // snapScrollItem의 뷰포트에서 중앙 Y 좌표
         const snapScrollItemCenter = (snapScrollItemRect.top + snapScrollItemRect.bottom) / 2;
         if (snapScrollItemCenter > scrollSnapWrapperTopY && snapScrollItemCenter < scrollSnapWrapperBottomY) {
+          console.log(scrollSnapItem[0]);
           scrollSnapItem[0].play();
         } else {
           scrollSnapItem[0].pause();
@@ -45,7 +46,6 @@ const Home = () => {
         ? getBoard.pages.map((page_data, page_num) => {
             const board_page = page_data.board_page;
             return board_page.map((item: any, idx: number) => {
-              console.log(item);
               const fileType = item.goodsImageUrl.split(".").at(-1);
               if (
                 // 마지막 요소에 ref 달아주기

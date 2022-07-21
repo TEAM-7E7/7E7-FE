@@ -1,5 +1,15 @@
 import axios from "axios";
-import { Cookies } from "react-cookie/cjs";
+import { Cookies } from "react-cookie";
+
+export const api = axios.create({ baseURL: "https://tryaz.shop" });
+api.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
 
 export const instanceWithToken = axios.create({ baseURL: "https://tryaz.shop" });
 instanceWithToken.interceptors.request.use(
@@ -39,7 +49,7 @@ instanceWithToken.interceptors.response.use(
       // referesh token을 가지고 access token을 발급받는 api 호출
       await axios
         .post(
-          "https://tryaz.shop/api/refresh-re",
+          "https://tryaz.shop/api/user/refresh-re",
           {},
           {
             headers: {
@@ -58,7 +68,6 @@ instanceWithToken.interceptors.response.use(
         })
         // refresh token을 가지고 access token을 발급 받지 못하면 -> refresh token이 valid하지 않으면 로그인 페이지로 이동
         .catch((refresh_token_error) => {
-          console.log(refresh_token_error);
           // refresh와 access token삭제
           localStorage.removeItem("X-REFRESH-TOKEN");
           cookies.remove("X-ACCESS-TOKEN");

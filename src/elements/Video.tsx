@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useEffect, memo } from "react";
 import "../styles/elements/video.scss";
 import { MuteIcon, NotMuteIcon, PauseIcon, PlayIcon } from "../assets/icons/FigmaIcons";
 import { useInView } from "react-intersection-observer";
@@ -8,9 +8,9 @@ interface VideoOptions {
   autoPlay?: boolean;
 }
 
-export function Video({ src, autoPlay = false }: VideoOptions) {
+export const Video = memo(({ src, autoPlay = false }: VideoOptions) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoIsViewRef, isView] = useInView();
 
@@ -36,13 +36,14 @@ export function Video({ src, autoPlay = false }: VideoOptions) {
   useEffect(() => {
     if (isView) {
       setIsPlaying(true);
-      setIsMuted(true);
+      handleSoundOn();
     }
   }, [isView]);
 
   return (
-    <div className="video-body" ref={videoIsViewRef}>
-      <video src={src} ref={videoRef} autoPlay={autoPlay} muted={true} />
+    <div className="video-body">
+      <video src={src} autoPlay={autoPlay} muted={true} ref={videoRef} />
+      <div className="video-body-center" ref={videoIsViewRef} />
       <div className="video-volume-icon">
         {isMuted ? (
           <div onClick={handleSoundOn}>
@@ -67,4 +68,4 @@ export function Video({ src, autoPlay = false }: VideoOptions) {
       </div>
     </div>
   );
-}
+});

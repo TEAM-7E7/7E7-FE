@@ -5,13 +5,13 @@ export interface BoardDto {
   nickname: string;
   accountImageUrl: string;
   status?: string;
-  imageMapList: imageMapDto[];
+  imageMapList: ImageMapDto[];
   id?: number;
   sellPrice: number;
   title: string;
 }
 
-interface imageMapDto {
+export interface ImageMapDto {
   id: number;
   url: string;
 }

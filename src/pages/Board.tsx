@@ -5,7 +5,7 @@ import axios from "axios";
 import { BoardDto } from "../dto/BoardDto";
 import { Button } from "../elements/Button";
 import { timeUtils } from "../utils/timeUtils";
-import { Video } from "../elements/Video";
+import BoardCarousel from "../components/BoardCarousel";
 
 const Board = () => {
   const { board_id } = useParams();
@@ -17,16 +17,11 @@ const Board = () => {
     };
     getBoard().then((result) => setBoard(result.data.data));
   }, []);
-  console.log(board);
   return (
     <div className="board-wrapper">
       <div className="board-body">
         <div className="preview-images">
-          {board?.imageMapList[0].url.split(".").at(-1) === "mp4" ? (
-            <Video src={board?.imageMapList[0].url} autoPlay={true} />
-          ) : (
-            <img src={board?.imageMapList[0].url} />
-          )}
+          {board?.imageMapList && <BoardCarousel imageMapList={board?.imageMapList} />}
         </div>
         <div>
           <div className="board-contents">
