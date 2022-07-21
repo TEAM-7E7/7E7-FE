@@ -10,7 +10,7 @@ const MyPage = () => {
   const accessToken = cookies.get("X-ACCESS-TOKEN");
   // sell, buy, bookmark
   const [boardState, setBoardState] = useState<string>("sell");
-
+  console.log(boardState);
   return (
     <div className="mypage-wrapper">
       <div className="mypage-header">마이페이지</div>
@@ -41,7 +41,12 @@ const MyPage = () => {
           </div>
         </div>
         <div className="mypage-body-board-state-menu">
-          <div className="board-state">
+          <div
+            className="board-state"
+            onClick={() => {
+              setBoardState("sell");
+            }}
+          >
             <div className="state-icon">
               <SellIcon />
             </div>
@@ -54,18 +59,13 @@ const MyPage = () => {
           <div
             className="board-state"
             onClick={() => {
-              setBoardState("sell");
+              setBoardState("buy");
             }}
           >
             <div className="state-icon">
               <BuyIcon />
             </div>
-            <div
-              className="state-text"
-              onClick={() => {
-                setBoardState("buy");
-              }}
-            >
+            <div className="state-text">
               구매목록
               <br />
               33건
