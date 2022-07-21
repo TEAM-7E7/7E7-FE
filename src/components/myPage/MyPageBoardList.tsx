@@ -1,11 +1,11 @@
 import { MyPageBoardStateDto } from "../../dto/MyPageDto";
 import React, { useEffect, useState } from "react";
 import { instanceWithToken } from "../../api/api";
-import { Video } from "../../elements/Video";
+// import { Video } from "../../elements/Video";
 import "../../styles/components/myPage/mypageboardlist.scss";
-import { timeUtils } from "../../utils/timeUtils";
-import { IconButton } from "../../elements/IconButton";
-import { ArrowIcon } from "../../assets/icons/FigmaIcons";
+// import { timeUtils } from "../../utils/timeUtils";
+// import { IconButton } from "../../elements/IconButton";
+// import { ArrowIcon } from "../../assets/icons/FigmaIcons";
 import SaleList from "./list/SaleList";
 
 const MyPageBoardList = ({ boardState }: MyPageBoardStateDto) => {
