@@ -18,6 +18,9 @@
       display: flex;
       align-items: center;
       justify-content: space-around;
+      background: #F9F9FA;
+      border-radius: 20px;
+      margin-bottom: 2rem;
       .user-profile{
         display: flex;
         .user-profile-img{
@@ -35,6 +38,7 @@
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          margin-left: 1rem;
           .user-profile-nickname{
             font-weight: bold;
             font-size: 1.5rem;
@@ -62,9 +66,12 @@
     .mypage-body-board-state-menu{
       padding: 1.5rem 0;
       display: flex;
-      max-width: 75%;
+      max-width: 100%;
       justify-content: space-evenly;
       margin: 0 auto;
+      background: #F9F9FA;
+      border-radius: 20px;
+      margin-bottom: 3rem;
       .board-state{
         cursor: pointer;
         display: flex;
