@@ -9,7 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SignUpDto, SignUpFormDto } from "../dto/AuthDto";
 import React, { useState } from "react";
-import VerifyEmailModal from "../elements/modals/VerifyEmailModal";
+import VerifyEmailModal from "../components/modals/VerifyEmailModal";
 
 const initialValues: SignUpFormDto = {
   email: "",

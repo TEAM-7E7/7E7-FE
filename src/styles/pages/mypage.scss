@@ -3,7 +3,7 @@
 }
 
 .mypage-wrapper{
-  font-family: 'Noto Sans KR';
+  font-family: 'Noto Sans KR', sans-serif;
   width: 80%;
   margin: 0 auto;
   .mypage-header{
@@ -24,6 +24,7 @@
           width: 3.75rem;
           height: 3.75rem;
           overflow: hidden;
+          margin-right: 1rem;
           border-radius: 50%;
           img{
             width: 100%;
@@ -71,6 +72,9 @@
         justify-items: center;
         align-items: center;
         .state-icon{
+          display: flex;
+          justify-content: center;
+          align-items: center;
           svg{
             width: 2rem;
             height: 2rem;
@@ -78,7 +82,7 @@
           margin-right: 0.5rem;
         }
         .state-text{
-          font-size: 1rem;
+          font-size: 1.2rem;
           text-align: center;
         }
       }

@@ -9,6 +9,7 @@ import BoardCarousel from "../components/BoardCarousel";
 
 const Board = () => {
   const { board_id } = useParams();
+  console.log(board_id);
   const [board, setBoard] = useState<BoardDto>();
   useEffect(() => {
     const getBoard = async () => {

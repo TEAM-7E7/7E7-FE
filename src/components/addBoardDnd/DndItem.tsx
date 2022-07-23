@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import "../../styles/components/addBoardDnd/dnditem.scss";
-import PreviewModal from "../../elements/modals/PreviewModal";
+import PreviewModal from "../modals/PreviewModal";
 import { AddBoardDto } from "../../dto/AddBoardDto";
 
 interface DndItemDto {

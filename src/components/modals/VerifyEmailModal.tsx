@@ -1,9 +1,9 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-import { Input } from "../Input";
+import { Input } from "../../elements/Input";
 import { useRef } from "react";
 import axios from "axios";
-import { Button } from "../Button";
-import "../../styles/elements/modals/verfiyemailmodal.scss";
+import { Button } from "../../elements/Button";
+import "../../styles/components/modals/verfiyemailmodal.scss";
 
 interface VerifyEmailModalDto {
   userEmail: string;

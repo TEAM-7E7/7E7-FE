@@ -1,4 +1,4 @@
-import { Route, Routes, useSearchParams, useNavigate } from "react-router-dom";
+import { Route, Routes, useSearchParams, useNavigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import SignUp from "./pages/SignUp";
@@ -11,9 +11,12 @@ import { useRefreshToken } from "./recoil/store";
 import { Cookies } from "react-cookie";
 import Board from "./pages/Board";
 import MyPage from "./pages/MyPage";
+import EditBoard from "./pages/EditBoard";
+
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const accessToken = searchParams.get("X-ACCESS-TOKEN")?.split(" ")[1];
   const refreshToken = searchParams.get("X-REFRESH-TOKEN")?.split(" ")[1];
   const cookies = new Cookies();
@@ -37,11 +40,12 @@ const App = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/add-board" element={<PrivateRoute path="/add-board" component={AddBoard} />} />
           <Route path="/add-board" element={<AddBoard />} />
-          <Route path="/MyPage" element={<PrivateRoute path="/MyPage" component={MyPage} />} />
-          <Route path="/Mypage/:board_id" element={<Board />} />
-          <Route path="/board/:id" element={<Board />} />
           <Route path="/board/:board_id" element={<Board />} />
           <Route path="/my-page" element={<PrivateRoute path="/my-page" component={MyPage} />} />
+          <Route
+            path="/edit-board/:board_id"
+            element={<PrivateRoute path={`${location.pathname}`} component={EditBoard} />}
+          />
         </Routes>
       </div>
     </>

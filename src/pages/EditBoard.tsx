@@ -1,7 +1,7 @@
 import "../styles/pages/addboard.scss";
 import { Button } from "../elements/Button";
 import { IconButton } from "../elements/IconButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { AddBoardDto } from "../dto/AddBoardDto";
 import { addBoardValidationSchema } from "../utils/boardValidation";
@@ -15,8 +15,9 @@ import { DndProvider } from "react-dnd-multi-backend";
 import HTML5toTouch from "react-dnd-multi-backend/dist/esm/HTML5toTouch";
 import { Select } from "../elements/Select";
 import { instanceWithToken } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Video } from "../elements/Video";
+import axios from "axios";
 
 const initialValues: AddBoardDto = {
   title: "",
@@ -26,7 +27,8 @@ const initialValues: AddBoardDto = {
   files: [],
 };
 
-const AddBoard = () => {
+const EditBoard = () => {
+  const { board_id } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const submit = async (values: AddBoardDto) => {
@@ -43,13 +45,43 @@ const AddBoard = () => {
       navigate("/");
     });
   };
+  const [initialState, setInitialState] = useState<any>();
+  useEffect(() => {
+    const getBoard = async () => {
+      const { data } = await axios.get(`https://tryaz.shop/api/goods/${board_id}`);
 
+      const initialFileList = data.data.imageMapList.map((file: any) => {
+        if (file.url.split(".").at(-1) === "mp4") {
+          return {
+            preview_URL: file.url,
+            file_id: file.id,
+            type: "video",
+          };
+        }
+        return {
+          preview_URL: file.url,
+          file_id: file.id,
+          type: "image",
+        };
+      });
+      setInitialState({
+        title: data.data.title,
+        category: data.data.category,
+        price: data.data.sellPrice,
+        explain: data.data.description,
+        files: initialFileList,
+      });
+    };
+    getBoard();
+  }, []);
+  console.log(initialState);
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={initialState}
       validationSchema={addBoardValidationSchema}
       onSubmit={submit}
       validateOnMount={true}
+      enableReinitialize={true}
     >
       {({ values, handleSubmit, handleChange, setValues, errors }) => (
         <div className="addboard-wrapper">
@@ -82,12 +114,18 @@ const AddBoard = () => {
                   </div>
                 </div>
                 <div className="input-title">
-                  <Input name="title" onChange={handleChange} fullWidth placeholder="제목을 입력하세요" />
+                  <Input
+                    name="title"
+                    value={values.title}
+                    onChange={handleChange}
+                    fullWidth
+                    placeholder="제목을 입력하세요"
+                  />
                   <div className="addboard-form-error">{errors.title ? errors.title : "✔ 제목이 입력되었습니다"}</div>
                 </div>
                 <div className="category-and-price">
                   <div className="dropdown-category">
-                    <Select name="category" onChange={handleChange}>
+                    <Select name="category" value={values.category} onChange={handleChange}>
                       <option value="" disabled selected hidden>
                         카테고리 선택
                       </option>
@@ -105,7 +143,7 @@ const AddBoard = () => {
                     </div>
                   </div>
                   <div className="input-price">
-                    <Input name="price" onChange={handleChange} placeholder="가격을 입력하세요" />
+                    <Input name="price" value={values.price} onChange={handleChange} placeholder="가격을 입력하세요" />
                     <div className="addboard-form-error">
                       <div>{errors.price ? errors.price : "✔ 가격이 적당한가요?"}</div>
                     </div>
@@ -115,6 +153,7 @@ const AddBoard = () => {
                 <div className="textfield-explain">
                   <TextField
                     name="explain"
+                    value={values.explain}
                     onChange={handleChange}
                     fullWidth
                     placeholder="설명을 써주세요!"
@@ -139,4 +178,4 @@ const AddBoard = () => {
     </Formik>
   );
 };
-export default AddBoard;
+export default EditBoard;

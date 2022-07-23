@@ -1,0 +1,30 @@
+.item-kebab{
+  svg{
+    width: 0.75rem;
+    height: 1.5rem;
+  }
+}
+
+.item-kebab-menu{
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  &:hover{
+    background: #d9d9d9;
+  }
+  .menu-icon{
+    margin-right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg{
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+  .menu-text{
+    margin-left: 0.5rem;
+    font-weight: bold;
+  }
+}

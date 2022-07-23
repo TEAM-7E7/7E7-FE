@@ -1,9 +1,9 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-import "../../styles/elements/modals/selectuploadtypemodal.scss";
-import { IconButton } from "../IconButton";
+import "../../styles/components/modals/selectuploadtypemodal.scss";
+import { IconButton } from "../../elements/IconButton";
 import { CameraIcon, ImageIcon } from "../../assets/icons/FigmaIcons";
 import { memo, useState } from "react";
-import FileUploader from "../../components/FileUploader";
+import FileUploader from "../FileUploader";
 import { AddBoardDto } from "../../dto/AddBoardDto";
 
 interface SelectUploadTypeModalProps {
