@@ -1,13 +1,13 @@
 .boardcarousel-wrapper {
   .slider-items {
-    width: 360px;
-    height: 620px;
+    width: 22.5rem;
+    height: 38.75rem;
     position: relative;
 
     .slider-item {
       position: relative;
-      width: 360px;
-      height: 620px;
+      width: 22.5rem;
+      height: 38.75rem;
       outline: none;
       border-radius: 25px;
       background: black;
@@ -28,7 +28,7 @@
     }
 
     .slick-dots {
-      bottom: 550px;
+      bottom: 35rem;
     }
 
     .slick-dots li.slick-active button:before {

@@ -1,21 +1,18 @@
-.addboard-wrapper {
+.editboard-wrapper {
   font-family: 'Noto Sans KR', sans-serif;
   box-sizing: border-box;
   padding: 5rem 0;
-  overflow: auto;
-  .addboard-header {
+  .editboard-header {
     font-weight: bold;
     text-align: center;
     font-size: 2rem;
     margin: 2rem 0;
   }
-  .addboard-body {
+  .editboard-body {
     display: flex;
     flex-wrap: wrap;
-    overflow: no;
     justify-content: center;
     .preview-main-image {
-      margin-bottom: 1rem;
       background: #E0DFEC;
       border-radius: 25px;
       flex-shrink: 0;
@@ -32,12 +29,12 @@
         object-fit: contain;
       }
     }
-    .addboard-form-error{
+    .editboard-form-error{
       color: blue;
       display: flex;
       justify-content: space-between;
     }
-    .addboard-form {
+    .editboard-form {
       margin-left: 1rem;
 
       .drag-explain {
@@ -79,7 +76,11 @@
     }
     .submit-button{
       display: flex;
-      flex-direction: row-reverse;
+
+      button{
+        flex-grow: 1;
+        margin-left: 1rem;
+      }
     }
 
   }

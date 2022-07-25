@@ -1,22 +1,40 @@
 import "../styles/components/header.scss";
-import { StarIcon } from "../assets/icons/FigmaIcons";
-import { useState } from "react";
+import { useCategory } from "../recoil/store";
+import { useNavigate } from "react-router-dom";
+import { useBoardInfiniteQueryReset } from "../react-query/query/useBoardInfiniteQueryReset";
 
 interface CategoryItemOptions {
-  id: number;
   name: string;
-  starred?: boolean;
+  value: string;
 }
 
-const CategoryItem = ({ id, name, starred }: CategoryItemOptions) => {
-  const [isOpen, setOpen] = useState<boolean>(false);
+const CategoryItem = ({ name, value }: CategoryItemOptions) => {
+  const { categoryList, setCategoryList } = useCategory();
+  const navigate = useNavigate();
 
   return (
-    <div className="category">
-      <p>{name}</p>
-      <i className={`category-${starred ? "starred" : "not-starred"}`}>
-        <StarIcon />
-      </i>
+    <div>
+      {categoryList.includes(value) ? (
+        <div
+          className="category selected"
+          onClick={() => {
+            setCategoryList([...categoryList].filter((category) => category !== value));
+            navigate("/");
+          }}
+        >
+          <p>{name}</p>
+        </div>
+      ) : (
+        <div
+          className="category"
+          onClick={() => {
+            setCategoryList([...categoryList, value]);
+            navigate("/");
+          }}
+        >
+          <p>{name}</p>
+        </div>
+      )}
     </div>
   );
 };

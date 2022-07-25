@@ -74,7 +74,7 @@ const SignIn = () => {
               <div className="signin-body-item">
                 <div className="signin-body-item-label">email</div>
                 <div className="signin-body-item-input">
-                  <Input size="medium" name="email" onChange={handleChange} value={values.email} />
+                  <Input size="medium" name="email" onChange={handleChange} value={values.email} fullWidth />
                 </div>
                 <div className="signin-body-item-error">{errors.email}</div>
               </div>
@@ -87,6 +87,7 @@ const SignIn = () => {
                     onChange={handleChange}
                     value={values.password}
                     type="password"
+                    fullWidth
                   />
                 </div>
                 <div className="signin-body-item-error">{errors.password}</div>

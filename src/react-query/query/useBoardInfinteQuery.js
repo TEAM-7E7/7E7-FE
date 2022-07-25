@@ -1,9 +1,19 @@
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery, useQueryClient } from "react-query";
 import axios from "axios";
+import { useCategory } from "../../recoil/store";
 
 export const useBoardInfiniteQuery = () => {
+  const { categoryList } = useCategory();
   const getPageBoard = async ({ pageParam = 1 }) => {
-    const { data } = await axios.get(`https://tryaz.shop/api/goods?page=${pageParam}&size=4`);
+    const pageBoardRequestBody = {
+      goodsCategoryList: categoryList,
+      goodsOrderBy: "ORDER_BY_CREATED_AT",
+    };
+    const { data } = await axios.post(
+      `https://tryaz.shop/api/goods/dynamic-paging?page=${pageParam}&size=4`,
+      pageBoardRequestBody,
+    );
+
     return {
       // 실제 데이터
       board_page: data.data.goodsList,
@@ -19,6 +29,7 @@ export const useBoardInfiniteQuery = () => {
     fetchNextPage: getNextPage,
     isSuccess: getBoardIsSuccess,
     hasNextPage: getNextPageIsPossible,
+    refetch: refetchBoard,
   } = useInfiniteQuery(["page_board_list"], getPageBoard, {
     getNextPageParam: (lastPage, pages) => {
       // lastPage와 pages는 콜백함수에서 리턴한 값을 의미한다!!
@@ -29,5 +40,5 @@ export const useBoardInfiniteQuery = () => {
     },
   });
 
-  return { getBoard, getNextPage, getBoardIsSuccess, getNextPageIsPossible };
+  return { getBoard, getNextPage, getBoardIsSuccess, getNextPageIsPossible, refetchBoard };
 };

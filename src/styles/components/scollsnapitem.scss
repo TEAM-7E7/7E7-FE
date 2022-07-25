@@ -16,7 +16,7 @@
   animation: smoothAppear 1.5s forwards;
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 30rem;
   height: 85%;
   border-radius: 10px;
   scroll-snap-align: center;
@@ -55,8 +55,8 @@
       color: white;
 
       .user-img {
-        width: 48px;
-        height: 48px;
+        width: 3rem;
+        height: 3rem;
         border-radius: 50%;
         overflow: hidden;
         margin-right: 8px;
@@ -70,7 +70,7 @@
 
       .user-nickname {
         color: #ffffff;
-        font-size: 16px;
+        font-size: 1rem;
       }
     }
   }
@@ -78,20 +78,33 @@
   .scroll-snap-item-explain {
     width: 100%;
 
+    .item-price-category-status{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .item-price {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+      .item-category-status{
+        display: flex;
+        .item-category{
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
     .item-title {
-      font-size: 20px;
+      font-size: 1.25rem;
       font-weight: bold;
     }
 
     .item-created {
       color: #9F9F9F;
+      margin-bottom: 1rem;
     }
 
-    .item-price {
-      margin: 1rem 0;
-      font-size: 24px;
-      font-weight: bold;
-    }
 
     .item-view-button {
 

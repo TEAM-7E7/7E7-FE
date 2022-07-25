@@ -1,0 +1,33 @@
+.label {
+  display: inline-block;
+  border-radius: 26px;
+  font-family: 'Noto Sans KR', sans-serif;
+  flex-shrink: 0;
+}
+
+.label-sale {
+  padding: 0.5rem 1rem;
+  background: #CEFFC1;
+  color: #1ED001;
+  font-size: 0.875rem;
+}
+
+.label-sold-out {
+  background: #FFDECC;
+  color: #FF5045;
+  font-size: 0.875rem;
+}
+
+.label-category {
+  background: #E3E1FB;
+  color: #6F4EF2;
+  font-size: 0.875rem;
+}
+
+.label-small {
+  padding: 0.5rem 1rem;
+}
+
+.label-medium{
+  padding: 0.75rem 1rem;
+}

@@ -1,14 +1,14 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-import "../../styles/elements/modals/previewmodal.scss";
-import { Video } from "../Video";
-interface PreviewModalProps {
+import "../../styles/components/modals/previewmodal.scss";
+import { Video } from "../../elements/Video";
+interface PreviewModalDto {
   modalIsOpen: boolean;
   setModalIsOpen: any;
   previewURL: string;
   type: string;
 }
 
-const PreviewModal = function PreviewTypeModal({ modalIsOpen, setModalIsOpen, previewURL, type }: PreviewModalProps) {
+const PreviewModal = function PreviewTypeModal({ modalIsOpen, setModalIsOpen, previewURL, type }: PreviewModalDto) {
   return (
     <>
       <Dialog
