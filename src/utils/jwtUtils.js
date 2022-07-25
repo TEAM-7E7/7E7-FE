@@ -5,16 +5,17 @@ export class jwtUtils {
   static isValid(token) {
     if (!token) {
       return false;
-    }
-    try {
-      const decoded = jwtDecode(token);
-      if (decoded.EXPIRED_DATE > new Date().getTime() / 1000) {
-        return true;
-      } else {
+    } else {
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.EXPIRED_DATE > new Date().getTime() / 1000) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (e) {
         return false;
       }
-    } catch (e) {
-      return false;
     }
   }
 
@@ -32,11 +33,11 @@ export class jwtUtils {
 
   static getEmail(token) {
     const decoded = jwtDecode(token);
-    return decoded.USER_EAMIL;
+    return decoded.USER_EMAIL;
   }
 
   static getProfileImg(token) {
     const decoded = jwtDecode(token);
-    return decoded.USER_PROFILEIMG;
+    return decoded.USER_PROFILE_IMG;
   }
 }

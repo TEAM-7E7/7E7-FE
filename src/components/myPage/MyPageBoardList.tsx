@@ -1,4 +1,4 @@
-import { MyPageBoardStateDto } from "../../dto/MyPageDto";
+import { MyBoardStatusDto, MyPageBoardCategoryDto } from "../../dto/MyPageDto";
 import React, { useEffect, useState } from "react";
 import { timeUtils } from "../../utils/timeUtils";
 import { instanceWithToken } from "../../api/api";
@@ -7,26 +7,67 @@ import { IconButton } from "../../elements/IconButton";
 import { ArrowIcon } from "../../assets/icons/FigmaIcons";
 import { useNavigate } from "react-router-dom";
 import KebabMenu from "./KebabMenu";
+import { Pagination } from "@mui/material";
+import Label from "../../elements/Label";
+import { BoardCategory } from "../../dto/BoardCategoryAndState";
 
-const MyPageBoardList = ({ boardState }: MyPageBoardStateDto) => {
+const MyPageBoardList = ({ boardCategory }: MyPageBoardCategoryDto) => {
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState<any>();
+  // boardCategory가 sell일 때 사용
+  // SALE, SOLD_OUT, RESERVED
+  const [boardStatus, setBoardStatus] = useState<string>("SALE");
+  // pagination을 위한 현재 page와 전체 페이지 수
   const [page, setPage] = useState<number>(1);
-  const [totalCount, setTotalCount] = useState<number>(0);
+  const [pageCount, setPageCount] = useState<number>(0);
   useEffect(() => {
-    if (boardState === "sell") {
+    if (boardCategory === "sell") {
       const getSellBoard = async () => {
-        const { data } = await instanceWithToken.post(`/api/goods/my-page?page=${page}&size=9&goodsStatus=SALE`);
-        setTotalCount(data.data.totalElements);
+        const { data } = await instanceWithToken.get(
+          `/api/goods/my-page?page=${page}&size=6&goodsStatus=${boardStatus}`,
+        );
+        setPageCount(Math.ceil(data.data.totalElements / 6));
         setBoardList(data.data.goodsList);
       };
       getSellBoard();
+    } else if (boardCategory === "bookmark") {
+      const getBookmarkBoard = async () => {
+        const { data } = await instanceWithToken.get(`/api/goods/my-wish?page=${page}&size=6`);
+        setPageCount(Math.ceil(data.data.totalElements / 6));
+        setBoardList(data.data.goodsList);
+      };
+      getBookmarkBoard();
     }
-  }, []);
+  }, [boardCategory, boardStatus, page]);
   console.log(boardList);
   return (
     <div className="board-list-wrapper">
-      {boardState === "sell" && <div className="board-list-header"></div>}
+      {boardCategory === "sell" && (
+        <div className="board-list-header">
+          <div
+            className={`header-menu-sale  + ${
+              boardStatus === "SALE" ? "header-menu-selected" : "header-menu-not-selected"
+            } `}
+            onClick={() => {
+              setBoardStatus("SALE");
+              setPage(1);
+            }}
+          >
+            판매중
+          </div>
+          <div
+            className={`header-menu-sold-out  + ${
+              boardStatus === "SOLD_OUT" ? "header-menu-selected" : "header-menu-not-selected"
+            } `}
+            onClick={() => {
+              setBoardStatus("SOLD_OUT");
+              setPage(1);
+            }}
+          >
+            판매완료
+          </div>
+        </div>
+      )}
       <div className="board-list-body">
         {boardList?.map((item: any) => (
           <div key={item.id} className="board-list-item-wrapper">
@@ -40,10 +81,17 @@ const MyPageBoardList = ({ boardState }: MyPageBoardStateDto) => {
             <div className="board-list-item-text">
               <div className="item-title-kebab">
                 <div className="item-title">{item.title}</div>
-                <KebabMenu board_id={item.id} board_title={item.title} />
+                {boardCategory === "sell" && <KebabMenu board_id={item.id} board_title={item.title} />}
               </div>
               <div className="item-created">{timeUtils.timePass(item.createdAt)}</div>
-              <div className="item-price">{item.sellPrice} 원</div>
+              <div className="item-price-category">
+                <div className="item-price">{item.sellPrice} 원</div>
+                <div className="item-category">
+                  <Label type="category" size="small">
+                    {BoardCategory[item.category]}
+                  </Label>
+                </div>
+              </div>
               <div
                 className="item-view-button"
                 onClick={() => {
@@ -58,7 +106,18 @@ const MyPageBoardList = ({ boardState }: MyPageBoardStateDto) => {
           </div>
         ))}
       </div>
-      <div className="board-list-footer"></div>
+      <div className="board-list-footer">
+        <Pagination
+          page={page}
+          count={pageCount}
+          size="medium"
+          onChange={(e, value) => {
+            setPage(value);
+          }}
+          showFirstButton
+          showLastButton
+        />
+      </div>
     </div>
   );
 };

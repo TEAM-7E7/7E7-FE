@@ -35,7 +35,6 @@ const BoardCarousel = ({ imageMapList }: BoardCarouselDto) => {
       }
     });
   }, [currentIndex]);
-  console.log(imageMapList);
 
   return (
     <div className="boardcarousel-wrapper">

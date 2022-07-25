@@ -9,8 +9,7 @@ const MyPage = () => {
   const cookies = new Cookies();
   const accessToken = cookies.get("X-ACCESS-TOKEN");
   // sell, buy, bookmark
-  const [boardState, setBoardState] = useState<string>("sell");
-  console.log(boardState);
+  const [boardCategory, setBoardCategory] = useState<string>("sell");
   return (
     <div className="mypage-wrapper">
       <div className="mypage-header">마이페이지</div>
@@ -44,7 +43,7 @@ const MyPage = () => {
           <div
             className="board-state"
             onClick={() => {
-              setBoardState("sell");
+              setBoardCategory("sell");
             }}
           >
             <div className="state-icon">
@@ -55,7 +54,7 @@ const MyPage = () => {
           <div
             className="board-state"
             onClick={() => {
-              setBoardState("buy");
+              setBoardCategory("buy");
             }}
           >
             <div className="state-icon">
@@ -66,7 +65,7 @@ const MyPage = () => {
           <div
             className="board-state"
             onClick={() => {
-              setBoardState("bookmark");
+              setBoardCategory("bookmark");
             }}
           >
             <div className="state-icon">
@@ -76,7 +75,7 @@ const MyPage = () => {
           </div>
         </div>
         <div className="mypage-body-board-list">
-          <MyPageBoardList boardState={boardState} />
+          <MyPageBoardList boardCategory={boardCategory} />
         </div>
       </div>
     </div>

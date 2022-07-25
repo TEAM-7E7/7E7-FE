@@ -6,21 +6,22 @@ import CategoryItem from "./CategoryItem";
 import { useRefreshToken } from "../recoil/store";
 import { jwtUtils } from "../utils/jwtUtils";
 import { Cookies } from "react-cookie";
+import { BoardCategory } from "../dto/BoardCategoryAndState";
 
 const Header = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
-  const { refreshToken } = useRefreshToken();
+  const { refreshToken, setRefreshToken } = useRefreshToken();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const cookies = new Cookies();
   const logout = () => {
-    localStorage.removeItem("X-REFRESH-TOKEN");
+    setRefreshToken("");
     cookies.remove("X-ACCESS-TOKEN");
     alert("로그아웃 되었습니다.");
     window.location.href = "/";
   };
-
+  console.log(Object.keys(BoardCategory));
   return (
     <>
       <div className="header-wrapper">
@@ -78,13 +79,8 @@ const Header = () => {
           </div>
 
           <div className="categories-wrapper">
-            {[
-              { id: 0, name: "카", starred: true },
-              { id: 1, name: "테", starred: true },
-              { id: 2, name: "고", starred: false },
-              { id: 3, name: "리", starred: false },
-            ].map((category) => (
-              <CategoryItem key={category.id} id={category.id} name={category.name} starred={category.starred} />
+            {Object.keys(BoardCategory).map((category: string, index: number) => (
+              <CategoryItem key={index} name={BoardCategory[category]} value={category} />
             ))}
           </div>
         </div>

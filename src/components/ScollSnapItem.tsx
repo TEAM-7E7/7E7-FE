@@ -5,6 +5,8 @@ import { ArrowIcon } from "../assets/icons/FigmaIcons";
 import React from "react";
 import "../styles/components/scollsnapitem.scss";
 import { useNavigate } from "react-router-dom";
+import Label from "../elements/Label";
+import { BoardCategory, BoardStatus } from "../dto/BoardCategoryAndState";
 
 interface ScrollSnapItemInterface {
   userNickname: string;
@@ -14,6 +16,8 @@ interface ScrollSnapItemInterface {
   scrollRef?: any;
   id: string;
   title: string;
+  category: string;
+  status: string;
   createdAt: any;
   sellPrice: any;
   autoPlay: boolean;
@@ -27,6 +31,8 @@ const ScrollSnapItem = ({
   scrollRef,
   id,
   title,
+  category,
+  status,
   createdAt,
   sellPrice,
   autoPlay,
@@ -45,9 +51,29 @@ const ScrollSnapItem = ({
         </div>
       </div>
       <div className="scroll-snap-item-explain">
+        <div className="item-price-category-status">
+          <div className="item-price">{sellPrice}원</div>
+          <div className="item-category-status">
+            <div className="item-category">
+              <Label type="category" size="small">
+                {BoardCategory[category]}
+              </Label>
+            </div>
+            <div className="item-status">
+              {status === "SALE" ? (
+                <Label size="small" type="sale">
+                  {BoardStatus[status]}
+                </Label>
+              ) : (
+                <Label size="small" type="sold-out">
+                  {BoardStatus[status]}
+                </Label>
+              )}
+            </div>
+          </div>
+        </div>
         <div className="item-title">{title}</div>
         <div className="item-created">{timeUtils.timePass(createdAt)}</div>
-        <div className="item-price">{sellPrice}원</div>
         <div
           className="item-view-button"
           onClick={() => {

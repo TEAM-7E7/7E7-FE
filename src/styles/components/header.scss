@@ -13,15 +13,18 @@ a {
 svg {
   cursor: pointer;
   transition: cubic-bezier(0.215, 0.61, 0.355, 1) transform 200ms;
+
   &:active {
     transform: scale(1);
   }
+
   &:hover {
     transform: scale(1.2);
   }
 }
 
 .header-wrapper {
+  font-family: 'Noto Sans KR', sans-serif;
   z-index: 10;
   position: fixed;
   padding: 0 1rem;
@@ -35,9 +38,11 @@ svg {
   align-items: center;
   flex-wrap: wrap;
   background: snow;
+
   .header-title {
     display: flex;
     align-items: center;
+
     a {
       font-size: 1.7rem;
       letter-spacing: -1px;
@@ -71,6 +76,7 @@ svg {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+
     a {
       flex-shrink: 0;
       margin: 0 0.8rem;
@@ -100,8 +106,9 @@ svg {
 }
 
 .slide-menu {
+  font-family: 'Noto Sans KR', sans-serif;
   user-select: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   z-index: 9999;
@@ -170,6 +177,7 @@ svg {
 
       .category {
         padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -186,35 +194,20 @@ svg {
         &:hover {
           background-color: #c1beff;
           transition: cubic-bezier(0.215, 0.61, 0.355, 1) background-color 400ms;
+
           p {
             color: #6f4ef2;
             font-weight: 700;
           }
         }
+      }
 
-        svg {
-          width: 20px;
-          height: 20px;
-          cursor: pointer;
+      .selected {
+        background-color: #c1beff;
 
-          &:active {
-            transform: scale(1) !important;
-          }
-        }
-
-        &:hover {
-          svg {
-            transform: scale(1.2);
-          }
-        }
-
-        .category-starred {
-          fill: #ffe247;
-          box-shadow: #282c34;
-        }
-
-        .category-not-starred {
-          fill: #adadad;
+        p {
+          color: #6f4ef2;
+          font-weight: 700;
         }
       }
     }

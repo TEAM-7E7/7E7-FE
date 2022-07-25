@@ -41,6 +41,11 @@ body {
   }
 }
 
+@media all and (max-width: 350px) {
+  html {
+    font-size: 60%;
+  }
+}
 
 :root {
   --header--height: 4.5rem;
