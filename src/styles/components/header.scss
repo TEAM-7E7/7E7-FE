@@ -24,7 +24,7 @@ svg {
 }
 
 .header-wrapper {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   z-index: 10;
   position: fixed;
   padding: 0 1rem;
@@ -106,7 +106,7 @@ svg {
 }
 
 .slide-menu {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   user-select: none;
   position: fixed;
   top: 0;
@@ -190,16 +190,6 @@ svg {
           line-height: 0;
           color: #606060;
         }
-
-        &:hover {
-          background-color: #c1beff;
-          transition: cubic-bezier(0.215, 0.61, 0.355, 1) background-color 400ms;
-
-          p {
-            color: #6f4ef2;
-            font-weight: 700;
-          }
-        }
       }
 
       .selected {
@@ -208,6 +198,46 @@ svg {
         p {
           color: #6f4ef2;
           font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 767px) {
+  .slide-menu {
+    .slide-menu-area {
+      .categories-wrapper {
+        .category {
+          &:hover {
+            background-color: #c1beff;
+            transition: cubic-bezier(0.215, 0.61, 0.355, 1) background-color 400ms;
+
+            p {
+              color: #6f4ef2;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .slide-menu {
+    .slide-menu-area {
+      .categories-wrapper {
+        .category {
+          &:active {
+            background-color: #c1beff;
+            transition: cubic-bezier(0.215, 0.61, 0.355, 1) background-color 400ms;
+
+            p {
+              color: #6f4ef2;
+              font-weight: 700;
+            }
+          }
         }
       }
     }
