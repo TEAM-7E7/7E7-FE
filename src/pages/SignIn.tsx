@@ -68,26 +68,40 @@ const SignIn = () => {
       {({ values, handleSubmit, handleChange, errors }) => (
         <div className="signin-wrapper">
           <ToastContainer />
-          <div className="signin-header">로그인</div>
-          <form onSubmit={handleSubmit}>
+          <h2 className="signin-header">로그인</h2>
+          <form onSubmit={handleSubmit} className="signin-form">
             <div className="signin-body">
               <div className="signin-body-item">
-                <div className="signin-body-item-label">email</div>
+                <label htmlFor="email" className="signin-body-item-label">
+                  이메일
+                </label>
                 <div className="signin-body-item-input">
-                  <Input size="medium" name="email" onChange={handleChange} value={values.email} fullWidth />
+                  <Input
+                    id="email"
+                    size="medium"
+                    name="email"
+                    onChange={handleChange}
+                    value={values.email}
+                    fullWidth
+                    placeholder="이메일을 입력해주세요."
+                  />
                 </div>
                 <div className="signin-body-item-error">{errors.email}</div>
               </div>
               <div className="signin-body-item">
-                <div className="signin-body-item-label">password</div>
+                <label htmlFor="password" className="signin-body-item-label">
+                  비밀번호
+                </label>
                 <div className="signin-body-item-input">
                   <Input
+                    id="password"
                     size="medium"
                     name="password"
                     onChange={handleChange}
                     value={values.password}
                     type="password"
                     fullWidth
+                    placeholder="비밀번호를 입력해주세요."
                   />
                 </div>
                 <div className="signin-body-item-error">{errors.password}</div>
@@ -100,7 +114,7 @@ const SignIn = () => {
                   type="submit"
                   fullWidth
                 >
-                  Login
+                  로그인
                 </Button>
               </div>
               <div className="forget-password-or-go-signup">

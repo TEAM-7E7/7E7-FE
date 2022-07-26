@@ -1,5 +1,5 @@
 .editboard-wrapper {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   box-sizing: border-box;
   padding: 5rem 0;
   .editboard-header {
@@ -13,7 +13,7 @@
     flex-wrap: wrap;
     justify-content: center;
     .preview-main-image {
-      background: #E0DFEC;
+      background: #e0dfec;
       border-radius: 25px;
       flex-shrink: 0;
       width: 360px;
@@ -24,13 +24,17 @@
       margin-top: 2rem;
       margin-right: 1rem;
       overflow: hidden;
-      img, video {
+      img,
+      video {
         width: 100%;
         object-fit: contain;
       }
     }
-    .editboard-form-error{
-      color: blue;
+    .editboard-form-error {
+      color: #6f4ef2;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-top: 0.3rem;
       display: flex;
       justify-content: space-between;
     }
@@ -61,7 +65,7 @@
         align-items: flex-end;
         .dropdown-category {
           flex-grow: 1;
-          select{
+          select {
             width: 100%;
           }
         }
@@ -74,14 +78,13 @@
         margin: 0.5rem 0;
       }
     }
-    .submit-button{
+    .submit-button {
       display: flex;
 
-      button{
+      button {
         flex-grow: 1;
         margin-left: 1rem;
       }
     }
-
   }
 }
