@@ -84,15 +84,16 @@ const SignUp = () => {
       {({ values, handleSubmit, handleChange, errors }) => (
         <div className="signup-wrapper">
           <ToastContainer />
-          <div className="signup-header">
-            <div className="signup-header-title">회원가입</div>
-          </div>
-          <form onSubmit={handleSubmit}>
+          <h2 className="signup-header">회원가입</h2>
+          <form onSubmit={handleSubmit} className="signup-form">
             <div className="signup-body">
               <div className="signup-body-item">
-                <div className="signup-body-item-label">이메일</div>
+                <label htmlFor="email" className="signup-body-item-label">
+                  이메일
+                </label>
                 <div className="signup-body-item-input">
                   <Input
+                    id="email"
                     size="medium"
                     name="email"
                     onChange={handleChange}
@@ -126,9 +127,12 @@ const SignUp = () => {
                 setEmailIsVerified={setEmailIsVerified}
               />
               <div className="signup-body-item">
-                <div className="signup-body-item-label">닉네임</div>
+                <label htmlFor="nickname" className="signup-body-item-label">
+                  닉네임
+                </label>
                 <div className="signup-body-item-input">
                   <Input
+                    id="nickname"
                     size="medium"
                     name="nickname"
                     onChange={handleChange}
@@ -155,9 +159,12 @@ const SignUp = () => {
                 </div>
               </div>
               <div className="signup-body-item">
-                <div className="signup-body-item-label">비밀번호</div>
+                <label htmlFor="password" className="signup-body-item-label">
+                  비밀번호
+                </label>
                 <div className="signup-body-item-input">
                   <Input
+                    id="password"
                     size="medium"
                     name="password"
                     onChange={handleChange}
@@ -172,9 +179,12 @@ const SignUp = () => {
                 </div>
               </div>
               <div className="signup-body-item">
-                <div className="signup-body-item-label">비밀번호 확인</div>
+                <label htmlFor="password-confirm" className="signup-body-item-label">
+                  비밀번호 확인
+                </label>
                 <div className="signup-body-item-input">
                   <Input
+                    id="password-confirm"
                     size="medium"
                     name="password2"
                     onChange={handleChange}

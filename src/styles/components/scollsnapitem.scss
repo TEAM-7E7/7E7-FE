@@ -11,7 +11,7 @@
   background: #ffffff;
   padding: 24px;
   box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   opacity: 0;
   animation: smoothAppear 1.5s forwards;
   display: flex;
@@ -40,7 +40,8 @@
       background: linear-gradient(180deg, rgba(186, 186, 186, 0) 7.14%, rgba(0, 0, 0, 0.2) 85.49%);
     }
 
-    img, video {
+    img,
+    video {
       width: 100%;
       object-fit: contain;
     }
@@ -55,11 +56,18 @@
       color: white;
 
       .user-img {
+        background-color: #adadad;
+        // outline: 2px solid #adadad66;
+        box-shadow: 0 0 0px 2px #adadad;
         width: 3rem;
         height: 3rem;
         border-radius: 50%;
         overflow: hidden;
         margin-right: 8px;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         img {
           height: 100%;
@@ -71,6 +79,7 @@
       .user-nickname {
         color: #ffffff;
         font-size: 1rem;
+        user-select: none;
       }
     }
   }
@@ -78,7 +87,7 @@
   .scroll-snap-item-explain {
     width: 100%;
 
-    .item-price-category-status{
+    .item-price-category-status {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -87,9 +96,9 @@
         margin-bottom: 0.5rem;
         font-weight: bold;
       }
-      .item-category-status{
+      .item-category-status {
         display: flex;
-        .item-category{
+        .item-category {
           margin-right: 0.5rem;
         }
       }
@@ -101,14 +110,11 @@
     }
 
     .item-created {
-      color: #9F9F9F;
+      color: #9f9f9f;
       margin-bottom: 1rem;
     }
 
-
     .item-view-button {
-
     }
   }
-
 }

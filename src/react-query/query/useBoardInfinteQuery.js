@@ -1,13 +1,13 @@
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import axios from "axios";
-import { useCategory } from "../../recoil/store";
+import { useBoardConfig } from "../../recoil/store";
 
 export const useBoardInfiniteQuery = () => {
-  const { categoryList } = useCategory();
+  const { categoryList, orderBy } = useBoardConfig();
   const getPageBoard = async ({ pageParam = 1 }) => {
     const pageBoardRequestBody = {
       goodsCategoryList: categoryList,
-      goodsOrderBy: "ORDER_BY_CREATED_AT",
+      goodsOrderBy: orderBy,
     };
     const { data } = await axios.post(
       `https://tryaz.shop/api/goods/dynamic-paging?page=${pageParam}&size=4`,

@@ -2,6 +2,7 @@ import "../styles/elements/input.scss";
 import { ForwardedRef, forwardRef } from "react";
 
 interface InputOptions {
+  id?: string;
   size?: "small" | "medium" | "large";
   placeholder?: string;
   fullWidth?: boolean;
@@ -15,6 +16,7 @@ interface InputOptions {
 // ref를 prop으로 받으려면 forwardRef를 이용해야함 ;
 export const Input = forwardRef(function (
   {
+    id,
     size = "medium",
     fullWidth = false,
     value,
@@ -29,6 +31,7 @@ export const Input = forwardRef(function (
 ) {
   return (
     <input
+      id={id}
       className={`input-${size} ${fullWidth ? "input-fullWidth" : ""} ${disabled ? "input-disabled" : ""}`}
       value={value}
       ref={ref}

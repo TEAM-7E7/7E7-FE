@@ -1,16 +1,27 @@
 import "../styles/components/header.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { UploadIcon, HamburgerIcon, AlarmIcon, PersonIcon, ChatIcon, ConfigIcon } from "../assets/icons/FigmaIcons";
-import { useEffect, useState } from "react";
+import {
+  UploadIcon,
+  HamburgerIcon,
+  AlarmIcon,
+  PersonIcon,
+  ChatIcon,
+  ConfigIcon,
+  SearchIcon,
+} from "../assets/icons/FigmaIcons";
+import { useState } from "react";
 import CategoryItem from "./CategoryItem";
-import { useRefreshToken } from "../recoil/store";
+import { useBoardConfig, useRefreshToken } from "../recoil/store";
 import { jwtUtils } from "../utils/jwtUtils";
 import { Cookies } from "react-cookie";
-import { BoardCategory } from "../dto/BoardCategoryAndState";
+import { BoardCategory, BoardOrderBy } from "../dto/BoardCategoryAndState";
+import { Input } from "../elements/Input";
 
 const Header = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
+  const [isOpenSearchbar, setOpenSearchbar] = useState<boolean>(false);
   const { refreshToken, setRefreshToken } = useRefreshToken();
+  const { orderBy, setOrderBy } = useBoardConfig();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
@@ -22,37 +33,65 @@ const Header = () => {
     window.location.href = "/";
   };
   console.log(Object.keys(BoardCategory));
+
+  const handleOpenSearchbar = () => setOpenSearchbar(true);
+  const handleCloseSearchbar = () => setOpenSearchbar(false);
+
   return (
     <>
       <div className="header-wrapper">
-        <div className="header-title">
-          <div onClick={handleOpen} className="header-icon">
-            <HamburgerIcon />
+        <div className="header-base">
+          <div className="header-title">
+            <div onClick={handleOpen} className="header-icon">
+              <HamburgerIcon />
+            </div>
+            <Link to="/">
+              <span>MarketClip</span>
+            </Link>
           </div>
-          <Link to="/">
-            <span>MarketClip</span>
-          </Link>
+
+          <div className="header-menu">
+            {!jwtUtils.isValid(refreshToken) ? (
+              <>
+                <Link to="/sign-in">로그인</Link>
+                <Link to="/sign-up">회원가입</Link>
+              </>
+            ) : (
+              <>
+                <Link to="#" onClick={logout}>
+                  로그아웃
+                </Link>
+              </>
+            )}
+
+            <div
+              onClick={isOpenSearchbar ? handleCloseSearchbar : handleOpenSearchbar}
+              className="header-icon-transparent"
+            >
+              <SearchIcon />
+            </div>
+
+            <Link to="/add-board">
+              <div className="header-icon">
+                <UploadIcon />
+              </div>
+            </Link>
+          </div>
         </div>
 
-        <div className="header-menu">
-          {!jwtUtils.isValid(refreshToken) ? (
-            <>
-              <Link to="/sign-in">로그인</Link>
-              <Link to="/sign-up">회원가입</Link>
-            </>
-          ) : (
-            <>
-              <Link to="#" onClick={logout}>
-                로그아웃
-              </Link>
-            </>
-          )}
-
-          <Link to="/add-board">
-            <div className="header-icon">
-              <UploadIcon />
-            </div>
-          </Link>
+        <div className={["header-searchbar", isOpenSearchbar ? "slide-down" : "slide-hide"].join(" ")}>
+          <select style={{ marginRight: "1rem" }}>
+            <option>검색</option>
+          </select>
+          <Input
+            id="search"
+            size="medium"
+            name="email"
+            // onChange={handleChange}
+            // value={values.email}
+            fullWidth
+            placeholder="검색어를 입력해주세요."
+          />
         </div>
       </div>
 
@@ -79,6 +118,19 @@ const Header = () => {
           </div>
 
           <div className="categories-wrapper">
+            <select
+              className="category-order-by"
+              onChange={(e) => {
+                setOrderBy(e.target.value);
+                navigate("/");
+              }}
+            >
+              {Object.keys(BoardOrderBy).map((orderByKey: string, index: number) => (
+                <option key={index} value={orderByKey} selected={orderByKey === orderBy}>
+                  {BoardOrderBy[orderByKey]}
+                </option>
+              ))}
+            </select>
             {Object.keys(BoardCategory).map((category: string, index: number) => (
               <CategoryItem key={index} name={BoardCategory[category]} value={category} />
             ))}

@@ -1,14 +1,22 @@
-.modal-select-type{
-  .modal-body{
+.modal-select-type {
+  .modal-body {
     display: flex;
     justify-content: center;
 
-    .select-button{
+    .select-button {
       margin: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
+  }
+
+  .modal-helper-text {
+    color: #adadad;
+    font-weight: 600;
+    font-size: 0.6rem;
+    line-height: 0.5;
+    letter-spacing: -0.25px;
   }
 }
