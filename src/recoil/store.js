@@ -17,14 +17,22 @@ export const useRefreshToken = () => {
 };
 
 // category-recoil-persist
-const { persistAtom: categoryPersist } = recoilPersist({ key: "CATEGORY" });
-export const category_list = atom({
-  key: "CATEGORY",
-  default: [],
-  effects_UNSTABLE: [categoryPersist],
+const { persistAtom: boardConfigPersist } = recoilPersist({ key: "BOARD_CONFIG" });
+export const board_config = atom({
+  key: "BOARD_CONFIG",
+  default: {
+    CATEGORY: [],
+    ORDERBY: "ORDER_BY_CREATED_AT",
+  },
+  effects_UNSTABLE: [boardConfigPersist],
 });
 
-export const useCategory = () => {
-  const [categoryList, setCategoryList] = useRecoilState(category_list);
-  return { categoryList, setCategoryList };
+export const useBoardConfig = () => {
+  const [boardConfig, setBoardConfig] = useRecoilState(board_config);
+  return {
+    categoryList: boardConfig.CATEGORY,
+    setCategoryList: (categoryList) => setBoardConfig({ CATEGORY: categoryList, ORDERBY: boardConfig.ORDERBY }),
+    orderBy: boardConfig.ORDERBY,
+    setOrderBy: (orderBy) => setBoardConfig({ CATEGORY: boardConfig.CATEGORY, ORDERBY: orderBy }),
+  };
 };

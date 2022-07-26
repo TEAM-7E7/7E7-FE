@@ -1,5 +1,5 @@
 import "../styles/components/header.scss";
-import { useCategory } from "../recoil/store";
+import { useBoardConfig } from "../recoil/store";
 import { useNavigate } from "react-router-dom";
 import { useBoardInfiniteQueryReset } from "../react-query/query/useBoardInfiniteQueryReset";
 
@@ -9,7 +9,7 @@ interface CategoryItemOptions {
 }
 
 const CategoryItem = ({ name, value }: CategoryItemOptions) => {
-  const { categoryList, setCategoryList } = useCategory();
+  const { categoryList, setCategoryList } = useBoardConfig();
   const navigate = useNavigate();
 
   return (

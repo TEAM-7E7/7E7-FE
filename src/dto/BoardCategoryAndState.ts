@@ -9,6 +9,12 @@ export const BoardCategory: any = {
   MAN_FASHION_GOODS: "남성패션/잡화",
 };
 
+export const BoardOrderBy: any = {
+  ORDER_BY_CREATED_AT: "최신순",
+  ORDER_BY_VIEW_COUNT: "조회순",
+  ORDER_BY_WISHLIST_COUNT: "인기순",
+};
+
 export const BoardStatus: any = {
   SALE: "판매중",
   SOLD_OUT: "거래완료",
