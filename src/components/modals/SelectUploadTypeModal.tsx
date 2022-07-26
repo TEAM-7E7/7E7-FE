@@ -45,6 +45,8 @@ const SelectUploadTypeModal = function SelectUploadTypeModal({
                 <FileUploader values={values} setValues={setValues} setModalIsOpen={setModalIsOpen} />
               </div>
             </div>
+            <p className="modal-helper-text">이미지 확장자: .jpg, .png, .jpeg, gif, .svg</p>
+            <p className="modal-helper-text">영상 확장자: .mp4, .m4v, .avi, .wmv, .mwa, .asf, .mpg, .mpeg, .mkv</p>
           </DialogContent>
         </div>
       </Dialog>

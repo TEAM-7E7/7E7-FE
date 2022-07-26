@@ -62,7 +62,7 @@ const FileUploader = memo(({ values, setValues, setModalIsOpen }: FileUploaderDt
     <div className="uploader-wrapper">
       <input
         type="file"
-        accept="video/*, image/*"
+        accept="video/mp4, video/png, video/avi, video/wmv, video/mwa, video/asf, video/mpg, video/mpeg, video/mkv, image/jpg, image/png, image/jpeg, image/gif, image/svg"
         onChange={saveImage}
         multiple
         onClick={(e: React.MouseEvent<HTMLInputElement>) => {
