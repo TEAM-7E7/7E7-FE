@@ -1,87 +1,94 @@
-@media all and (max-width: 1024px){
-
+@media all and (max-width: 1024px) {
 }
 
-.mypage-wrapper{
-  font-family: 'Noto Sans KR', sans-serif;
+.mypage-wrapper {
+  font-family: "Noto Sans KR", sans-serif;
   width: 80%;
   margin: 0 auto;
-  .mypage-header{
+  .mypage-header {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
     padding: 1.5rem;
   }
-  .mypage-body{
-    .mypage-body-user-profile{
+  .mypage-body {
+    .mypage-body-user-profile {
       padding: 1.5rem 0;
       display: flex;
       align-items: center;
       justify-content: space-around;
-      .user-profile{
+      .user-profile {
         display: flex;
-        .user-profile-img{
-          width: 3.75rem;
-          height: 3.75rem;
-          overflow: hidden;
-          margin-right: 1rem;
+        .user-profile-img {
+          background-color: #adadad;
+          // outline: 2px solid #adadad66;
+          box-shadow: 0 0 0px 2px #adadad;
+          width: 3rem;
+          height: 3rem;
           border-radius: 50%;
-          img{
-            width: 100%;
+          overflow: hidden;
+          margin-right: 8px;
+          user-select: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
             height: 100%;
+            width: 100%;
             object-fit: contain;
           }
         }
-        .user-profile-nickname-email{
+        .user-profile-nickname-email {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          .user-profile-nickname{
+          .user-profile-nickname {
             font-weight: bold;
             font-size: 1.5rem;
           }
-          .user-profile-email{
+          .user-profile-email {
             font-size: 1.25rem;
             color: #606060;
           }
         }
       }
-      .message-alarm-icon{
+      .message-alarm-icon {
         display: flex;
-        .message-icon{
+        .message-icon {
           margin-right: 1rem;
         }
-        .alarm-icon{
+        .alarm-icon {
           margin-left: 1rem;
         }
-        svg{
+        svg {
           width: 20px;
           height: 20px;
         }
       }
     }
-    .mypage-body-board-state-menu{
+    .mypage-body-board-state-menu {
       padding: 1.5rem 0;
       display: flex;
       max-width: 75%;
       justify-content: space-evenly;
       margin: 0 auto;
-      .board-state{
+      .board-state {
         cursor: pointer;
         display: flex;
         justify-items: center;
         align-items: center;
-        .state-icon{
+        .state-icon {
           display: flex;
           justify-content: center;
           align-items: center;
-          svg{
+          svg {
             width: 2rem;
             height: 2rem;
           }
           margin-right: 0.5rem;
         }
-        .state-text{
+        .state-text {
           font-size: 1.2rem;
           text-align: center;
         }

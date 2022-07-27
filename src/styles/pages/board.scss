@@ -1,5 +1,5 @@
 .board-wrapper {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   box-sizing: border-box;
   padding: 5rem 0;
   display: flex;
@@ -19,9 +19,9 @@
 
     .board-contents {
       height: 38.75rem;
-      border: 2px solid #E3E1FB;
+      border: 2px solid #e3e1fb;
       padding: 2rem;
-      background: #F9F9FA;
+      background: #f9f9fa;
       border-radius: 18px;
       box-sizing: border-box;
 
@@ -34,12 +34,18 @@
           display: flex;
 
           .user-img {
+            background-color: #adadad;
+            // outline: 2px solid #adadad66;
+            box-shadow: 0 0 0px 2px #adadad;
             width: 3rem;
             height: 3rem;
-            border: 1px solid slategrey;
             border-radius: 50%;
             overflow: hidden;
-            margin-right: 0.5rem;
+            margin-right: 8px;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             img {
               height: 100%;
@@ -55,7 +61,8 @@
             margin-left: 0.5rem;
 
             .user-nickname {
-              font-size: 1.2rem;
+              font-size: 1rem;
+              font-weight: bold;
             }
 
             .user-created {
@@ -103,7 +110,6 @@
       }
 
       .button-update {
-
       }
     }
 
@@ -112,7 +118,8 @@
       display: flex;
       justify-content: space-between;
 
-      .button-bookmark, .button-bookmark-filled {
+      .button-bookmark,
+      .button-bookmark-filled {
         svg {
           width: 3rem;
           height: 3rem;
@@ -134,9 +141,7 @@
       }
 
       .button-message {
-
       }
     }
   }
-
 }

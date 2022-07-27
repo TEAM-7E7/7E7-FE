@@ -33,13 +33,16 @@ const Board = () => {
               <div className="user-profile-category">
                 <div className="user-profile">
                   <div className="user-img">
-                    <img
-                      src={
-                        getBoard?.data.data.accountImageUrl === "default"
-                          ? "/img/default_img.png"
-                          : getBoard?.data.data.accountImageUrl
-                      }
-                    />
+                    {getBoard?.data.data.accountImageUrl === "default" ? (
+                      <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M12.3333 12C15.6483 12 18.3333 9.315 18.3333 6C18.3333 2.685 15.6483 0 12.3333 0C9.01834 0 6.33334 2.685 6.33334 6C6.33334 9.315 9.01834 12 12.3333 12ZM12.3333 15C8.32834 15 0.333344 17.01 0.333344 21V22.5C0.333344 23.325 1.00834 24 1.83334 24H22.8333C23.6583 24 24.3333 23.325 24.3333 22.5V21C24.3333 17.01 16.3383 15 12.3333 15Z"
+                          fill="#EBEEEF"
+                        />
+                      </svg>
+                    ) : (
+                      <img alt={getBoard?.data.data.nickname} src={getBoard?.data.data.accountImageUrl} />
+                    )}
                   </div>
                   <div className="user-nickname-created">
                     <div className="user-nickname">{getBoard?.data.data.nickname}</div>
@@ -73,7 +76,6 @@ const Board = () => {
                 <div className="board-button"></div>
               </div>
             </div>
-
             {jwtUtils.isValid(refreshToken) && jwtUtils.getId(refreshToken) === getBoard?.data.data.accountId ? (
               <div className="board-button">
                 <div className="button-delete">
