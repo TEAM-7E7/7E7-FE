@@ -25,55 +25,32 @@ const MyPageBoardList = ({ boardState }: MyPageBoardStateDto) => {
   }, []);
   return (
     <div className="board-list-wrapper">
+      {/*{boardState === "sell" && <div className="board-list-header"></div>}*/}
       {boardState === "sell" && (
-        <div className="board-list-header">
-          <button
-            className={color ? "button-large button-filled" : "button-large button-filled button-primary"}
-            onClick={() => {
-              setContent("Sale"), color ? setColor(false) : setColor(true);
-            }}
-          >
-            판매중(건)
-          </button>
-          <button
-            className={color ? "button-large button-filled button-primary" : "button-large button-filled"}
-            onClick={() => {
-              setContent("Complete"), color ? setColor(false) : setColor(true);
-            }}
-          >
-            거래완료(건)
-          </button>
-        </div>
-      )}
-      {boardState === "sell" && (
-        <>
-          {content === "Sale" && (
-            <div className="board-list-body">
-              {boardList?.map((item: any) => (
-                <div key={item.id} className="board-list-item-wrapper">
-                  <div className="board-list-item-img">
-                    {item.fileType === "mp4" ? <Video src={item?.goodsImageUrl} /> : <img src={item?.goodsImageUrl} />}
-                  </div>
-                  <div className="board-list-item-body">
-                    <div className="board-list-item-body-status">
-                      <h2>{item.title}</h2>
-                      <span>{item.status}</span>
-                    </div>
-                    <div className="board-list-item-body-info">
-                      <span>{timeUtils.timePass(item.createdAt)}</span>
-                      <h1>{item.sellPrice}원</h1>
-                    </div>
-                    <div className="board-list-item-body-detail">
-                      <IconButton icon={<ArrowIcon />} fullWidth>
-                        자세히 보러가기
-                      </IconButton>
-                    </div>
-                  </div>
+        <div className="board-list-body">
+          {boardList?.map((item: any) => (
+            <div key={item.id} className="board-list-item-wrapper">
+              <div className="board-list-item-img">
+                {item.fileType === "mp4" ? <Video src={item?.goodsImageUrl} /> : <img src={item?.goodsImageUrl} />}
+              </div>
+              <div className="board-list-item-body">
+                <div className="board-list-item-body-status">
+                  <h2>{item.title}</h2>
+                  <span>{item.status}</span>
                 </div>
-              ))}
+                <div className="board-list-item-body-info">
+                  <span>{timeUtils.timePass(item.createdAt)}</span>
+                  <h1>{item.sellPrice}원</h1>
+                </div>
+                <div className="board-list-item-body-detail">
+                  <IconButton icon={<ArrowIcon />} fullWidth>
+                    자세히 보러가기
+                  </IconButton>
+                </div>
+              </div>
             </div>
-          )}
-        </>
+          ))}
+        </div>
       )}
       <div className="board-list-footer"></div>
     </div>

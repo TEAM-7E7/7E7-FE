@@ -50,11 +50,7 @@ const MyPage = () => {
             <div className="state-icon">
               <SellIcon />
             </div>
-            <div className="state-text">
-              판매목록
-              <br />
-              33건
-            </div>
+            <div className="state-text">판매목록</div>
           </div>
           <div
             className="board-state"
@@ -65,11 +61,7 @@ const MyPage = () => {
             <div className="state-icon">
               <BuyIcon />
             </div>
-            <div className="state-text">
-              구매목록
-              <br />
-              33건
-            </div>
+            <div className="state-text">구매목록</div>
           </div>
           <div
             className="board-state"
@@ -80,11 +72,7 @@ const MyPage = () => {
             <div className="state-icon">
               <BookMarkIcon />
             </div>
-            <div className="state-text">
-              저장목록
-              <br />
-              33건
-            </div>
+            <div className="state-text">저장목록</div>
           </div>
         </div>
         <div className="mypage-body-board-list">

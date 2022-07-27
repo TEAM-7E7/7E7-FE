@@ -2,8 +2,13 @@ import { useInfiniteQuery } from "react-query";
 import axios from "axios";
 
 export const useBoardInfiniteQuery = () => {
+  const [category, setCategory] = useState([]);
   const getPageBoard = async ({ pageParam = 1 }) => {
-    const { data } = await axios.get(`https://tryaz.shop/api/goods?page=${pageParam}&size=4`);
+    const pageBoardRequestBody = {
+      goodsCategoryList: category,
+      goodsOrderby: "ORDER_BY_CREATED_AT",
+    };
+    const { data } = await axios.get(`https://tryaz.shop/api/goods?page=${pageParam}&size=4`, pageBoardRequestBody);
     return {
       // 실제 데이터
       board_page: data.data.goodsList,
