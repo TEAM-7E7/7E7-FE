@@ -1,0 +1,6 @@
+.scroll-snap-wrapper {
+  height: 100%;
+  scroll-snap-type: y mandatory;
+  overflow: auto;
+  background: #d9d9d9;
+}

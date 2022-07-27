@@ -1,0 +1,31 @@
+.modal-verify-email{
+  font-family: 'Noto Sans KR', sans-serif;
+  .modal-body{
+    padding: 3rem;
+    .modal-body-text{
+      margin: 1rem 0;
+      font-size: 1.4rem;
+      .modal-body-text-highlight{
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+    .modal-body-input-button{
+      margin: 2rem;
+      .modal-body-input{
+        margin: 1rem 0;
+      }
+      .modal-body-button{
+        margin: 1rem 0;
+      }
+    }
+  }
+  .modal-body-resend-text{
+    font-size: 0.8rem;
+    text-align: center;
+    .modal-body-resend-text-underline{
+      cursor: pointer;
+      text-underline: black;
+    }
+  }
+}

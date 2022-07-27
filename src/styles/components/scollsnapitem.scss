@@ -1,0 +1,120 @@
+@keyframes smoothAppear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.scroll-snap-item {
+  background: #ffffff;
+  padding: 24px;
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+  opacity: 0;
+  animation: smoothAppear 1.5s forwards;
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+  height: 85%;
+  border-radius: 10px;
+  scroll-snap-align: center;
+  margin: 2rem auto;
+
+  .scroll-snap-item-img {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    background: black;
+    overflow: hidden;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+
+    .scroll-snap-item-img-gradient {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(180deg, rgba(186, 186, 186, 0) 7.14%, rgba(0, 0, 0, 0.2) 85.49%);
+    }
+
+    img,
+    video {
+      width: 100%;
+      object-fit: contain;
+    }
+
+    .user-profile {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      bottom: 16px;
+      left: 16px;
+      color: white;
+
+      .user-img {
+        background-color: #adadad;
+        // outline: 2px solid #adadad66;
+        box-shadow: 0 0 0px 2px #adadad;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 8px;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .user-nickname {
+        color: #ffffff;
+        font-size: 1rem;
+        user-select: none;
+      }
+    }
+  }
+
+  .scroll-snap-item-explain {
+    width: 100%;
+
+    .item-price-category-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .item-price {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+      .item-category-status {
+        display: flex;
+        .item-category {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    .item-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .item-created {
+      color: #9f9f9f;
+      margin-bottom: 1rem;
+    }
+
+    .item-view-button {
+    }
+  }
+}

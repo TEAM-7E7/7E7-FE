@@ -1,0 +1,40 @@
+select {
+  border: 0;
+  border-radius: 14px;
+  cursor: pointer;
+  background: #E0DFEC;
+  font-family: 'Noto Sans KR', sans-serif;
+  flex-grow: 1;
+  &:focus {
+    outline: solid skyblue;
+  }
+  &::placeholder{
+    color: #ADADAD;
+    font-size: 0.8em;
+  }
+}
+
+// size
+.select-small {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.select-medium {
+  font-size: 1rem;
+  padding: 1rem 1.25rem;
+}
+
+.select-large {
+  font-size: 1.5rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.select-fullWidth{
+  width: 100%;
+}
+
+.select-disabled{
+  cursor: not-allowed;
+}
+

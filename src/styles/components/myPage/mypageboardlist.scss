@@ -1,0 +1,113 @@
+@keyframes smoothAppear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.board-list-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  .board-list-header {
+    width: 100%;
+    margin: 2rem 0;
+    font-size: 1.25rem;
+    text-align: center;
+    border-bottom: 2px solid #6F4EF2;
+    display: flex;
+    cursor: pointer;
+    .header-menu-sale{
+      border-radius: 20px 0 0 0;
+      padding: 1rem 0;
+      width: 50%;
+    }
+    .header-menu-sold-out{
+      border-radius: 0 20px 0 0;
+      padding: 1rem 0;
+      width: 50%;
+    }
+    .header-menu-selected{
+      background: #6F4EF2;
+      color: #fff;
+    }
+    .header-menu-not-selected{
+      box-sizing: border-box;
+      border: 1px solid #C1BEFF;
+    }
+  }
+
+  .board-list-body {
+    opacity: 0;
+    animation: smoothAppear 1.5s forwards;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    .board-list-item-wrapper {
+      width: 15rem;
+      height: 32rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+
+      .board-list-item-img {
+        width: 100%;
+        border-radius: 1.25rem;
+        background: black;
+        overflow: hidden;
+        flex-grow: 1;
+        margin-bottom: 1rem;
+
+        img, video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .board-list-item-text {
+        width: 100%;
+
+        .item-title-kebab {
+          display: flex;
+          justify-content: space-between;
+
+          .item-title {
+            font-size: 1rem;
+            font-weight: bold;
+          }
+        }
+
+        .item-created {
+          font-size: 0.8rem;
+          color: #9F9F9F;
+        }
+
+        .item-price-category {
+          margin: 1rem 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .item-price{
+            font-size: 1.1rem;
+            font-weight: bold;
+          }
+        }
+
+        .item-view-button {
+
+        }
+      }
+    }
+  }
+
+  .board-list-footer {
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+  }
+}

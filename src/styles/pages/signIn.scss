@@ -1,0 +1,58 @@
+.signin-wrapper {
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .signin-header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+
+  .signin-form {
+    width: 100%;
+    max-width: 448px;
+  }
+
+  .signin-body {
+    .signin-body-item {
+      margin: 1rem 0;
+      .signin-body-item-label {
+        font-size: 0.8rem;
+        color: #adadad;
+        user-select: none;
+        font-weight: bold;
+      }
+      .signin-body-item-input {
+        margin-top: 0.3rem;
+      }
+      .signin-body-item-error {
+        color: #6f4ef2;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-top: 0.3rem;
+      }
+    }
+    .forget-password-or-go-signup {
+      margin: 1rem 0;
+      text-align: center;
+      display: flex;
+      justify-content: space-evenly;
+      color: #989898;
+      .title {
+        font-size: 0.5rem;
+      }
+      .content {
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+    }
+    .separator {
+      width: 80%;
+      margin-bottom: 2rem;
+    }
+    .social-login-button {
+      margin: 0.5rem 0;
+    }
+  }
+}

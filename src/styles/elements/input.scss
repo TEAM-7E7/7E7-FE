@@ -1,14 +1,20 @@
 input {
-  outline: 0;
-  border-radius: 20px;
+  border: 0;
+  border-radius: 14px;
   cursor: pointer;
-  border: 1px solid #989898;
+  background: #efeff1;
+  // background: #E0DFEC;
   box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   flex-grow: 1;
+
   &:focus {
-    outline: solid skyblue;
-    border: 1px #ffffff;
+    outline: solid #6760ef99;
+  }
+
+  &::placeholder {
+    font-size: 0.8rem;
+    color: #adadad;
   }
 }
 
@@ -19,8 +25,8 @@ input {
 }
 
 .input-medium {
-  font-size: 1.25rem;
-  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  padding: 1rem 1.25rem;
 }
 
 .input-large {
@@ -28,8 +34,10 @@ input {
   padding: 0.75rem 1.5rem;
 }
 
-.input-fullWidth{
+.input-fullWidth {
   width: 100%;
 }
 
-
+.input-disabled {
+  cursor: not-allowed;
+}

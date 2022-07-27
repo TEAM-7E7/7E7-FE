@@ -1,0 +1,22 @@
+.modal-delete-board{
+  .modal-body{
+    padding: 3rem;
+    min-width: 300px;
+    .modal-body-text{
+      margin: 1rem 0;
+      font-size: 1.4rem;
+      text-align: center;
+      .modal-body-text-highlight{
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+    .modal-body-button{
+      margin: 2rem 0;
+      display: flex;
+      justify-content: space-evenly;
+      flex-direction: row-reverse;
+    }
+  }
+
+}

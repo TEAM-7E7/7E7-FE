@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+// snap-scroll-wrapper에서 %높이를 사용하려면 여기서 먼저 높이를 지정해야함
+// body는 기본적으로 높이값이 없기 때문에 높이를 줘야함
+html,
+body {
+  height: 100%;
+}
+
+//body의 자식인 root도 height를 먹여줌
+#root {
+  height: 100%;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+
+  margin: 0;
+  padding: 0;
+}
+
+@media all and (min-width: 1024px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+@media all and (max-width: 768px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media all and (max-width: 400px) {
+  html {
+    font-size: 70%;
+  }
+}
+
+@media all and (max-width: 350px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+:root {
+  --header--height: 4.5rem;
+}
+
+.contents {
+  position: relative;
+  height: calc(100% - var(--header--height));
+  // header가 fixed이므로 relative 속성을 주고 header 높이만큼 top 값을 부여
+  top: var(--header--height);
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+}
