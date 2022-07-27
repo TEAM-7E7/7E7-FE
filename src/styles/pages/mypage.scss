@@ -19,26 +19,48 @@
       justify-content: space-around;
       .user-profile {
         display: flex;
-        .user-profile-img {
-          background-color: #adadad;
-          // outline: 2px solid #adadad66;
-          box-shadow: 0 0 0px 2px #adadad;
-          width: 3rem;
-          height: 3rem;
-          border-radius: 50%;
-          overflow: hidden;
-          margin-right: 8px;
-          user-select: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        .user-profile-img-wrapper {
+          position: relative;
+          width: fit-content;
+          height: fit-content;
+          .user-profile-img {
+            cursor: pointer;
+            background-color: #adadad;
+            // outline: 2px solid #adadad66;
+            box-shadow: 0 0 0px 2px #adadad;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 8px;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-          img {
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
+            img {
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
+            }
+          }
+          .user-profile-delete-button {
+            outline: none;
+            border: none;
+            padding: 0;
+            width: 1.2rem;
+            height: 1.2rem;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            right: 0;
+            top: 0;
+            background-color: #6f4ef2;
+            border-radius: 50%;
           }
         }
+
         .user-profile-nickname-email {
           display: flex;
           flex-direction: column;
