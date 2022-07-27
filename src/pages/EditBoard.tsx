@@ -45,7 +45,7 @@ const EditBoard = () => {
   };
   useEffect(() => {
     const getBoard = async () => {
-      const { data } = await axios.get(`https://tryaz.shop/api/goods/${board_id}`);
+      const { data } = await axios.get(`https://tryaz.shop/api/goods/details/${board_id}`);
 
       const initialFileList = data.data.imageMapList.map((file: any) => {
         if (file.url.split(".").at(-1) === "mp4") {

@@ -32,7 +32,6 @@ const Header = () => {
     alert("로그아웃 되었습니다.");
     window.location.href = "/";
   };
-  console.log(Object.keys(BoardCategory));
 
   const handleOpenSearchbar = () => setOpenSearchbar(true);
   const handleCloseSearchbar = () => setOpenSearchbar(false);

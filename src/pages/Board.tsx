@@ -20,7 +20,7 @@ const Board = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const { board_id } = useParams();
   const { getBoard, getBoardIsSuccess, addBookmarkMutation, deleteBookmarkMutation } = useBoardQuery(board_id);
-
+  console.log(getBoard);
   return (
     <div className="board-wrapper">
       {getBoardIsSuccess && (

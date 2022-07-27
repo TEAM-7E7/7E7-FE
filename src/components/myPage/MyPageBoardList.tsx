@@ -39,7 +39,6 @@ const MyPageBoardList = ({ boardCategory }: MyPageBoardCategoryDto) => {
       getBookmarkBoard();
     }
   }, [boardCategory, boardStatus, page]);
-  console.log(boardList);
   return (
     <div className="board-list-wrapper">
       {boardCategory === "sell" && (
