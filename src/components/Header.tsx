@@ -22,8 +22,7 @@ const Header = () => {
   const [isOpenSearchbar, setOpenSearchbar] = useState<boolean>(false);
   const { refreshToken, setRefreshToken } = useRefreshToken();
   const { orderBy, setOrderBy } = useBoardConfig();
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
   const navigate = useNavigate();
   const cookies = new Cookies();
   const logout = () => {
@@ -32,6 +31,9 @@ const Header = () => {
     alert("로그아웃 되었습니다.");
     window.location.href = "/";
   };
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleOpenSearchbar = () => setOpenSearchbar(true);
   const handleCloseSearchbar = () => setOpenSearchbar(false);
@@ -98,7 +100,12 @@ const Header = () => {
         <div onClick={handleClose} className="backdrop-overlay" />
 
         <div className="slide-menu-area">
-          <div className="wrapper">
+          <div
+            className="wrapper"
+            onClick={() => {
+              handleClose();
+            }}
+          >
             <Link to="/">
               <span>MarketClip</span>
             </Link>
@@ -108,6 +115,7 @@ const Header = () => {
             <div
               onClick={() => {
                 navigate("/my-page");
+                handleClose();
               }}
             >
               <PersonIcon color="#22FF6D" />
