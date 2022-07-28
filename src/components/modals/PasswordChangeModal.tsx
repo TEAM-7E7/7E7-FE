@@ -1,7 +1,5 @@
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import { Dialog } from "@mui/material";
 import { Input } from "../../elements/Input";
-import { useRef } from "react";
-import axios from "axios";
 import { Button } from "../../elements/Button";
 import "../../styles/components/modals/settingmodal.scss";
 import { Formik } from "formik";

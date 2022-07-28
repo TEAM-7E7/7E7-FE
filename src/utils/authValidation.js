@@ -54,3 +54,12 @@ export const passwordChangeValidationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "🗙 비밀번호가 일치하지 않습니다!")
     .required(" "),
 });
+
+export const nicknameChangeValidationSchema = Yup.object().shape({
+  nickname: Yup.string()
+    .min(2, "🗙 닉네임은 최소 2글자 이상입니다!")
+    .max(16, "🗙 닉네임은 최대 16글자입니다!")
+    .matches(/^[\S].*[\S]$/, "🗙 닉네임의 시작과 끝이 공백이면 안됩니다.")
+    .matches(/^[가-힣][가-힣\s]*[가-힣]$/, "🗙 닉네임은 한글과 공백으로만 구성되야합니다.")
+    .required(" "),
+});

@@ -30,3 +30,7 @@ export interface PasswordChangeFormDto {
   password: string;
   password2: string;
 }
+
+export interface NicknameChangeDto {
+  nickname: string;
+}

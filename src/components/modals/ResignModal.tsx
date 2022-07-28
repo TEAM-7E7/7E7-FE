@@ -15,7 +15,7 @@ const ResignModal = function SelectUploadTypeModal({ open, handleClose }: Resign
 
   const resign = async () => {
     try {
-      await instanceWithToken.put("https://tryaz.shop/api/user/sign-out");
+      await instanceWithToken.delete("https://tryaz.shop/api/user/sign-out");
       toast.success(<h3>탈퇴 처리가 반영되었습니다.</h3>, {
         position: "top-center",
         autoClose: 2000,
@@ -25,6 +25,7 @@ const ResignModal = function SelectUploadTypeModal({ open, handleClose }: Resign
         handleClose();
       }, 2000);
     } catch (e: any) {
+      // TODO 500 에러가 납니당
       toast.error(e.response.data.message + "😭", {
         position: "top-center",
       });
