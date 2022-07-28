@@ -1,0 +1,27 @@
+a {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-decoration-line: none;
+  font-weight: bold;
+  // color: black;
+  // &:hover {
+  //   color: midnightblue;
+  // }
+}
+
+svg {
+  cursor: pointer;
+  transition: cubic-bezier(0.215, 0.61, 0.355, 1) transform 200ms;
+
+  &:active {
+    transform: scale(1);
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.toast-wrapper {
+}
