@@ -93,7 +93,13 @@ const AddBoard = () => {
                   <div className="addboard-form-error">🗙 최소 하나 이상의 사진/비디오를 등록해주세요!</div>
                 )}
                 <div className="input-title">
-                  <Input name="title" onChange={handleChange} fullWidth placeholder="제목을 입력하세요" />
+                  <Input
+                    name="title"
+                    color="skyblue"
+                    onChange={handleChange}
+                    fullWidth
+                    placeholder="제목을 입력하세요"
+                  />
                   <div className="addboard-form-error">{errors.title ? errors.title : "✔ 제목이 입력되었습니다!"}</div>
                 </div>
                 <div className="category-and-price">
@@ -116,7 +122,7 @@ const AddBoard = () => {
                     </div>
                   </div>
                   <div className="input-price">
-                    <Input name="price" onChange={handleChange} placeholder="가격을 입력하세요" />
+                    <Input name="price" color="skyblue" onChange={handleChange} placeholder="가격을 입력하세요" />
                     <div className="addboard-form-error">
                       <div>{errors.price ? errors.price : "✔ 가격이 적당한가요?"}</div>
                     </div>
