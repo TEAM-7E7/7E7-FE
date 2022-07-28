@@ -12,12 +12,14 @@ import { useRefreshToken } from "../recoil/store";
 import { BoardCategory, BoardStatus } from "../dto/BoardCategoryAndState";
 import Label from "../elements/Label";
 import { BookMarkIcon } from "../assets/icons/FigmaIcons";
+import ChattingModal from "../components/modals/ChattingModal";
+import { ref } from "yup";
 
 const Board = () => {
   const navigate = useNavigate();
-  const cookies = new Cookies();
   const { refreshToken } = useRefreshToken();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [chattingModalIsOpen, setChattingModalIsOpen] = useState<boolean>(false);
   const { board_id } = useParams();
   const { getBoard, getBoardIsSuccess, addBookmarkMutation, deleteBookmarkMutation } = useBoardQuery(board_id);
   console.log(getBoard);
@@ -134,18 +136,37 @@ const Board = () => {
                   </div>
                 )}
                 <div className="button-message">
-                  <Button color="primary">판매자에게 1:1 채팅 보내기</Button>
+                  <Button
+                    color="primary"
+                    onClick={() => {
+                      if (jwtUtils.isValid(refreshToken)) {
+                        setChattingModalIsOpen(true);
+                      } else {
+                        alert("로그인이 필요합니다.");
+                      }
+                    }}
+                  >
+                    판매자에게 1:1 채팅 보내기
+                  </Button>
                 </div>
               </div>
             )}
           </div>
-
-          <DeleteBoardModal
-            board_id={Number(board_id)}
-            board_title={getBoard?.data.data.title}
-            modalIsOpen={modalIsOpen}
-            setModalIsOpen={setModalIsOpen}
-          />
+          {jwtUtils.isValid(refreshToken) && jwtUtils.getId(refreshToken) === getBoard?.data.data.accountId ? (
+            <DeleteBoardModal
+              board_id={Number(board_id)}
+              board_title={getBoard?.data.data.title}
+              modalIsOpen={modalIsOpen}
+              setModalIsOpen={setModalIsOpen}
+            />
+          ) : (
+            <ChattingModal
+              boardId={getBoard?.data.data.id}
+              userId={getBoard?.data.data.accountId}
+              modalIsOpen={chattingModalIsOpen}
+              setModalIsOpen={setChattingModalIsOpen}
+            />
+          )}
         </div>
       )}
     </div>

@@ -7,10 +7,13 @@ import MyPageBoardList from "../components/myPage/MyPageBoardList";
 import { instanceWithToken } from "../api/api";
 import { Dialog, DialogActions, DialogTitle } from "@mui/material";
 import { Button } from "../elements/Button";
+import { useRefreshToken } from "../recoil/store";
+import axios from "axios";
 
 const MyPage = () => {
   const cookies = new Cookies();
   const accessToken = cookies.get("X-ACCESS-TOKEN");
+  const { refreshToken, setRefreshToken } = useRefreshToken();
   // sell, buy, bookmark
   const [boardCategory, setBoardCategory] = useState<string>("sell");
 
@@ -18,22 +21,37 @@ const MyPage = () => {
   const [profileImg, setProfileImg] = useState(jwtUtils.getProfileImg(accessToken));
   const [isOpen, setOpen] = useState<boolean>(false);
 
+  const reloadToken = async () => {
+    await axios
+      .get("https://tryaz.shop/api/user/refresh-re", {
+        headers: {
+          "X-REFRESH-TOKEN": "BEARER " + refreshToken,
+        },
+      })
+      .then((result) => {
+        console.log(result.headers);
+        const newRefreshToken = result.headers["x-refresh-token"].split(" ")[1];
+        const newAccessToken = result.headers["x-access-token"].split(" ")[1];
+        setRefreshToken(newRefreshToken);
+        const expires = new Date();
+        expires.setHours(expires.getHours() + 6);
+        cookies.set("X-ACCESS-TOKEN", newAccessToken, { expires: expires });
+      });
+  };
+
   const uploadProfileImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
-
     if (e.target.files === null || e.target.files?.length === 0) return;
-
     const file = e.target.files[0];
     const src = URL.createObjectURL(file);
-
     const formData = new FormData();
     formData.append("userProfile", file);
-
     await instanceWithToken
       .post("/api/user/profile-img", formData)
       .then((res) => {
         // TODO jwtUtils에서(token)
         setProfileImg(res.data.data.url);
+        reloadToken();
       })
       .catch((err) => console.log(err.response.data.message))
       .finally(() => {
@@ -48,7 +66,7 @@ const MyPage = () => {
     await instanceWithToken
       .delete("/api/user/profile-img")
       .then((res) => {
-        console.log(res);
+        reloadToken();
         setProfileImg("default");
       })
       .catch((err) => console.log(err))
@@ -60,7 +78,7 @@ const MyPage = () => {
 
   useEffect(() => {
     setProfileImg(jwtUtils.getProfileImg(accessToken));
-  }, [accessToken]);
+  }, [accessToken, refreshToken]);
 
   return (
     <>
