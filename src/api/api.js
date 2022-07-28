@@ -1,16 +1,6 @@
 import axios from "axios";
 import { Cookies } from "react-cookie";
 
-export const api = axios.create({ baseURL: "https://tryaz.shop" });
-api.interceptors.request.use(
-  (config) => {
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
-
 export const instanceWithToken = axios.create({ baseURL: "https://tryaz.shop" });
 instanceWithToken.interceptors.request.use(
   (config) => {
@@ -45,7 +35,10 @@ instanceWithToken.interceptors.response.use(
       access token이 만료되면 refresh token을 가지고 재발급 받고
       원래 호출하려던 api에 새로운 access/refresh token을 넣어서 보냄
     */
-    if (error.response.data === "JwtAuthFilter-Access-expired") {
+    if (
+      error.response.data === "JwtAuthFilter-Access-expired" ||
+      error.response.data === "JwtAuthFilter-Access-Invalid"
+    ) {
       // referesh token을 가지고 access token을 발급받는 api 호출
       await axios
         .post(
@@ -83,6 +76,7 @@ instanceWithToken.interceptors.response.use(
       cookies.remove("X-ACCESS-TOKEN");
       window.location.href = "/sign-in";
       return false;
+    } else {
     }
     return Promise.reject(error);
   },
