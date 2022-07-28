@@ -4,6 +4,7 @@ import { ForwardedRef, forwardRef } from "react";
 interface InputOptions {
   id?: string;
   size?: "small" | "medium" | "large";
+  color?: "skyblue";
   placeholder?: string;
   fullWidth?: boolean;
   value?: any;
@@ -18,6 +19,7 @@ export const Input = forwardRef(function (
   {
     id,
     size = "medium",
+    color,
     fullWidth = false,
     value,
     placeholder,
@@ -32,7 +34,9 @@ export const Input = forwardRef(function (
   return (
     <input
       id={id}
-      className={`input-${size} ${fullWidth ? "input-fullWidth" : ""} ${disabled ? "input-disabled" : ""}`}
+      className={`input-${size} ${fullWidth ? "input-fullWidth" : ""} input-${color} ${
+        disabled ? "input-disabled" : ""
+      }`}
       value={value}
       ref={ref}
       placeholder={placeholder}

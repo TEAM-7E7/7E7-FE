@@ -31,7 +31,6 @@ const MyPage = () => {
         },
       })
       .then((result) => {
-        console.log(result.headers);
         const newRefreshToken = result.headers["x-refresh-token"].split(" ")[1];
         const newAccessToken = result.headers["x-access-token"].split(" ")[1];
         setRefreshToken(newRefreshToken);
