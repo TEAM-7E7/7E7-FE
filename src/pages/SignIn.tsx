@@ -36,7 +36,11 @@ const SignIn = () => {
         const refreshToken = result.headers["x-refresh-token"].split(" ")[1];
         const accessToken = result.headers["x-access-token"].split(" ")[1];
         setRefreshToken(refreshToken);
-        cookies.set("X-ACCESS-TOKEN", accessToken);
+        const expires = new Date();
+        expires.setHours(expires.getHours() + 6);
+        cookies.set("X-ACCESS-TOKEN", accessToken, {
+          expires: expires,
+        });
       });
 
       const redirectUrl = searchParams.get("redirectUrl");
