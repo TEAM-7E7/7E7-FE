@@ -1,0 +1,19 @@
+.modal {
+  font-family: "Noto Sans KR", sans-serif;
+  .modal-header {
+    margin: 2rem 2rem 0 2rem;
+  }
+
+  .modal-body {
+    margin: 2rem;
+    .modal-body-text {
+      margin: 0 0 1rem;
+    }
+    .modal-body-input {
+      margin: 1rem 0;
+    }
+    .modal-body-button {
+      margin: 1rem 0;
+    }
+  }
+}

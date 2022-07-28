@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input } from "../elements/Input";
 import { Button } from "../elements/Button";
-import { SignInDto, SingInFormDto } from "../dto/AuthDto";
+import { SignInDto } from "../dto/AuthDto";
 import { signInValidationSchema } from "../utils/authValidation";
 import { useRefreshToken } from "../recoil/store";
 import { Cookies } from "react-cookie";
@@ -14,7 +14,7 @@ import React from "react";
 import { KakaoIcon } from "../assets/icons/FigmaIcons";
 import { IconButton } from "../elements/IconButton";
 
-const initialValues: SingInFormDto = {
+const initialValues: SignInDto = {
   email: "",
   password: "",
 };

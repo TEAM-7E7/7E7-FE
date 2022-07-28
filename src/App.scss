@@ -5,6 +5,7 @@
 html,
 body {
   height: 100%;
+  overflow: overlay;
 }
 
 //body의 자식인 root도 height를 먹여줌

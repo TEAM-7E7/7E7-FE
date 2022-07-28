@@ -1,0 +1,70 @@
+.setting-wrapper {
+  font-family: "Noto Sans KR", sans-serif;
+  width: 100%;
+  margin: 0 auto;
+  .setting-header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1.5rem;
+  }
+  .setting-body {
+    position: relative;
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+
+    .setting-body-section {
+      .setting-menus-title {
+        font-weight: bold;
+        padding: 1rem;
+
+        @media all and (max-width: 640px) {
+          padding: 1.5rem 2rem;
+        }
+      }
+      .setting-item {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 1rem;
+
+        transition: cubic-bezier(0.215, 0.61, 0.355, 1) background-color 100ms;
+
+        border-bottom: 1px solid #e0dfec;
+
+        &:last-of-type {
+          border-bottom: none;
+        }
+
+        span {
+          font-weight: 600;
+        }
+
+        svg {
+          width: 0.6rem;
+          height: 0.6rem;
+        }
+
+        &:hover {
+          background-color: #f9f9fa;
+        }
+        &:active {
+          background-color: #f9f9fa;
+        }
+
+        @media all and (max-width: 640px) {
+          padding: 1.5rem 2rem;
+          &:hover {
+            background-color: transparent;
+          }
+          &:active {
+            background-color: #f9f9fa;
+          }
+        }
+      }
+    }
+  }
+}

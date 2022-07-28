@@ -28,7 +28,7 @@ const FindPassword = () => {
   // nickname 중복확인을 하고 nickname을 바꿀 때 사용
   const submit = async (values: SignInDto) => {
     const { email, password } = values;
-    const signUpRequestBody = { email: email, password: password };
+    const signUpRequestBody = { email, password };
     try {
       await axios.put("https://tryaz.shop/api/user/password-search", signUpRequestBody);
       toast.success(<h3>비밀번호가 변경되었습니다.</h3>, {

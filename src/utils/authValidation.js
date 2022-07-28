@@ -40,3 +40,17 @@ export const passwordSearchValidationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "🗙 비밀번호가 일치하지 않습니다!")
     .required(" "),
 });
+
+export const passwordChangeValidationSchema = Yup.object().shape({
+  password: Yup.string()
+    .min(8, "🗙 비밀번호는 최소 8자리 이상입니다")
+    .max(16, "🗙 비밀번호는 최대 16자리입니다!")
+    .required(" ")
+    .matches(
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])\S*$/,
+      "🗙 공백을 제외한 특수문자와 알파벳, 숫자를 모두 포함한 8~16자리",
+    ),
+  password2: Yup.string()
+    .oneOf([Yup.ref("password"), null], "🗙 비밀번호가 일치하지 않습니다!")
+    .required(" "),
+});

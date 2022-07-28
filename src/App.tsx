@@ -12,6 +12,8 @@ import { Cookies } from "react-cookie";
 import Board from "./pages/Board";
 import MyPage from "./pages/MyPage";
 import EditBoard from "./pages/EditBoard";
+import FindPassword from "./pages/FindPassword";
+import Setting from "./pages/Setting";
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,9 +40,11 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/find-password" element={<FindPassword />} />
           <Route path="/add-board" element={<PrivateRoute path="/add-board" component={AddBoard} />} />
           <Route path="/board/:board_id" element={<Board />} />
           <Route path="/my-page" element={<PrivateRoute path="/my-page" component={MyPage} />} />
+          <Route path="/setting" element={<PrivateRoute path="/setting" component={Setting} />} />
           <Route
             path="/edit-board/:board_id"
             element={<PrivateRoute path={`${location.pathname}`} component={EditBoard} />}
