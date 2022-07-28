@@ -9,14 +9,16 @@ interface VerifyEmailModalDto {
   userEmail: string;
   modalIsOpen: boolean;
   setModalIsOpen: any;
-  setEmailIsVerified: any;
+  onSetEmailIsVerified: () => void;
+  url: string;
 }
 
 const VerifyEmailModal = function SelectUploadTypeModal({
   userEmail,
   modalIsOpen,
   setModalIsOpen,
-  setEmailIsVerified,
+  onSetEmailIsVerified,
+  url,
 }: VerifyEmailModalDto) {
   const emailTokenRef = useRef<HTMLInputElement>(null);
   const verifyEmail = async () => {
@@ -25,9 +27,9 @@ const VerifyEmailModal = function SelectUploadTypeModal({
       emailToken: emailTokenRef.current?.value,
     };
     try {
-      await axios.post("https://tryaz.shop/api/email-validation", verifyEmailRequestBody);
+      await axios.post(url, verifyEmailRequestBody);
       alert("이메일 인증이 완료되었습니다.");
-      setEmailIsVerified(true);
+      onSetEmailIsVerified();
       setModalIsOpen(false);
     } catch (e) {
       alert(`인증번호가 일치하지 않습니다.`);

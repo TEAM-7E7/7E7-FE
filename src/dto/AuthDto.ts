@@ -20,3 +20,9 @@ export interface SignUpFormDto {
   password: string;
   password2: string;
 }
+
+export interface PasswordSearchFormDto {
+  email: string;
+  password: string;
+  password2: string;
+}

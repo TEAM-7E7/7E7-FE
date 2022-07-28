@@ -123,7 +123,9 @@ const SignIn = () => {
               <div className="forget-password-or-go-signup">
                 <div className="forget-password">
                   <div className="title">비밀번호를 잊어버리셨다면?</div>
-                  <div className="content">비밀번호 찾기</div>
+                  <div className="content" onClick={() => navigate("/find-password")}>
+                    비밀번호 찾기
+                  </div>
                 </div>
                 <div className="go-signup">
                   <div className="title">아직 회원이 아니시라면?</div>
