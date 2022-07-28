@@ -82,7 +82,7 @@ const Header = () => {
 
         <div className={["header-searchbar", isOpenSearchbar ? "slide-down" : "slide-hide"].join(" ")}>
           <select style={{ marginRight: "1rem" }}>
-            <option>검색</option>
+            <option value={"search"}>검색</option>
           </select>
           <Input
             id="search"
@@ -121,7 +121,6 @@ const Header = () => {
               <PersonIcon color="#22FF6D" />
             </div>
             <ChatIcon color="#FF965A" />
-            <ConfigIcon color="#80C9FF" />
           </div>
 
           <div className="categories-wrapper">
@@ -131,9 +130,10 @@ const Header = () => {
                 setOrderBy(e.target.value);
                 navigate("/");
               }}
+              defaultValue={orderBy || "ORDER_BY_CREATED_AT"}
             >
               {Object.keys(BoardOrderBy).map((orderByKey: string, index: number) => (
-                <option key={index} value={orderByKey} selected={orderByKey === orderBy}>
+                <option key={index} value={orderByKey}>
                   {BoardOrderBy[orderByKey]}
                 </option>
               ))}
