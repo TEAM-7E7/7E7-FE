@@ -35,10 +35,7 @@ instanceWithToken.interceptors.response.use(
       access token이 만료되면 refresh token을 가지고 재발급 받고
       원래 호출하려던 api에 새로운 access/refresh token을 넣어서 보냄
     */
-    if (
-      error.response.data === "JwtAuthFilter-Access-expired" ||
-      error.response.data === "JwtAuthFilter-Access-Invalid"
-    ) {
+    if (error.response.data === "JwtAuthFilter-Access-expired") {
       // referesh token을 가지고 access token을 발급받는 api 호출
       await axios
         .post(
@@ -55,7 +52,9 @@ instanceWithToken.interceptors.response.use(
           const newRefreshToken = result.headers["x-refresh-token"].split(" ")[1];
           const newAccessToken = result.headers["x-access-token"].split(" ")[1];
           localStorage.setItem("X-REFRESH-TOKEN", `{"X-REFRESH-TOKEN": "${newRefreshToken}"}`);
-          cookies.set("X-ACCESS-TOKEN", newAccessToken);
+          const expires = new Date();
+          expires.setHours(expires.getHours() + 6);
+          cookies.set("X-ACCESS-TOKEN", newAccessToken, { expires: expires });
           originalRequest.headers["X-REFRESH-TOKEN"] = `BEARER ${newRefreshToken}`;
           originalRequest.headers["X-ACCESS-TOKEN"] = `BEARER ${newAccessToken}`;
         })
@@ -71,6 +70,12 @@ instanceWithToken.interceptors.response.use(
       return axios(originalRequest);
       // access token은 유효하지만 refresh-token이 만료되면 로그인 페이지로 이동
       // 안생길듯? access token을 발급받을 때마다 refresh token도 같이 발급 받도록 서버에서 설정!
+    } else if (error.response.data === "JwtAuthFilter-Access-Invalid") {
+      alert("다른 곳에서 로그인 되었습니다. 다시 로그인 해주세요");
+      localStorage.removeItem("X-REFRESH-TOKEN");
+      cookies.remove("X-ACCESS-TOKEN");
+      window.location.href = "/sign-in";
+      return false;
     } else if (error.response.data === "JwtAuthFilter-Refresh-expired") {
       localStorage.removeItem("X-REFRESH-TOKEN");
       cookies.remove("X-ACCESS-TOKEN");
