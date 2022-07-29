@@ -7,7 +7,7 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import { Input } from "../elements/Input";
 import { Button } from "../elements/Button";
-import { GoBackIcon } from "../assets/icons/FigmaIcons";
+import { GoBackIcon, HamburgerIcon } from "../assets/icons/FigmaIcons";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { timeUtils } from "../utils/timeUtils";
 
@@ -35,6 +35,7 @@ const Chatting = () => {
     chatRoomId: "",
     messages: [],
   });
+  const [chatListIsOpen, setChatListIsOpen] = useState<boolean>(false);
 
   const messageRef = useRef<HTMLInputElement>(null);
   const getAllChatList = async () => {
@@ -64,7 +65,7 @@ const Chatting = () => {
   };
 
   const refreshCurrentChat = async () => {
-    await instanceWithToken.post("/api/chat-message-list", { goodsId: boardId }).then((result) => {
+    await instanceWithToken.post("/api/chat-message-list", { goodsId: boardId, partnerId: userId }).then((result) => {
       setCurrentChat(result.data);
     });
   };
@@ -102,55 +103,74 @@ const Chatting = () => {
   return (
     <div className="chatting">
       <div className="chatting-wrapper">
-        <div className="chatting-list-wrapper">
-          <div className="close-button-text">
-            <div
-              className="close-button"
-              onClick={() => {
-                if (!boardId || !userId) {
-                  navigate("/");
-                } else {
-                  navigate(`/board/${boardId}`);
-                }
-              }}
-            >
-              <GoBackIcon />
-            </div>
-            <div className="text">채팅</div>
-          </div>
+        <div
+          className="open-chatting-list-button"
+          onClick={() => {
+            if (chatListIsOpen) {
+              setChatListIsOpen(false);
+            } else {
+              setChatListIsOpen(true);
+            }
+          }}
+        >
+          <HamburgerIcon />
+        </div>
+        <div className={`chatting-list-wrapper ${chatListIsOpen && "chatting-list-wrapper-is-open"}`}>
           <div className="chatting-list-body">
-            {allChatList?.map((item: any) => (
+            <div className="close-button-text">
               <div
-                className={`chatting-list-item ${
-                  currentChat.chatRoomId === item.chatRoomId ? "chatting-selected" : ""
-                }`}
-                key={item.chatRoomId}
+                className="close-button"
                 onClick={() => {
-                  navigate(`/chatting?board_id=${item.goodsId}&user_id=${item.partnerId}`);
+                  if (!boardId || !userId) {
+                    navigate("/");
+                  } else {
+                    navigate(`/board/${boardId}`);
+                  }
                 }}
               >
-                <div className="chatting-profile-img">
-                  {item.partnerProfileUrl === "default" ? (
-                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M12.3333 12C15.6483 12 18.3333 9.315 18.3333 6C18.3333 2.685 15.6483 0 12.3333 0C9.01834 0 6.33334 2.685 6.33334 6C6.33334 9.315 9.01834 12 12.3333 12ZM12.3333 15C8.32834 15 0.333344 17.01 0.333344 21V22.5C0.333344 23.325 1.00834 24 1.83334 24H22.8333C23.6583 24 24.3333 23.325 24.3333 22.5V21C24.3333 17.01 16.3383 15 12.3333 15Z"
-                        fill="#EBEEEF"
-                      />
-                    </svg>
-                  ) : (
-                    <img alt={item.partner} src={item.partnerProfileUrl} />
-                  )}
-                </div>
-                <div className="chatting-text">
-                  <div className="chatting-partner">{item.partner}</div>
-                  <div className="chatting-last-time">{timeUtils.timePass(item.lastDate)}</div>
-                  <div className="chatting-last-message">{item.lastMessage}</div>
-                </div>
-                <div className="chatting-board-img">
-                  <img src={item.goodsFileUrl} />
-                </div>
+                <GoBackIcon />
               </div>
-            ))}
+              <div className="text">채팅</div>
+            </div>
+            <div className="chatting-list-items">
+              {allChatList?.map((item: any) => (
+                <div
+                  className={`chatting-list-item ${
+                    currentChat.chatRoomId === item.chatRoomId ? "chatting-selected" : ""
+                  }`}
+                  key={item.chatRoomId}
+                  onClick={() => {
+                    navigate(`/chatting?board_id=${item.goodsId}&user_id=${item.partnerId}`);
+                    setChatListIsOpen(false);
+                  }}
+                >
+                  <div className="chatting-profile-img">
+                    {item.partnerProfileUrl === "default" ? (
+                      <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M12.3333 12C15.6483 12 18.3333 9.315 18.3333 6C18.3333 2.685 15.6483 0 12.3333 0C9.01834 0 6.33334 2.685 6.33334 6C6.33334 9.315 9.01834 12 12.3333 12ZM12.3333 15C8.32834 15 0.333344 17.01 0.333344 21V22.5C0.333344 23.325 1.00834 24 1.83334 24H22.8333C23.6583 24 24.3333 23.325 24.3333 22.5V21C24.3333 17.01 16.3383 15 12.3333 15Z"
+                          fill="#EBEEEF"
+                        />
+                      </svg>
+                    ) : (
+                      <img alt={item.partner} src={item.partnerProfileUrl} />
+                    )}
+                  </div>
+                  <div className="chatting-text">
+                    <div className="chatting-partner">{item.partner}</div>
+                    <div className="chatting-last-time">{timeUtils.timePass(item.lastDate)}</div>
+                    <div className="chatting-last-message">{item.lastMessage}</div>
+                  </div>
+                  <div className="chatting-board-img">
+                    {item.goodsFileUrl.split(".").at(-1) === "mp4" ? (
+                      <video src={item.goodsFileUrl} />
+                    ) : (
+                      <img src={item.goodsFileUrl} />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         {boardId && userId ? (
