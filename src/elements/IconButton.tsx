@@ -9,6 +9,7 @@ interface IconButtonOptions {
   icon: any;
   fullWidth?: boolean;
   iconSize?: "small" | "medium" | "large";
+  type?: "submit" | "button";
   onClick?: () => void;
   children?: ReactNode;
 }
@@ -22,6 +23,7 @@ export function IconButton({
   fullWidth = false,
   iconSize = "small",
   onClick,
+  type = "button",
   children,
 }: IconButtonOptions) {
   return (
@@ -30,6 +32,7 @@ export function IconButton({
         fullWidth ? "fullWidth" : ""
       } iconbutton-icon-${iconSize}`}
       onClick={onClick}
+      type={type === "submit" ? "submit" : "button"}
     >
       <div className="iconbutton-text">{children}</div>
       {icon}

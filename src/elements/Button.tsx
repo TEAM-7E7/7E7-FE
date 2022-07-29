@@ -7,7 +7,7 @@ interface ButtonOptions {
   color?: "primary" | "submit" | "skyblue";
   fullWidth?: boolean;
   onClick?: (() => void) | (() => Promise<void>);
-  type?: string;
+  type?: "submit" | "button";
   children: ReactNode;
   disabled?: boolean;
 }
@@ -18,7 +18,7 @@ export function Button({
   variant = "filled",
   fullWidth = false,
   onClick,
-  type,
+  type = "button",
   children,
   disabled = false,
 }: ButtonOptions) {
