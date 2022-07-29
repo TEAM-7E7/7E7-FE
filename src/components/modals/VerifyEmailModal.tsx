@@ -26,14 +26,16 @@ const VerifyEmailModal = function SelectUploadTypeModal({
       email: userEmail,
       emailToken: emailTokenRef.current?.value,
     };
-    try {
-      await axios.post(url, verifyEmailRequestBody);
-      alert("이메일 인증이 완료되었습니다.");
-      onSetEmailIsVerified();
-      setModalIsOpen(false);
-    } catch (e) {
-      alert(`인증번호가 일치하지 않습니다.`);
-    }
+    await axios
+      .post(url, verifyEmailRequestBody)
+      .then(() => {
+        alert("이메일 인증이 완료되었습니다.");
+        onSetEmailIsVerified();
+        setModalIsOpen(false);
+      })
+      .catch(() => {
+        alert(`인증번호가 일치하지 않습니다.`);
+      });
   };
   return (
     <>

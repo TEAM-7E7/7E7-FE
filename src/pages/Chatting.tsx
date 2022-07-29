@@ -1,6 +1,6 @@
 import "../styles/pages/chatting.scss";
 import { jwtUtils } from "../utils/jwtUtils";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { instanceWithToken } from "../api/api";
 import { Cookies } from "react-cookie";
 import SockJS from "sockjs-client";
@@ -36,8 +36,13 @@ const Chatting = () => {
     messages: [],
   });
   const [chatListIsOpen, setChatListIsOpen] = useState<boolean>(false);
-
   const messageRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  };
+
   const getAllChatList = async () => {
     await instanceWithToken.get("/api/chat-rooms").then((result) => setAllChatList(result.data));
   };
@@ -56,10 +61,18 @@ const Chatting = () => {
             id: newChatRoomId,
             goodsId: boardId,
           });
-          setCurrentChat({
-            chatRoomId: newChatRoomId,
-            messages: [],
-          });
+          client.send(
+            "/pub/chat/message",
+            {},
+            JSON.stringify({
+              goodsId: boardId,
+              chatRoomId: newChatRoomId,
+              senderId: myId,
+              partnerId: userId,
+              message: "채팅이 시작되었습니다.",
+              createdAt: new Date(),
+            }),
+          );
         });
     }
   };
@@ -84,6 +97,7 @@ const Chatting = () => {
       messageRef.current.value = "";
     }
   };
+
   useEffect(() => {
     getAllChatList();
     getCurrentChat();
@@ -99,6 +113,10 @@ const Chatting = () => {
       });
     };
   }, [boardId, userId]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [currentChat]);
 
   return (
     <div className="chatting">
@@ -177,18 +195,20 @@ const Chatting = () => {
           <div className="chatting-current-wrapper">
             <div className="chatting-current-list">
               {currentChat?.messages?.map((item: any, index: number) => {
-                if (item.senderNickname === myNickname) {
-                  return (
-                    <div className="chatting-current-mine" key={index}>
-                      <div className="chatting-mine">{item.message}</div>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div className="chatting-current-partner" key={index}>
-                      <div className="chatting-partner">{item.message}</div>
-                    </div>
-                  );
+                if (index !== 0) {
+                  if (item.senderNickname === myNickname) {
+                    return (
+                      <div className="chatting-current-mine" key={index} ref={scrollRef}>
+                        <div className="chatting-mine">{item.message}</div>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div className="chatting-current-partner" key={index} ref={scrollRef}>
+                        <div className="chatting-partner">{item.message}</div>
+                      </div>
+                    );
+                  }
                 }
               })}
             </div>
