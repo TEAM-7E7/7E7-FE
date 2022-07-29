@@ -22,20 +22,24 @@ const VerifyEmailModal = function SelectUploadTypeModal({
 }: VerifyEmailModalDto) {
   const emailTokenRef = useRef<HTMLInputElement>(null);
   const verifyEmail = async () => {
-    const verifyEmailRequestBody = {
-      email: userEmail,
-      emailToken: emailTokenRef.current?.value,
-    };
-    await axios
-      .post(url, verifyEmailRequestBody)
-      .then(() => {
-        alert("이메일 인증이 완료되었습니다.");
-        onSetEmailIsVerified();
-        setModalIsOpen(false);
-      })
-      .catch(() => {
-        alert(`인증번호가 일치하지 않습니다.`);
-      });
+    if (emailTokenRef.current?.value === "") {
+      alert("인증번호를 입력해주세요");
+    } else {
+      const verifyEmailRequestBody = {
+        email: userEmail,
+        emailToken: emailTokenRef.current?.value,
+      };
+      await axios
+        .post(url, verifyEmailRequestBody)
+        .then(() => {
+          alert("이메일 인증이 완료되었습니다.");
+          onSetEmailIsVerified();
+          setModalIsOpen(false);
+        })
+        .catch(() => {
+          alert(`인증번호가 일치하지 않습니다.`);
+        });
+    }
   };
   return (
     <>
