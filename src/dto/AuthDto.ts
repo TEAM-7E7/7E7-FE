@@ -3,11 +3,6 @@ export interface SignInDto {
   password: string;
 }
 
-export interface SingInFormDto {
-  email: string;
-  password: string;
-}
-
 export interface SignUpDto {
   email: string;
   nickname: string;
@@ -19,4 +14,23 @@ export interface SignUpFormDto {
   nickname: string;
   password: string;
   password2: string;
+}
+
+export interface PasswordSearchFormDto {
+  email: string;
+  password: string;
+  password2: string;
+}
+
+export interface PasswordChangeDto {
+  password: string;
+}
+
+export interface PasswordChangeFormDto {
+  password: string;
+  password2: string;
+}
+
+export interface NicknameChangeDto {
+  nickname: string;
 }

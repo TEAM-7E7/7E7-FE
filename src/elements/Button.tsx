@@ -6,7 +6,7 @@ interface ButtonOptions {
   size?: "small" | "medium" | "large";
   color?: "primary" | "submit" | "skyblue";
   fullWidth?: boolean;
-  onClick?: () => void;
+  onClick?: (() => void) | (() => Promise<void>);
   type?: string;
   children: ReactNode;
   disabled?: boolean;

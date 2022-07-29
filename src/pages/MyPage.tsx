@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import { jwtUtils } from "../utils/jwtUtils";
 import { Cookies } from "react-cookie";
 import "../styles/pages/mypage.scss";
-import { AlarmIcon, BookMarkIcon, BuyIcon, ChatIcon, SellIcon } from "../assets/icons/FigmaIcons";
+import { AlarmIcon, BookMarkIcon, BuyIcon, ChatIcon, ConfigIcon, SellIcon } from "../assets/icons/FigmaIcons";
 import MyPageBoardList from "../components/myPage/MyPageBoardList";
 import { instanceWithToken } from "../api/api";
 import { Dialog, DialogActions, DialogTitle } from "@mui/material";
 import { Button } from "../elements/Button";
 import { useRefreshToken } from "../recoil/store";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
+  const navigate = useNavigate();
   const cookies = new Cookies();
   const accessToken = cookies.get("X-ACCESS-TOKEN");
   const { refreshToken, setRefreshToken } = useRefreshToken();
@@ -77,7 +79,7 @@ const MyPage = () => {
 
   useEffect(() => {
     setProfileImg(jwtUtils.getProfileImg(accessToken));
-  }, [accessToken, refreshToken]);
+  }, [accessToken]);
 
   return (
     <>
@@ -133,12 +135,15 @@ const MyPage = () => {
               </div>
             </div>
             <div className="message-alarm-icon">
-              <div className="message-icon">
+              <i>
                 <ChatIcon color="#FF965A" />
-              </div>
-              <div className="alarm-icon">
+              </i>
+              <i>
                 <AlarmIcon color="#FFE247" />
-              </div>
+              </i>
+              <i onClick={() => navigate("/setting")}>
+                <ConfigIcon color="#80C9FF" />
+              </i>
             </div>
           </div>
           <div className="mypage-body-board-state-menu">

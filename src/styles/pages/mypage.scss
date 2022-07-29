@@ -10,6 +10,7 @@
   }
   .mypage-body {
     .mypage-body-user-profile {
+      // background-color: #f9f9fa;
       padding: 1.5rem 0;
       display: flex;
       align-items: center;
@@ -74,11 +75,9 @@
       }
       .message-alarm-icon {
         display: flex;
-        .message-icon {
+        align-items: center;
+        i {
           margin-right: 1rem;
-        }
-        .alarm-icon {
-          margin-left: 1rem;
         }
         svg {
           width: 20px;
