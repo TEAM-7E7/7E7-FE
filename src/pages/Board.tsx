@@ -11,7 +11,7 @@ import { useRefreshToken } from "../recoil/store";
 import { BoardCategory, BoardStatus } from "../dto/BoardCategoryAndState";
 import Label from "../elements/Label";
 import { BookMarkIcon } from "../assets/icons/FigmaIcons";
-import Chatting from "../components/Chatting";
+import Chatting from "./Chatting";
 
 const Board = () => {
   const navigate = useNavigate();
@@ -138,7 +138,9 @@ const Board = () => {
                       color="primary"
                       onClick={() => {
                         if (jwtUtils.isValid(refreshToken)) {
-                          setChattingIsOpen(true);
+                          navigate(
+                            `/chatting?board_id=${getBoard?.data.data.id}&user_id=${getBoard?.data.data.accountId}`,
+                          );
                         } else {
                           alert("로그인이 필요합니다.");
                         }
@@ -154,20 +156,12 @@ const Board = () => {
         )}
       </div>
       {jwtUtils.isValid(refreshToken) ? (
-        <>
-          <DeleteBoardModal
-            board_id={Number(board_id)}
-            board_title={getBoard?.data.data.title}
-            modalIsOpen={modalIsOpen}
-            setModalIsOpen={setModalIsOpen}
-          />
-          <Chatting
-            boardId={getBoard?.data.data.id}
-            userId={getBoard?.data.data.accountId}
-            chattingIsOpen={chattingIsOpen}
-            setChattingIsOpen={setChattingIsOpen}
-          />
-        </>
+        <DeleteBoardModal
+          board_id={Number(board_id)}
+          board_title={getBoard?.data.data.title}
+          modalIsOpen={modalIsOpen}
+          setModalIsOpen={setModalIsOpen}
+        />
       ) : null}
     </>
   );

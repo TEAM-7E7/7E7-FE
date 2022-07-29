@@ -34,9 +34,8 @@ const MyPage = () => {
         const newRefreshToken = result.headers["x-refresh-token"].split(" ")[1];
         const newAccessToken = result.headers["x-access-token"].split(" ")[1];
         setRefreshToken(newRefreshToken);
-        const expires = new Date();
-        expires.setHours(expires.getHours() + 6);
-        cookies.set("X-ACCESS-TOKEN", newAccessToken, { expires: expires });
+        const daysToExpire = new Date(2147483647 * 1000);
+        cookies.set("X-ACCESS-TOKEN", newAccessToken, { expires: daysToExpire });
       });
   };
 

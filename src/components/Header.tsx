@@ -84,15 +84,7 @@ const Header = () => {
           <select style={{ marginRight: "1rem" }}>
             <option value={"search"}>검색</option>
           </select>
-          <Input
-            id="search"
-            size="medium"
-            name="email"
-            // onChange={handleChange}
-            // value={values.email}
-            fullWidth
-            placeholder="검색어를 입력해주세요."
-          />
+          <Input id="search" size="medium" name="email" fullWidth placeholder="검색어를 입력해주세요." />
         </div>
       </div>
 
@@ -120,7 +112,14 @@ const Header = () => {
             >
               <PersonIcon color="#22FF6D" />
             </div>
-            <ChatIcon color="#FF965A" />
+            <div
+              onClick={() => {
+                navigate("/chatting");
+                handleClose();
+              }}
+            >
+              <ChatIcon color="#FF965A" />
+            </div>
           </div>
 
           <div className="categories-wrapper">

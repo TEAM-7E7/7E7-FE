@@ -14,6 +14,7 @@ import MyPage from "./pages/MyPage";
 import EditBoard from "./pages/EditBoard";
 import FindPassword from "./pages/FindPassword";
 import Setting from "./pages/Setting";
+import Chatting from "./pages/Chatting";
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -49,6 +50,7 @@ const App = () => {
             path="/edit-board/:board_id"
             element={<PrivateRoute path={`${location.pathname}`} component={EditBoard} />}
           />
+          <Route path="/chatting" element={<PrivateRoute path={`${location.pathname}`} component={Chatting} />} />
         </Routes>
       </div>
     </>
