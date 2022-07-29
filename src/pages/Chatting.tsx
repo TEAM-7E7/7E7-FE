@@ -98,7 +98,7 @@ const Chatting = () => {
         return;
       });
     };
-  }, [boardId]);
+  }, [boardId, userId]);
 
   return (
     <div className="chatting">
