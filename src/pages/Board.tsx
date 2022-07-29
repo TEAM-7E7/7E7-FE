@@ -17,9 +17,9 @@ const Board = () => {
   const navigate = useNavigate();
   const { refreshToken } = useRefreshToken();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [chattingIsOpen, setChattingIsOpen] = useState<boolean>(false);
   const { board_id } = useParams();
   const { getBoard, getBoardIsSuccess, addBookmarkMutation, deleteBookmarkMutation } = useBoardQuery(board_id);
+  console.log(getBoard);
   return (
     <>
       <div className="board-wrapper">
@@ -73,7 +73,10 @@ const Board = () => {
                   </div>
                   <div className="board-price">{getBoard?.data.data.sellPrice}원</div>
                   <div className="board-explain">{getBoard?.data.data.description}</div>
-                  <div className="board-button"></div>
+                  <div className="board-wishcount-viewcount">
+                    <div className="board-wishcount"></div>
+                    <div className="board-wishcount"></div>
+                  </div>
                 </div>
               </div>
               {jwtUtils.isValid(refreshToken) && jwtUtils.getId(refreshToken) === getBoard?.data.data.accountId ? (

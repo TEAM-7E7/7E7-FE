@@ -45,7 +45,7 @@ const Chatting = () => {
   const getCurrentChat = async () => {
     if (boardId && myId !== userId) {
       await instanceWithToken
-        .post("/api/chat-message-list", { goodsId: boardId })
+        .post("/api/chat-message-list", { goodsId: boardId, partnerId: userId })
         .then((result) => {
           setCurrentChat(result.data);
         })
