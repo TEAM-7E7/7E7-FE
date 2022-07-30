@@ -39,6 +39,9 @@ const Chatting = () => {
   const messageRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  console.log(currentChat);
+  console.log(allChatList);
+
   const scrollToBottom = () => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
   };
@@ -99,13 +102,13 @@ const Chatting = () => {
   };
 
   useEffect(() => {
-    getAllChatList();
-    getCurrentChat();
     client.connect({}, () => {
       client.subscribe(`/sub/my-rooms/${myId}`, () => {
         getAllChatList();
         refreshCurrentChat();
       });
+      getAllChatList();
+      getCurrentChat();
     });
     return () => {
       client.disconnect(() => {
