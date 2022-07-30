@@ -24,7 +24,7 @@ svg {
 }
 
 .header-wrapper {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: Pretendard, "Noto Sans KR", sans-serif;
   z-index: 10;
   position: fixed;
   top: 0;
@@ -98,10 +98,9 @@ svg {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-
+    padding: 0 1rem;
     a {
       flex-shrink: 0;
-      margin: 0 0.8rem;
       color: #6f4ef2;
       letter-spacing: -0.5px;
       font-weight: 800;
@@ -112,15 +111,15 @@ svg {
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
+      width: 3rem;
+      height: 3rem;
       background-color: #6f4ef2;
 
       svg {
         display: block;
         fill: #fff;
-        width: 20px;
-        height: 20px;
+        width: 1.25rem;
+        height: 1.25rem;
         cursor: pointer;
       }
     }
@@ -129,31 +128,53 @@ svg {
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
+      width: 3.5rem;
+      height: 3.5rem;
       background-color: transparent;
 
       svg {
         display: block;
         fill: #fff;
-        width: 20px;
-        height: 20px;
+        width: 1.5rem;
+        height: 1.5rem;
         cursor: pointer;
       }
+    }
+
+    .icon-auth {
+      svg{
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+    }
+
+    .icon-hover{
+      position: relative;
+      &:hover{
+        .hover-text{
+          color: #6f4ef2;
+        }
+      }
+      .hover-text{
+        font-size: 0.5rem;
+        position: absolute;
+        bottom: 0;
+        color: white;
+      }
+
     }
   }
 }
 
 .slide-menu {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: Pretendard, "Noto Sans KR", sans-serif;
+  //font-family: "Noto Sans KR", sans-serif;
   user-select: none;
   position: fixed;
   top: 0;
   bottom: 0;
   z-index: 9999;
   width: 100vw;
-
   transition: cubic-bezier(0.215, 0.61, 0.355, 1) all 400ms;
 
   .backdrop-overlay {
@@ -161,7 +182,7 @@ svg {
     width: 100%;
     height: 100%;
     background-color: #6f4ef233;
-    backdrop-filter: blur(5px) saturate(30%);
+    backdrop-filter: blur(1px) saturate(0%);
 
     cursor: pointer;
   }

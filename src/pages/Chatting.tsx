@@ -102,8 +102,8 @@ const Chatting = () => {
   };
 
   useEffect(() => {
-    client.connect({}, () => {
-      client.subscribe(`/sub/my-rooms/${myId}`, () => {
+    client.connect({}, async () => {
+      await client.subscribe(`/sub/my-rooms/${myId}`, () => {
         getAllChatList();
         refreshCurrentChat();
       });

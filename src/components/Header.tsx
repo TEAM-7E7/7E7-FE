@@ -6,8 +6,9 @@ import {
   AlarmIcon,
   PersonIcon,
   ChatIcon,
-  ConfigIcon,
   SearchIcon,
+  LoginIcon,
+  LogoutIcon,
 } from "../assets/icons/FigmaIcons";
 import { useState } from "react";
 import CategoryItem from "./CategoryItem";
@@ -54,13 +55,18 @@ const Header = () => {
           <div className="header-menu">
             {!jwtUtils.isValid(refreshToken) ? (
               <>
-                <Link to="/sign-in">로그인</Link>
-                <Link to="/sign-up">회원가입</Link>
+                <Link to="/sign-in">
+                  <div className="header-icon-transparent icon-auth">
+                    <LoginIcon />
+                  </div>
+                </Link>
               </>
             ) : (
               <>
                 <Link to="#" onClick={logout}>
-                  로그아웃
+                  <div className="header-icon-transparent icon-auth">
+                    <LogoutIcon />
+                  </div>
                 </Link>
               </>
             )}
@@ -73,8 +79,9 @@ const Header = () => {
             </div>
 
             <Link to="/add-board">
-              <div className="header-icon">
+              <div className="header-icon-transparent icon-hover">
                 <UploadIcon />
+                <div className="hover-text">업로드</div>
               </div>
             </Link>
           </div>

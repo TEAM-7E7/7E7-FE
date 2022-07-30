@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard.css");
 
 // snap-scroll-wrapper에서 %높이를 사용하려면 여기서 먼저 높이를 지정해야함
 // body는 기본적으로 높이값이 없기 때문에 높이를 줘야함
 html,
 body {
   height: 100%;
-  overflow: overlay;
+  overflow: auto;
+  //font-family: "Noto Sans KR", sans-serif;
 }
 
 //body의 자식인 root도 height를 먹여줌

@@ -1,7 +1,7 @@
 button {
   border-radius: 20px;
   cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: Pretendard, "Noto Sans KR", sans-serif;
 }
 
 .left-right{
@@ -85,6 +85,9 @@ button {
   color: #fff;
   svg{
     fill:#fff;
+  }
+  path{
+    fill: #fff;
   }
 }
 
