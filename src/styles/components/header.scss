@@ -257,6 +257,15 @@ svg {
           line-height: 0;
           color: #606060;
         }
+
+        svg{
+          width: 1rem;
+          height: 1rem;
+          fill: white;
+          stroke: #C1BEFF;
+          stroke-width : 2px;
+          stroke-linecap : round;
+        }
       }
 
       .selected {
@@ -265,6 +274,9 @@ svg {
         p {
           color: #6f4ef2;
           font-weight: 700;
+        }
+        svg{
+          fill: yellow;
         }
       }
     }

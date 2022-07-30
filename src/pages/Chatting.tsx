@@ -59,25 +59,34 @@ const Chatting = () => {
         .then((result) => {
           setCurrentChat(result.data);
         })
-        .catch(async () => {
-          const currentTime = Date.now();
-          const newChatRoomId = currentTime.toString() + myNickname;
-          await instanceWithToken.post("https://tryaz.shop/api/room", {
-            id: newChatRoomId,
-            goodsId: boardId,
-          });
-          client.send(
-            "/pub/chat/message",
-            {},
-            JSON.stringify({
-              goodsId: boardId,
-              chatRoomId: newChatRoomId,
-              senderId: myId,
-              partnerId: userId,
-              message: "채팅이 시작되었습니다.",
-              createdAt: new Date(),
-            }),
-          );
+        .catch(async (err) => {
+          if (err.response.data.code === "CHAT_ROOM_NOT_FOUND") {
+            const currentTime = Date.now();
+            const newChatRoomId = currentTime.toString() + myNickname;
+            await instanceWithToken
+              .post("https://tryaz.shop/api/room", {
+                id: newChatRoomId,
+                goodsId: boardId,
+              })
+              .then(() => {
+                client.send(
+                  "/pub/chat/message",
+                  {},
+                  JSON.stringify({
+                    goodsId: boardId,
+                    chatRoomId: newChatRoomId,
+                    senderId: myId,
+                    partnerId: userId,
+                    message: "채팅이 시작되었습니다.",
+                    createdAt: new Date(),
+                  }),
+                );
+              })
+              .catch((err) => {
+                alert(err.response.data.message);
+                navigate("/chatting");
+              });
+          }
         });
     }
   };

@@ -56,7 +56,7 @@ const VerifyEmailModal = function SelectUploadTypeModal({
               </div>
               <div className="modal-body-input-button">
                 <div className="modal-body-input">
-                  <Input ref={emailTokenRef} fullWidth />
+                  <Input ref={emailTokenRef} fullWidth placeholder="인증번호를 입력하세요" />
                 </div>
                 <div className="modal-body-button">
                   <Button

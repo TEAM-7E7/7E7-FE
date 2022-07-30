@@ -2,6 +2,7 @@ import "../styles/components/header.scss";
 import { useBoardConfig } from "../recoil/store";
 import { useNavigate } from "react-router-dom";
 import { useBoardInfiniteQueryReset } from "../react-query/query/useBoardInfiniteQueryReset";
+import { StarIcon } from "../assets/icons/FigmaIcons";
 
 interface CategoryItemOptions {
   name: string;
@@ -23,6 +24,9 @@ const CategoryItem = ({ name, value }: CategoryItemOptions) => {
           }}
         >
           <p>{name}</p>
+          <div>
+            <StarIcon />
+          </div>
         </div>
       ) : (
         <div
@@ -33,6 +37,9 @@ const CategoryItem = ({ name, value }: CategoryItemOptions) => {
           }}
         >
           <p>{name}</p>
+          <div>
+            <StarIcon />
+          </div>
         </div>
       )}
     </div>
