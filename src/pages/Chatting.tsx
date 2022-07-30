@@ -23,6 +23,7 @@ const Chatting = () => {
   const userId = searchParams.get("user_id");
   const socket = new SockJS("https://tryaz.shop/api/ws");
   const client = Stomp.over(socket);
+  const [isConnect, setIsConnect] = useState<boolean>(false);
   // 내 id, nickname 가져오기
   const cookies = new Cookies();
   const accessToken = cookies.get("X-ACCESS-TOKEN");
@@ -39,6 +40,7 @@ const Chatting = () => {
   const messageRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  console.log(isConnect);
   console.log(currentChat);
   console.log(allChatList);
 
@@ -102,16 +104,18 @@ const Chatting = () => {
   };
 
   useEffect(() => {
-    client.connect({}, async () => {
-      await client.subscribe(`/sub/my-rooms/${myId}`, () => {
+    client.connect({}, () => {
+      client.subscribe(`/sub/my-rooms/${myId}`, () => {
         getAllChatList();
         refreshCurrentChat();
       });
+      setIsConnect(true);
       getAllChatList();
       getCurrentChat();
     });
     return () => {
       client.disconnect(() => {
+        setIsConnect(false);
         return;
       });
     };
@@ -215,16 +219,18 @@ const Chatting = () => {
                 }
               })}
             </div>
-            <div className="chatting-send-input-button">
-              <div className="chatting-send-input">
-                <Input ref={messageRef} placeholder="메세지를 입력해보세요." />
+            {isConnect && (
+              <div className="chatting-send-input-button">
+                <div className="chatting-send-input">
+                  <Input ref={messageRef} placeholder="메세지를 입력해보세요." />
+                </div>
+                <div className="chatting-send-button">
+                  <Button color="primary" onClick={sendMessage}>
+                    전송
+                  </Button>
+                </div>
               </div>
-              <div className="chatting-send-button">
-                <Button color="primary" onClick={sendMessage}>
-                  전송
-                </Button>
-              </div>
-            </div>
+            )}
           </div>
         ) : (
           <div className="select-chatting-text">채팅 목록에서 상대를 선택해주세요!</div>
