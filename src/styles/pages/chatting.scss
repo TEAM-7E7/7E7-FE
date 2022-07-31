@@ -71,7 +71,7 @@
 
         .close-button-text {
           display: flex;
-          padding: 0 1.5rem;
+          padding: 0 2.5rem;
           justify-content: space-between;
           align-items: center;
 
@@ -180,11 +180,20 @@
     }
 
     .chatting-current-wrapper {
-      padding: 5rem;
+      padding: 4rem 6rem;
       box-sizing: border-box;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
+
+      .chatting-current-header{
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        font-size: 2rem;
+        font-weight: bold;
+        border-bottom: 1px solid #A9B5BC;
+      }
+
 
       .chatting-current-list {
         flex-grow: 1;
@@ -194,6 +203,15 @@
         &::-webkit-scrollbar {
           display: none
         }
+
+        .chatting-start-message{
+          text-align: center;
+          color: #606060;
+          font-size: 1.25rem;
+          line-height: 1.75rem;
+          margin-bottom: 2rem;
+        }
+
         .chatting-current-mine, .chatting-current-partner {
           margin: 1rem;
 
@@ -203,6 +221,7 @@
           padding: 0.75rem 1.75rem;
           max-width: 40%;
           border-radius: 16px;
+          font-size: 1.25rem;
           word-break: break-all;
         }
 
@@ -218,6 +237,28 @@
 
         .chatting-current-partner {
           display: flex;
+          align-items: flex-start;
+          .chatting-partner-img{
+            background-color: #adadad;
+            // outline: 2px solid #adadad66;
+            box-shadow: 0 0 0px 2px #adadad;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 8px;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+
+            img {
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
+            }
+          }
 
           .chatting-partner {
             background: #E3E1FB;
@@ -226,15 +267,18 @@
       }
 
       .chatting-send-input-button {
-        margin: 1rem;
+        margin-top: 1rem;
         display: flex;
         justify-content: center;
 
         .chatting-send-input {
-          margin-right: 2rem;
+          max-width: 50%;
+          margin-right: 0.5rem;
+          flex-grow: 1;
         }
 
         .chatting-send-button {
+          flex-shrink: 0;
         }
       }
     }

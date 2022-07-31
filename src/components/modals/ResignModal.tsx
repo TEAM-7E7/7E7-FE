@@ -4,6 +4,8 @@ import "../../styles/components/modals/settingmodal.scss";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { instanceWithToken } from "../../api/api";
+import { Cookies } from "react-cookie";
+import { useRefreshToken } from "../../recoil/store";
 
 interface ResignModalDto {
   open: boolean;
@@ -12,10 +14,13 @@ interface ResignModalDto {
 
 const ResignModal = function SelectUploadTypeModal({ open, handleClose }: ResignModalDto) {
   const navigate = useNavigate();
-
+  const cookies = new Cookies();
+  const { setRefreshToken } = useRefreshToken();
   const resign = async () => {
     try {
       await instanceWithToken.delete("https://tryaz.shop/api/user/sign-out");
+      setRefreshToken("");
+      cookies.remove("X-ACCESS-TOKEN");
       toast.success(<h3>탈퇴 처리가 반영되었습니다.</h3>, {
         position: "top-center",
         autoClose: 2000,

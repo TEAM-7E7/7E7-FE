@@ -36,13 +36,12 @@ export const Video = memo(({ src, autoPlay = false }: VideoOptions) => {
   useEffect(() => {
     if (isView) {
       setIsPlaying(true);
-      handleSoundOn();
     }
   }, [isView]);
 
   return (
     <div className="video-body">
-      <video src={src} autoPlay={autoPlay} muted={true} ref={videoRef} />
+      <video src={src} autoPlay={autoPlay} muted={true} ref={videoRef} loop={true} />
       <div className="video-body-center" ref={videoIsViewRef} />
       <div className="video-volume-icon">
         {isMuted ? (

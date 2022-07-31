@@ -13,6 +13,9 @@ import { timeUtils } from "../utils/timeUtils";
 
 interface CurrentChatDto {
   chatRoomId: string;
+  goodsTitle: string;
+  myProfileUrl: string;
+  partnerProfileUrl: string;
   messages: any;
 }
 
@@ -34,15 +37,16 @@ const Chatting = () => {
   // 현재 채팅의 boardId, 채팅(채팅 방 id, message), partner id
   const [currentChat, setCurrentChat] = useState<CurrentChatDto>({
     chatRoomId: "",
+    goodsTitle: "",
+    myProfileUrl: "",
+    partnerProfileUrl: "",
     messages: [],
   });
   const [chatListIsOpen, setChatListIsOpen] = useState<boolean>(false);
   const messageRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  console.log(isConnect);
   console.log(currentChat);
-  console.log(allChatList);
 
   const scrollToBottom = () => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
@@ -106,9 +110,21 @@ const Chatting = () => {
       message: messageRef?.current?.value,
       createdAt: new Date(),
     };
-    client.send("/pub/chat/message", {}, JSON.stringify(newMessage));
     if (messageRef.current) {
-      messageRef.current.value = "";
+      if (messageRef.current.value !== "") {
+        if (messageRef.current.value.length > 50) {
+          alert("메시지는 최대 50자까지 보낼 수 있습니다.");
+        } else {
+          client.send("/pub/chat/message", {}, JSON.stringify(newMessage));
+          messageRef.current.value = "";
+        }
+      }
+    }
+  };
+
+  const handleOnKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      sendMessage();
     }
   };
 
@@ -118,8 +134,8 @@ const Chatting = () => {
         getAllChatList();
         refreshCurrentChat();
       });
-      getAllChatList();
-      getCurrentChat();
+      await getAllChatList();
+      await getCurrentChat();
       setIsConnect(true);
     });
     return () => {
@@ -209,7 +225,14 @@ const Chatting = () => {
         </div>
         {boardId && userId ? (
           <div className="chatting-current-wrapper">
+            <div className="chatting-current-header">
+              <div className="chatting-current-partner-nickname">상대방이름</div>
+              <div className="chatting-current-partner-board">{currentChat.goodsTitle}</div>
+            </div>
             <div className="chatting-current-list">
+              <div className="chatting-start-message">
+                채팅이 시작되었어요! <br /> 배려하는 마음으로 즐거운 거래를 시작해보세요!
+              </div>
               {currentChat?.messages?.map((item: any, index: number) => {
                 if (index !== 0) {
                   if (item.senderNickname === myNickname) {
@@ -221,6 +244,24 @@ const Chatting = () => {
                   } else {
                     return (
                       <div className="chatting-current-partner" key={index} ref={scrollRef}>
+                        <div className="chatting-partner-img">
+                          {currentChat.partnerProfileUrl === "default" ? (
+                            <svg
+                              width="25"
+                              height="24"
+                              viewBox="0 0 25 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12.3333 12C15.6483 12 18.3333 9.315 18.3333 6C18.3333 2.685 15.6483 0 12.3333 0C9.01834 0 6.33334 2.685 6.33334 6C6.33334 9.315 9.01834 12 12.3333 12ZM12.3333 15C8.32834 15 0.333344 17.01 0.333344 21V22.5C0.333344 23.325 1.00834 24 1.83334 24H22.8333C23.6583 24 24.3333 23.325 24.3333 22.5V21C24.3333 17.01 16.3383 15 12.3333 15Z"
+                                fill="#EBEEEF"
+                              />
+                            </svg>
+                          ) : (
+                            <img src={currentChat.partnerProfileUrl} />
+                          )}
+                        </div>
                         <div className="chatting-partner">{item.message}</div>
                       </div>
                     );
@@ -231,7 +272,12 @@ const Chatting = () => {
             {isConnect && (
               <div className="chatting-send-input-button">
                 <div className="chatting-send-input">
-                  <Input ref={messageRef} placeholder="메세지를 입력해보세요." />
+                  <Input
+                    ref={messageRef}
+                    placeholder="메세지를 입력해보세요."
+                    onKeyPress={handleOnKeyPress}
+                    fullWidth
+                  />
                 </div>
                 <div className="chatting-send-button">
                   <Button color="primary" onClick={sendMessage}>

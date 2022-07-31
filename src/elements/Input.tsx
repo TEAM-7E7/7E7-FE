@@ -10,6 +10,7 @@ interface InputOptions {
   value?: any;
   onChange?: any;
   onClick?: any;
+  onKeyPress?: any;
   name?: string;
   type?: string;
   disabled?: boolean;
@@ -25,6 +26,7 @@ export const Input = forwardRef(function (
     placeholder,
     onChange,
     onClick,
+    onKeyPress,
     name,
     type,
     disabled = false,
@@ -42,6 +44,7 @@ export const Input = forwardRef(function (
       placeholder={placeholder}
       onChange={onChange}
       onClick={onClick}
+      onKeyPress={onKeyPress}
       name={name}
       type={type}
       disabled={!!disabled}

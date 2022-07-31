@@ -65,10 +65,6 @@ const AddBoard = () => {
                     <Video src={values.files[0].preview_URL} autoPlay={true} />
                   ))}
               </div>
-              {Object.keys(errors).map((item) => {
-                console.log(values.files);
-                return null;
-              })}
               <div className="addboard-form">
                 <div className="drag-explain">썸네일을 드래그해서 순서를 바꿀 수 있어요!</div>
                 <div className="upload-item">
@@ -88,7 +84,13 @@ const AddBoard = () => {
                   </div>
                 </div>
                 {values.files.length > 0 ? (
-                  <div className="addboard-form-error">✔ 사진/비디오 등록이 완료되었습니다!</div>
+                  <>
+                    {values.files.length > 5 ? (
+                      <div className="addboard-form-error">🗙 사진/비디오는 5개 까지 등록 가능합니다!</div>
+                    ) : (
+                      <div className="addboard-form-error">✔ 사진/비디오 등록이 완료되었습니다!</div>
+                    )}
+                  </>
                 ) : (
                   <div className="addboard-form-error">🗙 최소 하나 이상의 사진/비디오를 등록해주세요!</div>
                 )}

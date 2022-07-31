@@ -10,8 +10,8 @@ import DeleteBoardModal from "../components/modals/DeleteBoardModal";
 import { useRefreshToken } from "../recoil/store";
 import { BoardCategory, BoardStatus } from "../dto/BoardCategoryAndState";
 import Label from "../elements/Label";
-import { BookMarkIcon } from "../assets/icons/FigmaIcons";
-import Chatting from "./Chatting";
+import { BookMarkIcon, ViewIcon } from "../assets/icons/FigmaIcons";
+import { IconButton } from "../elements/IconButton";
 
 const Board = () => {
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ const Board = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const { board_id } = useParams();
   const { getBoard, getBoardIsSuccess, addBookmarkMutation, deleteBookmarkMutation } = useBoardQuery(board_id);
-  console.log(getBoard);
   return (
     <>
       <div className="board-wrapper">
@@ -74,8 +73,18 @@ const Board = () => {
                   <div className="board-price">{getBoard?.data.data.sellPrice}원</div>
                   <div className="board-explain">{getBoard?.data.data.description}</div>
                   <div className="board-wishcount-viewcount">
-                    <div className="board-wishcount"></div>
-                    <div className="board-wishcount"></div>
+                    <div className="board-wishcount">
+                      <div className="board-wishcount-icon">
+                        <BookMarkIcon />
+                      </div>
+                      {getBoard?.data.data.wishIds.length}
+                    </div>
+                    <div className="board-viewcount">
+                      <div className="board-viewcount-icon">
+                        <ViewIcon />
+                      </div>
+                      {getBoard?.data.data.viewCount}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -113,7 +122,9 @@ const Board = () => {
                           alert("저장목록에서 제외되었습니다.");
                         }}
                       >
-                        <BookMarkIcon />
+                        <IconButton icon={<BookMarkIcon />} fullWidth>
+                          저장취소
+                        </IconButton>
                       </div>
                     ) : (
                       <div
@@ -123,7 +134,9 @@ const Board = () => {
                           alert("저장목록에 추가되었습니다.");
                         }}
                       >
-                        <BookMarkIcon />
+                        <IconButton icon={<BookMarkIcon />} fullWidth>
+                          저장하기
+                        </IconButton>
                       </div>
                     )
                   ) : (
@@ -133,7 +146,9 @@ const Board = () => {
                         alert("로그인이 필요합니다");
                       }}
                     >
-                      <BookMarkIcon />
+                      <IconButton icon={<BookMarkIcon />} fullWidth>
+                        저장하기
+                      </IconButton>
                     </div>
                   )}
                   <div className="button-message">

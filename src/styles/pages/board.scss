@@ -18,6 +18,7 @@
     }
 
     .board-contents {
+      position: relative;
       height: 38.75rem;
       border: 2px solid #e3e1fb;
       padding: 2rem;
@@ -75,7 +76,6 @@
 
       .board-contents-text {
         width: 25rem;
-
         .board-title-status {
           display: flex;
           align-items: flex-start;
@@ -100,8 +100,37 @@
           height: 16rem;
           word-break: break-all;
         }
-        .board-wishcount-viewcount{
+      }
 
+      .board-wishcount-viewcount{
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        display: flex;
+        font-size: 1.25rem;
+        .board-wishcount, .board-viewcount{
+          display: flex;
+          align-items: center;
+        }
+        .board-wishcount{
+          .board-wishcount-icon{
+            display: flex;
+            align-items: center;
+            margin-right: 0.25rem;
+          }
+          margin-right: 1rem;
+        }
+        .board-viewcount{
+          .board-viewcount-icon{
+            display: flex;
+            align-items: center;
+            margin-right: 0.25rem;
+          }
+        }
+        svg{
+          width: 1.25rem;
+          height: 1.25rem;
+          fill: #ADADAD;
         }
       }
     }
@@ -123,14 +152,12 @@
       margin-top: 1rem;
       display: flex;
       justify-content: space-between;
-
       .button-bookmark,
       .button-bookmark-filled {
-        svg {
-          width: 3rem;
-          height: 3rem;
-          stroke: yellow;
-          stroke-width: 3px;
+        flex-grow: 1;
+        margin-right: 1rem;
+        button{
+          padding: 1rem 1.75rem;
         }
       }
 
