@@ -5,6 +5,7 @@ import { instanceWithToken } from "../api/api";
 import { Cookies } from "react-cookie";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
+import * as StompJs from "@stomp/stompjs";
 import { Input } from "../elements/Input";
 import { Button } from "../elements/Button";
 import { GoBackIcon, HamburgerIcon } from "../assets/icons/FigmaIcons";
@@ -25,8 +26,9 @@ const Chatting = () => {
   const [searchParams] = useSearchParams();
   const boardId = searchParams.get("board_id");
   const userId = searchParams.get("user_id");
-  const socket = new SockJS("https://tryaz.shop/api/ws");
-  const client = Stomp.over(socket);
+  const client = useRef<any>({});
+  /*const socket = new SockJS("https://tryaz.shop/api/ws");
+  let client = Stomp.over(socket);*/
   const [isConnect, setIsConnect] = useState<boolean>(false);
   // 내 id, nickname 가져오기
   const cookies = new Cookies();
@@ -73,10 +75,9 @@ const Chatting = () => {
                 goodsId: boardId,
               })
               .then(() => {
-                client.send(
-                  "/pub/chat/message",
-                  {},
-                  JSON.stringify({
+                client.current.publish({
+                  destination: "/pub/chat/message",
+                  body: JSON.stringify({
                     goodsId: boardId,
                     chatRoomId: newChatRoomId,
                     senderId: myId,
@@ -84,7 +85,7 @@ const Chatting = () => {
                     message: "marketclipchatstarter",
                     createdAt: new Date(),
                   }),
-                );
+                });
               })
               .catch((err) => {
                 alert(err.response.data.message);
@@ -101,7 +102,7 @@ const Chatting = () => {
     });
   };
 
-  const sendMessage = () => {
+  /*const sendMessage = () => {
     const newMessage = {
       goodsId: boardId,
       chatRoomId: currentChat.chatRoomId,
@@ -120,7 +121,7 @@ const Chatting = () => {
         }
       }
     }
-  };
+  };*/
 
   const handleOnKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -128,25 +129,92 @@ const Chatting = () => {
     }
   };
 
-  useEffect(() => {
-    client.connect({}, async () => {
-      await client.subscribe(`/sub/my-rooms/${myId}`, (message) => {
-        if (message.body.split(" ")[1] === "채팅방") {
-          alert("상대방이 채팅방에서 나갔습니다.");
-          navigate("/chatting");
-        }
-        refreshCurrentChat();
-        getAllChatList();
-      });
-      await getCurrentChat();
-      await getAllChatList();
-      setIsConnect(true);
+  const stompConnect = () => {
+    client.current = new StompJs.Client({
+      webSocketFactory: () => new SockJS("https://tryaz.shop/api/ws"),
+      debug: (str) => {
+        console.log(str);
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onConnect: () => {
+        stompSubscribe();
+      },
+      onStompError: (frame) => {
+        console.error(frame);
+      },
     });
+    client.current.activate();
+  };
+
+  const stompSubscribe = () => {
+    client.current.subscribe(`/sub/my-rooms/${myId}`, (message: any) => {
+      if (message.body.split(" ")[1] === "채팅방") {
+        alert("상대방이 채팅방에서 나갔습니다.");
+        navigate("/chatting");
+      }
+      refreshCurrentChat();
+      getAllChatList();
+    });
+    getCurrentChat();
+    getAllChatList();
+    setIsConnect(true);
+  };
+
+  const sendMessage = () => {
+    const newMessage = {
+      goodsId: boardId,
+      chatRoomId: currentChat.chatRoomId,
+      senderId: myId,
+      partnerId: userId,
+      message: messageRef?.current?.value,
+      createdAt: new Date(),
+    };
+    if (messageRef.current) {
+      if (messageRef.current.value !== "") {
+        if (messageRef.current.value.length > 50) {
+          alert("메시지는 최대 50자까지 보낼 수 있습니다.");
+        } else {
+          client.current.publish({ destination: "/pub/chat/message", body: JSON.stringify(newMessage) });
+          messageRef.current.value = "";
+        }
+      }
+    }
+  };
+
+  // stomp
+  /*const stompSuccessCallback = async () => {
+    await client.subscribe(`/sub/my-rooms/${myId}`, (message) => {
+      if (message.body.split(" ")[1] === "채팅방") {
+        alert("상대방이 채팅방에서 나갔습니다.");
+        navigate("/chatting");
+      }
+      refreshCurrentChat();
+      getAllChatList();
+    });
+    await getCurrentChat();
+    await getAllChatList();
+    setIsConnect(true);
+  };
+
+  const stompFailureCallback = (err: any) => {
+    client = Stomp.over(socket);
+    console.log(err);
+    setTimeout(() => {
+      stompConnect();
+    }, 10000);
+  };
+
+  const stompConnect = () => {
+    client.connect({}, stompSuccessCallback, stompFailureCallback);
+  };
+*/
+  useEffect(() => {
+    stompConnect();
     return () => {
-      client.disconnect(() => {
-        setIsConnect(false);
-        return;
-      });
+      client.current.deactivate();
+      setIsConnect(false);
     };
   }, [boardId, userId]);
 
@@ -212,8 +280,10 @@ const Chatting = () => {
                   </div>
                   <div className="chatting-text">
                     <div className="chatting-partner">
-                      {item.partner}{" "}
-                      {item.checkReadCnt !== 0 && item.chatRoomId !== currentChat.chatRoomId && item.checkReadCnt}
+                      <div className="chatting-partner-name">{item.partner}</div>
+                      {item.checkReadCnt !== 0 && item.chatRoomId !== currentChat.chatRoomId && (
+                        <div className="chatting-partner-unread">{item.checkReadCnt}</div>
+                      )}
                     </div>
                     <div className="chatting-last-time">{timeUtils.timePass(item.lastDate)}</div>
                     <div className="chatting-last-message">{item.lastMessage}</div>

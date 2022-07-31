@@ -74,6 +74,16 @@ svg {
       color: #6f4ef2;
     }
 
+    .header-title-icon{
+      margin-right: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        width: 2rem;
+        height: 2rem;
+      }
+    }
     .header-icon {
       display: flex;
       align-items: center;

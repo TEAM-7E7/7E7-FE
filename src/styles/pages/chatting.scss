@@ -132,17 +132,41 @@
               overflow: hidden;
 
               .chatting-partner {
-                font-size: 1.5rem;
-                font-weight: bold;
+                display: flex;
+                align-items: center;
+
+                .chatting-partner-name {
+                  font-size: 1.25rem;
+                  font-weight: bold;
+                  margin-right: 0.5rem;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                }
+
+                .chatting-partner-unread {
+                  flex-shrink: 0;
+                  background: #ff7a6b;
+                  min-width: 0.8rem;
+                  height: 0.8rem;
+                  font-size: 0.8rem;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 0.2rem;
+                  color: #ffffff;
+                  border-radius: 40%;
+
+                }
               }
 
               .chatting-last-time {
-                font-size: 1.25rem;
+                font-size: 1rem;
                 color: #ADADAD;
               }
 
               .chatting-last-message {
-                font-size: 1.25rem;
+                font-size: 1rem;
                 color: #ADADAD;
                 overflow: hidden;
                 white-space: nowrap;
@@ -186,7 +210,7 @@
       display: flex;
       flex-direction: column;
 
-      .chatting-current-header{
+      .chatting-current-header {
         margin-bottom: 2rem;
         padding-bottom: 1rem;
         font-size: 2rem;
@@ -204,7 +228,7 @@
           display: none
         }
 
-        .chatting-start-message{
+        .chatting-start-message {
           text-align: center;
           color: #606060;
           font-size: 1.25rem;
@@ -238,7 +262,8 @@
         .chatting-current-partner {
           display: flex;
           align-items: flex-start;
-          .chatting-partner-img{
+
+          .chatting-partner-img {
             background-color: #adadad;
             // outline: 2px solid #adadad66;
             box-shadow: 0 0 0px 2px #adadad;

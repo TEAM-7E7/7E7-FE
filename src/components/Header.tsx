@@ -48,6 +48,9 @@ const Header = () => {
               <HamburgerIcon />
             </div>
             <Link to="/">
+              <div className="header-title-icon">
+                <img src="/favicon.svg" />
+              </div>
               <span>MarketClip</span>
             </Link>
           </div>
