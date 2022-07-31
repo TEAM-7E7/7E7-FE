@@ -15,6 +15,7 @@ interface CurrentChatDto {
   chatRoomId: string;
   goodsTitle: string;
   myProfileUrl: string;
+  partnerNickname: string;
   partnerProfileUrl: string;
   messages: any;
 }
@@ -39,14 +40,13 @@ const Chatting = () => {
     chatRoomId: "",
     goodsTitle: "",
     myProfileUrl: "",
+    partnerNickname: "",
     partnerProfileUrl: "",
     messages: [],
   });
   const [chatListIsOpen, setChatListIsOpen] = useState<boolean>(false);
   const messageRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  console.log(currentChat);
 
   const scrollToBottom = () => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
@@ -81,7 +81,7 @@ const Chatting = () => {
                     chatRoomId: newChatRoomId,
                     senderId: myId,
                     partnerId: userId,
-                    message: "채팅이 시작되었습니다.",
+                    message: "marketclipchatstarter",
                     createdAt: new Date(),
                   }),
                 );
@@ -130,12 +130,16 @@ const Chatting = () => {
 
   useEffect(() => {
     client.connect({}, async () => {
-      await client.subscribe(`/sub/my-rooms/${myId}`, () => {
-        getAllChatList();
+      await client.subscribe(`/sub/my-rooms/${myId}`, (message) => {
+        if (message.body.split(" ")[1] === "채팅방") {
+          alert("상대방이 채팅방에서 나갔습니다.");
+          navigate("/chatting");
+        }
         refreshCurrentChat();
+        getAllChatList();
       });
-      await getAllChatList();
       await getCurrentChat();
+      await getAllChatList();
       setIsConnect(true);
     });
     return () => {
@@ -207,7 +211,10 @@ const Chatting = () => {
                     )}
                   </div>
                   <div className="chatting-text">
-                    <div className="chatting-partner">{item.partner}</div>
+                    <div className="chatting-partner">
+                      {item.partner}{" "}
+                      {item.checkReadCnt !== 0 && item.chatRoomId !== currentChat.chatRoomId && item.checkReadCnt}
+                    </div>
                     <div className="chatting-last-time">{timeUtils.timePass(item.lastDate)}</div>
                     <div className="chatting-last-message">{item.lastMessage}</div>
                   </div>
@@ -226,7 +233,29 @@ const Chatting = () => {
         {boardId && userId ? (
           <div className="chatting-current-wrapper">
             <div className="chatting-current-header">
-              <div className="chatting-current-partner-nickname">상대방이름</div>
+              <div className="delete-chatting-button">
+                <Button
+                  onClick={async () => {
+                    const deleteChattingRequestBody: any = {
+                      chatRoomId: currentChat.chatRoomId,
+                    };
+                    await instanceWithToken
+                      .delete("/api/room", {
+                        data: deleteChattingRequestBody,
+                      })
+                      .then(() => {
+                        alert("채팅방이 삭제되었습니다!");
+                        navigate("/chatting");
+                      })
+                      .catch(() => {
+                        alert("채팅방을 삭제할 수 없습니다.");
+                      });
+                  }}
+                >
+                  삭제하기
+                </Button>
+              </div>
+              <div className="chatting-current-partner-nickname">{currentChat.partnerNickname}</div>
               <div className="chatting-current-partner-board">{currentChat.goodsTitle}</div>
             </div>
             <div className="chatting-current-list">

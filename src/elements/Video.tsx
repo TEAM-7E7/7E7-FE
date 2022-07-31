@@ -36,6 +36,7 @@ export const Video = memo(({ src, autoPlay = false }: VideoOptions) => {
   useEffect(() => {
     if (isView) {
       setIsPlaying(true);
+      //handleSoundOn();
     }
   }, [isView]);
 

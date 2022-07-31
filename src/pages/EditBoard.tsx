@@ -113,6 +113,17 @@ const EditBoard = () => {
                         ></IconButton>
                       </div>
                     </div>
+                    {values.files.length > 0 ? (
+                      <>
+                        {values.files.length > 5 ? (
+                          <div className="editboard-form-error">🗙 사진/비디오는 5개 까지 등록 가능합니다!</div>
+                        ) : (
+                          <div className="editboard-form-error">✔ 사진/비디오 등록이 완료되었습니다!</div>
+                        )}
+                      </>
+                    ) : (
+                      <div className="editboard-form-error">🗙 최소 하나 이상의 사진/비디오를 등록해주세요!</div>
+                    )}
                     <div className="input-title">
                       <Input
                         name="title"

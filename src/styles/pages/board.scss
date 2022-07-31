@@ -105,18 +105,29 @@
       .board-wishcount-viewcount{
         position: absolute;
         bottom: 1rem;
-        left: 1rem;
+        right: 1rem;
         display: flex;
         font-size: 1.25rem;
         .board-wishcount, .board-viewcount{
           display: flex;
           align-items: center;
         }
+
         .board-wishcount{
           .board-wishcount-icon{
             display: flex;
             align-items: center;
             margin-right: 0.25rem;
+            svg{
+              width: 1.25rem;
+              height: 1.25rem;
+              stroke: #C1BEFF;
+              stroke-width: 3px;
+              stroke-linecap : round;
+            }
+            path{
+              fill: none;
+            }
           }
           margin-right: 1rem;
         }
@@ -125,13 +136,14 @@
             display: flex;
             align-items: center;
             margin-right: 0.25rem;
+            svg{
+              width: 1.5rem;
+              height: 1.5rem;
+              fill: #C1BEFF;
+            }
           }
         }
-        svg{
-          width: 1.25rem;
-          height: 1.25rem;
-          fill: #ADADAD;
-        }
+
       }
     }
 
