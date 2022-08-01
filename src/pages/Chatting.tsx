@@ -129,7 +129,7 @@ const Chatting = () => {
     client.current.subscribe(`/sub/my-rooms/${myId}`, (message: any) => {
       if (message.body.split(" ")[1] === "채팅방") {
         alert("상대방이 채팅방에서 나갔습니다.");
-        navigate("/chatting");
+        navigate("/chatting", { replace: true });
       }
       refreshCurrentChat();
       getAllChatList();
@@ -265,7 +265,7 @@ const Chatting = () => {
                       })
                       .then(() => {
                         alert("채팅방이 삭제되었습니다!");
-                        navigate("/chatting");
+                        navigate("/chatting", { replace: true });
                       })
                       .catch(() => {
                         alert("채팅방을 삭제할 수 없습니다.");

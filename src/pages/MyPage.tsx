@@ -134,7 +134,11 @@ const MyPage = () => {
               </div>
             </div>
             <div className="message-alarm-icon">
-              <i>
+              <i
+                onClick={() => {
+                  navigate("/chatting");
+                }}
+              >
                 <ChatIcon color="#FF965A" />
               </i>
               <i>
