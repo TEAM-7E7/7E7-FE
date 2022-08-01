@@ -74,12 +74,12 @@ const Header = () => {
               </>
             )}
 
-            <div
+            {/*<div
               onClick={isOpenSearchbar ? handleCloseSearchbar : handleOpenSearchbar}
               className="header-icon-transparent"
             >
               <SearchIcon />
-            </div>
+            </div>*/}
 
             <Link to="/add-board">
               <div className="header-icon-transparent icon-hover">
@@ -89,13 +89,13 @@ const Header = () => {
             </Link>
           </div>
         </div>
-
-        <div className={["header-searchbar", isOpenSearchbar ? "slide-down" : "slide-hide"].join(" ")}>
+        {/* 검색 기능 */}
+        {/*<div className={["header-searchbar", isOpenSearchbar ? "slide-down" : "slide-hide"].join(" ")}>
           <select style={{ marginRight: "1rem" }}>
             <option value={"search"}>검색</option>
           </select>
           <Input id="search" size="medium" name="email" fullWidth placeholder="검색어를 입력해주세요." />
-        </div>
+        </div>*/}
       </div>
 
       <div className={["slide-menu", isOpen ? "slide-in" : "slide-away"].join(" ")}>

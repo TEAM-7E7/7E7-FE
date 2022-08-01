@@ -67,15 +67,17 @@ const Setting = () => {
                 />
               </svg>
             </div>
-            <div className="setting-item" onClick={() => onChangeModalOpen(opensType.passwordSearch)}>
-              <span>비밀번호 변경</span>
-              <svg viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M0.355323 0.368312C-0.118482 0.857285 -0.118482 1.64716 0.355323 2.13614L5.06907 7.00079L0.355323 11.8654C-0.118482 12.3544 -0.118482 13.1443 0.355323 13.6333C0.829127 14.1222 1.5945 14.1222 2.06831 13.6333L7.64462 7.87843C8.11842 7.38946 8.11842 6.59958 7.64462 6.11061L2.06831 0.355774C1.60665 -0.120661 0.829127 -0.120661 0.355323 0.368312Z"
-                  fill="#030303"
-                />
-              </svg>
-            </div>
+            {!jwtUtils.getUserIsSocial(accessToken) && (
+              <div className="setting-item" onClick={() => onChangeModalOpen(opensType.passwordSearch)}>
+                <span>비밀번호 변경</span>
+                <svg viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M0.355323 0.368312C-0.118482 0.857285 -0.118482 1.64716 0.355323 2.13614L5.06907 7.00079L0.355323 11.8654C-0.118482 12.3544 -0.118482 13.1443 0.355323 13.6333C0.829127 14.1222 1.5945 14.1222 2.06831 13.6333L7.64462 7.87843C8.11842 7.38946 8.11842 6.59958 7.64462 6.11061L2.06831 0.355774C1.60665 -0.120661 0.829127 -0.120661 0.355323 0.368312Z"
+                    fill="#030303"
+                  />
+                </svg>
+              </div>
+            )}
           </div>
           <div className="setting-body-section">
             <h4 className="setting-menus-title">계정 전환</h4>

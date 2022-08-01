@@ -39,4 +39,9 @@ export class jwtUtils {
     const decoded = jwtDecode(token);
     return decoded.USER_PROFILE_IMG;
   }
+
+  static getUserIsSocial(token) {
+    const decoded = jwtDecode(token);
+    return !(decoded.USER_TYPE === "MARKETCLIP");
+  }
 }

@@ -2,9 +2,9 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 const MetaTag = ({
-  description = "짧은 영상으로 내 물건을 소개해보세요!",
+  description = "마켓클립, 영상으로 즐기는 중고거래",
   keywords = "",
-  title = "마켓클립, 영상으로 즐기는 중고거래",
+  title = "마켓클립 | Market Clip",
   imgsrc = "%PUBLIC_URL%/metatag.jpg",
   url = "https://marketclip.kr",
 }) => {
@@ -19,7 +19,7 @@ const MetaTag = ({
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:site_name" content={title} />
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={description} data-react-helmet="true" />
       <meta property="og:image" content={imgsrc} />
       <meta property="og:url" content={url} />
 

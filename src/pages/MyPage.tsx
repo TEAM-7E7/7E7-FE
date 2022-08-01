@@ -19,7 +19,6 @@ const MyPage = () => {
   const { refreshToken, setRefreshToken } = useRefreshToken();
   // sell, buy, bookmark
   const [boardCategory, setBoardCategory] = useState<string>("sell");
-
   const [isLoading, setLoading] = useState<boolean>(false);
   const [profileImg, setProfileImg] = useState(jwtUtils.getProfileImg(accessToken));
   const [isOpen, setOpen] = useState<boolean>(false);

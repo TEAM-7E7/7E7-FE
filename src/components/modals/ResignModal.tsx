@@ -18,17 +18,19 @@ const ResignModal = function SelectUploadTypeModal({ open, handleClose }: Resign
   const { setRefreshToken } = useRefreshToken();
   const resign = async () => {
     try {
-      await instanceWithToken.delete("https://tryaz.shop/api/user/sign-out");
-      setRefreshToken("");
-      cookies.remove("X-ACCESS-TOKEN");
-      toast.success(<h3>탈퇴 처리가 반영되었습니다.</h3>, {
+      await instanceWithToken.delete("https://tryaz.shop/api/user/sign-out").then(() => {
+        setRefreshToken("");
+        cookies.remove("X-ACCESS-TOKEN");
+        alert("이용해주셔서 감사합니다.");
+      });
+      /*toast.success(<h3>탈퇴 처리가 반영되었습니다.</h3>, {
         position: "top-center",
         autoClose: 2000,
       });
       setTimeout(() => {
         navigate("/");
         handleClose();
-      }, 2000);
+      }, 2000);*/
     } catch (e: any) {
       // TODO 500 에러가 납니당
       toast.error(e.response.data.message + "😭", {
