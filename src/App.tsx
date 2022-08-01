@@ -27,7 +27,6 @@ const App = () => {
   const cookies = new Cookies();
   const { setRefreshToken } = useRefreshToken();
   useEffect(() => {
-    console.log(refreshToken);
     // 소셜로그인시, 쿼리 파라미터로 token을 넘겨주므로 저장 후, url을 안보이게 함
     if (refreshToken && accessToken) {
       setRefreshToken(refreshToken);
