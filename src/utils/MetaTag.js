@@ -5,7 +5,7 @@ const MetaTag = ({
   description = "마켓클립, 영상으로 즐기는 중고거래",
   keywords = "",
   title = "마켓클립 | Market Clip",
-  imgsrc = "%PUBLIC_URL%/metatag.jpg",
+  imgsrc = "https://marketclipimages.s3.ap-northeast-2.amazonaws.com/Market_Clip_OG_Image.jpg",
   url = "https://marketclip.kr",
 }) => {
   // props로 content 내용을 불러올 예정임
