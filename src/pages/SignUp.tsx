@@ -38,7 +38,7 @@ const SignUp = () => {
         autoClose: 2000,
       });
       setTimeout(() => {
-        navigate("/sign-in");
+        navigate("/sign-in", { replace: true });
       }, 2000);
     } catch (e: any) {
       toast.error(e.response.data.message + "😭", {
@@ -116,11 +116,13 @@ const SignUp = () => {
                   </Button>
                 </div>
                 <div className="signup-body-item-error">
-                  {emailIsVerified
-                    ? "✔ 이메일 인증이 완료되었습니다."
-                    : errors.email
-                    ? errors.email
-                    : "🗙 이메일 인증을 해주세요."}
+                  {emailIsVerified ? (
+                    <span className="valid">이메일 인증이 완료되었습니다.</span>
+                  ) : errors.email ? (
+                    errors.email
+                  ) : (
+                    "이메일 인증을 해주세요."
+                  )}
                 </div>
               </div>
               <VerifyEmailModal
@@ -141,7 +143,7 @@ const SignUp = () => {
                     name="nickname"
                     onChange={handleChange}
                     value={values.nickname}
-                    placeholder="한글과 공백 포함 2~16자리"
+                    placeholder="특수문자 제외 2~10자리"
                   />
                   <Button
                     onClick={() => {
@@ -155,11 +157,13 @@ const SignUp = () => {
                   </Button>
                 </div>
                 <div className="signup-body-item-error">
-                  {errors.nickname
-                    ? errors.nickname
-                    : currentNickname !== "" && currentNickname === values.nickname
-                    ? "✔ 사용할 수 있는 닉네임입니다."
-                    : "🗙 닉네임 중복확인을 해주세요"}
+                  {errors.nickname ? (
+                    errors.nickname
+                  ) : currentNickname !== "" && currentNickname === values.nickname ? (
+                    <span className="valid">사용할 수 있는 닉네임입니다.</span>
+                  ) : (
+                    "닉네임 중복확인을 해주세요"
+                  )}
                 </div>
               </div>
               <div className="signup-body-item">
@@ -179,7 +183,7 @@ const SignUp = () => {
                   />
                 </div>
                 <div className="signup-body-item-error">
-                  {errors.password ? errors.password : "✔ 사용할 수 있는 비밀번호입니다."}
+                  {errors.password ? errors.password : <span className="valid">사용할 수 있는 비밀번호입니다.</span>}
                 </div>
               </div>
               <div className="signup-body-item">
@@ -199,7 +203,7 @@ const SignUp = () => {
                   />
                 </div>
                 <div className="signup-body-item-error">
-                  {errors.password2 ? errors.password2 : "✔ 비밀번호가 일치합니다."}
+                  {errors.password2 ? errors.password2 : <span className="valid">비밀번호가 일치합니다.</span>}
                 </div>
               </div>
               <Button

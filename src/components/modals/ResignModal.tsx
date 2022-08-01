@@ -43,7 +43,9 @@ const ResignModal = function SelectUploadTypeModal({ open, handleClose }: Resign
       <div className="modal-body">
         <div className="modal-body-text">회원 탈퇴를 진행할 경우 작성된 모든 글이 삭제됩니다.</div>
         <ToastContainer />
-        <Button onClick={resign}>탈퇴하기</Button>
+        <Button onClick={resign} fullWidth>
+          탈퇴하기
+        </Button>
       </div>
     </Dialog>
   );

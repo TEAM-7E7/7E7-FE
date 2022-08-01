@@ -41,7 +41,7 @@ const EditBoard = () => {
         alert("게시물 수정이 완료되었습니다.");
         navigate("/my-page");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.message));
   };
   useEffect(() => {
     const getBoard = async () => {
@@ -96,7 +96,7 @@ const EditBoard = () => {
                       ))}
                   </div>
                   <div className="editboard-form">
-                    <div className="drag-explain">썸네일을 드래그해서 순서를 바꿀 수 있어요!</div>
+                    <div className="drag-explain">이미지를 드래그해서 썸네일을 바꿀 수 있어요!</div>
                     <div className="upload-item">
                       {/* drag and drop uploaded items*/}
                       <DndProvider options={HTML5toTouch}>
@@ -116,16 +116,19 @@ const EditBoard = () => {
                     {values.files.length > 0 ? (
                       <>
                         {values.files.length > 5 ? (
-                          <div className="editboard-form-error">🗙 사진/비디오는 5개 까지 등록 가능합니다!</div>
+                          <div className="editboard-form-error">사진/비디오는 5개 까지 등록 가능합니다!</div>
                         ) : (
-                          <div className="editboard-form-error">✔ 사진/비디오 등록이 완료되었습니다!</div>
+                          <div className="editboard-form-error">
+                            <span className="valid">사진/비디오 등록이 완료되었습니다!</span>
+                          </div>
                         )}
                       </>
                     ) : (
-                      <div className="editboard-form-error">🗙 최소 하나 이상의 사진/비디오를 등록해주세요!</div>
+                      <div className="editboard-form-error">최소 하나 이상의 사진/비디오를 등록해주세요!</div>
                     )}
                     <div className="input-title">
                       <Input
+                        color="skyblue"
                         name="title"
                         value={values.title}
                         onChange={handleChange}
@@ -133,7 +136,7 @@ const EditBoard = () => {
                         placeholder="제목을 입력하세요"
                       />
                       <div className="editboard-form-error">
-                        {errors.title ? errors.title : "✔ 제목이 입력되었습니다"}
+                        {errors.title ? errors.title : <span className="valid">제목이 입력되었습니다!</span>}
                       </div>
                     </div>
                     <div className="category-and-price">
@@ -152,18 +155,25 @@ const EditBoard = () => {
                           <option value="MAN_FASHION_GOODS">{BoardCategory.MAN_FASHION_GOODS}</option>
                         </Select>
                         <div className="editboard-form-error">
-                          <div>{errors.category ? errors.category : "✔ 카테고리가 선택되었습니다."}</div>
+                          <div>
+                            {errors.category ? (
+                              errors.category
+                            ) : (
+                              <span className="valid">카테고리가 선택되었습니다!</span>
+                            )}
+                          </div>
                         </div>
                       </div>
                       <div className="input-price">
                         <Input
+                          color="skyblue"
                           name="price"
                           value={values.price}
                           onChange={handleChange}
                           placeholder="가격을 입력하세요"
                         />
                         <div className="editboard-form-error">
-                          <div>{errors.price ? errors.price : "✔ 가격이 적당한가요?"}</div>
+                          <div>{errors.price ? errors.price : <span className="valid">가격이 적당한가요?</span>}</div>
                         </div>
                       </div>
                     </div>
@@ -178,7 +188,7 @@ const EditBoard = () => {
                         rows={10}
                       />
                       <div className="editboard-form-error">
-                        {errors.explain ? errors.explain : "✔ 좋은 설명이네요"}
+                        {errors.explain ? errors.explain : <span className="valid">좋은 설명이네요!</span>}
                       </div>
                     </div>
                     <div className="submit-button">

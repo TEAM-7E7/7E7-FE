@@ -12,6 +12,10 @@ textarea {
     outline: solid skyblue;
     border: 1px #ffffff;
   }
+  &::placeholder {
+    font-size: 0.8rem;
+    color: #adadad;
+  }
 }
 
 // size

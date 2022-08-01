@@ -73,7 +73,11 @@ const PasswordChangeModal = function SelectUploadTypeModal({ open, handleClose }
                       />
                     </div>
                     <div className="signup-body-item-error">
-                      {errors.password ? errors.password : "✔ 사용할 수 있는 비밀번호입니다."}
+                      {errors.password ? (
+                        errors.password
+                      ) : (
+                        <span className="valid">사용할 수 있는 비밀번호입니다.</span>
+                      )}
                     </div>
                   </div>
                   <div className="signup-body-item">
@@ -93,7 +97,7 @@ const PasswordChangeModal = function SelectUploadTypeModal({ open, handleClose }
                       />
                     </div>
                     <div className="signup-body-item-error">
-                      {errors.password2 ? errors.password2 : "✔ 비밀번호가 일치합니다."}
+                      {errors.password2 ? errors.password2 : <span className="valid">비밀번호가 일치합니다.</span>}
                     </div>
                   </div>
                   <Button
