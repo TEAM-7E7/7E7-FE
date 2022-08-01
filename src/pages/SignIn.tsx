@@ -11,8 +11,9 @@ import { useRefreshToken } from "../recoil/store";
 import { Cookies } from "react-cookie";
 import axios from "axios";
 import React from "react";
-import { KakaoIcon } from "../assets/icons/FigmaIcons";
+import { GoogleIcon, KakaoIcon } from "../assets/icons/FigmaIcons";
 import { IconButton } from "../elements/IconButton";
+import MetaTag from "../utils/MetaTag";
 
 const initialValues: SignInDto = {
   email: "",
@@ -69,6 +70,7 @@ const SignIn = () => {
     >
       {({ values, handleSubmit, handleChange, errors }) => (
         <div className="signin-wrapper">
+          <MetaTag title="로그인" />
           <ToastContainer />
           <h2 className="signin-header">로그인</h2>
           <form onSubmit={handleSubmit} className="signin-form">
@@ -140,23 +142,13 @@ const SignIn = () => {
               </div>
               <hr className="separator" />
               <div className="social-login-button">
-                <Button
-                  fullWidth
-                  onClick={() => {
-                    window.location.replace("https://tryaz.shop/oauth2/authorization/google");
-                  }}
-                >
-                  SignIn with Google
-                </Button>
-              </div>
-              <div className="social-login-button">
                 <IconButton
                   icon={<KakaoIcon />}
                   direction="right-left"
-                  variant=""
                   color="kakao"
                   iconSize="medium"
                   fullWidth
+                  variant=""
                   onClick={() => {
                     window.location.replace("https://tryaz.shop/oauth2/authorization/kakao");
                   }}
@@ -164,6 +156,20 @@ const SignIn = () => {
                   SignIn with Kakao
                 </IconButton>
               </div>
+              <div className="social-login-button">
+                <IconButton
+                  icon={<GoogleIcon />}
+                  direction="right-left"
+                  iconSize="medium"
+                  fullWidth
+                  onClick={() => {
+                    window.location.replace("https://tryaz.shop/oauth2/authorization/google");
+                  }}
+                >
+                  SignIn with Google
+                </IconButton>
+              </div>
+
               {/*<div className="social-login-button">
                 <Button fullWidth>SignIn with Naver</Button>
               </div>*/}

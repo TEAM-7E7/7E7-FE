@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { SignInDto, PasswordSearchFormDto } from "../dto/AuthDto";
 import React, { useState } from "react";
 import VerifyEmailModal from "../components/modals/VerifyEmailModal";
+import MetaTag from "../utils/MetaTag";
 
 const initialValues: PasswordSearchFormDto = {
   email: "",
@@ -70,6 +71,7 @@ const FindPassword = () => {
     >
       {({ values, handleSubmit, handleChange, errors }) => (
         <div className="signup-wrapper">
+          <MetaTag title="비밀번호 변경하기" />
           <ToastContainer />
           <h2 className="signup-header">비밀번호 찾기</h2>
           <form onSubmit={handleSubmit} className="signup-form">

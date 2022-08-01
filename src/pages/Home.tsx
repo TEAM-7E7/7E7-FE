@@ -4,6 +4,7 @@ import { useBoardInfiniteQuery } from "../react-query/query/useBoardInfinteQuery
 import { useInView } from "react-intersection-observer";
 import ScollSnapItem from "../components/ScrollSnapItem";
 import { useBoardConfig } from "../recoil/store";
+import MetaTag from "../utils/MetaTag";
 
 const Home = () => {
   const snapScrollWrapperRef = useRef<HTMLDivElement>(null);
@@ -47,6 +48,7 @@ const Home = () => {
 
   return (
     <div className="scroll-snap-wrapper" ref={snapScrollWrapperRef} onScroll={playVideo}>
+      <MetaTag />
       {getBoardIsSuccess && getBoard?.pages
         ? getBoard.pages.map((page_data, page_num) => {
             const board_page = page_data.board_page;

@@ -12,6 +12,7 @@ import { BoardCategory, BoardStatus } from "../dto/BoardCategoryAndState";
 import Label from "../elements/Label";
 import { BookMarkIcon, ViewIcon } from "../assets/icons/FigmaIcons";
 import { IconButton } from "../elements/IconButton";
+import MetaTag from "../utils/MetaTag";
 
 const Board = () => {
   const navigate = useNavigate();
@@ -19,8 +20,10 @@ const Board = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const { board_id } = useParams();
   const { getBoard, getBoardIsSuccess, addBookmarkMutation, deleteBookmarkMutation } = useBoardQuery(board_id);
+  console.log(getBoard);
   return (
     <>
+      <MetaTag title="게시물 상세보기" description={getBoard?.data.data.description} />
       <div className="board-wrapper">
         {getBoardIsSuccess && (
           <div className="board-body">

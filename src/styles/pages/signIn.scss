@@ -53,6 +53,14 @@
     }
     .social-login-button {
       margin: 0.5rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button{
+        justify-content: space-evenly;
+        padding: 1rem 1.75rem;
+        font-weight: bold;
+      }
     }
   }
 }

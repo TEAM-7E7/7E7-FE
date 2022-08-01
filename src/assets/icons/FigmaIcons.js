@@ -194,6 +194,19 @@ export function KakaoIcon() {
   );
 }
 
+export function GoogleIcon() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="36" height="36" rx="18" fill="white" />
+      <path
+        d="M25.456 17.28H18.12V19.464H23.328C23.064 22.512 20.528 23.816 18.128 23.816C15.064 23.816 12.376 21.4 12.376 18C12.376 14.72 14.936 12.184 18.136 12.184C20.608 12.184 22.056 13.76 22.056 13.76L23.576 12.176C23.576 12.176 21.624 10 18.056 10C13.512 10 9.99997 13.84 9.99997 18C9.99997 22.04 13.304 26 18.176 26C22.456 26 25.576 23.064 25.576 18.728C25.576 17.808 25.456 17.28 25.456 17.28Z"
+        fill="#030303"
+        stroke="#030303"
+      />
+    </svg>
+  );
+}
+
 export function SellIcon({ color = "#ADADAD" }) {
   return (
     <svg viewBox="0 0 36 33" xmlns="http://www.w3.org/2000/svg">

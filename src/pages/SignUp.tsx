@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { SignUpDto, SignUpFormDto } from "../dto/AuthDto";
 import React, { useState } from "react";
 import VerifyEmailModal from "../components/modals/VerifyEmailModal";
+import MetaTag from "../utils/MetaTag";
 
 const initialValues: SignUpFormDto = {
   email: "",
@@ -87,6 +88,7 @@ const SignUp = () => {
       {({ values, handleSubmit, handleChange, errors }) => (
         <div className="signup-wrapper">
           <ToastContainer />
+          <MetaTag title="회원가입" />
           <h2 className="signup-header">회원가입</h2>
           <form onSubmit={handleSubmit} className="signup-form">
             <div className="signup-body">

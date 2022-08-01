@@ -6,12 +6,9 @@ import { Formik } from "formik";
 import { NicknameChangeDto } from "../../dto/AuthDto";
 import { nicknameChangeValidationSchema } from "../../utils/authValidation";
 import { toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { instanceWithToken } from "../../api/api";
 import { useState } from "react";
 import axios from "axios";
-import { useRefreshToken } from "../../recoil/store";
-import { Cookies } from "react-cookie";
 
 interface NicknameChangeModalDto {
   open: boolean;
@@ -24,36 +21,18 @@ const initialValues: NicknameChangeDto = {
 };
 
 const NicknameChangeModal = function SelectUploadTypeModal({ open, handleClose, reloadToken }: NicknameChangeModalDto) {
-  const navigate = useNavigate();
   const [currentNickname, setCurrentNickname] = useState<string>("");
-  const cookies = new Cookies();
-  const { refreshToken, setRefreshToken } = useRefreshToken();
 
   const submit = async (values: NicknameChangeDto) => {
     const { nickname } = values;
     try {
       await instanceWithToken.put("https://tryaz.shop/api/user/nickname-update" + `?nickname=${nickname}`);
+      reloadToken();
       toast.success(<h3>닉네임이 변경되었습니다.</h3>, {
         position: "top-center",
         autoClose: 2000,
       });
-      const reloadToken = async () => {
-        await axios
-          .get("https://tryaz.shop/api/user/refresh-re", {
-            headers: {
-              "X-REFRESH-TOKEN": "BEARER " + refreshToken,
-            },
-          })
-          .then((result) => {
-            const newRefreshToken = result.headers["x-refresh-token"].split(" ")[1];
-            const newAccessToken = result.headers["x-access-token"].split(" ")[1];
-            setRefreshToken(newRefreshToken);
-            const daysToExpire = new Date(2147483647 * 1000);
-            cookies.set("X-ACCESS-TOKEN", newAccessToken, { expires: daysToExpire });
-          });
-      };
       setTimeout(() => {
-        reloadToken();
         handleClose();
       }, 2000);
     } catch (e: any) {

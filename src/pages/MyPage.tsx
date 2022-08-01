@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { jwtUtils } from "../utils/jwtUtils";
 import { Cookies } from "react-cookie";
 import "../styles/pages/mypage.scss";
@@ -10,6 +10,7 @@ import { Button } from "../elements/Button";
 import { useRefreshToken } from "../recoil/store";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import MetaTag from "../utils/MetaTag";
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -82,6 +83,7 @@ const MyPage = () => {
 
   return (
     <>
+      <MetaTag title="내정보" />
       <div className="mypage-wrapper">
         <div className="mypage-header">마이페이지</div>
         <div className="mypage-body">

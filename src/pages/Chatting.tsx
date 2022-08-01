@@ -11,6 +11,7 @@ import { Button } from "../elements/Button";
 import { GoBackIcon, HamburgerIcon } from "../assets/icons/FigmaIcons";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { timeUtils } from "../utils/timeUtils";
+import MetaTag from "../utils/MetaTag";
 
 interface CurrentChatDto {
   chatRoomId: string;
@@ -174,6 +175,7 @@ const Chatting = () => {
 
   return (
     <div className="chatting">
+      <MetaTag title="Chatting" description="실시간 채팅을 즐겨보세요!" />
       <div className="chatting-wrapper">
         <div
           className="open-chatting-list-button"
