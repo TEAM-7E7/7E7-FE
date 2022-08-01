@@ -1,5 +1,5 @@
 import "../styles/pages/signIn.scss";
-import { Formik } from "formik";
+import { Formik, replace } from "formik";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -48,9 +48,9 @@ const SignIn = () => {
       });
       setTimeout(() => {
         if (redirectUrl) {
-          navigate(redirectUrl);
+          navigate(redirectUrl, { replace: true });
         } else {
-          navigate("/");
+          navigate("/", { replace: true });
         }
       }, 1000);
     } catch (e) {

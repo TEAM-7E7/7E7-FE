@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { instanceWithToken } from "../../api/api";
 import { useState } from "react";
 import axios from "axios";
+import { useRefreshToken } from "../../recoil/store";
+import { Cookies } from "react-cookie";
 
 interface NicknameChangeModalDto {
   open: boolean;
@@ -24,6 +26,8 @@ const initialValues: NicknameChangeDto = {
 const NicknameChangeModal = function SelectUploadTypeModal({ open, handleClose, reloadToken }: NicknameChangeModalDto) {
   const navigate = useNavigate();
   const [currentNickname, setCurrentNickname] = useState<string>("");
+  const cookies = new Cookies();
+  const { refreshToken, setRefreshToken } = useRefreshToken();
 
   const submit = async (values: NicknameChangeDto) => {
     const { nickname } = values;
@@ -33,6 +37,21 @@ const NicknameChangeModal = function SelectUploadTypeModal({ open, handleClose, 
         position: "top-center",
         autoClose: 2000,
       });
+      const reloadToken = async () => {
+        await axios
+          .get("https://tryaz.shop/api/user/refresh-re", {
+            headers: {
+              "X-REFRESH-TOKEN": "BEARER " + refreshToken,
+            },
+          })
+          .then((result) => {
+            const newRefreshToken = result.headers["x-refresh-token"].split(" ")[1];
+            const newAccessToken = result.headers["x-access-token"].split(" ")[1];
+            setRefreshToken(newRefreshToken);
+            const daysToExpire = new Date(2147483647 * 1000);
+            cookies.set("X-ACCESS-TOKEN", newAccessToken, { expires: daysToExpire });
+          });
+      };
       setTimeout(() => {
         reloadToken();
         handleClose();
@@ -83,7 +102,7 @@ const NicknameChangeModal = function SelectUploadTypeModal({ open, handleClose, 
                         onChange={handleChange}
                         value={values.nickname}
                         type="text"
-                        placeholder="한글과 공백 포함 2~16자리"
+                        placeholder="특수문자 제외 2~10자리"
                       />
                       <Button
                         onClick={() => {
@@ -97,11 +116,13 @@ const NicknameChangeModal = function SelectUploadTypeModal({ open, handleClose, 
                       </Button>
                     </div>
                     <div className="signup-body-item-error">
-                      {errors.nickname
-                        ? errors.nickname
-                        : currentNickname !== "" && currentNickname === values.nickname
-                        ? "✔ 사용할 수 있는 닉네임입니다."
-                        : "🗙 닉네임 중복확인을 해주세요"}
+                      {errors.nickname ? (
+                        errors.nickname
+                      ) : currentNickname !== "" && currentNickname === values.nickname ? (
+                        <span className="valid">사용할 수 있는 닉네임입니다.</span>
+                      ) : (
+                        "닉네임 중복확인을 해주세요"
+                      )}
                     </div>
                   </div>
                   <Button

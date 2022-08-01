@@ -27,8 +27,6 @@ const Chatting = () => {
   const boardId = searchParams.get("board_id");
   const userId = searchParams.get("user_id");
   const client = useRef<any>({});
-  /*const socket = new SockJS("https://tryaz.shop/api/ws");
-  let client = Stomp.over(socket);*/
   const [isConnect, setIsConnect] = useState<boolean>(false);
   // 내 id, nickname 가져오기
   const cookies = new Cookies();
@@ -102,27 +100,6 @@ const Chatting = () => {
     });
   };
 
-  /*const sendMessage = () => {
-    const newMessage = {
-      goodsId: boardId,
-      chatRoomId: currentChat.chatRoomId,
-      senderId: myId,
-      partnerId: userId,
-      message: messageRef?.current?.value,
-      createdAt: new Date(),
-    };
-    if (messageRef.current) {
-      if (messageRef.current.value !== "") {
-        if (messageRef.current.value.length > 50) {
-          alert("메시지는 최대 50자까지 보낼 수 있습니다.");
-        } else {
-          client.send("/pub/chat/message", {}, JSON.stringify(newMessage));
-          messageRef.current.value = "";
-        }
-      }
-    }
-  };*/
-
   const handleOnKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       sendMessage();
@@ -183,33 +160,6 @@ const Chatting = () => {
     }
   };
 
-  // stomp
-  /*const stompSuccessCallback = async () => {
-    await client.subscribe(`/sub/my-rooms/${myId}`, (message) => {
-      if (message.body.split(" ")[1] === "채팅방") {
-        alert("상대방이 채팅방에서 나갔습니다.");
-        navigate("/chatting");
-      }
-      refreshCurrentChat();
-      getAllChatList();
-    });
-    await getCurrentChat();
-    await getAllChatList();
-    setIsConnect(true);
-  };
-
-  const stompFailureCallback = (err: any) => {
-    client = Stomp.over(socket);
-    console.log(err);
-    setTimeout(() => {
-      stompConnect();
-    }, 10000);
-  };
-
-  const stompConnect = () => {
-    client.connect({}, stompSuccessCallback, stompFailureCallback);
-  };
-*/
   useEffect(() => {
     stompConnect();
     return () => {

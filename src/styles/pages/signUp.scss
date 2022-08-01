@@ -18,7 +18,7 @@
     .signup-body-item {
       margin: 1rem 0;
       .signup-body-item-label {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         color: #adadad;
         user-select: none;
         font-weight: bold;
@@ -32,10 +32,13 @@
         }
       }
       .signup-body-item-error {
-        color: #6f4ef2;
+        color: #D93403;
         font-size: 0.8rem;
         font-weight: bold;
         margin-top: 0.3rem;
+        .valid{
+          color: #6f4ef2;
+        }
       }
     }
   }

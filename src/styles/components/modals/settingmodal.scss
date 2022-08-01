@@ -5,7 +5,9 @@
   }
 
   .modal-body {
-    margin: 2rem;
+    min-width: 28rem;
+    box-sizing: border-box;
+    margin: 1rem;
     .modal-body-text {
       margin: 0 0 1rem;
     }

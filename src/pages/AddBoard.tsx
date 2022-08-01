@@ -18,7 +18,6 @@ import { Select } from "../elements/Select";
 import { instanceWithToken } from "../api/api";
 import { useNavigate } from "react-router-dom";
 import { Video } from "../elements/Video";
-import Board from "./Board";
 
 const initialValues: AddBoardDto = {
   title: "",
@@ -66,7 +65,7 @@ const AddBoard = () => {
                   ))}
               </div>
               <div className="addboard-form">
-                <div className="drag-explain">썸네일을 드래그해서 순서를 바꿀 수 있어요!</div>
+                <div className="drag-explain">이미지를 드래그해서 썸네일을 바꿀 수 있어요!</div>
                 <div className="upload-item">
                   {/* drag and drop uploaded items*/}
                   <DndProvider options={HTML5toTouch}>
@@ -86,13 +85,15 @@ const AddBoard = () => {
                 {values.files.length > 0 ? (
                   <>
                     {values.files.length > 5 ? (
-                      <div className="addboard-form-error">🗙 사진/비디오는 5개 까지 등록 가능합니다!</div>
+                      <div className="addboard-form-error">사진/비디오는 5개 까지 등록 가능합니다!</div>
                     ) : (
-                      <div className="addboard-form-error">✔ 사진/비디오 등록이 완료되었습니다!</div>
+                      <div className="addboard-form-error">
+                        <span className="valid">사진/비디오 등록이 완료되었습니다!</span>
+                      </div>
                     )}
                   </>
                 ) : (
-                  <div className="addboard-form-error">🗙 최소 하나 이상의 사진/비디오를 등록해주세요!</div>
+                  <div className="addboard-form-error">최소 하나 이상의 사진/비디오를 등록해주세요!</div>
                 )}
                 <div className="input-title">
                   <Input
@@ -102,7 +103,9 @@ const AddBoard = () => {
                     fullWidth
                     placeholder="제목을 입력하세요"
                   />
-                  <div className="addboard-form-error">{errors.title ? errors.title : "✔ 제목이 입력되었습니다!"}</div>
+                  <div className="addboard-form-error">
+                    {errors.title ? errors.title : <span className="valid">제목이 입력되었습니다!</span>}
+                  </div>
                 </div>
                 <div className="category-and-price">
                   <div className="dropdown-category">
@@ -120,13 +123,15 @@ const AddBoard = () => {
                       <option value="MAN_FASHION_GOODS">{BoardCategory.MAN_FASHION_GOODS}</option>
                     </Select>
                     <div className="addboard-form-error">
-                      <div>{errors.category ? errors.category : "✔ 카테고리가 선택되었습니다!"}</div>
+                      <div>
+                        {errors.category ? errors.category : <span className="valid">카테고리가 선택되었습니다!</span>}
+                      </div>
                     </div>
                   </div>
                   <div className="input-price">
                     <Input name="price" color="skyblue" onChange={handleChange} placeholder="가격을 입력하세요" />
                     <div className="addboard-form-error">
-                      <div>{errors.price ? errors.price : "✔ 가격이 적당한가요?"}</div>
+                      <div>{errors.price ? errors.price : <span className="valid">가격이 적당한가요?</span>}</div>
                     </div>
                   </div>
                 </div>
@@ -139,7 +144,9 @@ const AddBoard = () => {
                     placeholder="설명을 써주세요!"
                     rows={10}
                   />
-                  <div className="addboard-form-error">{errors.explain ? errors.explain : "✔ 좋은 설명이네요!"}</div>
+                  <div className="addboard-form-error">
+                    {errors.explain ? errors.explain : <span className="valid">좋은 설명이네요!</span>}
+                  </div>
                 </div>
                 <div className="submit-button">
                   <Button type="submit">Upload</Button>

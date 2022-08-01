@@ -15,6 +15,7 @@ import EditBoard from "./pages/EditBoard";
 import FindPassword from "./pages/FindPassword";
 import Setting from "./pages/Setting";
 import Chatting from "./pages/Chatting";
+import { replace } from "formik";
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +23,7 @@ const App = () => {
   const location = useLocation();
   const accessToken = searchParams.get("X-ACCESS-TOKEN")?.split(" ")[1];
   const refreshToken = searchParams.get("X-REFRESH-TOKEN")?.split(" ")[1];
+  const socialLoginError = searchParams.get("EMAIL_ALREADY_EXIST");
   const cookies = new Cookies();
   const { setRefreshToken } = useRefreshToken();
   useEffect(() => {
@@ -29,8 +31,11 @@ const App = () => {
     if (refreshToken && accessToken) {
       setRefreshToken(refreshToken);
       cookies.set("X-ACCESS-TOKEN", accessToken);
+      navigate("/", { replace: true });
       alert("로그인에 성공했습니다.");
-      navigate("/");
+    } else if (socialLoginError) {
+      navigate("/", { replace: true });
+      alert("이미 존재하는 이메일입니다.");
     }
   }, []);
   return (

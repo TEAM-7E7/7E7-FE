@@ -33,13 +33,13 @@ const SelectUploadTypeModal = function SelectUploadTypeModal({
           <DialogTitle>업로드는 어떤걸로 해볼까요?</DialogTitle>
           <DialogContent>
             <div className="modal-body">
-              <div className="select-button">
+              {/*<div className="select-button">
                 <IconButton icon={<CameraIcon />} direction="top-bottom" iconSize="large">
                   직접
                   <br />
                   촬영할게요
                 </IconButton>
-              </div>
+              </div>*/}
               <div className="select-button">
                 {/* 유저가 직접 업로드하는 파일 업로더 */}
                 <FileUploader values={values} setValues={setValues} setModalIsOpen={setModalIsOpen} />

@@ -2,54 +2,68 @@
   font-family: Pretendard, "Noto Sans KR", sans-serif;
   box-sizing: border-box;
   padding: 5rem 0;
+
   .editboard-header {
     font-weight: bold;
     text-align: center;
     font-size: 2rem;
     margin: 2rem 0;
   }
+
   .editboard-body {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: center;
+
     .preview-main-image {
       background: #e0dfec;
       border-radius: 25px;
       flex-shrink: 0;
-      width: 360px;
-      height: 620px;
+      width: 22.5rem;
+      height: 38.75rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 2rem;
       margin-right: 1rem;
-      overflow: hidden;
+      margin-bottom: 2rem;
+
       img,
       video {
         width: 100%;
         object-fit: contain;
       }
     }
+
     .editboard-form-error {
-      color: #6f4ef2;
+      color: #D93403;
       font-size: 0.8rem;
       font-weight: bold;
       margin-top: 0.3rem;
       display: flex;
       justify-content: space-between;
+
+      .valid {
+        color: #6f4ef2;
+      }
     }
+
     .editboard-form {
+      position: relative;
       margin-left: 1rem;
 
       .drag-explain {
+        position: absolute;
         font-size: 0.8rem;
         margin-bottom: 0.5rem;
         color: #797979;
+        top: -1.2rem;
       }
 
       .upload-item {
         display: flex;
         align-items: flex-end;
+
         .upload-button {
           margin-left: 0.5rem;
         }
@@ -63,8 +77,10 @@
         margin: 0.5rem 0;
         display: flex;
         align-items: flex-end;
+
         .dropdown-category {
           flex-grow: 1;
+
           select {
             width: 100%;
           }
@@ -74,10 +90,12 @@
           margin-left: 0.5rem;
         }
       }
+
       .textfield-explain {
         margin: 0.5rem 0;
       }
     }
+
     .submit-button {
       display: flex;
 

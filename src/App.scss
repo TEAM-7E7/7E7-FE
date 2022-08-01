@@ -40,17 +40,24 @@ body {
   }
 }
 
-@media all and (max-width: 400px) {
+@media all and (max-width: 500px) {
   html {
     font-size: 70%;
   }
 }
 
-@media all and (max-width: 350px) {
+@media all and (max-width: 400px) {
   html {
     font-size: 60%;
   }
 }
+
+@media all and (max-width: 350px) {
+  html {
+    font-size: 55%;
+  }
+}
+
 
 :root {
   --header--height: 4.5rem;
