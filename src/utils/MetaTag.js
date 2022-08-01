@@ -5,7 +5,7 @@ const MetaTag = ({
   description = "짧은 영상으로 내 물건을 소개해보세요!",
   keywords = "",
   title = "마켓클립, 영상으로 즐기는 중고거래",
-  imgsrc = "/metatag.jpg",
+  imgsrc = "%PUBLIC_URL%/metatag.jpg",
   url = "https://marketclip.kr",
 }) => {
   // props로 content 내용을 불러올 예정임
@@ -13,7 +13,7 @@ const MetaTag = ({
     <Helmet>
       <title>{title}</title>
 
-      <meta name="description" content={description} />
+      <meta name="description" content={description} data-react-helmet="true" />
       {/*<meta name="keywords" content={keywords} />*/}
 
       <meta property="og:type" content="website" />
