@@ -144,43 +144,16 @@ const Chatting = () => {
         navigate("/chatting", { replace: true });
       } else if (message.body.includes("TRADE_CALL_SELLER") && message.body.split("_").at(0) === boardId) {
         alert("거래를 신청했습니다!");
-        const tradeMessage = {
-          goodsId: boardId,
-          chatRoomId: currentChat.chatRoomId,
-          senderId: myId,
-          partnerId: userId,
-          message: "거래 요청을 확인해주세요!",
-          createdAt: new Date(),
-        };
-        client.current.publish({ destination: "/pub/chat/message", body: JSON.stringify(tradeMessage) });
       } else if (message.body.includes("TRADE_CALL_BUYER")) {
         alert("거래 요청이 도착했습니다!");
       } else if (message.body.includes("TRADE_SUCCESS_SELLER") && message.body.split("_").at(0) === boardId) {
         alert("거래가 완료되었습니다!");
       } else if (message.body.includes("TRADE_SUCCESS_BUYER") && message.body.split("_").at(0) === boardId) {
         alert("거래가 완료되었습니다!");
-        const tradeMessage = {
-          goodsId: boardId,
-          chatRoomId: currentChat.chatRoomId,
-          senderId: myId,
-          partnerId: userId,
-          message: "상대방이 거래 요청을 수락했습니다.",
-          createdAt: new Date(),
-        };
-        client.current.publish({ destination: "/pub/chat/message", body: JSON.stringify(tradeMessage) });
       } else if (message.body.includes("TRADE_FAIL_SELLER") && message.body.split("_").at(0) === boardId) {
         alert("상대방이 거래를 취소했습니다!");
       } else if (message.body.includes("TRADE_FAIL_BUYER")) {
         alert("거래를 취소했습니다!");
-        const tradeMessage = {
-          goodsId: boardId,
-          chatRoomId: currentChat.chatRoomId,
-          senderId: myId,
-          partnerId: userId,
-          message: "상대방이 거래 요청을 취소했습니다.",
-          createdAt: new Date(),
-        };
-        client.current.publish({ destination: "/pub/chat/message", body: JSON.stringify(tradeMessage) });
       }
 
       refreshCurrentChat();
@@ -322,6 +295,15 @@ const Chatting = () => {
                         chatRoomId: currentChat.chatRoomId,
                       };
                       await instanceWithToken.post("/api/review/deal", requestBody);
+                      const tradeMessage = {
+                        goodsId: boardId,
+                        chatRoomId: currentChat.chatRoomId,
+                        senderId: myId,
+                        partnerId: userId,
+                        message: "거래 요청이 도착했습니다!",
+                        createdAt: new Date(),
+                      };
+                      client.current.publish({ destination: "/pub/chat/message", body: JSON.stringify(tradeMessage) });
                     }}
                   >
                     거래요청
@@ -345,6 +327,18 @@ const Chatting = () => {
                           status: true,
                         };
                         await instanceWithToken.put("/api/review/ok", requestBody);
+                        const tradeMessage = {
+                          goodsId: boardId,
+                          chatRoomId: currentChat.chatRoomId,
+                          senderId: myId,
+                          partnerId: userId,
+                          message: "거래 요청이 수락되었습니다!",
+                          createdAt: new Date(),
+                        };
+                        client.current.publish({
+                          destination: "/pub/chat/message",
+                          body: JSON.stringify(tradeMessage),
+                        });
                       }}
                     >
                       수락
@@ -360,6 +354,18 @@ const Chatting = () => {
                           status: false,
                         };
                         await instanceWithToken.put("/api/review/ok", requestBody);
+                        const tradeMessage = {
+                          goodsId: boardId,
+                          chatRoomId: currentChat.chatRoomId,
+                          senderId: myId,
+                          partnerId: userId,
+                          message: "거래 요청이 취소되었습니다ㅠㅠ",
+                          createdAt: new Date(),
+                        };
+                        client.current.publish({
+                          destination: "/pub/chat/message",
+                          body: JSON.stringify(tradeMessage),
+                        });
                       }}
                     >
                       취소
