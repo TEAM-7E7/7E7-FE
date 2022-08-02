@@ -47,83 +47,85 @@ const Home = () => {
   };
 
   return (
-    <div className="scroll-snap-wrapper" ref={snapScrollWrapperRef} onScroll={playVideo}>
+    <>
       <MetaTag />
-      {getBoardIsSuccess && getBoard?.pages
-        ? getBoard.pages.map((page_data, page_num) => {
-            const board_page = page_data.board_page;
-            return board_page.map((item: any, idx: number) => {
-              const fileType = item.goodsImageUrl.split(".").at(-1);
-              if (
-                // 마지막 요소에 ref 달아주기
-                page_num === getBoard.pages.length - 1 &&
-                idx === board_page.length - 1
-              ) {
-                return (
-                  <React.Fragment key={item.id}>
-                    <ScollSnapItem
-                      userNickname={item.nickname}
-                      userImageUrl={item.accountImageUrl}
-                      fileType={fileType}
-                      fileUrl={item.goodsImageUrl}
-                      id={item.id}
-                      title={item.title}
-                      category={item.category}
-                      status={item.status}
-                      createdAt={item.createdAt}
-                      sellPrice={item.sellPrice}
-                      viewCount={item.viewCount}
-                      wishIds={item.wishIds}
-                      autoPlay={false}
-                      scrollRef={scrollRef}
-                    />
-                  </React.Fragment>
-                );
-              } else if (page_num === 0 && idx === 0) {
-                return (
-                  <React.Fragment key={item.id}>
-                    <ScollSnapItem
-                      userNickname={item.nickname}
-                      userImageUrl={item.accountImageUrl}
-                      fileType={fileType}
-                      fileUrl={item.goodsImageUrl}
-                      id={item.id}
-                      title={item.title}
-                      category={item.category}
-                      status={item.status}
-                      createdAt={item.createdAt}
-                      sellPrice={item.sellPrice}
-                      viewCount={item.viewCount}
-                      wishIds={item.wishIds}
-                      autoPlay={true}
-                    />
-                  </React.Fragment>
-                );
-              } else {
-                return (
-                  <React.Fragment key={item.id}>
-                    <ScollSnapItem
-                      userNickname={item.nickname}
-                      userImageUrl={item.accountImageUrl}
-                      fileType={fileType}
-                      fileUrl={item.goodsImageUrl}
-                      id={item.id}
-                      title={item.title}
-                      category={item.category}
-                      status={item.status}
-                      createdAt={item.createdAt}
-                      sellPrice={item.sellPrice}
-                      viewCount={item.viewCount}
-                      wishIds={item.wishIds}
-                      autoPlay={false}
-                    />
-                  </React.Fragment>
-                );
-              }
-            });
-          })
-        : null}
-    </div>
+      <div className="scroll-snap-wrapper" ref={snapScrollWrapperRef} onScroll={playVideo}>
+        {getBoardIsSuccess && getBoard?.pages
+          ? getBoard.pages.map((page_data, page_num) => {
+              const board_page = page_data.board_page;
+              return board_page.map((item: any, idx: number) => {
+                const fileType = item.goodsImageUrl.split(".").at(-1);
+                if (
+                  // 마지막 요소에 ref 달아주기
+                  page_num === getBoard.pages.length - 1 &&
+                  idx === board_page.length - 1
+                ) {
+                  return (
+                    <React.Fragment key={item.id}>
+                      <ScollSnapItem
+                        userNickname={item.nickname}
+                        userImageUrl={item.accountImageUrl}
+                        fileType={fileType}
+                        fileUrl={item.goodsImageUrl}
+                        id={item.id}
+                        title={item.title}
+                        category={item.category}
+                        status={item.status}
+                        createdAt={item.createdAt}
+                        sellPrice={item.sellPrice}
+                        viewCount={item.viewCount}
+                        wishIds={item.wishIds}
+                        autoPlay={false}
+                        scrollRef={scrollRef}
+                      />
+                    </React.Fragment>
+                  );
+                } else if (page_num === 0 && idx === 0) {
+                  return (
+                    <React.Fragment key={item.id}>
+                      <ScollSnapItem
+                        userNickname={item.nickname}
+                        userImageUrl={item.accountImageUrl}
+                        fileType={fileType}
+                        fileUrl={item.goodsImageUrl}
+                        id={item.id}
+                        title={item.title}
+                        category={item.category}
+                        status={item.status}
+                        createdAt={item.createdAt}
+                        sellPrice={item.sellPrice}
+                        viewCount={item.viewCount}
+                        wishIds={item.wishIds}
+                        autoPlay={true}
+                      />
+                    </React.Fragment>
+                  );
+                } else {
+                  return (
+                    <React.Fragment key={item.id}>
+                      <ScollSnapItem
+                        userNickname={item.nickname}
+                        userImageUrl={item.accountImageUrl}
+                        fileType={fileType}
+                        fileUrl={item.goodsImageUrl}
+                        id={item.id}
+                        title={item.title}
+                        category={item.category}
+                        status={item.status}
+                        createdAt={item.createdAt}
+                        sellPrice={item.sellPrice}
+                        viewCount={item.viewCount}
+                        wishIds={item.wishIds}
+                        autoPlay={false}
+                      />
+                    </React.Fragment>
+                  );
+                }
+              });
+            })
+          : null}
+      </div>
+    </>
   );
 };
 export default Home;
