@@ -65,7 +65,6 @@ const Chatting = () => {
     await instanceWithToken.get("/api/chat-rooms").then((result) => setAllChatList(result.data));
   };
 
-  console.log(currentChat);
   const getCurrentChat = async () => {
     if (boardId && myId !== userId) {
       await instanceWithToken
@@ -145,16 +144,43 @@ const Chatting = () => {
         navigate("/chatting", { replace: true });
       } else if (message.body.includes("TRADE_CALL_SELLER") && message.body.split("_").at(0) === boardId) {
         alert("거래를 신청했습니다!");
+        const tradeMessage = {
+          goodsId: boardId,
+          chatRoomId: currentChat.chatRoomId,
+          senderId: myId,
+          partnerId: userId,
+          message: "거래 요청을 확인해주세요!",
+          createdAt: new Date(),
+        };
+        client.current.publish({ destination: "/pub/chat/message", body: JSON.stringify(tradeMessage) });
       } else if (message.body.includes("TRADE_CALL_BUYER")) {
         alert("거래 요청이 도착했습니다!");
       } else if (message.body.includes("TRADE_SUCCESS_SELLER") && message.body.split("_").at(0) === boardId) {
         alert("거래가 완료되었습니다!");
       } else if (message.body.includes("TRADE_SUCCESS_BUYER") && message.body.split("_").at(0) === boardId) {
         alert("거래가 완료되었습니다!");
+        const tradeMessage = {
+          goodsId: boardId,
+          chatRoomId: currentChat.chatRoomId,
+          senderId: myId,
+          partnerId: userId,
+          message: "상대방이 거래 요청을 수락했습니다.",
+          createdAt: new Date(),
+        };
+        client.current.publish({ destination: "/pub/chat/message", body: JSON.stringify(tradeMessage) });
       } else if (message.body.includes("TRADE_FAIL_SELLER") && message.body.split("_").at(0) === boardId) {
         alert("상대방이 거래를 취소했습니다!");
       } else if (message.body.includes("TRADE_FAIL_BUYER")) {
         alert("거래를 취소했습니다!");
+        const tradeMessage = {
+          goodsId: boardId,
+          chatRoomId: currentChat.chatRoomId,
+          senderId: myId,
+          partnerId: userId,
+          message: "상대방이 거래 요청을 취소했습니다.",
+          createdAt: new Date(),
+        };
+        client.current.publish({ destination: "/pub/chat/message", body: JSON.stringify(tradeMessage) });
       }
 
       refreshCurrentChat();
@@ -285,30 +311,6 @@ const Chatting = () => {
                 <div className="chatting-current-partner-board">{currentChat.goodsTitle}</div>
               </div>
               <div className="chatting-button">
-                <Button
-                  size="small"
-                  color="skyblue"
-                  variant="outlined"
-                  onClick={async () => {
-                    const deleteChattingRequestBody: any = {
-                      goodsId: boardId,
-                      buyerId: currentChat.buyerId,
-                    };
-                    await instanceWithToken
-                      .delete("/api/room", {
-                        data: deleteChattingRequestBody,
-                      })
-                      .then(() => {
-                        alert("채팅방이 삭제되었습니다!");
-                        navigate("/chatting", { replace: true });
-                      })
-                      .catch(() => {
-                        alert("채팅방을 삭제할 수 없습니다.");
-                      });
-                  }}
-                >
-                  채팅방 나가기
-                </Button>
                 {currentChat.sellStatus === "SELLER_TRY" && (
                   <Button
                     size="small"
@@ -364,6 +366,30 @@ const Chatting = () => {
                     </Button>
                   </>
                 )}
+                <Button
+                  size="small"
+                  color="skyblue"
+                  variant="outlined"
+                  onClick={async () => {
+                    const deleteChattingRequestBody: any = {
+                      goodsId: boardId,
+                      buyerId: currentChat.buyerId,
+                    };
+                    await instanceWithToken
+                      .delete("/api/room", {
+                        data: deleteChattingRequestBody,
+                      })
+                      .then(() => {
+                        alert("채팅방이 삭제되었습니다!");
+                        navigate("/chatting", { replace: true });
+                      })
+                      .catch(() => {
+                        alert("채팅방을 삭제할 수 없습니다.");
+                      });
+                  }}
+                >
+                  채팅방 나가기
+                </Button>
               </div>
             </div>
             <div className="chatting-current-list">

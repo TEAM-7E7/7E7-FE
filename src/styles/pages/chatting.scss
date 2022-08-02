@@ -222,6 +222,9 @@
         .chatting-button{
           display: flex;
           justify-content: space-between;
+          button{
+            margin-left: 0.5rem;
+          }
         }
       }
 
