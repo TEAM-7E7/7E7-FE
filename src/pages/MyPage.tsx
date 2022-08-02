@@ -81,7 +81,7 @@ const MyPage = () => {
   }, [accessToken]);
 
   return (
-    <>
+    <div className="mypage">
       <MetaTag title="내정보" />
       <div className="mypage-wrapper">
         <div className="mypage-header">마이페이지</div>
@@ -198,7 +198,7 @@ const MyPage = () => {
           <Button onClick={deleteProfileImage}>삭제</Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 };
 export default MyPage;

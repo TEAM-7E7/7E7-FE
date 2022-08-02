@@ -216,6 +216,10 @@
         font-size: 2rem;
         font-weight: bold;
         border-bottom: 1px solid #A9B5BC;
+        .chatting-button{
+          display: flex;
+          justify-content: space-between;
+        }
       }
 
 
@@ -228,7 +232,7 @@
           display: none
         }
 
-        .chatting-start-message {
+        .chatting-start-message, chatting-end-message {
           text-align: center;
           color: #606060;
           font-size: 1.25rem;

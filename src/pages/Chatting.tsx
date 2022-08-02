@@ -138,10 +138,12 @@ const Chatting = () => {
   console.log(currentChat);
   const stompSubscribe = () => {
     client.current.subscribe(`/sub/my-rooms/${myId}`, (message: any) => {
-      console.log(message);
       if (message.body.includes("PARTNER_EXIT") && message.body.split("_").at(0) === boardId) {
         alert("상대방이 채팅방에서 나갔습니다.");
         navigate("/chatting", { replace: true });
+      }
+      if (message.body.includes("TRADE")) {
+        alert("거래 상태가 변경되었습니다");
       }
       refreshCurrentChat();
       getAllChatList();
@@ -266,7 +268,7 @@ const Chatting = () => {
         {boardId && userId ? (
           <div className="chatting-current-wrapper">
             <div className="chatting-current-header">
-              <div className="delete-chatting-button">
+              <div className="chatting-button">
                 <Button
                   onClick={async () => {
                     const deleteChattingRequestBody: any = {
@@ -288,12 +290,54 @@ const Chatting = () => {
                 >
                   삭제하기
                 </Button>
+                {currentChat.sellStatus === "SELLER_TRY" && (
+                  <Button
+                    onClick={async () => {
+                      const requestBody = {
+                        goodsId: boardId,
+                        buyerId: currentChat.buyerId,
+                        chatRoomId: currentChat.chatRoomId,
+                      };
+                      await instanceWithToken.post("/api/review/deal", requestBody);
+                    }}
+                  >
+                    거래요청
+                  </Button>
+                )}
+                {currentChat.sellStatus === "TRADE_WAITING" && (
+                  <Button onClick={() => alert("이미 거래중인 게시물입니다.")}>거래요청</Button>
+                )}
+                {currentChat.sellStatus === "BUYER_CHECK_REQUEST" && (
+                  <>
+                    <Button
+                      onClick={async () => {
+                        const requestBody = {
+                          goodsId: boardId,
+                          buyerId: currentChat.buyerId,
+                          chatRoomId: currentChat.chatRoomId,
+                          isStatus: true,
+                        };
+                        await instanceWithToken.put("/api/review/ok", requestBody);
+                      }}
+                    >
+                      수락
+                    </Button>
+                    <Button
+                      onClick={async () => {
+                        const requestBody = {
+                          goodsId: boardId,
+                          buyerId: currentChat.buyerId,
+                          chatRoomId: currentChat.chatRoomId,
+                          isStatus: false,
+                        };
+                        await instanceWithToken.put("/api/review/ok", requestBody);
+                      }}
+                    >
+                      취소
+                    </Button>
+                  </>
+                )}
               </div>
-              {currentChat.sellStatus === "SELLER_TRY" && (
-                <div className="seller-try-button">
-                  <Button>거래요청</Button>
-                </div>
-              )}
               <div className="chatting-current-partner-nickname">{currentChat.partnerNickname}</div>
               <div className="chatting-current-partner-board">{currentChat.goodsTitle}</div>
             </div>
@@ -336,6 +380,9 @@ const Chatting = () => {
                   }
                 }
               })}
+              {currentChat.sellStatus === "SOLD_OUT" && (
+                <div className="chatting-start-message">거래가 완료된 게시물입니다!</div>
+              )}
             </div>
             {isConnect && (
               <div className="chatting-send-input-button">
