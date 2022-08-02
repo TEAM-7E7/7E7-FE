@@ -1,7 +1,6 @@
 import "../styles/components/header.scss";
 import { useBoardConfig } from "../recoil/store";
 import { useNavigate } from "react-router-dom";
-import { useBoardInfiniteQueryReset } from "../react-query/query/useBoardInfiniteQueryReset";
 import { StarIcon } from "../assets/icons/FigmaIcons";
 
 interface CategoryItemOptions {

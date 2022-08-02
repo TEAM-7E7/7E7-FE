@@ -1,4 +1,4 @@
-import { MyBoardStatusDto, MyPageBoardCategoryDto } from "../../dto/MyPageDto";
+import { MyPageBoardCategoryDto } from "../../dto/MyPageDto";
 import React, { useEffect, useState } from "react";
 import { timeUtils } from "../../utils/timeUtils";
 import { instanceWithToken } from "../../api/api";
@@ -14,6 +14,7 @@ import { BoardCategory } from "../../dto/BoardCategoryAndState";
 const MyPageBoardList = ({ boardCategory }: MyPageBoardCategoryDto) => {
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState<any>();
+  console.log(boardList);
   // boardCategory가 sell일 때 사용
   // SALE, SOLD_OUT, RESERVED
   const [boardStatus, setBoardStatus] = useState<string>("SALE");

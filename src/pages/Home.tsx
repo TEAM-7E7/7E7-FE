@@ -80,7 +80,6 @@ const Home = () => {
                   </React.Fragment>
                 );
               } else if (page_num === 0 && idx === 0) {
-                console.log(item);
                 return (
                   <React.Fragment key={item.id}>
                     <ScollSnapItem

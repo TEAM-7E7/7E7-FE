@@ -5,7 +5,7 @@ export const addBoardValidationSchema = Yup.object().shape({
     .required("제목을 입력해주세요!")
     .min(3, "제목은 3글자 이상 입력해주세요!")
     .max(20, "제목을 20글자 이하로 입력해주세요!"),
-  category: Yup.string().required("🗙 카테고리를 선택해주세요!"),
+  category: Yup.string().required("카테고리를 선택해주세요!"),
   price: Yup.number()
     .typeError("숫자만 입력하세요!")
     .integer()

@@ -52,7 +52,6 @@ const NicknameChangeModal = function SelectUploadTypeModal({ open, handleClose, 
         setCurrentNickname(nickname);
       });
     } catch (e) {
-      console.log(e);
       alert("이미 존재하는 닉네임입니다.");
     }
   };

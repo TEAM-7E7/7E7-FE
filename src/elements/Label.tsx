@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import "../styles/elements/label.scss";
 
 interface LabelOption {
-  type: "category" | "sale" | "sold-out";
+  type: "category" | "sale" | "sold-out" | "reserved";
   size: "small" | "medium";
   children: ReactNode;
 }

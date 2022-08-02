@@ -15,10 +15,12 @@ import MetaTag from "../utils/MetaTag";
 
 interface CurrentChatDto {
   chatRoomId: string;
+  goodsId: number;
   goodsTitle: string;
   myProfileUrl: string;
   partnerNickname: string;
   partnerProfileUrl: string;
+  sellStatus: string;
   messages: any;
 }
 
@@ -39,10 +41,12 @@ const Chatting = () => {
   // 현재 채팅의 boardId, 채팅(채팅 방 id, message), partner id
   const [currentChat, setCurrentChat] = useState<CurrentChatDto>({
     chatRoomId: "",
+    goodsId: 0,
     goodsTitle: "",
     myProfileUrl: "",
     partnerNickname: "",
     partnerProfileUrl: "",
+    sellStatus: "",
     messages: [],
   });
   const [chatListIsOpen, setChatListIsOpen] = useState<boolean>(false);
@@ -68,6 +72,7 @@ const Chatting = () => {
           if (err.response.data.code === "CHAT_ROOM_NOT_FOUND") {
             const currentTime = Date.now();
             const newChatRoomId = currentTime.toString() + myNickname;
+            console.log(newChatRoomId);
             await instanceWithToken
               .post("https://tryaz.shop/api/room", {
                 id: newChatRoomId,
@@ -87,8 +92,9 @@ const Chatting = () => {
                 });
               })
               .catch((err) => {
+                console.log(err);
                 alert(err.response.data.message);
-                navigate("/chatting");
+                navigate("/chatting", { replace: true });
               });
           }
         });
@@ -96,9 +102,11 @@ const Chatting = () => {
   };
 
   const refreshCurrentChat = async () => {
-    await instanceWithToken.post("/api/chat-message-list", { goodsId: boardId, partnerId: userId }).then((result) => {
-      setCurrentChat(result.data);
-    });
+    if (boardId && userId) {
+      await instanceWithToken.post("/api/chat-message-list", { goodsId: boardId, partnerId: userId }).then((result) => {
+        setCurrentChat(result.data);
+      });
+    }
   };
 
   const handleOnKeyPress = (e: React.KeyboardEvent) => {
@@ -125,10 +133,11 @@ const Chatting = () => {
     });
     client.current.activate();
   };
-
+  console.log(currentChat);
   const stompSubscribe = () => {
     client.current.subscribe(`/sub/my-rooms/${myId}`, (message: any) => {
-      if (message.body.split(" ")[1] === "채팅방") {
+      console.log(message);
+      if (message.body.includes("PARTNER_EXIT") && message.body.split("_").at(0) === boardId) {
         alert("상대방이 채팅방에서 나갔습니다.");
         navigate("/chatting", { replace: true });
       }
@@ -277,6 +286,11 @@ const Chatting = () => {
                   삭제하기
                 </Button>
               </div>
+              {currentChat.sellStatus === "SELLER_TRY" && (
+                <div className="seller-try-button">
+                  <Button>거래요청</Button>
+                </div>
+              )}
               <div className="chatting-current-partner-nickname">{currentChat.partnerNickname}</div>
               <div className="chatting-current-partner-board">{currentChat.goodsTitle}</div>
             </div>

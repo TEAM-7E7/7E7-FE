@@ -17,13 +17,13 @@ const MetaTag = ({
       {/*<meta name="keywords" content={keywords} />*/}
 
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content="마켓클립 | Market Clip" />
       <meta property="og:site_name" content={title} />
       <meta property="og:description" content={description} data-react-helmet="true" />
       <meta property="og:image" content={imgsrc} />
       <meta property="og:url" content={url} />
 
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content="마켓클립 | Market Clip" />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imgsrc} />
 

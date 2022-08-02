@@ -24,7 +24,6 @@ instanceWithToken.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.log(error);
     const refreshTokenState = JSON.parse(localStorage.getItem("X-REFRESH-TOKEN"))
       ? JSON.parse(localStorage.getItem("X-REFRESH-TOKEN"))
       : "";
