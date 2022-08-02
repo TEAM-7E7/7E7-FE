@@ -14,6 +14,7 @@ import { timeUtils } from "../utils/timeUtils";
 import MetaTag from "../utils/MetaTag";
 
 interface CurrentChatDto {
+  buyerId: number;
   chatRoomId: string;
   goodsId: number;
   goodsTitle: string;
@@ -41,6 +42,7 @@ const Chatting = () => {
   // 현재 채팅의 boardId, 채팅(채팅 방 id, message), partner id
   const [currentChat, setCurrentChat] = useState<CurrentChatDto>({
     chatRoomId: "",
+    buyerId: 0,
     goodsId: 0,
     goodsTitle: "",
     myProfileUrl: "",
@@ -268,7 +270,8 @@ const Chatting = () => {
                 <Button
                   onClick={async () => {
                     const deleteChattingRequestBody: any = {
-                      chatRoomId: currentChat.chatRoomId,
+                      goodsId: boardId,
+                      buyerId: currentChat.buyerId,
                     };
                     await instanceWithToken
                       .delete("/api/room", {
