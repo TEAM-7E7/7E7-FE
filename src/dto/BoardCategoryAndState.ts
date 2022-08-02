@@ -18,4 +18,5 @@ export const BoardOrderBy: any = {
 export const BoardStatus: any = {
   SALE: "판매중",
   SOLD_OUT: "거래완료",
+  RESERVED: "거래중",
 };

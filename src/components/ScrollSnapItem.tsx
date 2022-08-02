@@ -78,8 +78,12 @@ const ScrollSnapItem = ({
                 <Label size="small" type="sale">
                   {BoardStatus[status]}
                 </Label>
-              ) : (
+              ) : status === "SOLD_OUT" ? (
                 <Label size="small" type="sold-out">
+                  {BoardStatus[status]}
+                </Label>
+              ) : (
+                <Label size="small" type="reserved">
                   {BoardStatus[status]}
                 </Label>
               )}

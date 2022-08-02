@@ -15,6 +15,7 @@ import MetaTag from "../utils/MetaTag";
 
 interface CurrentChatDto {
   buyerId: number;
+  sellerId: number;
   chatRoomId: string;
   goodsId: number;
   goodsTitle: string;
@@ -42,6 +43,7 @@ const Chatting = () => {
   // 현재 채팅의 boardId, 채팅(채팅 방 id, message), partner id
   const [currentChat, setCurrentChat] = useState<CurrentChatDto>({
     chatRoomId: "",
+    sellerId: 0,
     buyerId: 0,
     goodsId: 0,
     goodsTitle: "",
@@ -74,7 +76,6 @@ const Chatting = () => {
           if (err.response.data.code === "CHAT_ROOM_NOT_FOUND") {
             const currentTime = Date.now();
             const newChatRoomId = currentTime.toString() + myNickname;
-            console.log(newChatRoomId);
             await instanceWithToken
               .post("https://tryaz.shop/api/room", {
                 id: newChatRoomId,
@@ -135,16 +136,26 @@ const Chatting = () => {
     });
     client.current.activate();
   };
-  console.log(currentChat);
   const stompSubscribe = () => {
     client.current.subscribe(`/sub/my-rooms/${myId}`, (message: any) => {
+      console.log(message.body);
       if (message.body.includes("PARTNER_EXIT") && message.body.split("_").at(0) === boardId) {
         alert("상대방이 채팅방에서 나갔습니다.");
         navigate("/chatting", { replace: true });
+      } else if (message.body.includes("TRADE_CALL_SELLER") && message.body.split("_").at(0) === boardId) {
+        alert("거래를 신청했습니다!");
+      } else if (message.body.includes("TRADE_CALL_BUYER")) {
+        alert("거래 요청이 도착했습니다!");
+      } else if (message.body.includes("TRADE_SUCCESS_SELLER") && message.body.split("_").at(0) === boardId) {
+        alert("거래가 완료되었습니다!");
+      } else if (message.body.includes("TRADE_SUCCESS_BUYER")) {
+        alert("거래가 완료되었습니다!");
+      } else if (message.body.includes("TRADE_FAIL_SELLER") && message.body.split("_").at(0) === boardId) {
+        alert("상대방이 거래를 취소했습니다!");
+      } else if (message.body.includes("TRADE_FAIL_BUYER")) {
+        alert("거래를 취소했습니다!");
       }
-      if (message.body.includes("TRADE")) {
-        alert("거래 상태가 변경되었습니다");
-      }
+
       refreshCurrentChat();
       getAllChatList();
     });
@@ -296,6 +307,7 @@ const Chatting = () => {
                       const requestBody = {
                         goodsId: boardId,
                         buyerId: currentChat.buyerId,
+                        sellerId: currentChat.sellerId,
                         chatRoomId: currentChat.chatRoomId,
                       };
                       await instanceWithToken.post("/api/review/deal", requestBody);
@@ -314,6 +326,7 @@ const Chatting = () => {
                         const requestBody = {
                           goodsId: boardId,
                           buyerId: currentChat.buyerId,
+                          sellerId: currentChat.sellerId,
                           chatRoomId: currentChat.chatRoomId,
                           isStatus: true,
                         };
@@ -327,6 +340,7 @@ const Chatting = () => {
                         const requestBody = {
                           goodsId: boardId,
                           buyerId: currentChat.buyerId,
+                          sellerId: currentChat.sellerId,
                           chatRoomId: currentChat.chatRoomId,
                           isStatus: false,
                         };

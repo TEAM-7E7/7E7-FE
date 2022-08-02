@@ -59,16 +59,18 @@ const Header = () => {
             {!jwtUtils.isValid(refreshToken) ? (
               <>
                 <Link to="/sign-in">
-                  <div className="header-icon-transparent icon-auth">
+                  <div className="header-icon-transparent icon-auth icon-hover">
                     <LoginIcon />
+                    <div className="hover-text">로그인</div>
                   </div>
                 </Link>
               </>
             ) : (
               <>
                 <Link to="#" onClick={logout}>
-                  <div className="header-icon-transparent icon-auth">
+                  <div className="header-icon-transparent icon-auth icon-hover">
                     <LogoutIcon />
+                    <div className="hover-text">로그아웃</div>
                   </div>
                 </Link>
               </>
