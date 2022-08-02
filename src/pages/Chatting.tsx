@@ -65,6 +65,7 @@ const Chatting = () => {
     await instanceWithToken.get("/api/chat-rooms").then((result) => setAllChatList(result.data));
   };
 
+  console.log(currentChat);
   const getCurrentChat = async () => {
     if (boardId && myId !== userId) {
       await instanceWithToken
@@ -403,13 +404,21 @@ const Chatting = () => {
                 <div className="chatting-send-input">
                   <Input
                     ref={messageRef}
-                    placeholder="메세지를 입력해보세요."
+                    placeholder={
+                      currentChat.sellStatus === "SOLD_OUT" ? "거래가 완료된 게시물입니다." : "메세지를 입력해보세요."
+                    }
                     onKeyPress={handleOnKeyPress}
+                    disabled={currentChat.sellStatus === "SOLD_OUT"}
+                    onClick={() => {
+                      if (currentChat.sellStatus === "SOLD_OUT") {
+                        alert("거래가 완료된 게시물입니다!");
+                      }
+                    }}
                     fullWidth
                   />
                 </div>
                 <div className="chatting-send-button">
-                  <Button color="primary" onClick={sendMessage}>
+                  <Button color="primary" onClick={sendMessage} disabled={currentChat.sellStatus === "SOLD_OUT"}>
                     전송
                   </Button>
                 </div>
