@@ -280,8 +280,15 @@ const Chatting = () => {
         {boardId && userId ? (
           <div className="chatting-current-wrapper">
             <div className="chatting-current-header">
+              <div className="chatting-current-header-text">
+                <div className="chatting-current-partner-nickname">{currentChat.partnerNickname}</div>
+                <div className="chatting-current-partner-board">{currentChat.goodsTitle}</div>
+              </div>
               <div className="chatting-button">
                 <Button
+                  size="small"
+                  color="skyblue"
+                  variant="outlined"
                   onClick={async () => {
                     const deleteChattingRequestBody: any = {
                       goodsId: boardId,
@@ -300,10 +307,11 @@ const Chatting = () => {
                       });
                   }}
                 >
-                  삭제하기
+                  채팅방 나가기
                 </Button>
                 {currentChat.sellStatus === "SELLER_TRY" && (
                   <Button
+                    size="small"
                     onClick={async () => {
                       const requestBody = {
                         goodsId: boardId,
@@ -318,11 +326,14 @@ const Chatting = () => {
                   </Button>
                 )}
                 {currentChat.sellStatus === "TRADE_WAITING" && (
-                  <Button onClick={() => alert("이미 거래중인 게시물입니다.")}>거래요청</Button>
+                  <Button size="small" onClick={() => alert("이미 거래중인 게시물입니다.")}>
+                    거래요청
+                  </Button>
                 )}
                 {currentChat.sellStatus === "BUYER_CHECK_REQUEST" && (
                   <>
                     <Button
+                      size="small"
                       onClick={async () => {
                         const requestBody = {
                           goodsId: boardId,
@@ -337,6 +348,7 @@ const Chatting = () => {
                       수락
                     </Button>
                     <Button
+                      size="small"
                       onClick={async () => {
                         const requestBody = {
                           goodsId: boardId,
@@ -353,8 +365,6 @@ const Chatting = () => {
                   </>
                 )}
               </div>
-              <div className="chatting-current-partner-nickname">{currentChat.partnerNickname}</div>
-              <div className="chatting-current-partner-board">{currentChat.goodsTitle}</div>
             </div>
             <div className="chatting-current-list">
               <div className="chatting-start-message">
