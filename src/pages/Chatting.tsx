@@ -148,7 +148,7 @@ const Chatting = () => {
         alert("거래 요청이 도착했습니다!");
       } else if (message.body.includes("TRADE_SUCCESS_SELLER") && message.body.split("_").at(0) === boardId) {
         alert("거래가 완료되었습니다!");
-      } else if (message.body.includes("TRADE_SUCCESS_BUYER")) {
+      } else if (message.body.includes("TRADE_SUCCESS_BUYER") && message.body.split("_").at(0) === boardId) {
         alert("거래가 완료되었습니다!");
       } else if (message.body.includes("TRADE_FAIL_SELLER") && message.body.split("_").at(0) === boardId) {
         alert("상대방이 거래를 취소했습니다!");
@@ -328,7 +328,7 @@ const Chatting = () => {
                           buyerId: currentChat.buyerId,
                           sellerId: currentChat.sellerId,
                           chatRoomId: currentChat.chatRoomId,
-                          isStatus: true,
+                          status: true,
                         };
                         await instanceWithToken.put("/api/review/ok", requestBody);
                       }}
@@ -342,7 +342,7 @@ const Chatting = () => {
                           buyerId: currentChat.buyerId,
                           sellerId: currentChat.sellerId,
                           chatRoomId: currentChat.chatRoomId,
-                          isStatus: false,
+                          status: false,
                         };
                         await instanceWithToken.put("/api/review/ok", requestBody);
                       }}
