@@ -6,7 +6,7 @@
 html,
 body {
   height: 100%;
-  overflow: auto;
+  overflow: overlay;
   //font-family: "Noto Sans KR", sans-serif;
 }
 
@@ -58,7 +58,6 @@ body {
   }
 }
 
-
 :root {
   --header--height: 4.5rem;
 }
@@ -72,4 +71,48 @@ body {
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+  width: 13px;
+  height: 13px;
+}
+
+/* width */
+::-webkit-scrollbar-button {
+  background: transparent;
+  /* width: 10px;
+  height: 10px; */
+  width: 0px;
+  height: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e3e1fb;
+  width: 0;
+  border-radius: 99rem;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: transparent;
+  width: 0;
+}
+
+/* corner */
+::-webkit-scrollbar-corner {
+  background: gray;
+}
+
+/* resizer */
+::-webkit-resizer {
+  background: 6f4ef2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #6f4ef2;
+  border: 2px solid transparent;
+  border-radius: 99rem;
 }
