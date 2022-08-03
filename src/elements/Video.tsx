@@ -14,6 +14,8 @@ export const Video = memo(({ src, autoPlay = false }: VideoOptions) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoIsViewRef, isView] = useInView();
 
+  console.log();
+
   const handlePlay = () => {
     videoRef.current?.play();
     setIsPlaying(true);
@@ -56,7 +58,7 @@ export const Video = memo(({ src, autoPlay = false }: VideoOptions) => {
         )}
       </div>
       <div className="video-play-icon">
-        {isPlaying ? (
+        {isPlaying && isView ? (
           <div onClick={handlePause}>
             <PauseIcon />
           </div>
