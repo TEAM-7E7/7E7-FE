@@ -261,13 +261,29 @@
   #### 1. shorts 영상 클립
   - scroll snap을 이용해 뷰포트에 한 게시물만 들어오도록 구현.
   - 뷰포트에서 게시물이 보일 맨 위,아래 y좌표를 계산하고 scroll event를 추가하여 scroll snap된 게시물의 가운데 좌표가 그 사이에 들어가면 동영상을 자동으로 재생시키도록 video 태그를 조작.
-  ![1231234](https://user-images.githubusercontent.com/55455103/182722838-6ecc2df5-7937-45ca-bf89-9dd7e90b1266.png)
+    <details>
+      <summary><h5>뷰포트 y좌표 계산 예시</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182722838-6ecc2df5-7937-45ca-bf89-9dd7e90b1266.png"/>
+      </div>
+    </details>
+  
   - 위의 구현을 기반으로 게시물의 썸네일이 동영상일 경우 youtube shorts처럼 자동 재생
-  <details>
-    <summary><h5>홈 화면 shots 영상 클립</h5></summary>
-    <div markdown="1">
-    <img src="https://user-images.githubusercontent.com/55455103/182723126-84ef1001-38d8-4ac9-affb-0c43f0fc4d9f.gif"/>
-    </div>
-  </details>
-  #### 2. infinite scroll
-  - 
+    <details>
+      <summary><h5>홈 화면 shots 영상 클립</h5></summary>
+      <div markdown="1">
+        <p align="center"><img src="https://user-images.githubusercontent.com/55455103/182723126-84ef1001-38d8-4ac9-affb-0c43f0fc4d9f.gif"/></p>
+      </div>
+    </details>
+  
+  #### 2. infinite scroll / 카테고리, 정렬 기준 선택
+  - 무한스크롤은 리액트의 useState를 사용해서 페이지에 해당하는 데이터를 이어나가는 방식이 아닌 react-query의 useInfiniteQuery 훅을 이용해서 페이지의 마지막 게시물이 보이면 자동으로 다음 페이지를 fetching하는 방식을 이용.
+  -  react query의 캐싱 기능을 이용해게시물 전체보기 화면에서 카테고리 및 정렬 기준 선택 시 useInfiniteQuery의 refetch 기능을 이용해서 카테고리나 정렬 기준이 변경되면 자동으로 변경된 카테고리와 정렬 기준이 반영된 api를 첫 페이지부터 호출하는데 사용.
+  -  카테고리와, 정렬 기준은 recoil-persist를 이용해 전역 상태의 저장소를 로컬 스토리지로 사용해서 즐겨찾기 기능처럼 페이지를 새로고침하거나 종료해도 남아있다.
+    <details>
+      <summary><h5>inifinite scroll + 카테고리 선택</h5></summary>
+      <div markdown="1">
+        <p align="center"><img src="https://user-images.githubusercontent.com/55455103/182724905-197f514e-c3a7-4dbc-8231-0b5821abe234.gif"/></p>
+      </div>
+    </details>
+
