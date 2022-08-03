@@ -216,7 +216,7 @@
 ## 2. 프로젝트 주요 기능 
   ### ➀ 로그인/회원가입 
   - URL: /sign-in, /sign-up
-  #### 1. 소셜 로그인 및 플랫폼 자체 회원가입
+  #### 1. 소셜 로그인 및 플랫폼 자체 회원가입 + 보안
   - 소셜 로그인은 카카오/구글의 로그인 api를 이용해서 구현.
     <details>
     <summary><h5>소셜로그인</h5></summary>
@@ -238,6 +238,19 @@
     <img src="https://user-images.githubusercontent.com/55455103/182720339-ab1b3004-73d9-4351-b05c-cbb5777a9b5e.gif"/>
     </div>
     </details>
+  #### 3. JWT(refresh + access) / Axios Interceptor / PrivateRoute 
+  - 로그인 후 서버에서 받은 refresh token과 access token을 각각 cookie와 webstorage에 저장해서 csrf와 xss 공격에 대응.
+  - axios interceptor를 구현해 api 요청을 가로채서 refresh token과 access token을 넣어주고 만약 access token이 만료되었다면 refresh token으로 access token을 재발급 받은 후 refresh token과 access token을 넣어서 원래 api 호출.
+  - 만약 refresh token이 만료되었다면 로그인 페이지로 리다이렉트 시킨다.
+  - Private Route를 구현해서 인증이 된 사용자만 접근할 수 있는 페이지를 구현한다. 만약 인증이 되지 않은 사용자가 접근 시 alert를 띄우고 접근을 막음.
+     <details>
+      <summary><h5>PrivateRoute</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182728855-de871baf-8313-4bc3-b298-c939ae6f30cb.gif"/>
+      </div>
+    </details>
+
+
   ### ➁ 게시물 등록 → drag and drop
   - URL: /add-board
   #### 1. 게시물 등록
@@ -283,7 +296,8 @@
     <details>
       <summary><h5>inifinite scroll + 카테고리 선택</h5></summary>
       <div markdown="1">
-        <p align="center"><img src="https://user-images.githubusercontent.com/55455103/182724905-197f514e-c3a7-4dbc-8231-0b5821abe234.gif"/></p>
+        <img src="https://user-images.githubusercontent.com/55455103/182724905-197f514e-c3a7-4dbc-8231-0b5821abe234.gif"/>
       </div>
-    </details>
-
+  
+  ### ➃ 게시물 상세보기  
+  #### 1.
