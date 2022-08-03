@@ -305,7 +305,7 @@
         margin-top: 1rem;
         display: flex;
         justify-content: center;
-
+        flex-shrink: 0;
         .chatting-send-input {
           max-width: 50%;
           margin-right: 0.5rem;
