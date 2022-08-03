@@ -326,18 +326,19 @@ const Chatting = () => {
                           chatRoomId: currentChat.chatRoomId,
                           status: true,
                         };
-                        await instanceWithToken.put("/api/review/ok", requestBody);
-                        const tradeMessage = {
-                          goodsId: boardId,
-                          chatRoomId: currentChat.chatRoomId,
-                          senderId: myId,
-                          partnerId: userId,
-                          message: "거래 요청이 수락되었습니다!",
-                          createdAt: new Date(),
-                        };
-                        client.current.publish({
-                          destination: "/pub/chat/message",
-                          body: JSON.stringify(tradeMessage),
+                        await instanceWithToken.put("/api/review/ok", requestBody).then(() => {
+                          const tradeMessage = {
+                            goodsId: boardId,
+                            chatRoomId: currentChat.chatRoomId,
+                            senderId: myId,
+                            partnerId: userId,
+                            message: "거래 요청이 수락되었습니다!",
+                            createdAt: new Date(),
+                          };
+                          client.current.publish({
+                            destination: "/pub/chat/message",
+                            body: JSON.stringify(tradeMessage),
+                          });
                         });
                       }}
                     >
@@ -353,18 +354,19 @@ const Chatting = () => {
                           chatRoomId: currentChat.chatRoomId,
                           status: false,
                         };
-                        await instanceWithToken.put("/api/review/ok", requestBody);
-                        const tradeMessage = {
-                          goodsId: boardId,
-                          chatRoomId: currentChat.chatRoomId,
-                          senderId: myId,
-                          partnerId: userId,
-                          message: "거래 요청이 취소되었습니다ㅠㅠ",
-                          createdAt: new Date(),
-                        };
-                        client.current.publish({
-                          destination: "/pub/chat/message",
-                          body: JSON.stringify(tradeMessage),
+                        await instanceWithToken.put("/api/review/ok", requestBody).then(() => {
+                          const tradeMessage = {
+                            goodsId: boardId,
+                            chatRoomId: currentChat.chatRoomId,
+                            senderId: myId,
+                            partnerId: userId,
+                            message: "거래 요청이 취소되었습니다ㅠㅠ",
+                            createdAt: new Date(),
+                          };
+                          client.current.publish({
+                            destination: "/pub/chat/message",
+                            body: JSON.stringify(tradeMessage),
+                          });
                         });
                       }}
                     >
