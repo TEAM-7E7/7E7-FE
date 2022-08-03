@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { instanceWithToken } from "../api/api";
 import { Cookies } from "react-cookie";
 import SockJS from "sockjs-client";
-import Stomp from "stompjs";
 import * as StompJs from "@stomp/stompjs";
 import { Input } from "../elements/Input";
 import { Button } from "../elements/Button";
@@ -138,7 +137,7 @@ const Chatting = () => {
   };
   const stompSubscribe = () => {
     client.current.subscribe(`/sub/my-rooms/${myId}`, (message: any) => {
-      console.log(message.body);
+      console.log(message);
       if (message.body.includes("PARTNER_EXIT") && message.body.split("_").at(0) === boardId) {
         alert("상대방이 채팅방에서 나갔습니다.");
         navigate("/chatting", { replace: true });
@@ -354,6 +353,7 @@ const Chatting = () => {
                           chatRoomId: currentChat.chatRoomId,
                           status: false,
                         };
+                        console.log(requestBody);
                         await instanceWithToken.put("/api/review/ok", requestBody).then(() => {
                           const tradeMessage = {
                             goodsId: boardId,

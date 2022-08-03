@@ -4,7 +4,7 @@ export const signUpValidationSchema = Yup.object().shape({
   email: Yup.string().email("올바른 이메일 형식이 아닙니다!").required(" "),
   nickname: Yup.string()
     .min(2, "닉네임은 최소 2글자 이상입니다!")
-    .max(16, "닉네임은 최대 10글자입니다!")
+    .max(10, "닉네임은 최대 10글자입니다!")
     .matches(/^[0-9가-힣a-zA-Z]*$/, "특수문자가 포함되면 안되고 글자만 가능합니다!")
     .required(" "),
   password: Yup.string()
@@ -57,7 +57,7 @@ export const passwordChangeValidationSchema = Yup.object().shape({
 export const nicknameChangeValidationSchema = Yup.object().shape({
   nickname: Yup.string()
     .min(2, "닉네임은 최소 2글자 이상입니다!")
-    .max(16, "닉네임은 최대 16글자입니다!")
+    .max(10, "닉네임은 최대 10글자입니다!")
     .matches(/^[0-9가-힣a-zA-Z]*$/, "특수문자가 포함되면 안되고 글자만 가능합니다!")
     .required(" "),
 });
