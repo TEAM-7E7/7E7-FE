@@ -132,7 +132,7 @@
     <hr/>
   </details>
   <details>
-    <summary><h5>최경</h5></summary>
+    <summary><h5>최경민</h5></summary>
     <div markdown="1">
       <hr/>
       <div>
@@ -214,8 +214,90 @@
 <hr/>
 
 ## 2. 프로젝트 주요 기능 
-  ### ➀ 로그인/회원가입
-  
+  ### ➀ 로그인/회원가입 
+  - URL: /sign-in, /sign-up
+  #### 1. 소셜 로그인 및 플랫폼 자체 회원가입 + 보안
+  - 소셜 로그인은 카카오/구글의 로그인 api를 이용해서 구현.
+    <details>
+    <summary><h5>소셜로그인</h5></summary>
+    <div markdown="1">
+    <img src="https://user-images.githubusercontent.com/55455103/182719213-22d011f5-8bb5-45a9-b360-6f7174f7b185.gif"/>
+    </div>
+    </details>
+  #### 2. 플랫폼 자체 회원가입/로그인
+  - 플랫폼 자체 회원가입은 이메일 인증과 닉네임 중복체크를 진행해야 하며 formik과 yup으로 form의 validation 및 state를 관리함.
+    <details>
+    <summary><h5>회원가입 이메일 인증</h5></summary>
+    <div markdown="1">
+    <img src="https://user-images.githubusercontent.com/55455103/182720016-af4be124-5ea7-4013-9c83-643ea5b0a712.gif"/>
+    </div>
+    </details>
+    <details>
+    <summary><h5>닉네임 중복확인 및 form 유효성 검증</h5></summary>
+    <div markdown="1">
+    <img src="https://user-images.githubusercontent.com/55455103/182720339-ab1b3004-73d9-4351-b05c-cbb5777a9b5e.gif"/>
+    </div>
+    </details>
+  #### 3. JWT(refresh + access) / Axios Interceptor / PrivateRoute 
+  - 로그인 후 서버에서 받은 refresh token과 access token을 각각 cookie와 webstorage에 저장해서 csrf와 xss 공격에 대응.
+  - axios interceptor를 구현해 api 요청을 가로채서 refresh token과 access token을 넣어주고 만약 access token이 만료되었다면 refresh token으로 access token을 재발급 받은 후 refresh token과 access token을 넣어서 원래 api 호출.
+  - 만약 refresh token이 만료되었다면 로그인 페이지로 리다이렉트 시킨다.
+  - Private Route를 구현해서 인증이 된 사용자만 접근할 수 있는 페이지를 구현한다. 만약 인증이 되지 않은 사용자가 접근 시 alert를 띄우고 접근을 막음.
+     <details>
+      <summary><h5>PrivateRoute</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182728855-de871baf-8313-4bc3-b298-c939ae6f30cb.gif"/>
+      </div>
+    </details>
+
+
   ### ➁ 게시물 등록 → drag and drop
+  - URL: /add-board
+  #### 1. 게시물 등록
+  - yup + formik을 이용해 게시물 등록 form의 validation 검증 및 state 관리.
+  - 게시물의 이미지/비디오 갯수는 최대 5개까지 허용(초과하면 valdation schema에서 에러 메시지를 보내줌)하고 동영상의 길이는 16초 이상이면 alert를 띄워주고 form의 state에 반영되지 않음.
+  - drag and drop으로 서버에 올라갈 이미지/비디오의 순서를 바꿀 수 있고 맨 앞에 있는 이미지/비디오가 썸네일이 된다.
+    <details>
+      <summary><h5>게시물 등록 drag and drop</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182722073-05672738-8a51-4f03-bde2-187532fa5662.gif"/>
+      </div>
+    </details>
+    <details>
+      <summary><h5>게시물 등록</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182722363-123c7ae0-3127-4145-91fb-04c1558cd385.gif"/>
+      </div>
+    </details>
+  ### ➂ 게시물 전체보기(홈 화면 → shots 영상 클립 / 카테고리,정렬 기준 선택) 
+  - URL: /
+  #### 1. shorts 영상 클립
+  - scroll snap을 이용해 뷰포트에 한 게시물만 들어오도록 구현.
+  - 뷰포트에서 게시물이 보일 맨 위,아래 y좌표를 계산하고 scroll event를 추가하여 scroll snap된 게시물의 가운데 좌표가 그 사이에 들어가면 동영상을 자동으로 재생시키도록 video 태그를 조작.
+    <details>
+      <summary><h5>뷰포트 y좌표 계산 예시</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182722838-6ecc2df5-7937-45ca-bf89-9dd7e90b1266.png"/>
+      </div>
+    </details>
   
-  ### ➂ 게시물 전체보기(홈화면) 
+  - 위의 구현을 기반으로 게시물의 썸네일이 동영상일 경우 youtube shorts처럼 자동 재생
+    <details>
+      <summary><h5>홈 화면 shots 영상 클립</h5></summary>
+      <div markdown="1">
+        <p align="center"><img src="https://user-images.githubusercontent.com/55455103/182723126-84ef1001-38d8-4ac9-affb-0c43f0fc4d9f.gif"/></p>
+      </div>
+    </details>
+  
+  #### 2. infinite scroll / 카테고리, 정렬 기준 선택
+  - 무한스크롤은 리액트의 useState를 사용해서 페이지에 해당하는 데이터를 이어나가는 방식이 아닌 react-query의 useInfiniteQuery 훅을 이용해서 페이지의 마지막 게시물이 보이면 자동으로 다음 페이지를 fetching하는 방식을 이용.
+  -  react query의 캐싱 기능을 이용해게시물 전체보기 화면에서 카테고리 및 정렬 기준 선택 시 useInfiniteQuery의 refetch 기능을 이용해서 카테고리나 정렬 기준이 변경되면 자동으로 변경된 카테고리와 정렬 기준이 반영된 api를 첫 페이지부터 호출하는데 사용.
+  -  카테고리와, 정렬 기준은 recoil-persist를 이용해 전역 상태의 저장소를 로컬 스토리지로 사용해서 즐겨찾기 기능처럼 페이지를 새로고침하거나 종료해도 남아있다.
+    <details>
+      <summary><h5>inifinite scroll + 카테고리 선택</h5></summary>
+      <div markdown="1">
+        <img src="https://user-images.githubusercontent.com/55455103/182724905-197f514e-c3a7-4dbc-8231-0b5821abe234.gif"/>
+      </div>
+  
+  ### ➃ 게시물 상세보기  
+  #### 1.
