@@ -25,12 +25,15 @@ const BoardCarousel = ({ imageMapList }: BoardCarouselDto) => {
   // slider에서 보이는 동영상만 재생하기
   useEffect(() => {
     sliderItemRef.current.forEach((element: any, index: any) => {
-      const sliderItem = element.childNodes[1].childNodes[0];
-      if (sliderItem && sliderItem.tagName === "VIDEO") {
+      console.log(element);
+      const sliderItem = element?.childNodes[1];
+      if (sliderItem?.childNodes[0] && sliderItem?.childNodes[0].tagName === "VIDEO") {
         if (currentIndex === index) {
-          sliderItem.play();
+          setTimeout(() => {
+            sliderItem.childNodes[0].play();
+          }, 150);
         } else {
-          sliderItem.pause();
+          sliderItem.childNodes[0].pause();
         }
       }
     });
