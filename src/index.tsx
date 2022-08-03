@@ -9,18 +9,36 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { HelmetProvider } from "react-helmet-async";
 
 const queryClient = new QueryClient();
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
-root.render(
-  <BrowserRouter>
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
-      </RecoilRoot>
-    </QueryClientProvider>
-  </BrowserRouter>,
-);
+
+const container = document.getElementById("root") as HTMLElement;
+const root = ReactDOM.createRoot(container);
+
+if (container.hasChildNodes()) {
+  ReactDOM.hydrateRoot(
+    container,
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
+        </RecoilRoot>
+      </QueryClientProvider>
+    </BrowserRouter>,
+  );
+} else {
+  root.render(
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
+        </RecoilRoot>
+      </QueryClientProvider>
+    </BrowserRouter>,
+  );
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

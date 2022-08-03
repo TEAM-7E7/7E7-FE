@@ -83,12 +83,10 @@ const Header = () => {
               <SearchIcon />
             </div>*/}
 
-            <Link to="/add-board">
-              <div className="header-icon-transparent icon-hover">
-                <UploadIcon />
-                <div className="hover-text">업로드</div>
-              </div>
-            </Link>
+            <div className="header-icon-transparent icon-hover" onClick={() => navigate("/add-board")}>
+              <UploadIcon />
+              <div className="hover-text">업로드</div>
+            </div>
           </div>
         </div>
         {/* 검색 기능 */}

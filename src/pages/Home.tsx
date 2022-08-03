@@ -53,7 +53,8 @@ const Home = () => {
         ? getBoard.pages.map((page_data, page_num) => {
             const board_page = page_data.board_page;
             return board_page.map((item: any, idx: number) => {
-              const fileType = item.goodsImageUrl.split(".").at(-1);
+              const splitted = item.goodsImageUrl?.split(".");
+              const fileType = splitted[splitted.length - 1] || "";
               if (
                 // 마지막 요소에 ref 달아주기
                 page_num === getBoard.pages.length - 1 &&
