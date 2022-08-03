@@ -16,9 +16,10 @@ const DeleteBoardModal = function DeleteBoardModal({
   setModalIsOpen,
 }: DeleteBoardModalDto) {
   const deleteBoard = async () => {
-    await instanceWithToken.delete(`/api/goods/${board_id}`);
+    const res = await instanceWithToken.delete(`/api/goods/${board_id}`);
+    console.log(res);
     alert("게시물이 삭제되었습니다.");
-    window.location.href = "/my-page";
+    //window.location.href = "/my-page";
   };
   return (
     <>

@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import "../../styles/components/modals/selectuploadtypemodal.scss";
 import { IconButton } from "../../elements/IconButton";
 import { CameraIcon, ImageIcon } from "../../assets/icons/FigmaIcons";
-import { memo, useState } from "react";
+import { useState } from "react";
 import FileUploader from "../FileUploader";
 import { AddBoardDto } from "../../dto/AddBoardDto";
 
@@ -30,7 +30,10 @@ const SelectUploadTypeModal = function SelectUploadTypeModal({
         }}
       >
         <div className="modal-select-type">
-          <DialogTitle>업로드는 어떤걸로 해볼까요?</DialogTitle>
+          <DialogTitle>
+            <div className="modal-select-type-title">업로드는 어떤걸로 해볼까요?</div>
+            <div className="modal-about-video-text">영상의 길이는 최대 16초입니다!</div>
+          </DialogTitle>
           <DialogContent>
             <div className="modal-body">
               {/*<div className="select-button">

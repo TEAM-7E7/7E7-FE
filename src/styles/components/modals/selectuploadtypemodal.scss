@@ -1,5 +1,18 @@
 .modal-select-type {
   font-family: Pretendard, "Noto Sans KR", sans-serif;
+  .modal-select-type-title{
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+  .modal-about-video-text{
+    color: #D93403;
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 0.5;
+    letter-spacing: -0.25px;
+    margin-top: 0.5rem;
+  }
   .modal-body {
     display: flex;
     justify-content: center;
