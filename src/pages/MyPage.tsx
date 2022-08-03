@@ -158,7 +158,7 @@ const MyPage = () => {
               }}
             >
               <div className="state-icon">
-                <SellIcon />
+                <SellIcon color={boardCategory === "sell" ? "#408080" : "#ADADAD"} />
               </div>
               <div className="state-text">판매목록</div>
             </div>
@@ -169,7 +169,7 @@ const MyPage = () => {
               }}
             >
               <div className="state-icon">
-                <BuyIcon />
+                <BuyIcon color={boardCategory === "buy" ? "#92aacf" : "#ADADAD"} />
               </div>
               <div className="state-text">구매목록</div>
             </div>
@@ -180,7 +180,7 @@ const MyPage = () => {
               }}
             >
               <div className="state-icon">
-                <BookMarkIcon />
+                <BookMarkIcon color={boardCategory === "bookmark" ? "#C08A67" : "#ADADAD"} />
               </div>
               <div className="state-text">저장목록</div>
             </div>

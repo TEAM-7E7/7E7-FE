@@ -8,9 +8,10 @@ import DeleteBoardModal from "../modals/DeleteBoardModal";
 interface KebabMenu {
   board_id: number;
   board_title: string;
+  board_status: string;
 }
 
-const KebabMenu = ({ board_id, board_title }: KebabMenu) => {
+const KebabMenu = ({ board_id, board_title, board_status }: KebabMenu) => {
   // kebab button
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -28,18 +29,20 @@ const KebabMenu = ({ board_id, board_title }: KebabMenu) => {
         <KebabIcon />
       </div>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem
-          onClick={() => {
-            navigate(`/edit-board/${board_id}`);
-          }}
-        >
-          <div className="item-kebab-menu">
-            <div className="menu-icon">
-              <EditIcon />
+        {board_status === "SALE" && (
+          <MenuItem
+            onClick={() => {
+              navigate(`/edit-board/${board_id}`);
+            }}
+          >
+            <div className="item-kebab-menu">
+              <div className="menu-icon">
+                <EditIcon />
+              </div>
+              <div className="menu-text">수정하기</div>
             </div>
-            <div className="menu-text">수정하기</div>
-          </div>
-        </MenuItem>
+          </MenuItem>
+        )}
         <MenuItem
           onClick={() => {
             setModalIsOpen(true);

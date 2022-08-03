@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 interface IconButtonOptions {
   variant?: "outlined" | "filled" | "";
   size?: "small" | "medium" | "large";
-  color?: "primary" | "skyblue" | "kakao";
+  color?: "primary" | "skyblue" | "kakao" | "google";
   direction?: "left-right" | "top-bottom" | "right-left";
   icon: any;
   fullWidth?: boolean;

@@ -11,7 +11,7 @@ export const addBoardValidationSchema = Yup.object().shape({
     .integer()
     .positive("양수만 입력하세요!")
     .required("가격을 입력해주세요!")
-    .max(999999999, "10억은 너무 비싸요!"),
+    .max(999999999, "10억 이상은 너무 비싸요!"),
   explain: Yup.string()
     .required("상품에 대한 설명을 입력해주세요!")
     .min(10, "설명은 10글자 이상 입력해주세요!")

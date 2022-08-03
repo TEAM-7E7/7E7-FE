@@ -27,7 +27,7 @@
       justify-content: center;
       margin-right: 1rem;
       margin-bottom: 2rem;
-
+      overflow: hidden;
       img,
       video {
         width: 100%;
@@ -98,11 +98,7 @@
 
     .submit-button {
       display: flex;
-
-      button {
-        flex-grow: 1;
-        margin-left: 1rem;
-      }
+      flex-direction: row-reverse;
     }
   }
 }

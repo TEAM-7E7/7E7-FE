@@ -13,6 +13,7 @@ import Label from "../elements/Label";
 import { BookMarkIcon, ViewIcon } from "../assets/icons/FigmaIcons";
 import { IconButton } from "../elements/IconButton";
 import MetaTag from "../utils/MetaTag";
+import numeral from "numeral";
 
 const Board = () => {
   const navigate = useNavigate();
@@ -66,14 +67,18 @@ const Board = () => {
                         <Label size="small" type="sale">
                           {BoardStatus[getBoard?.data.data.status]}
                         </Label>
-                      ) : (
+                      ) : getBoard?.data.data.status === "SOLD_OUT" ? (
                         <Label size="small" type="sold-out">
+                          {BoardStatus[getBoard?.data.data.status]}
+                        </Label>
+                      ) : (
+                        <Label size="small" type="reserved">
                           {BoardStatus[getBoard?.data.data.status]}
                         </Label>
                       )}
                     </div>
                   </div>
-                  <div className="board-price">{getBoard?.data.data.sellPrice}원</div>
+                  <div className="board-price">{numeral(getBoard?.data.data.sellPrice).format("0,0")}원</div>
                   <div className="board-explain">{getBoard?.data.data.description}</div>
                   <div className="board-wishcount-viewcount">
                     <div className="board-wishcount">
@@ -86,7 +91,7 @@ const Board = () => {
                       <div className="board-viewcount-icon">
                         <ViewIcon />
                       </div>
-                      {getBoard?.data.data.viewCount}
+                      {getBoard?.data.data.chatRoomCount}
                     </div>
                   </div>
                 </div>
@@ -107,7 +112,13 @@ const Board = () => {
                     <Button
                       color="primary"
                       onClick={() => {
-                        navigate(`/edit-board/${board_id}`);
+                        if (getBoard?.data.data.status === "SALE") {
+                          navigate(`/edit-board/${board_id}`);
+                        } else if (getBoard?.data.data.status === "SOLD_OUT") {
+                          alert("거래 완료된 게시물은 수정이 불가능합니다!");
+                        } else {
+                          alert("거래중인 게시물은 수정이 불가능합니다!");
+                        }
                       }}
                     >
                       수정하기

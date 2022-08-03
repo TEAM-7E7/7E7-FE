@@ -159,6 +159,7 @@ const SignIn = () => {
               <div className="social-login-button">
                 <IconButton
                   icon={<GoogleIcon />}
+                  color="google"
                   direction="right-left"
                   iconSize="medium"
                   fullWidth

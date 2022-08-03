@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 import KebabMenu from "./KebabMenu";
 import { Pagination } from "@mui/material";
 import Label from "../../elements/Label";
-import { BoardCategory } from "../../dto/BoardCategoryAndState";
+import { BoardCategory, BoardStatus } from "../../dto/BoardCategoryAndState";
+import numeral from "numeral";
 
 const MyPageBoardList = ({ boardCategory }: MyPageBoardCategoryDto) => {
   const navigate = useNavigate();
@@ -38,6 +39,13 @@ const MyPageBoardList = ({ boardCategory }: MyPageBoardCategoryDto) => {
         setBoardList(data.data.goodsList);
       };
       getBookmarkBoard();
+    } else if (boardCategory === "buy") {
+      const getBuyBoard = async () => {
+        const { data } = await instanceWithToken.get(`/api/goods/my-purchase?page=${page}&size=6`);
+        setPageCount(Math.ceil(data.data.totalElements / 6));
+        setBoardList(data.data.goodsList);
+      };
+      getBuyBoard();
     }
   }, [boardCategory, boardStatus, page]);
   return (
@@ -81,11 +89,30 @@ const MyPageBoardList = ({ boardCategory }: MyPageBoardCategoryDto) => {
             <div className="board-list-item-text">
               <div className="item-title-kebab">
                 <div className="item-title">{item.title}</div>
-                {boardCategory === "sell" && <KebabMenu board_id={item.id} board_title={item.title} />}
+                {boardCategory === "sell" && (
+                  <KebabMenu board_id={item.id} board_title={item.title} board_status={item.status} />
+                )}
               </div>
-              <div className="item-created">{timeUtils.timePass(item.createdAt)}</div>
+              <div className="item-created-status">
+                <div className="item-created">{timeUtils.timePass(item.createdAt)}</div>
+                <div className="item-status">
+                  {item.status === "SALE" ? (
+                    <Label size="small" type="sale">
+                      {BoardStatus[item.status]}
+                    </Label>
+                  ) : item.status === "SOLD_OUT" ? (
+                    <Label size="small" type="sold-out">
+                      {BoardStatus[item.status]}
+                    </Label>
+                  ) : (
+                    <Label size="small" type="reserved">
+                      {BoardStatus[item.status]}
+                    </Label>
+                  )}
+                </div>
+              </div>
               <div className="item-price-category">
-                <div className="item-price">{item.sellPrice} 원</div>
+                <div className="item-price">{numeral(item.sellPrice).format("0,0")}원</div>
                 <div className="item-category">
                   <Label type="category" size="small">
                     {BoardCategory[item.category]}

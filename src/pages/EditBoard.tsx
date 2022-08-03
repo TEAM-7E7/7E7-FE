@@ -192,13 +192,6 @@ const EditBoard = () => {
                       </div>
                     </div>
                     <div className="submit-button">
-                      <Select name="status" value={values.status} onChange={handleChange}>
-                        <option value="" disabled selected hidden>
-                          거래 상태 변경하기
-                        </option>
-                        <option value="SALE">판매중</option>
-                        <option value="SOLD_OUT">판매완료</option>
-                      </Select>
                       <Button type="submit">Update</Button>
                     </div>
                   </div>

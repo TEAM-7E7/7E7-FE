@@ -7,6 +7,10 @@
   }
 }
 
+.label{
+  padding: 0.4rem 0.8rem;
+}
+
 .board-list-wrapper {
   width: 80%;
   margin: 0 auto;
@@ -45,15 +49,15 @@
   .board-list-body {
     opacity: 0;
     animation: smoothAppear 1.5s forwards;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 18rem);
+    justify-content: space-around;
 
     .board-list-item-wrapper {
-      width: 15rem;
-      height: 32rem;
-      margin: 1.5rem 1rem;
-      display: flex;
+      width: 18rem;
+      height: 34rem;
+      margin: 1.5rem 0;
+      display: inline-flex;
       flex-direction: column;
 
       .board-list-item-img {
@@ -77,26 +81,38 @@
         .item-title-kebab {
           display: flex;
           justify-content: space-between;
-
+          align-items: center;
+          margin-bottom: 0.5rem;
           .item-title {
             font-size: 1rem;
             font-weight: bold;
           }
         }
 
-        .item-created {
-          font-size: 0.8rem;
-          color: #9F9F9F;
+        .item-created-status{
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          .item-created {
+            font-size: 0.8rem;
+            color: #9F9F9F;
+          }
+          .item-status{
+
+          }
         }
 
         .item-price-category {
-          margin: 1rem 0;
+          margin: 0.5rem 0;
           display: flex;
           justify-content: space-between;
           align-items: center;
           .item-price{
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
+          }
+          .item-category{
+
           }
         }
 

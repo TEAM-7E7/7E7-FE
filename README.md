@@ -20,4 +20,11 @@
 
 ## 개요
 ### ➀ MarketClip 이란?
-
+- 유저들의 개성있는 영상 클립과 사진으로 보는 재미를 느끼며 쇼핑을하는 웹 서비스입니다
+- 기존의 거래 플랫폼에 없는 흥미로운 shorts 영상에 
+- 
+<details>
+<summary></summary>
+<div markdown="1">
+</div>
+</details>
