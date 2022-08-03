@@ -4,6 +4,8 @@
 
 ![2](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/43f6e5a4-a517-490f-aa9e-1cfe29e98a1b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220802%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220802T144954Z&X-Amz-Expires=86400&X-Amz-Signature=366e35ebd6363395b9c513cd6951aadc21487d52e3da41b85922b5336d36bac5&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
 
+<hr/>
+
 ## 목차
 
 ### 1. 개요
@@ -17,6 +19,7 @@
 - MyPage
 - Chatting
 
+<hr/>
 
 ##  개요
 ### ➀ MarketClip 이란?
@@ -210,5 +213,7 @@
   #### react-dnd-multi-backend
     → 게시물 등록/수정 페이지에서 drag and drop을 이용해 게시물에 올라갈 비디오/사진의 순서를 바꾸기 위해 사용. 
     → 프로젝트가 모바일과 웹 환경을 둘 다 고려해서 진행되므로 웹에서는 drag event, 모바일에선 touch event로 drag and drop을 쉽게 도입할 수 있고 따로 event listner를 해제하지 않아도 되는 편리함이 있어서 사용.
+
+<hr/>
 
 ## 2. 프로젝트 주요 기능 
