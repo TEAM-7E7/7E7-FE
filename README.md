@@ -132,7 +132,7 @@
     <hr/>
   </details>
   <details>
-    <summary><h5>최경</h5></summary>
+    <summary><h5>최경민</h5></summary>
     <div markdown="1">
       <hr/>
       <div>
@@ -214,8 +214,30 @@
 <hr/>
 
 ## 2. 프로젝트 주요 기능 
-  ### ➀ 로그인/회원가입
-  
+  ### ➀ 로그인/회원가입 
+  - URL: /sign-in, /sign-up
+  #### 1. 소셜 로그인 및 플랫폼 자체 회원가입
+  - 소셜 로그인은 카카오/구글의 로그인 api를 이용해서 구현.
+    <details>
+    <summary><h5>소셜로그인</h5></summary>
+    <div markdown="1">
+    <img src="https://user-images.githubusercontent.com/55455103/182719213-22d011f5-8bb5-45a9-b360-6f7174f7b185.gif"/>
+    </div>
+    </details>
+  #### 2. 플랫폼 자체 회원가입/로그인
+  - 플랫폼 자체 회원가입은 이메일 인증과 닉네임 중복체크를 진행해야 하며 formik과 yup으로 form의 validation 및 state를 관리함.
+    <details>
+    <summary><h5>회원가입 이메일 인증</h5></summary>
+    <div markdown="1">
+    <img src="https://user-images.githubusercontent.com/55455103/182720016-af4be124-5ea7-4013-9c83-643ea5b0a712.gif"/>
+    </div>
+    </details>
+    <details>
+    <summary><h5>닉네임 중복확인 및 form 유효성 검증</h5></summary>
+    <div markdown="1">
+    <img src="https://user-images.githubusercontent.com/55455103/182720339-ab1b3004-73d9-4351-b05c-cbb5777a9b5e.gif"/>
+    </div>
+    </details>
   ### ➁ 게시물 등록 → drag and drop
-  
-  ### ➂ 게시물 전체보기(홈화면) 
+ 
+  ### ➂ 게시물 전체보기(홈화면 → shots 영상) 
