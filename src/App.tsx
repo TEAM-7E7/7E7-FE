@@ -37,9 +37,10 @@ const App = () => {
       alert("이미 존재하는 이메일입니다.");
     }
   }, []);
+
   return (
     <>
-      <Header />
+      {!location.pathname.match(/\/chatting/g) && <Header />}
       <div className="contents">
         <Routes>
           <Route path="/" element={<Home />} />

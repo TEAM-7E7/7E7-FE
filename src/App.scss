@@ -116,3 +116,9 @@ body {
   border: 2px solid transparent;
   border-radius: 99rem;
 }
+
+@media (min-width: 1024px) {
+  .contents {
+    margin-left: 200px;
+  }
+}
