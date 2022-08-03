@@ -29,7 +29,8 @@ const App = () => {
     // 소셜로그인시, 쿼리 파라미터로 token을 넘겨주므로 저장 후, url을 안보이게 함
     if (refreshToken && accessToken) {
       setRefreshToken(refreshToken);
-      cookies.set("X-ACCESS-TOKEN", accessToken);
+      const daysToExpire = new Date(2147483647 * 1000);
+      cookies.set("X-ACCESS-TOKEN", accessToken, { expires: daysToExpire });
       navigate("/", { replace: true });
       alert("로그인에 성공했습니다.");
     } else if (socialLoginError === "EMAIL_ALREADY_EXIST") {
