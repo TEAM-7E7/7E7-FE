@@ -25,7 +25,6 @@ const BoardCarousel = ({ imageMapList }: BoardCarouselDto) => {
   // slider에서 보이는 동영상만 재생하기
   useEffect(() => {
     sliderItemRef.current.forEach((element: any, index: any) => {
-      console.log(element);
       const sliderItem = element?.childNodes[1];
       if (sliderItem?.childNodes[0] && sliderItem?.childNodes[0].tagName === "VIDEO") {
         if (currentIndex === index) {

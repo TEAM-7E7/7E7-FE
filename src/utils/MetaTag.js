@@ -12,20 +12,19 @@ const MetaTag = ({
   return (
     <Helmet>
       <title>{title}</title>
-
       <meta name="description" content={description} data-react-helmet="true" />
       {/*<meta name="keywords" content={keywords} />*/}
-
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content="마켓클립 | Market Clip" />
-      <meta property="og:site_name" content={title} />
+      <meta charSet="utf-8" />
+      <meta property="og:type" content="website" data-react-helmet="true" />
+      <meta property="og:title" content="마켓클립 | Market Clip" data-react-helmet="true" />
+      <meta property="og:site_name" content={title} data-react-helmet="true" />
       <meta property="og:description" content={description} data-react-helmet="true" />
-      <meta property="og:image" content={imgsrc} />
-      <meta property="og:url" content={url} />
+      <meta property="og:image" content={imgsrc} data-react-helmet="true" />
+      <meta property="og:url" content={url} data-react-helmet="true" />
 
       <meta name="twitter:title" content="마켓클립 | Market Clip" />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={imgsrc} />
+      <meta name="twitter:description" content={description} data-react-helmet="true" />
+      <meta name="twitter:image" content={imgsrc} data-react-helmet="true" />
 
       <link rel="canonical" href={url} />
     </Helmet>
