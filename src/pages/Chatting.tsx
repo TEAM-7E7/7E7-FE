@@ -120,24 +120,17 @@ const Chatting = () => {
   const stompConnect = () => {
     client.current = new StompJs.Client({
       webSocketFactory: () => new SockJS("https://tryaz.shop/api/ws"),
-      debug: (str) => {
-        console.log(str);
-      },
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
       onConnect: () => {
         stompSubscribe();
       },
-      onStompError: (frame) => {
-        console.error(frame);
-      },
     });
     client.current.activate();
   };
   const stompSubscribe = () => {
     client.current.subscribe(`/sub/my-rooms/${myId}`, (message: any) => {
-      console.log(message);
       if (message.body.includes("PARTNER_EXIT") && message.body.split("_").at(0) === boardId) {
         alert("상대방이 채팅방에서 나갔습니다.");
         navigate("/chatting", { replace: true });
@@ -354,7 +347,7 @@ const Chatting = () => {
                             chatRoomId: currentChat.chatRoomId,
                             status: false,
                           };
-                          console.log(requestBody);
+
                           await instanceWithToken.put("/api/review/ok", requestBody).then(() => {
                             const tradeMessage = {
                               goodsId: boardId,

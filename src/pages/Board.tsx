@@ -21,8 +21,6 @@ const Board = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const { board_id } = useParams();
   const { getBoard, getBoardIsSuccess, addBookmarkMutation, deleteBookmarkMutation } = useBoardQuery(board_id);
-
-  console.log(getBoard);
   return (
     <>
       <MetaTag title="게시물 상세보기" description={getBoard?.data.data.description} />
