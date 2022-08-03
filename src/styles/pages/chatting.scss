@@ -213,18 +213,27 @@
       .chatting-current-header {
         margin-bottom: 2rem;
         padding-bottom: 1rem;
-        font-size: 2rem;
-        font-weight: bold;
         border-bottom: 1px solid #A9B5BC;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        .chatting-button{
+        font-weight: bold;
+        .chatting-current-header-partner-button{
           display: flex;
           justify-content: space-between;
-          button{
-            margin-left: 0.5rem;
+          align-items: center;
+          margin-bottom: 0.25rem;
+          font-size: 1.75rem;
+          .chatting-button{
+            display: flex;
+            justify-content: space-between;
+            button{
+              margin-left: 0.5rem;
+            }
           }
+        }
+        .chatting-current-board{
+          color: #6760EF;
+          font-size: 1.25rem;
+          cursor: pointer;
+          display: inline-block;
         }
       }
 
@@ -302,6 +311,7 @@
       }
 
       .chatting-send-input-button {
+        margin-bottom: 5rem;
         margin-top: 1rem;
         display: flex;
         justify-content: center;

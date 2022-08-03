@@ -278,126 +278,136 @@ const Chatting = () => {
         {boardId && userId ? (
           <div className="chatting-current-wrapper">
             <div className="chatting-current-header">
-              <div className="chatting-current-header-text">
+              <div className="chatting-current-header-partner-button">
                 <div className="chatting-current-partner-nickname">{currentChat.partnerNickname}</div>
-                <div className="chatting-current-partner-board">{currentChat.goodsTitle}</div>
-              </div>
-              <div className="chatting-button">
-                {currentChat.sellStatus === "SELLER_TRY" && (
+                <div className="chatting-button">
+                  {currentChat.sellStatus === "SELLER_TRY" && (
+                    <Button
+                      size="small"
+                      onClick={async () => {
+                        const requestBody = {
+                          goodsId: boardId,
+                          buyerId: currentChat.buyerId,
+                          sellerId: currentChat.sellerId,
+                          chatRoomId: currentChat.chatRoomId,
+                        };
+                        await instanceWithToken.post("/api/review/deal", requestBody);
+                        const tradeMessage = {
+                          goodsId: boardId,
+                          chatRoomId: currentChat.chatRoomId,
+                          senderId: myId,
+                          partnerId: userId,
+                          message: "거래 요청이 도착했습니다!",
+                          createdAt: new Date(),
+                        };
+                        client.current.publish({
+                          destination: "/pub/chat/message",
+                          body: JSON.stringify(tradeMessage),
+                        });
+                      }}
+                    >
+                      거래요청
+                    </Button>
+                  )}
+                  {currentChat.sellStatus === "TRADE_WAITING" && (
+                    <Button size="small" onClick={() => alert("이미 거래중인 게시물입니다.")}>
+                      거래요청
+                    </Button>
+                  )}
+                  {currentChat.sellStatus === "BUYER_CHECK_REQUEST" && (
+                    <>
+                      <Button
+                        size="small"
+                        onClick={async () => {
+                          const requestBody = {
+                            goodsId: boardId,
+                            buyerId: currentChat.buyerId,
+                            sellerId: currentChat.sellerId,
+                            chatRoomId: currentChat.chatRoomId,
+                            status: true,
+                          };
+                          await instanceWithToken.put("/api/review/ok", requestBody).then(() => {
+                            const tradeMessage = {
+                              goodsId: boardId,
+                              chatRoomId: currentChat.chatRoomId,
+                              senderId: myId,
+                              partnerId: userId,
+                              message: "거래 요청이 수락되었습니다!",
+                              createdAt: new Date(),
+                            };
+                            client.current.publish({
+                              destination: "/pub/chat/message",
+                              body: JSON.stringify(tradeMessage),
+                            });
+                          });
+                        }}
+                      >
+                        수락
+                      </Button>
+                      <Button
+                        size="small"
+                        onClick={async () => {
+                          const requestBody = {
+                            goodsId: boardId,
+                            buyerId: currentChat.buyerId,
+                            sellerId: currentChat.sellerId,
+                            chatRoomId: currentChat.chatRoomId,
+                            status: false,
+                          };
+                          console.log(requestBody);
+                          await instanceWithToken.put("/api/review/ok", requestBody).then(() => {
+                            const tradeMessage = {
+                              goodsId: boardId,
+                              chatRoomId: currentChat.chatRoomId,
+                              senderId: myId,
+                              partnerId: userId,
+                              message: "거래 요청이 취소되었습니다ㅠㅠ",
+                              createdAt: new Date(),
+                            };
+                            client.current.publish({
+                              destination: "/pub/chat/message",
+                              body: JSON.stringify(tradeMessage),
+                            });
+                          });
+                        }}
+                      >
+                        취소
+                      </Button>
+                    </>
+                  )}
                   <Button
                     size="small"
+                    color="skyblue"
+                    variant="outlined"
                     onClick={async () => {
-                      const requestBody = {
+                      const deleteChattingRequestBody: any = {
                         goodsId: boardId,
                         buyerId: currentChat.buyerId,
-                        sellerId: currentChat.sellerId,
-                        chatRoomId: currentChat.chatRoomId,
                       };
-                      await instanceWithToken.post("/api/review/deal", requestBody);
-                      const tradeMessage = {
-                        goodsId: boardId,
-                        chatRoomId: currentChat.chatRoomId,
-                        senderId: myId,
-                        partnerId: userId,
-                        message: "거래 요청이 도착했습니다!",
-                        createdAt: new Date(),
-                      };
-                      client.current.publish({ destination: "/pub/chat/message", body: JSON.stringify(tradeMessage) });
+                      await instanceWithToken
+                        .delete("/api/room", {
+                          data: deleteChattingRequestBody,
+                        })
+                        .then(() => {
+                          alert("채팅방이 삭제되었습니다!");
+                          navigate("/chatting", { replace: true });
+                        })
+                        .catch(() => {
+                          alert("채팅방을 삭제할 수 없습니다.");
+                        });
                     }}
                   >
-                    거래요청
+                    채팅방 나가기
                   </Button>
-                )}
-                {currentChat.sellStatus === "TRADE_WAITING" && (
-                  <Button size="small" onClick={() => alert("이미 거래중인 게시물입니다.")}>
-                    거래요청
-                  </Button>
-                )}
-                {currentChat.sellStatus === "BUYER_CHECK_REQUEST" && (
-                  <>
-                    <Button
-                      size="small"
-                      onClick={async () => {
-                        const requestBody = {
-                          goodsId: boardId,
-                          buyerId: currentChat.buyerId,
-                          sellerId: currentChat.sellerId,
-                          chatRoomId: currentChat.chatRoomId,
-                          status: true,
-                        };
-                        await instanceWithToken.put("/api/review/ok", requestBody).then(() => {
-                          const tradeMessage = {
-                            goodsId: boardId,
-                            chatRoomId: currentChat.chatRoomId,
-                            senderId: myId,
-                            partnerId: userId,
-                            message: "거래 요청이 수락되었습니다!",
-                            createdAt: new Date(),
-                          };
-                          client.current.publish({
-                            destination: "/pub/chat/message",
-                            body: JSON.stringify(tradeMessage),
-                          });
-                        });
-                      }}
-                    >
-                      수락
-                    </Button>
-                    <Button
-                      size="small"
-                      onClick={async () => {
-                        const requestBody = {
-                          goodsId: boardId,
-                          buyerId: currentChat.buyerId,
-                          sellerId: currentChat.sellerId,
-                          chatRoomId: currentChat.chatRoomId,
-                          status: false,
-                        };
-                        console.log(requestBody);
-                        await instanceWithToken.put("/api/review/ok", requestBody).then(() => {
-                          const tradeMessage = {
-                            goodsId: boardId,
-                            chatRoomId: currentChat.chatRoomId,
-                            senderId: myId,
-                            partnerId: userId,
-                            message: "거래 요청이 취소되었습니다ㅠㅠ",
-                            createdAt: new Date(),
-                          };
-                          client.current.publish({
-                            destination: "/pub/chat/message",
-                            body: JSON.stringify(tradeMessage),
-                          });
-                        });
-                      }}
-                    >
-                      취소
-                    </Button>
-                  </>
-                )}
-                <Button
-                  size="small"
-                  color="skyblue"
-                  variant="outlined"
-                  onClick={async () => {
-                    const deleteChattingRequestBody: any = {
-                      goodsId: boardId,
-                      buyerId: currentChat.buyerId,
-                    };
-                    await instanceWithToken
-                      .delete("/api/room", {
-                        data: deleteChattingRequestBody,
-                      })
-                      .then(() => {
-                        alert("채팅방이 삭제되었습니다!");
-                        navigate("/chatting", { replace: true });
-                      })
-                      .catch(() => {
-                        alert("채팅방을 삭제할 수 없습니다.");
-                      });
-                  }}
-                >
-                  채팅방 나가기
-                </Button>
+                </div>
+              </div>
+              <div
+                className="chatting-current-board"
+                onClick={() => {
+                  navigate(`/board/${boardId}`);
+                }}
+              >
+                {currentChat.goodsTitle}
               </div>
             </div>
             <div className="chatting-current-list">
