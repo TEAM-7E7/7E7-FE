@@ -10,7 +10,7 @@ import DeleteBoardModal from "../components/modals/DeleteBoardModal";
 import { useRefreshToken } from "../recoil/store";
 import { BoardCategory, BoardStatus } from "../dto/BoardCategoryAndState";
 import Label from "../elements/Label";
-import { BookMarkIcon, ViewIcon } from "../assets/icons/FigmaIcons";
+import { BookMarkIcon, ChatIcon, ViewIcon } from "../assets/icons/FigmaIcons";
 import { IconButton } from "../elements/IconButton";
 import MetaTag from "../utils/MetaTag";
 import numeral from "numeral";
@@ -21,6 +21,8 @@ const Board = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const { board_id } = useParams();
   const { getBoard, getBoardIsSuccess, addBookmarkMutation, deleteBookmarkMutation } = useBoardQuery(board_id);
+
+  console.log(getBoard);
   return (
     <>
       <MetaTag title="게시물 상세보기" description={getBoard?.data.data.description} />
@@ -79,16 +81,16 @@ const Board = () => {
                   </div>
                   <div className="board-price">{numeral(getBoard?.data.data.sellPrice).format("0,0")}원</div>
                   <div className="board-explain">{getBoard?.data.data.description}</div>
-                  <div className="board-wishcount-viewcount">
+                  <div className="board-wishcount-chatcount">
                     <div className="board-wishcount">
                       <div className="board-wishcount-icon">
                         <BookMarkIcon />
                       </div>
                       {getBoard?.data.data.wishIds.length}
                     </div>
-                    <div className="board-viewcount">
-                      <div className="board-viewcount-icon">
-                        <ViewIcon />
+                    <div className="board-chatcount">
+                      <div className="board-chatcount-icon">
+                        <ChatIcon />
                       </div>
                       {getBoard?.data.data.chatRoomCount}
                     </div>

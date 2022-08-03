@@ -104,13 +104,13 @@
         }
       }
 
-      .board-wishcount-viewcount{
+      .board-wishcount-chatcount{
         position: absolute;
         bottom: 1rem;
         right: 1rem;
         display: flex;
         font-size: 1.25rem;
-        .board-wishcount, .board-viewcount{
+        .board-wishcount, .board-chatcount{
           display: flex;
           align-items: center;
         }
@@ -133,15 +133,20 @@
           }
           margin-right: 1rem;
         }
-        .board-viewcount{
-          .board-viewcount-icon{
+        .board-chatcount{
+          .board-chatcount-icon{
             display: flex;
             align-items: center;
             margin-right: 0.25rem;
             svg{
-              width: 1.5rem;
-              height: 1.5rem;
-              fill: #C1BEFF;
+              width: 1.25rem;
+              height: 1.25rem;
+              stroke: #C1BEFF;
+              stroke-width: 2px;
+              stroke-linecap: round;
+            }
+            path{
+              fill: none
             }
           }
         }
