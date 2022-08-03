@@ -412,7 +412,10 @@ const Chatting = () => {
                   if (item.senderNickname === myNickname) {
                     return (
                       <div className="chatting-current-mine" key={index} ref={scrollRef}>
-                        <div className="chatting-mine">{item.message}</div>
+                        <div className="chatting-mine-message-created">
+                          <div className="chatting-mine-message">{item.message}</div>
+                          <div className="chatting-mine-created">{timeUtils.getMessageTime(item.createAt)}</div>
+                        </div>
                       </div>
                     );
                   } else {
@@ -436,7 +439,10 @@ const Chatting = () => {
                             <img src={currentChat.partnerProfileUrl} />
                           )}
                         </div>
-                        <div className="chatting-partner">{item.message}</div>
+                        <div className="chatting-partner-message-created">
+                          <div className="chatting-partner-message">{item.message}</div>
+                          <div className="chatting-partner-created">{timeUtils.getMessageTime(item.createAt)}</div>
+                        </div>
                       </div>
                     );
                   }

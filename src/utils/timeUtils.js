@@ -20,7 +20,12 @@ export class timeUtils {
     return `${Math.floor(years)}년 전`;
   }
   static createdTime(createdAt) {
-    const createdDate = dayjs(createdAt).add(9, "h").format("YYYY-MM-DD");
+    const createdDate = dayjs(createdAt).format("YYYY-MM-DD");
     return createdDate;
+  }
+
+  static getMessageTime(createdAt) {
+    const createdDate = dayjs(createdAt);
+    return createdDate.format("A HH:mm");
   }
 }
