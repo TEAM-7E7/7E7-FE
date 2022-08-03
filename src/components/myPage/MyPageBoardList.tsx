@@ -15,7 +15,6 @@ import numeral from "numeral";
 const MyPageBoardList = ({ boardCategory }: MyPageBoardCategoryDto) => {
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState<any>();
-  console.log(boardList);
   // boardCategory가 sell일 때 사용
   // SALE, SOLD_OUT, RESERVED
   const [boardStatus, setBoardStatus] = useState<string>("SALE");
