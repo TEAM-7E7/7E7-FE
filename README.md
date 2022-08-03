@@ -239,5 +239,35 @@
     </div>
     </details>
   ### ➁ 게시물 등록 → drag and drop
- 
-  ### ➂ 게시물 전체보기(홈화면 → shots 영상) 
+  - URL: /add-board
+  #### 1. 게시물 등록
+  - yup + formik을 이용해 게시물 등록 form의 validation 검증 및 state 관리.
+  - 게시물의 이미지/비디오 갯수는 최대 5개까지 허용(초과하면 valdation schema에서 에러 메시지를 보내줌)하고 동영상의 길이는 16초 이상이면 alert를 띄워주고 form의 state에 반영되지 않음.
+  - drag and drop으로 서버에 올라갈 이미지/비디오의 순서를 바꿀 수 있고 맨 앞에 있는 이미지/비디오가 썸네일이 된다.
+    <details>
+      <summary><h5>게시물 등록 drag and drop</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182722073-05672738-8a51-4f03-bde2-187532fa5662.gif"/>
+      </div>
+    </details>
+    <details>
+      <summary><h5>게시물 등록</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182722363-123c7ae0-3127-4145-91fb-04c1558cd385.gif"/>
+      </div>
+    </details>
+  ### ➂ 게시물 전체보기(홈 화면 → shots 영상 클립 / 카테고리,정렬 기준 선택) 
+  - URL: /
+  #### 1. shorts 영상 클립
+  - scroll snap을 이용해 뷰포트에 한 게시물만 들어오도록 구현.
+  - 뷰포트에서 게시물이 보일 맨 위,아래 y좌표를 계산하고 scroll event를 추가하여 scroll snap된 게시물의 가운데 좌표가 그 사이에 들어가면 동영상을 자동으로 재생시키도록 video 태그를 조작.
+  ![1231234](https://user-images.githubusercontent.com/55455103/182722838-6ecc2df5-7937-45ca-bf89-9dd7e90b1266.png)
+  - 위의 구현을 기반으로 게시물의 썸네일이 동영상일 경우 youtube shorts처럼 자동 재생
+  <details>
+    <summary><h5>홈 화면 shots 영상 클립</h5></summary>
+    <div markdown="1">
+    <img src="https://user-images.githubusercontent.com/55455103/182723126-84ef1001-38d8-4ac9-affb-0c43f0fc4d9f.gif"/>
+    </div>
+  </details>
+  #### 2. infinite scroll
+  - 
