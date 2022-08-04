@@ -15,7 +15,6 @@ import EditBoard from "./pages/EditBoard";
 import FindPassword from "./pages/FindPassword";
 import Setting from "./pages/Setting";
 import Chatting from "./pages/Chatting";
-import { jwtUtils } from "./utils/jwtUtils";
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();

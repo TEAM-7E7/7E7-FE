@@ -142,7 +142,11 @@ const MyPage = () => {
               >
                 <ChatIcon color="#FF965A" />
               </i>
-              <i>
+              <i
+                onClick={() => {
+                  alert("현재 개발중입니다. 잠시만 기다려주세요 =)");
+                }}
+              >
                 <AlarmIcon color="#FFE247" />
               </i>
               <i onClick={() => navigate("/setting")}>
