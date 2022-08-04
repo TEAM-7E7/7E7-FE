@@ -299,5 +299,27 @@
         <img src="https://user-images.githubusercontent.com/55455103/182724905-197f514e-c3a7-4dbc-8231-0b5821abe234.gif"/>
       </div>
   
-  ### ➃ 게시물 상세보기  
-  #### 1.
+  ### ➃ 게시물 상세보기 (이미지,비디오 carousel / 저장하기 / 사용자별 메뉴)
+  - URL: /board/:board_id
+  - dynamic routing으로 board_id에 해당하는 게시물을 api 요청을 통해 가져온다.
+  #### 1. 이미지,비디오 carousel
+  - 사용자가 등록한 이미지,비디오는 carousel로 보여준다. 
+  - 뷰포트에 보이는 동영상일 경우 shorts 클립 영상처럼 자동재생시킨다.
+    <details>
+      <summary><h5>이미지,비디오 carousel / shorts 클립 영상</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182731237-ee64bc11-397f-4cea-a1a2-8a6afc1ac1ab.gif"/>
+      </div>
+    </details>
+  #### 2. 저장하기
+  - 로그인한 사용자만 이용할 수 있는 메뉴
+  - react-query의 useQuery 훅과 useMutation 훅을 이용해서 저장하기 버튼 클릭 시 즉시 query cache를 초기화해서 저장하기가 적용된 게시물을 서버에서 불러온 후 화면에 렌더링한다.
+  - 저장하기가 눌린 게시물은 노란색 북마크 버튼이 생긴다!
+    <details>
+      <summary><h5>이미지,비디오 carousel / shorts 클립 영상</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182732367-dd231645-4379-458f-8408-7a450ac36de1.gif"/>
+      </div>
+
+    </details>
+  
