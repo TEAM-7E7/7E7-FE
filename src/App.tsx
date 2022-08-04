@@ -29,17 +29,16 @@ const App = () => {
   const { setRefreshToken } = useRefreshToken();
   useEffect(() => {
     // 소셜로그인시, 쿼리 파라미터로 token을 넘겨주므로 저장 후, url을 안보이게 함
-    if (cookies.get("X"))
-      if (socialRefreshToken && socialAccessToken) {
-        setRefreshToken(socialRefreshToken);
-        const daysToExpire = new Date(2147483647 * 1000);
-        cookies.set("X-ACCESS-TOKEN", socialAccessToken, { expires: daysToExpire });
-        navigate("/", { replace: true });
-        alert("로그인에 성공했습니다.");
-      } else if (socialLoginError === "EMAIL_ALREADY_EXIST") {
-        navigate("/", { replace: true });
-        alert("이미 존재하는 이메일입니다.");
-      }
+    if (socialRefreshToken && socialAccessToken) {
+      setRefreshToken(socialRefreshToken);
+      const daysToExpire = new Date(2147483647 * 1000);
+      cookies.set("X-ACCESS-TOKEN", socialAccessToken, { expires: daysToExpire });
+      navigate("/", { replace: true });
+      alert("로그인에 성공했습니다.");
+    } else if (socialLoginError === "EMAIL_ALREADY_EXIST") {
+      navigate("/", { replace: true });
+      alert("이미 존재하는 이메일입니다.");
+    }
   }, []);
 
   return (
