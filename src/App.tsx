@@ -15,28 +15,31 @@ import EditBoard from "./pages/EditBoard";
 import FindPassword from "./pages/FindPassword";
 import Setting from "./pages/Setting";
 import Chatting from "./pages/Chatting";
+import { jwtUtils } from "./utils/jwtUtils";
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const accessToken = searchParams.get("X-ACCESS-TOKEN")?.split(" ")[1];
-  const refreshToken = searchParams.get("X-REFRESH-TOKEN")?.split(" ")[1];
+  const socialAccessToken = searchParams.get("X-ACCESS-TOKEN")?.split(" ")[1];
+  const socialRefreshToken = searchParams.get("X-REFRESH-TOKEN")?.split(" ")[1];
   const socialLoginError = searchParams.get("social");
   const cookies = new Cookies();
+
   const { setRefreshToken } = useRefreshToken();
   useEffect(() => {
     // 소셜로그인시, 쿼리 파라미터로 token을 넘겨주므로 저장 후, url을 안보이게 함
-    if (refreshToken && accessToken) {
-      setRefreshToken(refreshToken);
-      const daysToExpire = new Date(2147483647 * 1000);
-      cookies.set("X-ACCESS-TOKEN", accessToken, { expires: daysToExpire });
-      navigate("/", { replace: true });
-      alert("로그인에 성공했습니다.");
-    } else if (socialLoginError === "EMAIL_ALREADY_EXIST") {
-      navigate("/", { replace: true });
-      alert("이미 존재하는 이메일입니다.");
-    }
+    if (cookies.get("X"))
+      if (socialRefreshToken && socialAccessToken) {
+        setRefreshToken(socialRefreshToken);
+        const daysToExpire = new Date(2147483647 * 1000);
+        cookies.set("X-ACCESS-TOKEN", socialAccessToken, { expires: daysToExpire });
+        navigate("/", { replace: true });
+        alert("로그인에 성공했습니다.");
+      } else if (socialLoginError === "EMAIL_ALREADY_EXIST") {
+        navigate("/", { replace: true });
+        alert("이미 존재하는 이메일입니다.");
+      }
   }, []);
 
   return (

@@ -44,4 +44,8 @@ export class jwtUtils {
     const decoded = jwtDecode(token);
     return !(decoded.USER_TYPE === "MARKETCLIP");
   }
+  static getPayload(token) {
+    const decoded = jwtDecode(token);
+    return decoded;
+  }
 }

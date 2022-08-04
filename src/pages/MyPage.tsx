@@ -23,6 +23,7 @@ const MyPage = () => {
   const [profileImg, setProfileImg] = useState(jwtUtils.getProfileImg(accessToken));
   const [isOpen, setOpen] = useState<boolean>(false);
 
+  console.log(jwtUtils.getPayload(accessToken), jwtUtils.getPayload(refreshToken));
   const reloadToken = async () => {
     await axios
       .get("https://tryaz.shop/api/user/refresh-re", {
