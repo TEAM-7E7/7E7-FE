@@ -47,7 +47,12 @@ const Header = () => {
             <div onClick={handleOpen} className="header-icon">
               <HamburgerIcon />
             </div>
-            <Link to="/">
+            <Link
+              to="#"
+              onClick={() => {
+                window.location.href = "/";
+              }}
+            >
               <div className="header-title-icon">
                 <img src="/favicon.svg" />
               </div>
@@ -110,7 +115,12 @@ const Header = () => {
               handleClose();
             }}
           >
-            <Link to="/">
+            <Link
+              to="#"
+              onClick={() => {
+                window.location.href = "/";
+              }}
+            >
               <div className="header-title-icon">
                 <img src="/favicon.svg" />
               </div>
