@@ -313,13 +313,25 @@
     </details>
   #### 2. 저장하기
   - 로그인한 사용자만 이용할 수 있는 메뉴
+  - jwt payload에 들어있는 사용자의 id와 db에 저장된 저장하기를 누른 사람의 id 리스트를 비교하면서 구현
   - react-query의 useQuery 훅과 useMutation 훅을 이용해서 저장하기 버튼 클릭 시 즉시 query cache를 초기화해서 저장하기가 적용된 게시물을 서버에서 불러온 후 화면에 렌더링한다.
   - 저장하기가 눌린 게시물은 노란색 북마크 버튼이 생긴다!
     <details>
-      <summary><h5>이미지,비디오 carousel / shorts 클립 영상</h5></summary>
+      <summary><h5>저장하기 예시</h5></summary>
       <div markdown="1">
       <img src="https://user-images.githubusercontent.com/55455103/182732367-dd231645-4379-458f-8408-7a450ac36de1.gif"/>
       </div>
-
     </details>
+  #### 3. 사용자별 메뉴
+  - 로그인하지 않은 사용자는 저장하기, 1:1 채팅 보내기 메뉴가 보이지만 클릭하면 로그인을 요청하는 alert가 보임.
+  - 로그인한 사용자는 저장하기, 1:1 채팅 보내기 메뉴가 사용 가능함.
+  - 게시물의 작성자는 저장하기, 1:1 채팅 보내기 메뉴 대신 수정하기, 삭제하기 버튼이 보임!
+    <details>
+      <summary><h5>게시물 작성자가 보이는 메뉴</h5></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/182734352-b3c251eb-571b-4489-b455-a189133821c6.png"/>
+      </div>
+    </details>
+  
+  ### ➄ 게시물 상세보기 (이미지,비디오 carousel / 저장하기 / 사용자별 메뉴)
   
