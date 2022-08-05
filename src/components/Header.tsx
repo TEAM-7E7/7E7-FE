@@ -150,9 +150,15 @@ const Header = () => {
                     setRefreshToken(newRefreshToken);
                     const daysToExpire = new Date(2147483647 * 1000);
                     cookies.set("X-ACCESS-TOKEN", newAccessToken, { expires: daysToExpire });
+                  })
+                  .then(() => {
+                    navigate("/my-page");
+                    handleClose();
+                  })
+                  .catch(() => {
+                    navigate("/my-page");
+                    handleClose();
                   });
-                navigate("/my-page");
-                handleClose();
               }}
             >
               <PersonIcon color="#22FF6D" />
