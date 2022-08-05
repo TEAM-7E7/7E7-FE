@@ -150,8 +150,6 @@ const Header = () => {
                     setRefreshToken(newRefreshToken);
                     const daysToExpire = new Date(2147483647 * 1000);
                     cookies.set("X-ACCESS-TOKEN", newAccessToken, { expires: daysToExpire });
-                  })
-                  .then(() => {
                     navigate("/my-page");
                     handleClose();
                   })
