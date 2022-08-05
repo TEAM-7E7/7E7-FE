@@ -6,7 +6,6 @@ import {
   AlarmIcon,
   PersonIcon,
   ChatIcon,
-  SearchIcon,
   LoginIcon,
   LogoutIcon,
 } from "../assets/icons/FigmaIcons";
@@ -17,6 +16,7 @@ import { jwtUtils } from "../utils/jwtUtils";
 import { Cookies } from "react-cookie";
 import { BoardCategory, BoardOrderBy } from "../dto/BoardCategoryAndState";
 import { Input } from "../elements/Input";
+import axios from "axios";
 
 const Header = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -137,8 +137,21 @@ const Header = () => {
             </div>
 
             <div
-              onClick={() => {
-                navigate("/my-page");
+              onClick={async () => {
+                await axios
+                  .get("https://tryaz.shop/api/user/refresh-re", {
+                    headers: {
+                      "X-REFRESH-TOKEN": "BEARER " + refreshToken,
+                    },
+                  })
+                  .then((result) => {
+                    const newRefreshToken = result.headers["x-refresh-token"].split(" ")[1];
+                    const newAccessToken = result.headers["x-access-token"].split(" ")[1];
+                    setRefreshToken(newRefreshToken);
+                    const daysToExpire = new Date(2147483647 * 1000);
+                    cookies.set("X-ACCESS-TOKEN", newAccessToken, { expires: daysToExpire });
+                    navigate("/my-page");
+                  });
                 handleClose();
               }}
             >

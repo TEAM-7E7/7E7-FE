@@ -134,22 +134,22 @@ const Chatting = () => {
       if (message.body.includes("PARTNER_EXIT") && message.body.split("_").at(0) === boardId) {
         alert("상대방이 채팅방에서 나갔습니다.");
         navigate("/chatting", { replace: true });
-      } else if (message.body.includes("TRADE_CALL_SELLER") && message.body.split("_").at(0) === boardId) {
+      } else if (message.body.includes("TRADE_CALL_SELLER")) {
         alert("거래를 신청했습니다!");
       } else if (message.body.includes("TRADE_CALL_BUYER")) {
         alert("거래 요청이 도착했습니다!");
-      } else if (message.body.includes("TRADE_SUCCESS_SELLER") && message.body.split("_").at(0) === boardId) {
+      } else if (message.body.includes("TRADE_SUCCESS_SELLER")) {
         alert("거래가 완료되었습니다!");
-      } else if (message.body.includes("TRADE_SUCCESS_BUYER") && message.body.split("_").at(0) === boardId) {
+      } else if (message.body.includes("TRADE_SUCCESS_BUYER")) {
         alert("거래가 완료되었습니다!");
-      } else if (message.body.includes("TRADE_FAIL_SELLER") && message.body.split("_").at(0) === boardId) {
+      } else if (message.body.includes("TRADE_FAIL_SELLER")) {
         alert("상대방이 거래를 취소했습니다!");
       } else if (message.body.includes("TRADE_FAIL_BUYER")) {
         alert("거래를 취소했습니다!");
       }
-
-      refreshCurrentChat();
-      getAllChatList();
+      getAllChatList().then(() => {
+        refreshCurrentChat();
+      });
     });
     getCurrentChat();
     getAllChatList();
