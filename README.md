@@ -13,13 +13,15 @@
 
 <hr/>
 
-##  개요
+## 1. 개요
 ### ➀ MarketClip 이란?
+- https://marketclip.kr/
 - 유저들의 개성있는 영상 클립과 사진으로 보는 재미를 느끼며 쇼핑을하는 웹 서비스입니다
 - 기존의 거래 플랫폼에 없는 흥미로운 shorts 영상과 다양한 UX적인 요소에 실시간 거래 서비스까지 제공합니다!
 ![shorts5](https://user-images.githubusercontent.com/55455103/182669372-e21b2881-fe2b-4e59-8518-d8b969d15513.gif)
 
-
+#### 🗓 프로젝트 기간
+  - #### 2022년 6월 24일 ~ 2022년 8월 05일
 ### ➁ 👨‍👩‍👧‍👧 팀원 및 담당 기능
 - ### ⚛️FrontEnd 
 
@@ -142,15 +144,27 @@
       <div>
         <h4>3. 정보 수정</h4>
       </div>
-      
-      
     </div>
     <hr/>
   </details>
+- ### 🚀 Back End
+  - 임선용
+  - 김재호
+  - 남신욱
+  - Repository : https://github.com/TEAM-7E7/7E7-BE
+### ➂ ✏️ 마켓클립 문서 및 자료  
+- ### Team Notion
+  - https://www.notion.so/7E7-6ece1d79d21c483194bbadddb3bab1bd
+- ### 프로젝트 브로셔
+  - https://www.notion.so/Market-Clip-b0feee01a3454f85962915faa7047410
+- ### 🎞 프로젝트 발표영상 🎞
+  - https://www.youtube.com/watch?v=sQ2qn1elfGQ
+- ### 🎞 프로젝트 발표 자료 🎞
+  - [marketclip-발표PPT.pptx](https://github.com/TEAM-7E7/7E7-FE/files/9265166/marketclip-.PPT.pptx)
+- ### 🎞 프로젝트 시연영상 🎞
+  - https://www.youtube.com/watch?v=GsA8UhmQMKo&t=1s
 
-### 
-
-### ➂ 🛠️ 기술적 의사결정
+### ➃ 🛠️ 기술적 의사결정
 #### 🧱 Tech stacks
 <div>
 <img src="http://img.shields.io/badge/-JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white" />
@@ -219,6 +233,10 @@
   #### react-dnd-multi-backend
   - 게시물 등록/수정 페이지에서 drag and drop을 이용해 게시물에 올라갈 비디오/사진의 순서를 바꾸기 위해 사용. 
   - 프로젝트가 모바일과 웹 환경을 둘 다 고려해서 진행되므로 웹에서는 drag event, 모바일에선 touch event로 drag and drop을 쉽게 도입할 수 있고 따로 event listner를 해제하지 않아도 되는 편리함이 있어서 사용.
+
+### ⑤ 🖼 Service Architecture
+![아키텍쳐](https://user-images.githubusercontent.com/55455103/182998260-ff6faae9-e4e3-484f-80c9-a4156b1c16ba.png)
+
 
 <hr/>
 
