@@ -8,19 +8,14 @@ import { nicknameChangeValidationSchema } from "../../utils/authValidation";
 import { toast, ToastContainer } from "react-toastify";
 import { instanceWithToken } from "../../api/api";
 import { useState } from "react";
-import axios from "axios";
-
-interface NicknameChangeModalDto {
-  open: boolean;
-  handleClose: () => void;
-  reloadToken: () => void;
-}
+import axios, { AxiosError } from "axios";
+import { NicknameChangeModalDto } from "../../dto/ModalDto";
 
 const initialValues: NicknameChangeDto = {
   nickname: "",
 };
 
-const NicknameChangeModal = function SelectUploadTypeModal({ open, handleClose, reloadToken }: NicknameChangeModalDto) {
+const NicknameChangeModal = function NicknameChangeModal({ open, handleClose, reloadToken }: NicknameChangeModalDto) {
   const [currentNickname, setCurrentNickname] = useState<string>("");
 
   const submit = async (values: NicknameChangeDto) => {

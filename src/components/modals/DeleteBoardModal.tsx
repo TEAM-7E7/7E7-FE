@@ -2,12 +2,7 @@ import { Dialog, DialogContent } from "@mui/material";
 import { instanceWithToken } from "../../api/api";
 import { Button } from "../../elements/Button";
 import "../../styles/components/modals/deleteboardmodal.scss";
-interface DeleteBoardModalDto {
-  board_id: number;
-  board_title: string;
-  modalIsOpen: boolean;
-  setModalIsOpen: any;
-}
+import { DeleteBoardModalDto } from "../../dto/ModalDto";
 
 const DeleteBoardModal = function DeleteBoardModal({
   board_id,
@@ -16,8 +11,7 @@ const DeleteBoardModal = function DeleteBoardModal({
   setModalIsOpen,
 }: DeleteBoardModalDto) {
   const deleteBoard = async () => {
-    const res = await instanceWithToken.delete(`/api/goods/${board_id}`);
-    console.log(res);
+    await instanceWithToken.delete(`/api/goods/${board_id}`);
     alert("게시물이 삭제되었습니다.");
     window.location.href = "/my-page";
   };

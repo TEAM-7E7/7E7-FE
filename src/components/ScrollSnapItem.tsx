@@ -8,23 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Label from "../elements/Label";
 import { BoardCategory, BoardStatus } from "../dto/BoardCategoryAndState";
 import numeral from "numeral";
-
-interface ScrollSnapItemInterface {
-  userNickname: string;
-  userImageUrl: string;
-  fileType: string;
-  fileUrl: string;
-  scrollRef?: any;
-  id: string;
-  title: string;
-  category: string;
-  status: string;
-  createdAt: any;
-  sellPrice: any;
-  autoPlay: boolean;
-  viewCount: number;
-  wishIds: string[];
-}
+import { ScrollSnapItemDto } from "../dto/HomeDto";
 
 const ScrollSnapItem = ({
   userNickname,
@@ -41,13 +25,25 @@ const ScrollSnapItem = ({
   autoPlay,
   viewCount,
   wishIds,
-}: ScrollSnapItemInterface) => {
+}: ScrollSnapItemDto) => {
   const navigate = useNavigate();
   return (
     <div className="scroll-snap-item" key={id} ref={scrollRef}>
       <div className="scroll-snap-item-img">
         <div className="scroll-snap-item-img-gradient" />
-        {fileType === "mp4" ? <Video src={fileUrl} autoPlay={autoPlay} /> : <img src={fileUrl} />}
+        {fileType === "mp4" ||
+        fileType === "m4v" ||
+        fileType === "avi" ||
+        fileType === "wmv" ||
+        fileType === "mwa" ||
+        fileType === "asf" ||
+        fileType === "mpg" ||
+        fileType === "mpeg" ||
+        fileType === "mkw" ? (
+          <Video src={fileUrl} autoPlay={autoPlay} />
+        ) : (
+          <img src={fileUrl} />
+        )}
         <div className="user-profile">
           <div className="user-img">
             {userImageUrl === "default" ? (

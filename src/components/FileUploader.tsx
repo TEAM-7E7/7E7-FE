@@ -2,14 +2,8 @@ import React, { memo } from "react";
 import "../styles/components/fileuploader.scss";
 import { ImageIcon } from "../assets/icons/FigmaIcons";
 import { IconButton } from "../elements/IconButton";
-import { AddBoardDto } from "../dto/AddBoardDto";
+import { FileUploaderDto } from "../dto/AddBoardAndEditBoardDto";
 import { instanceWithToken } from "../api/api";
-
-interface FileUploaderDto {
-  values: AddBoardDto;
-  setValues: any;
-  setModalIsOpen: any;
-}
 
 const FileUploader = memo(({ values, setValues, setModalIsOpen }: FileUploaderDto) => {
   let inputRef: HTMLInputElement;
@@ -62,7 +56,7 @@ const FileUploader = memo(({ values, setValues, setModalIsOpen }: FileUploaderDt
     <div className="uploader-wrapper">
       <input
         type="file"
-        accept="video/mp4, video/png, video/avi, video/wmv, video/mwa, video/asf, video/mpg, video/mpeg, video/mkv, image/jpg, image/png, image/jpeg, image/gif, image/svg"
+        accept="video/mp4, video/m4v, video/avi, video/wmv, video/mwa, video/asf, video/mpg, video/mpeg, video/mkv, image/jpg, image/png, image/jpeg, image/gif, image/svg"
         onChange={saveImage}
         multiple
         onClick={(e: React.MouseEvent<HTMLInputElement>) => {

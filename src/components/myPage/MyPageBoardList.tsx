@@ -1,4 +1,4 @@
-import { MyPageBoardCategoryDto } from "../../dto/MyPageDto";
+import { MyBoardListDto, MyPageBoardCategoryDto } from "../../dto/MyPageDto";
 import React, { useEffect, useState } from "react";
 import { timeUtils } from "../../utils/timeUtils";
 import { instanceWithToken } from "../../api/api";
@@ -14,7 +14,7 @@ import numeral from "numeral";
 
 const MyPageBoardList = ({ boardCategory }: MyPageBoardCategoryDto) => {
   const navigate = useNavigate();
-  const [boardList, setBoardList] = useState<any>();
+  const [boardList, setBoardList] = useState<MyBoardListDto[]>([]);
   // boardCategory가 sell일 때 사용
   // SALE, SOLD_OUT, RESERVED
   const [boardStatus, setBoardStatus] = useState<string>("SALE");
@@ -76,61 +76,72 @@ const MyPageBoardList = ({ boardCategory }: MyPageBoardCategoryDto) => {
         </div>
       )}
       <div className="board-list-body">
-        {boardList?.map((item: any) => (
-          <div key={item.id} className="board-list-item-wrapper">
-            <div className="board-list-item-img">
-              {item.goodsImageUrl.split(".").at(-1) === "mp4" ? (
-                <video src={item.goodsImageUrl} autoPlay={false} />
-              ) : (
-                <img src={item.goodsImageUrl} />
-              )}
-            </div>
-            <div className="board-list-item-text">
-              <div className="item-title-kebab">
-                <div className="item-title">{item.title}</div>
-                {boardCategory === "sell" && (
-                  <KebabMenu board_id={item.id} board_title={item.title} board_status={item.status} />
+        {boardList?.map((item: MyBoardListDto) => {
+          const fileType = item.goodsImageUrl.split(".").at(-1);
+          return (
+            <div key={item.id} className="board-list-item-wrapper">
+              <div className="board-list-item-img">
+                {fileType === "mp4" ||
+                fileType === "m4v" ||
+                fileType === "avi" ||
+                fileType === "wmv" ||
+                fileType === "mwa" ||
+                fileType === "asf" ||
+                fileType === "mpg" ||
+                fileType === "mpeg" ||
+                fileType === "mkw" ? (
+                  <video src={item.goodsImageUrl} autoPlay={false} />
+                ) : (
+                  <img src={item.goodsImageUrl} />
                 )}
               </div>
-              <div className="item-created-status">
-                <div className="item-created">{timeUtils.timePass(item.createdAt)}</div>
-                <div className="item-status">
-                  {item.status === "SALE" ? (
-                    <Label size="small" type="sale">
-                      {BoardStatus[item.status]}
-                    </Label>
-                  ) : item.status === "SOLD_OUT" ? (
-                    <Label size="small" type="sold-out">
-                      {BoardStatus[item.status]}
-                    </Label>
-                  ) : (
-                    <Label size="small" type="reserved">
-                      {BoardStatus[item.status]}
-                    </Label>
+              <div className="board-list-item-text">
+                <div className="item-title-kebab">
+                  <div className="item-title">{item.title}</div>
+                  {boardCategory === "sell" && (
+                    <KebabMenu board_id={item.id} board_title={item.title} board_status={item.status} />
                   )}
                 </div>
-              </div>
-              <div className="item-price-category">
-                <div className="item-price">{numeral(item.sellPrice).format("0,0")}원</div>
-                <div className="item-category">
-                  <Label type="category" size="small">
-                    {BoardCategory[item.category]}
-                  </Label>
+                <div className="item-created-status">
+                  <div className="item-created">{timeUtils.timePass(item.createdAt)}</div>
+                  <div className="item-status">
+                    {item.status === "SALE" ? (
+                      <Label size="small" type="sale">
+                        {BoardStatus[item.status]}
+                      </Label>
+                    ) : item.status === "SOLD_OUT" ? (
+                      <Label size="small" type="sold-out">
+                        {BoardStatus[item.status]}
+                      </Label>
+                    ) : (
+                      <Label size="small" type="reserved">
+                        {BoardStatus[item.status]}
+                      </Label>
+                    )}
+                  </div>
+                </div>
+                <div className="item-price-category">
+                  <div className="item-price">{numeral(item.sellPrice).format("0,0")}원</div>
+                  <div className="item-category">
+                    <Label type="category" size="small">
+                      {BoardCategory[item.category]}
+                    </Label>
+                  </div>
+                </div>
+                <div
+                  className="item-view-button"
+                  onClick={() => {
+                    navigate(`/board/${item.id}`);
+                  }}
+                >
+                  <IconButton icon={<ArrowIcon />} size="small" fullWidth>
+                    자세히 보러가기
+                  </IconButton>
                 </div>
               </div>
-              <div
-                className="item-view-button"
-                onClick={() => {
-                  navigate(`/board/${item.id}`);
-                }}
-              >
-                <IconButton icon={<ArrowIcon />} size="small" fullWidth>
-                  자세히 보러가기
-                </IconButton>
-              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       <div className="board-list-footer">
         <Pagination

@@ -4,14 +4,9 @@ import React, { useState } from "react";
 import "../../styles/components/myPage/kebabmenu.scss";
 import { useNavigate } from "react-router-dom";
 import DeleteBoardModal from "../modals/DeleteBoardModal";
+import { KebabMenuDto } from "../../dto/MyPageDto";
 
-interface KebabMenu {
-  board_id: number;
-  board_title: string;
-  board_status: string;
-}
-
-const KebabMenu = ({ board_id, board_title, board_status }: KebabMenu) => {
+const KebabMenu = ({ board_id, board_title, board_status }: KebabMenuDto) => {
   // kebab button
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

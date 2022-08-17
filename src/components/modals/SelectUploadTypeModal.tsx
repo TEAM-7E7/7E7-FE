@@ -4,14 +4,7 @@ import { IconButton } from "../../elements/IconButton";
 import { CameraIcon, ImageIcon } from "../../assets/icons/FigmaIcons";
 import { useState } from "react";
 import FileUploader from "../FileUploader";
-import { AddBoardDto } from "../../dto/AddBoardDto";
-
-interface SelectUploadTypeModalProps {
-  modalIsOpen: boolean;
-  setModalIsOpen: any;
-  setValues: any;
-  values: AddBoardDto;
-}
+import { SelectUploadTypeModalProps } from "../../dto/ModalDto";
 
 const SelectUploadTypeModal = function SelectUploadTypeModal({
   modalIsOpen,

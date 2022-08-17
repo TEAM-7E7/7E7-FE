@@ -15,7 +15,7 @@ import { useBoardConfig, useRefreshToken } from "../recoil/store";
 import { jwtUtils } from "../utils/jwtUtils";
 import { Cookies } from "react-cookie";
 import { BoardCategory, BoardOrderBy } from "../dto/BoardCategoryAndState";
-import { Input } from "../elements/Input";
+
 import axios from "axios";
 
 const Header = () => {

@@ -11,19 +11,7 @@ import { GoBackIcon, HamburgerIcon } from "../assets/icons/FigmaIcons";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { timeUtils } from "../utils/timeUtils";
 import MetaTag from "../utils/MetaTag";
-
-interface CurrentChatDto {
-  buyerId: number;
-  sellerId: number;
-  chatRoomId: string;
-  goodsId: number;
-  goodsTitle: string;
-  myProfileUrl: string;
-  partnerNickname: string;
-  partnerProfileUrl: string;
-  sellStatus: string;
-  messages: any;
-}
+import { CurrentChatDto } from "../dto/ChattingDto";
 
 const Chatting = () => {
   const navigate = useNavigate();
@@ -40,18 +28,7 @@ const Chatting = () => {
   // 모든 채팅 방 리스트
   const [allChatList, setAllChatList] = useState<any>([]);
   // 현재 채팅의 boardId, 채팅(채팅 방 id, message), partner id
-  const [currentChat, setCurrentChat] = useState<CurrentChatDto>({
-    chatRoomId: "",
-    sellerId: 0,
-    buyerId: 0,
-    goodsId: 0,
-    goodsTitle: "",
-    myProfileUrl: "",
-    partnerNickname: "",
-    partnerProfileUrl: "",
-    sellStatus: "",
-    messages: [],
-  });
+  const [currentChat, setCurrentChat] = useState<CurrentChatDto>();
   const [chatListIsOpen, setChatListIsOpen] = useState<boolean>(false);
   const messageRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -159,7 +136,7 @@ const Chatting = () => {
   const sendMessage = () => {
     const newMessage = {
       goodsId: boardId,
-      chatRoomId: currentChat.chatRoomId,
+      chatRoomId: currentChat?.chatRoomId,
       senderId: myId,
       partnerId: userId,
       message: messageRef?.current?.value,
@@ -226,7 +203,7 @@ const Chatting = () => {
               {allChatList?.map((item: any) => (
                 <div
                   className={`chatting-list-item ${
-                    currentChat.chatRoomId === item.chatRoomId ? "chatting-selected" : ""
+                    currentChat?.chatRoomId === item.chatRoomId ? "chatting-selected" : ""
                   }`}
                   key={item.chatRoomId}
                   onClick={() => {
@@ -249,7 +226,7 @@ const Chatting = () => {
                   <div className="chatting-text">
                     <div className="chatting-partner">
                       <div className="chatting-partner-name">{item.partner}</div>
-                      {item.checkReadCnt !== 0 && item.chatRoomId !== currentChat.chatRoomId && (
+                      {item.checkReadCnt !== 0 && item.chatRoomId !== currentChat?.chatRoomId && (
                         <div className="chatting-partner-unread">{item.checkReadCnt}</div>
                       )}
                     </div>
@@ -272,9 +249,9 @@ const Chatting = () => {
           <div className="chatting-current-wrapper">
             <div className="chatting-current-header">
               <div className="chatting-current-header-partner-button">
-                <div className="chatting-current-partner-nickname">{currentChat.partnerNickname}</div>
+                <div className="chatting-current-partner-nickname">{currentChat?.partnerNickname}</div>
                 <div className="chatting-button">
-                  {currentChat.sellStatus === "SELLER_TRY" && (
+                  {currentChat?.sellStatus === "SELLER_TRY" && (
                     <Button
                       size="small"
                       onClick={async () => {
@@ -302,21 +279,21 @@ const Chatting = () => {
                       거래요청
                     </Button>
                   )}
-                  {currentChat.sellStatus === "TRADE_WAITING" && (
+                  {currentChat?.sellStatus === "TRADE_WAITING" && (
                     <Button size="small" onClick={() => alert("이미 거래중인 게시물입니다.")}>
                       거래요청
                     </Button>
                   )}
-                  {currentChat.sellStatus === "BUYER_CHECK_REQUEST" && (
+                  {currentChat?.sellStatus === "BUYER_CHECK_REQUEST" && (
                     <>
                       <Button
                         size="small"
                         onClick={async () => {
                           const requestBody = {
                             goodsId: boardId,
-                            buyerId: currentChat.buyerId,
-                            sellerId: currentChat.sellerId,
-                            chatRoomId: currentChat.chatRoomId,
+                            buyerId: currentChat?.buyerId,
+                            sellerId: currentChat?.sellerId,
+                            chatRoomId: currentChat?.chatRoomId,
                             status: true,
                           };
                           await instanceWithToken.put("/api/review/ok", requestBody).then(() => {
@@ -375,7 +352,7 @@ const Chatting = () => {
                     onClick={async () => {
                       const deleteChattingRequestBody: any = {
                         goodsId: boardId,
-                        buyerId: currentChat.buyerId,
+                        buyerId: currentChat?.buyerId,
                       };
                       await instanceWithToken
                         .delete("/api/room", {
@@ -400,7 +377,7 @@ const Chatting = () => {
                   navigate(`/board/${boardId}`);
                 }}
               >
-                {currentChat.goodsTitle}
+                {currentChat?.goodsTitle}
               </div>
             </div>
             <div className="chatting-current-list">
@@ -448,7 +425,7 @@ const Chatting = () => {
                   }
                 }
               })}
-              {currentChat.sellStatus === "SOLD_OUT" && (
+              {currentChat?.sellStatus === "SOLD_OUT" && (
                 <div className="chatting-start-message">거래가 완료된 게시물입니다!</div>
               )}
             </div>
@@ -458,12 +435,12 @@ const Chatting = () => {
                   <Input
                     ref={messageRef}
                     placeholder={
-                      currentChat.sellStatus === "SOLD_OUT" ? "거래가 완료된 게시물입니다." : "메세지를 입력해보세요."
+                      currentChat?.sellStatus === "SOLD_OUT" ? "거래가 완료된 게시물입니다." : "메세지를 입력해보세요."
                     }
                     onKeyPress={handleOnKeyPress}
-                    disabled={currentChat.sellStatus === "SOLD_OUT"}
+                    disabled={currentChat?.sellStatus === "SOLD_OUT"}
                     onClick={() => {
-                      if (currentChat.sellStatus === "SOLD_OUT") {
+                      if (currentChat?.sellStatus === "SOLD_OUT") {
                         alert("거래가 완료된 게시물입니다!");
                       }
                     }}
@@ -471,7 +448,7 @@ const Chatting = () => {
                   />
                 </div>
                 <div className="chatting-send-button">
-                  <Button color="primary" onClick={sendMessage} disabled={currentChat.sellStatus === "SOLD_OUT"}>
+                  <Button color="primary" onClick={sendMessage} disabled={currentChat?.sellStatus === "SOLD_OUT"}>
                     전송
                   </Button>
                 </div>

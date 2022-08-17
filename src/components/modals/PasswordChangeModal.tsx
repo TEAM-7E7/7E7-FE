@@ -8,18 +8,14 @@ import { passwordChangeValidationSchema } from "../../utils/authValidation";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { instanceWithToken } from "../../api/api";
-
-interface PasswordChangeModalDto {
-  open: boolean;
-  handleClose: () => void;
-}
+import { PasswordChangeModalDto } from "../../dto/ModalDto";
 
 const initialValues: PasswordChangeFormDto = {
   password: "",
   password2: "",
 };
 
-const PasswordChangeModal = function SelectUploadTypeModal({ open, handleClose }: PasswordChangeModalDto) {
+const PasswordChangeModal = function PasswordChangeModal({ open, handleClose }: PasswordChangeModalDto) {
   const navigate = useNavigate();
 
   const submit = async (values: PasswordChangeDto) => {

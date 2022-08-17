@@ -17,23 +17,22 @@ import { instanceWithToken } from "../api/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { Video } from "../elements/Video";
 import axios from "axios";
-import { EditBoardDto } from "../dto/EditBoardDto";
+import { AddBoardAndEditBoardDto, ImageMapDto } from "../dto/AddBoardAndEditBoardDto";
 import { BoardCategory } from "../dto/BoardCategoryAndState";
 
 const EditBoard = () => {
   const { board_id } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [initialState, setInitialState] = useState<any>();
+  const [initialState, setInitialState] = useState<AddBoardAndEditBoardDto | any>();
   const navigate = useNavigate();
-  const submit = async (values: EditBoardDto) => {
-    const { title, category, price, explain, files, status } = values;
+  const submit = async (values: AddBoardAndEditBoardDto) => {
+    const { title, category, price, explain, files } = values;
     const editBoardRequestBody = {
       title: title,
       description: explain,
       fileIdList: files.map((item) => item.file_id),
       category: category,
       sellPrice: Number(price),
-      status: status,
     };
     await instanceWithToken
       .put(`/api/goods/${board_id}`, editBoardRequestBody)
@@ -47,8 +46,19 @@ const EditBoard = () => {
     const getBoard = async () => {
       const { data } = await axios.get(`https://tryaz.shop/api/goods/details/${board_id}`);
 
-      const initialFileList = data.data.imageMapList.map((file: any) => {
-        if (file.url.split(".").at(-1) === "mp4") {
+      const initialFileList = data.data.imageMapList.map((file: ImageMapDto) => {
+        const fileType = file.url.split(".").at(-1);
+        if (
+          fileType === "mp4" ||
+          fileType === "m4v" ||
+          fileType === "avi" ||
+          fileType === "wmv" ||
+          fileType === "mwa" ||
+          fileType === "asf" ||
+          fileType === "mpg" ||
+          fileType === "mpeg" ||
+          fileType === "mkw"
+        ) {
           return {
             preview_URL: file.url,
             file_id: file.id,
@@ -67,7 +77,6 @@ const EditBoard = () => {
         price: data.data.sellPrice,
         explain: data.data.description,
         files: initialFileList,
-        status: data.data.status,
       });
     };
     getBoard();

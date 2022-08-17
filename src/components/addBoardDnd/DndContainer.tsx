@@ -1,12 +1,8 @@
 import { memo, useCallback } from "react";
 import DndItem from "./DndItem";
-import { AddBoardDto, FileDto } from "../../dto/AddBoardDto";
+import { DndContainerDto, FileDto } from "../../dto/AddBoardAndEditBoardDto";
 import "../../styles/components/addBoardDnd/dndcontainer.scss";
 
-interface DndContainerDto {
-  values: AddBoardDto;
-  setValues: any;
-}
 // DND를 담는 컨테이너
 const DndContainer = memo(({ values, setValues }: DndContainerDto) => {
   const findItem = useCallback(
@@ -44,7 +40,7 @@ const DndContainer = memo(({ values, setValues }: DndContainerDto) => {
       {values.files?.map((item: FileDto) => (
         <DndItem
           key={item.preview_URL}
-          type={item.type}
+          fileType={item.type}
           id={`${item.preview_URL}`}
           moveItem={moveItem}
           findItem={findItem}

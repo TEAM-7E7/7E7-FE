@@ -6,13 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { instanceWithToken } from "../../api/api";
 import { Cookies } from "react-cookie";
 import { useRefreshToken } from "../../recoil/store";
+import { ResignModalDto } from "../../dto/ModalDto";
 
-interface ResignModalDto {
-  open: boolean;
-  handleClose: () => void;
-}
-
-const ResignModal = function SelectUploadTypeModal({ open, handleClose }: ResignModalDto) {
+const ResignModal = function ResignModal({ open, handleClose }: ResignModalDto) {
   const navigate = useNavigate();
   const cookies = new Cookies();
   const { setRefreshToken } = useRefreshToken();
@@ -32,7 +28,6 @@ const ResignModal = function SelectUploadTypeModal({ open, handleClose }: Resign
         handleClose();
       }, 2000);*/
     } catch (e: any) {
-      // TODO 500 에러가 납니당
       toast.error(e.response.data.message + "😭", {
         position: "top-center",
       });

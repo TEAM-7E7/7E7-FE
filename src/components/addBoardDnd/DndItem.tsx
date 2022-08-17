@@ -2,18 +2,9 @@ import { memo, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import "../../styles/components/addBoardDnd/dnditem.scss";
 import PreviewModal from "../modals/PreviewModal";
-import { AddBoardDto } from "../../dto/AddBoardDto";
+import { AddBoardAndEditBoardDto, DndItemDto } from "../../dto/AddBoardAndEditBoardDto";
 
-interface DndItemDto {
-  type: string;
-  id: string;
-  moveItem: any;
-  findItem: any;
-  values: AddBoardDto;
-  setValues: any;
-}
-
-const DndItem = memo(({ type, id, moveItem, findItem, values, setValues }: DndItemDto) => {
+const DndItem = memo(({ fileType, id, moveItem, findItem, values, setValues }: DndItemDto) => {
   // Card의 id로 원래 인덱스를 찾기
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const originalIndex = findItem(id).index;
@@ -65,7 +56,7 @@ const DndItem = memo(({ type, id, moveItem, findItem, values, setValues }: DndIt
         >
           🗙
         </span>
-        {type === "video" ? <video src={id} /> : <img src={id} />}
+        {fileType === "video" ? <video src={id} /> : <img src={id} />}
         {originalIndex === 0 && <div className="dnditem-is-main">대표영상/사진</div>}
       </div>
       <div
@@ -76,7 +67,7 @@ const DndItem = memo(({ type, id, moveItem, findItem, values, setValues }: DndIt
       >
         미리보기
       </div>
-      <PreviewModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} previewURL={id} type={type} />
+      <PreviewModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} previewURL={id} fileType={fileType} />
     </div>
   );
 });

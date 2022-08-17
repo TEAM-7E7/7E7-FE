@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "../styles/pages/home.scss";
 import { useBoardInfiniteQuery } from "../react-query/query/useBoardInfinteQuery";
 import { useInView } from "react-intersection-observer";
-import ScollSnapItem from "../components/ScrollSnapItem";
+import ScrollSnapItem from "../components/ScrollSnapItem";
 import { useBoardConfig } from "../recoil/store";
 import MetaTag from "../utils/MetaTag";
 
@@ -61,7 +61,7 @@ const Home = () => {
               ) {
                 return (
                   <React.Fragment key={item.id}>
-                    <ScollSnapItem
+                    <ScrollSnapItem
                       userNickname={item.nickname}
                       userImageUrl={item.accountImageUrl}
                       fileType={fileType}
@@ -82,7 +82,7 @@ const Home = () => {
               } else if (page_num === 0 && idx === 0) {
                 return (
                   <React.Fragment key={item.id}>
-                    <ScollSnapItem
+                    <ScrollSnapItem
                       userNickname={item.nickname}
                       userImageUrl={item.accountImageUrl}
                       fileType={fileType}
@@ -102,7 +102,7 @@ const Home = () => {
               } else {
                 return (
                   <React.Fragment key={item.id}>
-                    <ScollSnapItem
+                    <ScrollSnapItem
                       userNickname={item.nickname}
                       userImageUrl={item.accountImageUrl}
                       fileType={fileType}

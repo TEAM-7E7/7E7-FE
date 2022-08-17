@@ -24,7 +24,7 @@ const BoardCarousel = ({ imageMapList }: BoardCarouselDto) => {
   const sliderItemRef = useRef<HTMLDivElement[]>([]);
   // slider에서 보이는 동영상만 재생하기
   useEffect(() => {
-    sliderItemRef.current.forEach((element: any, index: any) => {
+    sliderItemRef.current.forEach((element: HTMLDivElement | any, index: number) => {
       const sliderItem = element?.childNodes[1];
       if (sliderItem?.childNodes[0] && sliderItem?.childNodes[0].tagName === "VIDEO") {
         if (currentIndex === index) {
@@ -46,16 +46,31 @@ const BoardCarousel = ({ imageMapList }: BoardCarouselDto) => {
           setCurrentIndex(index);
         }}
       >
-        {imageMapList.map((item, index) => (
-          <div
-            className="slider-item"
-            key={index}
-            ref={(element: HTMLDivElement) => (sliderItemRef.current[index] = element)}
-          >
-            <div className="slider-item-gradient" />
-            {item.url.split(".").at(-1) === "mp4" ? <Video src={item.url} autoPlay={false} /> : <img src={item.url} />}
-          </div>
-        ))}
+        {imageMapList.map((item, index) => {
+          const fileType = item.url.split(".").at(-1);
+          return (
+            <div
+              className="slider-item"
+              key={index}
+              ref={(element: HTMLDivElement) => (sliderItemRef.current[index] = element)}
+            >
+              <div className="slider-item-gradient" />
+              {fileType === "mp4" ||
+              fileType === "m4v" ||
+              fileType === "avi" ||
+              fileType === "wmv" ||
+              fileType === "mwa" ||
+              fileType === "asf" ||
+              fileType === "mpg" ||
+              fileType === "mpeg" ||
+              fileType === "mkw" ? (
+                <Video src={item.url} autoPlay={false} />
+              ) : (
+                <img src={item.url} />
+              )}
+            </div>
+          );
+        })}
       </Slider>
     </div>
   );

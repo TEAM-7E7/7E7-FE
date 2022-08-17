@@ -4,16 +4,9 @@ import { useRef } from "react";
 import axios from "axios";
 import { Button } from "../../elements/Button";
 import "../../styles/components/modals/verfiyemailmodal.scss";
+import { VerifyEmailModalDto } from "../../dto/ModalDto";
 
-interface VerifyEmailModalDto {
-  userEmail: string;
-  modalIsOpen: boolean;
-  setModalIsOpen: any;
-  onSetEmailIsVerified: () => void;
-  url: string;
-}
-
-const VerifyEmailModal = function SelectUploadTypeModal({
+const VerifyEmailModal = function VerifyEmailModal({
   userEmail,
   modalIsOpen,
   setModalIsOpen,
