@@ -424,11 +424,18 @@
       <img src="https://user-images.githubusercontent.com/55455103/183480826-72723c04-ee8e-4af1-98b7-5ad2b63c9e13.gif"/>
       </div>
     </details>
-  ### ⑧ 크로스 브라우징
+  ### ⑧ 반응형 웹 서비스
   - 반응형 웹 서비스 제작을 위해 일정 분기마다 media query를 사용해서 html 태그의 font-size를 조정하고 CSS 작업을 할 때 px대신 % 와 rem을 적절히 섞어서 사용했다.
+  - nav바와 같은 UX는 일정 분기가 지나면 화면에서 보이지 않고 햄버거 버튼을 클릭할 때 나타나도록 구현
     <details>
-      <summary><h4>크로스 브라우징</h4></summary>
+      <summary><h4>반응형 예시</h4></summary>
       <div markdown="1">
       <img src="https://user-images.githubusercontent.com/55455103/183487943-621a2f07-86d2-4305-9f37-c34f00551c16.gif"/>
+      </div>
+    </details>
+    <details>
+      <summary><h4>모바일 화면</h4></summary>
+      <div markdown="1">
+      <img src="https://user-images.githubusercontent.com/55455103/185857187-04f035c1-099e-4b2a-b5d7-cb6080ff8361.jpg"/>
       </div>
     </details>
