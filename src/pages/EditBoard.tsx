@@ -33,6 +33,7 @@ const EditBoard = () => {
       fileIdList: files.map((item) => item.file_id),
       category: category,
       sellPrice: Number(price),
+      status: "SALE",
     };
     await instanceWithToken
       .put(`/api/goods/${board_id}`, editBoardRequestBody)
