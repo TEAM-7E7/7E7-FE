@@ -74,6 +74,7 @@
         <ul>
           <li>scoll snap된 게시물의 동영상 자동 재생 → scroll event를 이용해 구현</li>
           <li>화면에 게시물이 하나만 보이도록 구현</li>
+          <li>infinite scroll을 구현해서 데이터 페이징</li>
         </ul>
       </div>
       <div>
